@@ -1,0 +1,384 @@
+\section{Úvod}
+
+\subsection{Výroková a predikátová logika}
+
+Výroková a predikátová logika je věda o pravdivosti výroků. Výrok je tvrzení,
+u kterého můžeme rozhodnout, zda-li je pravdivé nebo nikoliv.
+
+\begin{definition} 
+    \newterm{Výroková funkce} je výrok, do něhož dosazujeme proměnné.
+\end{definition}
+
+\begin{remark}[Příklady výrokových funkcí]
+    \leavevmode
+    \begin{itemize}
+        \item $A(x): x < 3.$ $A(1)$ je pravda, $A(3)$ je lež.
+        \item $B(x,y): x < y.$ $B(1,2)$ je pravda, $B(5,2)$ je lež.
+    \end{itemize}
+\end{remark}
+
+\begin{remark}[Úmluva ohledně zápisu výroků]
+    \leavevmode
+    \begin{itemize}
+        \item Zápisem $\forall x \in \R; x > 10: A(X)$ budeme rozumět výrok
+            $\forall x \in \R: (x > 10 \implies A(X))$.
+        \item Zápisem $\forall x \in \R, \exists y \in \R: B(x,y)$ budeme
+            rozumět výrok $\forall x \in \R: (\exists y \in \R: B(x,y))$.
+    \end{itemize}
+\end{remark}
+
+\begin{remark}[Pořadí kvantifikátorů]
+    Na pořadí kvantifikátorů záleží, to jest zápisy 
+    $$\forall x \in \R, \exists y \in \R: B(x,y)$$
+    a 
+    $$\exists x \in \R, \forall y \in \R: B(x,y)$$
+    vyjadřují dva rozdílné výroky.
+\end{remark}
+
+\subsection{Základní metody důkazů}
+
+\subsubsection{Důkaz sporem}
+Naším cílem je dokázat výrok $A$. V důkazu sporem se prokáže, že výrok 
+$\neg A$ vede ke sporu. Díky zákonu o vyloučení třetího tedy odvodíme, že 
+výrok $A$ musí být pravdivý.
+
+Mějme například následující výrok $A$:
+$$\forall n \in \N: (\text{$n^2$ je liché} \implies \text{$n$ je liché}).$$
+Nyní ukážeme, že výrok $\neg A$:
+$$\exists n \in \N: (\text{$n^2$ je liché} \land \text{$n$ je sudé})$$
+vede ke sporu. Tedy, pokud je $n$ sudé a $n^2$ liché, potom jejich součet,
+$n + n^2$, je také lichý. To nicméně vede ke sporu, jelikož $n + n^2 = n(n+1)$
+je součin dvou po sobě následujících čísel, z nichž jedno je liché a jedno
+sudé. Součin sudého a lichého čísla je vždy sudé číslo.
+
+\subsubsection{Nepřímý důkaz}
+
+Naším cílem je dokázat implikaci typu $A \implies B$. Někdy je ovšem
+jednodušší dokázat ekvivalentní výrok tvaru $\neg B \implies \neg A$.
+V našem příkladě budeme tedy dokazovat výrok:
+$$\forall n \in \N: (\text{$n$ je sudé} \implies \text{$n^2$ je sudé}).$$
+Vyjádřeme $n$ jako $2k$. Potom $n^2 = 4k$, což je sudé číslo.
+
+\subsubsection{Přímý důkaz}
+
+Přímý důkaz implikace $A \implies B$ spočívá v nalezení řady 
+výroků tvaru: 
+$$A \implies C_1, C_1 \implies C_2, \dots, C_{n-1} \implies C_n, C_n \implies B.$$
+V našem případě můžeme vyjádřit číslo $n$ jako součin $p_1 \dots p_k$. Potom
+$n^2 = p_1^2 \dots p_k^2$. Pokud je číslo $n^2$ liché, potom žádný činitel
+z $p_1^2 \dots p_k^2$ neobsahuje číslo $2$, a tedy žádný činitel z 
+$p_1 \dots p_n$ neobsahuje číslo $2$ a tedy číslo $n = p_1 \dots p_k$
+je liché.
+
+\subsubsection{Matematická indukce}
+Matematickou indukci využijeme v případě, kdy chceme dokázat platnost výroku
+pro všechna přirozená čísla, či případně pro jinou, předem danou nekonečnou
+posloupnost, např. pro všechna přirozená čísla větší než $5$.
+
+V prvním kroce důkazu matematickou indukcí se ukáže, že tvrzení platí
+pro nejmenší přirozené číslo $k$. V indukčním kroce se dokáže, že pokud
+tvrzení platí pro $n = m$, pak platí i pro $n = m+1$. Dle principu matematické
+indukce pak tvrzení platí pro každé přirozené číslo větší nebo rovno $k$.
+
+Jako příklad dokážeme následující dvě věty.
+
+\begin{theorem}[Bernoulliho nerovnost]
+    \label{th:bernoulli}
+    Nechť $x \in \R, x \geq -1$ a $n \in \N.$ Potom:
+    $$(1 + x)^n \geq 1 + nx.$$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[I.]
+        \item Pro $n = 1$ zřejmě platí: $(1 + x)^1  = 1 + 1\cdot x.$
+        \item Předpokládejme, že tvrzení platí pro $n = m$ a pokusme se jej
+            dokázat pro $n = m+1.$ Tedy:
+            \begin{align*}
+                (1 + x)^{m+1} &= (1+x)(1+x)^m \\
+                              &\geq (1+x)(1+mx) \tag{dle indukčního předpokladu} \\
+                              &= 1 + x + mx + mx^2 \\
+                              &= 1 + (m+1)x + mx^2 \\
+                              &\geq 1 + (m+1)x \tag{jelikož $mx^2 \geq 0$}
+            \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Vztah aritmetického a geometrického průměru]
+    \label{th:agprumer}
+    Aritmetický průměr nezáporných čísel je vždy větší nebo roven geometrickému 
+    průměru. 
+\end{theorem}
+
+\begin{proof}
+    Nejprve dokážeme, že toto
+    tvrzení platí pro jedno číslo, $V(1)$. Poté ukážeme, že $V(n) \implies 
+    V(2n)$. Nakonec ukážeme, že $V(n+1) \implies V(n)$. Tím je důkaz ukončen.
+
+    Základní krok je jednoduchý:
+    $$\frac{x_1}{1} = \sqrt[1]{x_1}$$
+
+    Jednoduše se ukáže i platnost výroku $V(2)$:
+    $$\frac{x_1 + x_2}{2} \geq \sqrt{x_1x_2} 
+        \iff x_1 - 2\sqrt{x_1x_2} + x_2 \geq 0 
+        \iff (\sqrt{x_1} - \sqrt{x_2})^2 \geq 0$$
+
+    Nyní ukážeme platnost tvrzení $V(n) \implies V(2n)$:
+    \begin{align*}
+        \frac{x_1 + x_2 + \dots + x_{2n}}{2n} 
+            &= \frac{\frac{x_1 + \dots + x_n}{n} + \frac{x_{n+1} + 
+                \dots + x_{2n}}{n}}{2} \\
+            &\geq \frac{\sqrt[n]{x_1 \dots x_n} + \sqrt[n]{x_{n+1} \dots 
+                x_{2n}}}{2} \tag{indukční předpoklad $V(n)$} \\
+            &\geq \sqrt{\sqrt[n]{x_1 \dots x_n} \sqrt[n]{x_{n+1} \dots x_{2n}}} 
+                \tag{$V(2)$} \\
+            &= \sqrt[2n]{x_1 \dots x_{2n}}
+    \end{align*}
+
+    Zbývá dokázat platnost tvrzení: $V(n+1) \implies V(n)$. Mějme čísla $x_1,
+    \dots, x_n >0$. Položme $y_i = \frac{x_i}{\sqrt[n]{x_1 \dots x_n}}$ pro
+    $i = 1, \dots, n$, a $y_{n+1} = 1$. Dle předpokladu:
+    \begin{align*}
+        \frac{y_1 + \dots + y_{n+1}}{n+1} 
+            &\geq \sqrt[n+1]{y_1 \dots y_{n+1}} \\
+            &=\sqrt[n+1]{\frac{x_1}{\sqrt[n]{x_1 \dots x_n}} \dots 
+                \frac{x_n}{\sqrt[n]{x_1 \dots x_n}} \cdot 1} \\
+            &= 1
+    \end{align*}
+
+    Potom:
+    \begin{align*}
+        \frac{\frac{x_1}{\sqrt[n]{x_1 \dots x_n}} + \dots + 
+        \frac{x_n}{\sqrt[n]{x_1 \dots x_n}} + 1}{n+1} &\geq 1 \\
+        \frac{x_1 + \dots + x_n}{\sqrt[n]{x_1 \dots x_n}} &\geq n \\
+        \frac{x_1 + \dots + x_n}{n} &\geq \sqrt[n]{x_1 \dots x_n}
+    \end{align*}
+\end{proof}
+
+\subsection{Množina reálných čísel}
+
+Ze střední školy známe množiny:
+\begin{itemize}
+    \item $\N = \{1, 2, 3, \dots \}$
+    \item $\Z = \{\dots, -2, -1, 0, 1, 2, \dots \}$
+    \item $\Q = \{\frac{p}{q}, p \in \Z, q \in \N \}$
+\end{itemize}
+
+Tyto množiny nicméně neobsahují všechna čísla, se kterými pracujeme.
+
+\begin{theorem}
+    \leavevmode
+    $\sqrt{2} \not \in \Q$
+\end{theorem}
+
+\begin{proof}
+    Sporem. Nechť $\exists p \in \Z, q \in \N$ nesoudělná taková, že
+    $$\sqrt{2} = \frac{p}{q}.$$
+    Potom $2q^2 = p^2$, $p^2$ je sudé a $p$ musí být taktéž sudé: $\exists
+    k \in \Z: p = 2k$ a $2q^2 = 4k^2$. Z toho vyplývá, že $q$ je také sudé, 
+    čímž dostáváme spor s nesoudělností $p$ a $q$.
+\end{proof}
+
+\begin{remark}[Vlastnosti reálných čísel I.]
+    Na množině $\R$ je dána binární relace $\leq \; \subset \R \times \R$, operace 
+    sčítání ($+$), násobení ($\cdot$) a význačné prvky $0, 1$ tak, že 
+    platí:
+    \begin{enumerate}[i.]
+        \item $\forall x,y,z \in \R: x + (y + z) = (x + y) + z$ (asociativita
+            sčítání)
+        \item $\forall x,y \in \R: x + y = y + x$ (komutativita sčítání)
+        \item $\forall x \in \R: x + 0 = x$ (existence $0$)
+        \item $\forall x \in \R, \exists (-x) \in \R: x + (-x) = 0$ (existence
+            opačného prvku při sčítání)
+        \item $\forall x,y,z \in \R: x\cdot(y\cdot z) = (x \cdot y) \cdot z$
+            (asociativita násobení)
+        \item $\forall x,y \in \R: x\cdot y = y \cdot x$ (komutativita 
+            násobení)
+        \item $\forall x \in \R: x \cdot 1 = x$ (existence $1$)
+        \item $\forall x \in \R \setminus \{0\}: \exists x^{-1} \in \R: x \cdot
+            x^{-1} = 1$ (existence opačného prvku při násobení)
+        \item $\forall x,y,z \in \R: x \cdot (y + z) = xy + xz$ 
+            (distributivita)
+    \end{enumerate}
+\end{remark}
+
+\begin{remark}[Vlastnosti reálných čísel II.]
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item $\forall x,y \in \R: (x \leq y \land y \leq x) \implies x = y$
+        \item $\forall x,y,z \in \R: (x \leq y \land y \leq z) \implies 
+            x \leq z$
+        \item $\forall x,y \in \R: (x \leq y) \lor (y \leq x)$
+        \item $\forall x,y,z \in \R: (x \leq y) \implies x + z \leq y + z$
+        \item $\forall x,y \in \R: (0 \leq x \land 0 \leq y) \implies
+            0 \leq xy$
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    Množina $M \subset \R$ je \newterm{omezená shora (zdola)}, pokud
+    existuje $x \in \R$ tak, že $\forall y \in M: y \leq x$ $(y \geq x)$.
+    Číslo $x$ nazýváme \newterm{horní (dolní) závora} množiny $M$.
+\end{definition}
+
+\begin{definition}
+    Nechť $M \subset \R$. Číslo $s \in \R$ nazveme \newterm{supremum} $M$
+    (\newterm{nejmenší horní závora}) a značíme $\sup M$, pokud:
+    \begin{enumerate}[i.]
+        \item $\forall x \in M: x \leq s$ ($s$ je horní závora $M$)
+        \item $\forall y < s \in \R: \exists x \in M: y < x$ ($s$ je 
+            nejmenší horní závora)
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}[Vlastnosti reálných čísel III.]
+    Nechť množina $M \subset \R$ je neprázdná shora omezená. Pak existuje 
+    $\sup M \in \R.$
+\end{remark}
+
+Vlastnosti I., II. a III. určují jednoznačně množinu reálných čísel.
+
+\begin{definition}
+    \label{def:inf}
+    Nechť $M \subset \R$. Číslo $i \in \R$ nazveme \newterm{infimem}, pokud:
+    \begin{enumerate}[i.]
+        \item $\forall x \in M: x \geq i$ ($i$ je dolní závora)
+        \item $\forall y > i \in \R: \exists x \in M: x < y$ ($i$ je největší
+            dolní závora)
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[O existenci infima]
+    Nechť $M \subset \R$ je neprázdná zdola omezená. Pak existuje 
+    $\inf M \in \R.$
+\end{theorem}
+
+\begin{proof}
+    Definujme $-M = \{ -x; x \in M \}$. Tato množina je neprázdná shora omezená
+    a tedy existuje $s = \sup(-M).$ Označíme $i = -s$ a ukážeme, že $i = \inf M$:
+    \begin{enumerate}[i.]
+        \item $x \in -M, x \leq s \implies \tilde{x} = -x, \tilde{x} \in M, 
+            -\tilde{x} \leq -i, \tilde{x} \geq i$
+        \item $\forall y \in \R, y < s: \exists x \in M: y < x \implies
+            \tilde{x} = -x, \tilde{y} = -y, \forall \tilde{y} \in \R, \tilde{y} > -s = i:
+            \exists \tilde{x} \in M: -\tilde{y} < -\tilde{x} \implies \tilde{y} > \tilde{x}$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Archimédova vlastnost]
+    \label{th:archimedes}
+    $\forall x \in \R: \exists n \in \N: x < n$
+\end{theorem}
+
+\begin{proof}
+    Sporem. $\exists x \in \R: \forall n \in \N: x \geq n \implies \exists 
+    s = \sup \N$, tedy $\forall n \in \N: n+1 \leq s$ a tedy $n \leq s - 1$.
+    Číslo $s-1$ je také horní zavorou $\N$, což je spor s definicí $s$ jako 
+    nejmenší horní zavory $\N$.
+\end{proof}
+
+\begin{theorem}[Hustota $\Q$ a $\R \setminus \Q$]
+    \label{th:hustotaqrq}
+    Nechť $a,b \in \R, a < b$. Pak existují $q \in \Q$ a $r \in \R$ takové, že
+    $q \in (a,b), r \in (a,b).$
+\end{theorem}
+
+\begin{proof}
+    Díky Archimédově vlastnosti (Věta~\ref{th:archimedes}) existuje 
+    $n \in \N: n > \frac{1}{b-a}$ a tedy
+    $b - a > \frac{1}{n}.$ Vezměme za $m$ nejmenší přirozené číslo větší než $na$.
+    Potom $\frac{m}{n} = q \in (a,b)$. 
+    
+    Proč? Hledáme $m$ takové, že $a < \frac{m}{n} < b$, tj. $na < m 
+    < nb$. Jelikož jsme vybrali $m$ jako nejmenší přirozené číslo větší než $na$,
+    platí: $m-1 \leq na < m$. Z pravé části nerovnice přímo plyne $a < \frac{m}{n}$.
+    Dále platí:
+    \begin{align*}
+        m &\leq na+1 \\
+          &< n\left(b-\frac{1}{n}\right) +1 \tag{plyne z $n > \frac{1}{b-a}$} \\
+          &=nb
+    \end{align*}
+
+    Tímto jsme dokázali větu o hustotě racionálních čísel v $\R$. Rozšíření na
+    iracionální čísla je jednoduché: Mějme $q_1, q_2 \in \Q, q_1 < q_2 \in (a,b)$. 
+    Položme $r = q_1 + \sqrt{2}
+    \left(\frac{q_2-q_1}{2}\right)$. Zřejmě $r \in \R \setminus \Q$.
+\end{proof}
+
+\begin{theorem}[O existenci $n$-té odmocniny]
+    Nechť $x \in [0; +\infty)$ a $n \in \N$. Pak existuje právě jedno $y \in 
+        [0;+\infty)$ takové, že $y^n = x$.
+\end{theorem}
+
+\begin{proof}
+    Definujme dvě množiny, $M_1$ a $M_2$ následovně:
+    \begin{itemize}
+        \item $M_1 = \left\{a \in [0;+\infty): a^n \leq x\right\}$. Tato množina
+                je neprázdná a shora omezená, tedy existuje $y_1 = \sup M$.
+        \item $M_2 = \left\{a \in [0;+\infty): a^n \geq x\right\}$. Tato množina
+                je neprázdná a zdola omezená, tedy existuje $y_2 = \inf M$.
+   \end{itemize}
+
+   Pozorování: $y_1 \geq y_2$. Pokud by tomu tak nebylo, potom existuje $q \in \R:
+   y_1 < q < y_2$ a buď $q^n \leq x$ nebo $x \leq q^n$. Obě možnosti vedou ke 
+   sporu s definicemi suprema či infima.
+
+   Tvrdím: $y_1^n \leq x$ a $y_2^n \geq x$. Tvrzení dokážeme sporem. Vezměme
+   libovolné $k \in \N$ takové, že $k > \frac{ny_1^{n-1}}{y_1^n - x}$. Z
+   definice suprema víme, že pro $y_1 - \frac{1}{k}$ existuje $a \in M_1: 
+   a > y_1 - \frac{1}{k}$. Potom dostáváme spor:
+   \begin{align*}
+       y_1^n - x &\leq y_1^n - a^n \tag{$a \in M_1$ a tedy $a^n \leq x$} \\
+                 &= (y_1 -a)(y_1^{n-1} + y_1^{n-2}a + \dots + y_1a^{n-2} + a^{n-1}) \\
+                 &\leq (y_1-a)ny_1^{n-1} \tag{jelikož $y_1 \geq a$}\\
+                 &< \frac{1}{k}ny_1^{n-1} \tag{vzpomeňme $a > y_1 - \frac{1}{k}$}\\
+                 &< y_1^n-x
+   \end{align*}
+
+   Podobně lze ukázat, že $y_2^n \geq x$, čímž dostáváme dvě sady nerovností:
+   \begin{itemize}
+       \item $y_1 \geq y_2$, a
+       \item $y_1^n \leq x \leq y_2^n$.
+   \end{itemize}
+   Zřejmě $x = y_1^n = y_2^n$.
+\end{proof}
+
+\begin{definition}
+    Pro $x \in \R$ definujeme \newterm{absolutní hodnotu} $|x|$ následovně:
+    $$|x| = \begin{cases}
+        x &\text{pokud $x \geq 0,$} \\
+        -x &\text{pokud $x < 0$.}
+    \end{cases}$$
+\end{definition}
+
+\begin{theorem}[Vlastnosti absolutní hodnoty]
+    \label{th:triangleineq}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item $\fa x \in \R: |x| \geq 0,$
+        \item $\fa x \in \R: |x| = 0 \iff x = 0,$
+        \item $\fa x \in \R: x \leq |x|,$
+        \item $\fa x,y \in \R: |xy| = |x||y|,$
+        \item $\fa x,y \in \R: ||x| - |y|| \leq |x \pm y| \leq |x| + 
+            |y|$ (rozšířená \newterm{trojúhelníková nerovnost}).
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    První čtyři vlastnosti jsou zřejmé: Postačí jednoduché rozepsání případů 
+    ($x \geq 0$, $x < 0$, $y \geq 0$, $y < 0$) či jejich kombinací.
+
+    Dokažme nyní poslední vlastnost. Z předchozích bodů vyplývá:
+    $$-2|x||y| \leq 2xy \leq 2|x||y|.$$
+    Přičtěme v nerovnostech výraz $|x|^2 + |y|^2 = x^2 + y^2$:
+    $$|x|^2 - 2|x||y| + |y|^2 \leq x^2 + 2xy + y^2 \leq |x|^2 + 2|x||y| + |y|^2$$
+    Tyto nerovnosti můžeme dále upravit:
+    $$ (|x| - |y|)^2 \leq (x + y)^2 \leq (|x|+|y|)^2$$
+    Jelikož platí:
+    $$|a| \leq |b| \iff a^2 \leq b^2,$$
+    dostáváme:
+    $$ ||x| - |y|| \leq |x + y| \leq ||x| + |y|| = |x| + |y|.$$
+
+    Pokud dále dosadíme $-y$ za $y$, dostaneme:
+    $$||x| - |y|| \leq |x - y| \leq |x| + |y|$$
+\end{proof}

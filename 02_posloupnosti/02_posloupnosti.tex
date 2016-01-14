@@ -1,0 +1,683 @@
+\section{Posloupnosti}
+
+\subsection{Úvod}
+\begin{definition}
+    Nechť pro $\forall n \in \N$ máme dáno $a_n \in \R$. Pak 
+    $\left\{a_n\right\}_{n=1}^{\infty} = \left\{a_1, a_2, a_3, \dots \right\}$
+    nazveme \newterm{posloupnost reálných čísel}. Číslo $a_n$ nazveme 
+    $n$-tým prvkem posloupnosti.
+\end{definition}
+
+\begin{remark}[Příklady posloupností]
+    \leavevmode
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item $\left\{\frac{1}{n}\right\}_{n=1}^\infty$
+                
+                Tedy $1, \frac{1}{2}, \frac{1}{3},$ atd.
+
+            \item $\left\{2^n\right\}_{n=1}^\infty$
+
+            \item $\left\{p_n\right\}_{n=1}^\infty$, kde $p_n$ je $n$-té prvočíslo.
+
+            \item $a_1=1, a_{n+1} = 1 + a_n^2.$ 
+                
+                Tato posloupnost je zadána rekursivně.
+        \end{itemize}
+    \end{multicols}
+\end{remark}
+
+\begin{definition}
+    Posloupnost $\seq{a_n}$ je \newterm{omezená}, pokud je množina členů 
+    posloupnosti $\seq{a_n}_{n=1}^\infty \subset \R$ omezená množina. 
+    Analogicky definujeme omezenost shora a omezenost zdola.
+\end{definition}
+
+\begin{definition}
+    Řekneme, že posloupnost $\seq{a_n}_{n\in\N}$ je:
+    \begin{itemize}
+        \item \newterm{neklesající}, pokud $\forall n \in \N: a_n \leq a_{n+1},$
+        \item \newterm{nerostoucí}, pokud $\forall n \in \N: a_n \geq a_{n+1},$
+        \item \newterm{rostoucí}, pokud $\forall n \in \N: a_n < a_{n+1},$
+        \item \newterm{klesající}, pokud $\forall n \in \N: a_n > a_{n+1}.$
+    \end{itemize}
+\end{definition}
+
+\subsection{Vlastní limita posloupnosti}
+
+\begin{definition}
+    Nechť $A \in \R$ a $\seq{a_n}_{n=1}^\infty$ je posloupnost. Řekneme, že $A$ je 
+    \newterm{vlastní limitou} posloupnosti $\seq{a_n}$, jestliže:
+    $$\fa \e > 0 \; \exists n_0 \in \N \; \fa n \geq n_0,n\in \N: |a_n - A| < \e$$
+    Značíme: $$\lim_{n\to\infty}a_n = A.$$
+\end{definition}
+
+\begin{remark}[Příklady limit]
+    \label{remark:limitexamples}
+    \leavevmode
+    \begin{itemize}
+        \item
+            Mějme posloupnost $\seq{\frac{1}{n}}_{n=1}^\infty$. 
+            Tato posloupnost zřejmě směřuje k nule, formálně: $$\lim_{n\to\infty}
+            \frac{1}{n} = 0.$$
+            Dle definice limity musí platit:
+            $$\fa \e > 0 \; \exists n_0 \in \N \; \fa n \geq n_0,n\in \N: 
+            |\frac{1}{n} - 0| < \e$$
+            Pro dané $\e$ volíme $n_0 > \frac{1}{\e}$.
+            Pro všechna $n \geq n_0 > \frac{1}{\e}$ platí: $\frac{1}{n} < \e$, a tedy: 
+            $|\frac{1}{n} - 0| = \frac{1}{n} < \e$.
+        \item
+            $\lim_{n\to\infty}\sqrt[n]{n} = 1$
+
+            Sporem: Nechť daná limita neexistuje, tedy: 
+            $$\exists \e > 0 \; \fa n_0 \in \N \; 
+            \exists n \geq n_0: |\sqrt[n]{n} - 1| \geq \e.$$ 
+            Jelikož $\fa n \in \N: \sqrt[n]{n} \geq 1$, 
+            vyplývá, že $\sqrt[n]{n} \geq 1 + \e$. Potom ovšem:
+            \begin{align*}
+                n &\geq (1 + \e)^n \\
+                  &\geq 1 + n\e + \frac{n(n-1)}{2}\e^2 \tag{první tři členy 
+                    binomického rozvoje} \\
+                  &\geq n\e(1 + \frac{n-1}{2}\e)
+            \end{align*}
+            Po vydělení obou stran číslem $n$ dostáváme:
+            $$1 \geq \e(1 + \frac{n-1}{2}\e)$$
+            což očividně pro příliš velká $n \in \N$ nemůže platit.
+        \item
+            $\lim_{n\to\infty} (-1)^n$ neexistuje. 
+            
+            Sporem: Předpokládejme, že
+            daná limita $A$ existuje, tj.: 
+            $$\fa \e > 0 \; \exists n_0 \in \N \; \fa n \geq n_0,n\in \N: 
+            |(-1)^n - A| < \e$$
+            Ukážeme, že existuje protipříklad. Nechť $\e = \frac{1}{4}$. Potom
+            dostáváme následující spor:
+            \begin{align*}
+                2 &= |(-1)^n - (-1)^{n+1}| \\
+                  &\leq |(-1)^n - A| + |A - (-1)^{n+1}| \tag{trojúhelníková
+                    nerovnost} \\
+                  &\leq \frac{1}{4} + \frac{1}{4} \tag{z definice limity pro
+                $\fa n \geq n_0$} \\
+                  &= \frac{1}{2}
+            \end{align*}
+    \end{itemize}
+\end{remark}
+
+\begin{theorem}[jednoznačnost vlastní limity]
+    \label{th:jednoznacnostlimity}
+    Každá posloupnost má nejvýše jednu limitu.
+\end{theorem}
+
+\begin{proof}
+    Nechť má posloupnost $\seq{a_n}$ dvě různé limity, $A_1$ a $A_2$. Bez újmy
+    na obecnosti: $A_1 < A_2$. Zvolíme
+    $0 < \e < \frac{A_2-A_1}{2}$. Z definice víme, že existují $n_1, n_2 \in
+    \N$ takové, že: $\fa n \geq n_1: |a_n - A_1| < \e$ a $\fa n \geq n_2: |a_n
+    -A_2| < \e$. Vezměme $n_0 \coloneqq \max(n_1,n_2)$. Potom dostáváme 
+    následující spor:
+    \begin{align*}
+        \fa n \geq n_0: A_2 - A_1 &= |A_2 - A_1| \\
+                                  &\leq |A_2 - a_n| + |a_n - A_1| 
+                                     \tag{trojúhelníková nerovnost}\\
+                                 &< 2\e \tag{z definice limity} \\
+                                 &< A_2 - A_1 \tag{díky volbě $\e < \frac{A_2 - A_1}{2}$}
+    \end{align*}
+\end{proof}
+
+\begin{theorem}
+    \label{th:seqomez}
+    Nechť posloupnost $\seq{a_n}$ má vlastní limitu $A \in \R$. Pak je množina
+    $\seq{a_n}$ omezená.
+\end{theorem}
+
+\begin{proof}
+    Zvolme $\e = 1$. Dle definice limity:
+    $$\exists n_0 \in \N \; \fa n \geq n_0,n \in \N: |a_n - A| < 1.$$
+    Pro všechna $n \geq n_0$ potom platí: 
+    $$|a_n| = |a_n - A + A| \leq |a_n - A| + |A| < 1 + |A|.$$
+    Nyní zvolme $$K \coloneqq \max{\{|A|+1, |a_1|, |a_2|, \dots, |a_{n_0}|\}}.$$
+    Zřejmě: $\fa n \in \N: |a_n| \leq K.$
+\end{proof}
+
+\begin{definition}
+    Řekneme, že posloupnost $\seq{b_k}_{k \in \N}$ je \newterm{vybraná} z posloupnosti
+    $\seq{a_n}_{n \in \N}$, jestliže existuje rostoucí posloupnost přirozených
+    čísel $\seq{n_k}_{k=1}^\infty$ tak, že $b_k = a_{n_k}$.
+\end{definition}
+
+\begin{remark}[Příklad vybrané posloupnosti]
+    \leavevmode
+    \begin{itemize}
+        \item Posloupnost $\seq{\frac{1}{2^n}}$ je vybraná z posloupnosti 
+            $\seq{\frac{1}{n}}$.
+    \end{itemize}
+\end{remark}
+
+\begin{theorem}[O limitě vybrané posloupnosti]
+    \label{th:vybranalimita}
+    Nechť $\lim_{n \to \infty} a_n = A \in \R$ a nechť $\seq{b_k}$ je vybraná z
+    $\seq{a_n}$. Potom $\lim_{n\to\infty} b_k = A$.
+\end{theorem}
+
+\begin{proof}
+    Z definice limity víme, že:
+    $$\fa \e > 0 \; \exists n_0 \in \N \; \fa n \geq n_0,n\in \N: |a_n - A| < \e$$
+    K tomuto $\e$ volíme $k_0 \coloneqq n_0$. Potom $\fa k \geq k_0, k \in \N$ platí
+    $n_k \geq k \geq n_0$ a tedy $|b_k - A| = |a_{n_k} -A| < \e$.
+\end{proof}
+
+\begin{remark}
+    Předchozí implikace neplatí v opačném směru. 
+    Uvažujte například posloupnost $\seq{(-1)^n}$ a její
+    možné vybrané posloupnosti.
+\end{remark}
+
+\begin{theorem}[Aritmetika limit]
+    \label{th:voal}
+    Nechť $\lim_{n\to\infty}a_n = A \in \R$ a $\lim_{n\to\infty}b_n = B \in \R$.
+    Pak platí:
+    \begin{enumerate}[i.]
+        \item $\lim_{n \to \infty} a_n + b_n = A + B$
+        \item $\lim_{n \to \infty} a_nb_n = AB$
+        \item pokud $\fa n \in \N: b_n \neq 0$ a $B \neq 0$, pak
+            $\lim_{n \to \infty} \frac{a_n}{b_n} = \frac{A}{B}.$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item Z definice limity dostáváme:
+            $$\fa \e > 0 \; \exists n_1 \in \N \; \fa n \geq n_1,n\in \N: 
+            |a_n - A| < \e,$$
+            $$\fa \e > 0 \; \exists n_2 \in \N \; \fa n \geq n_2,n\in \N: 
+            |b_n - B| < \e.$$
+            Zvolme $n_0 \coloneqq \max\{n_1,n_2\}.$ Potom:
+            \begin{align*}
+                \fa n \geq n_0, n\in \N: 
+                    |a_n + b_n - (A+B)| &\leq |a_n - A| + |b_n - B| \\
+                                        &< \e + \e = 2\e
+            \end{align*}
+        \item Mějme $n_0 \coloneqq \max\{n_1,n_2\}$ jako v předchozím bodě. Potom:
+            \begin{align*}
+                \fa n \geq n_0, n\in \N:
+                    |a_nb_n - AB| &\leq |a_nb_n - a_nB| + |a_nB - AB| \\
+                                  &\leq |a_n||b_n - B| + |B||a_n - A| \\
+                                  &< |a_n|\e + |B|\e
+            \end{align*}
+            Z Věty~\ref{th:seqomez} víme, že posloupnost $\seq{a_n}$ je omezená,
+            tj. $\exists K \; \fa n \in \N: |a_n| \leq K$, a tedy:
+            $$|a_n|\e + |B|\e \leq \e(K + |B|).$$
+
+        \item Mějme $n_1$ a $n_2$ jako v předchozích bodech. Navíc, pro $\tilde{\e}
+            = \frac{|B|}{2}$:
+            $$\exists n_3 \in \N \; \fa n \geq n_3, n \in \N: |b_n - B| < \frac{|B|}{2}.$$
+            Dle rozšířené trojúhelníkové nerovnosti (Věta~\ref{th:triangleineq}) 
+            dále platí:
+            $$|b_n - B| \geq ||b_n| - |B|| \geq |b_n| - |B|.$$
+            a tedy:
+            $$\fa n \geq n_3, n \in \N: |b_n| > \frac{|B|}{2}.$$
+            Zvolme $n_0 \coloneqq \max\{n_1,n_2, n_3\}$, potom
+            \begin{align*}
+                \fa n \geq n_0, n\in\N: 
+                    \left|\frac{a_n}{b_n} - \frac{A}{B}\right| 
+                    &= \left|\frac{a_nB - AB + AB -Ab_n}{b_nB}\right| \\
+                    &\leq \left|\frac{a_nB - AB}{b_nB}\right|+ \left|\frac{AB -Ab_n}{b_nB}\right| \\
+                    &\leq \frac{|B||a_n - A|}{|b_n||B|} + \frac{|A||B - b_n|}{|b_n||B|} \\
+                    &< \frac{\e}{\frac{|B|}{2}} + \frac{|A|\e}{\frac{|B|}{2}|B|} 
+                    \tag{jelikož $|b_n| > \frac{|B|}{2}$}\\
+                    &= \e\left(\frac{2}{|B|}+\frac{2|A|}{|B|^2}\right)
+            \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[Limita a uspořádání]
+    \label{th:limitaausporadani}
+    Nechť $\lim_{n\to\infty} a_n = A \in \R, \lim_{n\to\infty}b_n = B \in \R.$
+    \begin{enumerate}[i.]
+        \item Jestliže $A < B$, pak $\exists n_0 \in \N \; \fa n \geq n_0: 
+            a_n < b_n.$
+        \item Jestliže existuje $n_0 \in \N$ takové, že pro každé $n \geq n_0$ 
+            platí $a_n \geq b_n$, pak $A \geq B.$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item
+            Zvolme $0<\e < \frac{B-A}{2}.$ Dle definice limity:
+            $$\exists n_1 \in \N \; \fa n \geq n_1, n \in \N: |a_n - A| < \e$$
+            $$\exists n_2 \in \N \; \fa n \geq n_2, n \in \N: |b_n - B| < \e$$
+            Položmě $n_0 \coloneqq \max\{n_1,n_2\}$. Potom:
+            \begin{align*}
+                \fa n \geq n_0: a_n &< A+\e \\
+                                                      &< B-\e \tag{$0<\e < \frac{B-A}{2}$} \\
+                                                      &< b_n
+            \end{align*}
+
+        \item Sporem: Nechť A < B. Potom dle předchozího bodu:
+            $$\exists \widetilde{n_0} \in \N \; \fa n \geq \widetilde{n_0}: 
+            a_n < b_n,$$
+            což je ve sporu s předpoklady.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[O dvou strážnících]
+    \label{th:dvastraznici}
+    Nechť $\seq{a_n}, \seq{b_n}, \seq{c_n}$ jsou posloupnosti splňující:
+    \begin{enumerate}[i.]
+        \item $\exists n_0 \in \N \; \fa n \geq n_0: a_n \leq c_n \leq b_n,$
+        \item $\lim a_n = \lim b_n = A \in \R.$
+    \end{enumerate}
+    Pak $\lim c_n = A.$
+\end{theorem}
+
+\begin{proof} 
+    Zvolme $\e > 0.$ Dle definice limity:
+    $$\exists n_1 \in \N \; \fa n \geq n_1, n \in \N: |a_n - A| < \e$$
+    $$\exists n_2 \in \N \; \fa n \geq n_2, n \in \N: |b_n - A| < \e$$
+    Položme $n_3 \coloneqq \max\{n_0,n_1,n_2\}$. Potom:
+    $$\fa n \geq n_3: A - \e < a_n \leq c_n \leq b_n < A + \e,$$
+    tedy $\fa n \geq n_3: |c_n - A| < \e$, a proto $\lim c_n = A$.
+\end{proof}
+
+\begin{remark}[Příklad využití věty o dvou strážnících]
+    Pomocí předchozí věty dokážeme následující tvrzení:
+    \begin{quote}  
+        \Necht $a>0.$ Pak $\lim_{n\to\infty} \sqrt[n]{a} = 1.$
+    \end{quote}
+    Podle hodnoty $a$ rozdělíme důkaz do tří částí:
+    \begin{itemize}
+        \item[$(a = 1)$] Triviální.
+        \item[$(a > 1)$] Zřejmě: $$\exists n_0 \in \N, n_0 \geq a, \fa n \geq n_0: 
+            a \leq n.$$ Potom:
+            $$\fa n \geq n_0: 1 \leq \sqrt[n]{a} \leq \sqrt[n]{n}.$$
+            Jelikož $\lim 1 = 1$ a $\lim \sqrt[n]{n} = 1$ 
+            (Poznámka~\ref{remark:limitexamples}), potom dle věty o dvou 
+            strážnících i $\lim \sqrt[n]{a} = 1$.
+        \item[$(0 < a < 1)$] 
+            S pomocí věty o aritmetice limit (Věta~\ref{th:voal}) převedeme 
+            problém na již vyřešený případ $a > 1:$
+            \begin{align*}
+                \lim_{n \to \infty} \sqrt[n]{a} &= \lim_{n \to \infty} 
+                \frac{1}{\sqrt[n]{\frac{1}{a}}} \\
+                &= \frac{\lim_{n\to\infty} 1}{\lim_{n\to\infty} 
+            \sqrt[n]{\frac{1}{a}}} \tag{aritmetika limit} \\
+                &= \frac{1}{1} = 1 \tag{$\frac{1}{a} > 0$}
+            \end{align*}
+    \end{itemize}
+    
+\end{remark}
+
+\begin{theorem}[O limitě součinu omezené a mizející posloupnosti]
+    \label{th:mizejici}
+    Nechť $\lim a_n = 0$ a $\seq{b_n}$ je omezená. Potom:
+    $$\lim_{n\to\infty}a_nb_n = 0.$$
+\end{theorem}
+
+\begin{proof}
+    Posloupnost $\seq{b_n}$ je omezená, tedy $\exists K: \fa n \in \N: |b_n| 
+    \leq K.$ Potom:
+    $$ 0 \leq |a_nb_n| = |a_n||b_n| \leq K|a_n|$$
+    a s pomocí dvou strážníků (Věta~\ref{th:dvastraznici}) je 
+    $\lim_{\ntoinfty} a_nb_n = 0.$
+\end{proof}
+
+\begin{remark}
+    Předchozí větu můžeme využít např. při důkazu 
+    $\lim_{n\to\infty} {\frac{1}{n}\sin n} = 0.$
+\end{remark}
+
+\subsection{Nevlastní limita posloupnosti}
+
+\begin{definition}
+    \label{df:nevlastnilimitaposl}
+    Řekneme, že posloupnost $\seq{a_n}_{n \in \N}$ má \newterm{nevlastní limitu}
+    $+\infty$ (respektive $-\infty$), pokud:
+    $$\fa K \in \R \; \exists n_0 \in \N \; \fa n \geq n_0, n\in \N: a_n > K$$
+    $$(\fa K \in \R \; \exists n_0 \in \N \; \fa n \geq n_0, n\in \N: a_n < K)$$
+\end{definition}
+
+\begin{remark}[Příklady nevlastních limit]
+    \leavevmode
+    \begin{itemize}
+        \item $\lim_{n \to \infty} n^2 = +\infty$
+
+            Ke $K \in \R$ zvol $n_0 \in \N$ takové, že $n_0 > \sqrt{K}.$ Pak
+            $\fa n \geq n_0: n\geq n_0 \geq \sqrt{K},$ a tedy: $n^2 > K.$
+
+        \item $\lim_{n \to \infty} -\sqrt{n} = -\infty$
+
+            Ke $K \in \R$ zvol $n_0 \in \N$ takové, že $n_0 > K^2.$ Pak
+            $\fa n \geq n_0: \sqrt{n} > -K,$ a tedy $-\sqrt{n} < K$.
+    \end{itemize}
+\end{remark}
+
+\begin{definition}
+    Nechť $\lim a_n = A.$ Pokud $A \in \R,$ říkáme, že posloupnost $\seq{a_n}$ 
+    \newterm{konverguje}. Pokud $A = \pm \infty,$ říkáme, že posloupnost
+    \newterm{diverguje}.
+\end{definition}
+
+\begin{metaproposition}
+    Věty \ref{th:jednoznacnostlimity}, \ref{th:vybranalimita}, 
+    \ref{th:limitaausporadani} a \ref{th:dvastraznici} platí i v případě,
+    že uvažujeme nevlastní limity.
+\end{metaproposition}
+
+\begin{proof}
+    Důkazy zmíněných vět je třeba rozepsat pro jednotlivé případy: 
+    vlastní limita, nevlastní limita, kombinace vlastní a nevlastní 
+    limity, atd. 
+\end{proof}
+
+\begin{definition}
+    \newterm{Rozšířená reálná osa} je množina $\R^* \coloneqq \R \cup 
+    \left\{+\infty\right\}\cup \left\{-\infty\right\}$ s následujícími vlastnostmi:
+
+    \begin{center}
+        \begin{tabular}{lr}
+            Uspořádání: &$\fa a \in \R: -\infty < a < +\infty$ \\
+            Absolutní hodnota: &$|-\infty| = |+\infty| = +\infty$ \\
+            Sčítání: &$\fa a \in \R^* \setminus \{+\infty\}: -\infty + a = -\infty$ \\
+                     &$\fa a \in \R^* \setminus \{-\infty\}: +\infty + a = +\infty$ \\
+            Násobení: &$\fa a \in \R^*, a>0: a\cdot (\pm\infty) = \pm \infty$ \\
+                      &$\fa a \in \R^*, a<0: a\cdot (\pm\infty) = \mp \infty$ \\
+            Dělení: &$\fa a \in \R: \frac{a}{\pm\infty} = 0$ \\
+        \end{tabular}
+    \end{center}
+
+    Výrazy $-\infty + \infty, 0 \cdot (\pm\infty), \frac{\pm\infty}{\pm\infty},
+    \frac{\text{cokoli}}{0}$ nejsou definovány.
+\end{definition}
+\begin{definition}[Rozšíření definice suprema a infima]
+    \leavevmode
+    \begin{itemize}
+        \item Pokud množina $M$ není shora omezená, potom $\sup M = +\infty.$
+        \item Pokud množina $M$ není zdola omezená, potom $\inf M = -\infty.$
+        \item Pokud $M = \emptyset$, potom $\sup M = -\infty$ a 
+            $\inf M = +\infty.$
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    Všimněte si, že při $M = \emptyset$ je $\inf M > \sup M.$
+\end{remark}
+
+\begin{theorem}[aritmetika limit podruhé]
+    \Necht $\lim_{\ntoinfty} a_n = A\in\Rstar$ a $\lim_{\ntoinfty} b_n = B \in \Rstar.$
+    Pak platí:
+    \begin{enumerate}[i.]
+        \item $\lim_{\ntoinfty} a_n + b_n = A + B,$ pokud je výraz $A+B$ definován,
+        \item $\lim_{\ntoinfty} a_nb_n = AB,$ pokud je výraz $AB$ definován, a
+        \item pokud $B \neq 0$ a $\fa n \in \N: b_n \neq 0$, pak
+            $\lim_{\ntoinfty} \frac{a_n}{b_n} = \frac{A}{B},$ pokud je výraz 
+            $\frac{A}{B}$ definován.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Tato věta je rozšířením původní věty o aritmetice limit (Věty~\ref{th:voal}), 
+    ve které jsme uvažovali pouze vlastní limity. 
+
+    Jako příklad podívejme na důkaz bodu $(i)$ a případ $A = +\infty, B \in \R$.
+
+    K $\e = 1$:
+    $$\exists n_1 \in \N, \fa n \geq n_1, n \in \N: |b_n - B| < 1,$$ 
+    a tedy $\fa n \geq n_1, n \in \N: b_n > B - 1.$ Dále, ke $K \in \R:$
+    $$\exists n_2 \in \N, \fa n \geq n_2, n\in\N: a_n > K - B + 1.$$
+    Zvolme $n_0 \coloneqq \max\{n_1, n_2\},$ potom:
+    $$\fa n \geq n_0, n\in\N: a_n + b_n > K -B +1 +B -1 = K.$$
+\end{proof}
+
+\begin{theorem}[Limita typu $\frac{A}{0}$]
+    \Necht $\lim_{\ntoinfty} a_n = A \in \Rstar, A > 0, \lim_{\ntoinfty} b_n = 0$
+    a $\exists n_0 \in \N, \fa n \geq n_0, n \in \N: b_n > 0.$ Potom 
+    $\lim_{\ntoinfty} \frac{a_n}{b_n} = \infty.$
+\end{theorem}
+
+\begin{remark}
+    \leavevmode
+    \begin{itemize}
+        \item $\lim_{\ntoinfty} \frac{(-1)^n}{n} = 0$
+        \item $\lim_{\ntoinfty} \frac{1}{\frac{(-1)^n}{n}}$ neexistuje,
+            jelikož porušuje podmínku $\exists n_0 \in \N, \fa n \geq 
+            n_0, n \in \N: b_n > 0.$
+    \end{itemize}
+\end{remark}
+
+\begin{proof}
+    Uvažujme případ, kdy $A \in \R$, tedy $\lim a_n$ je vlastní.
+    Pro $\e = \frac{A}{2}$ platí:
+    $$\exists n_1 \in \N, \fa n \geq n_1, n\in\N: |a_n - A| < \frac{A}{2},$$
+    a tedy $\fa n \geq n_1, n \in \N: a_n > \frac{A}{2}.$ Zvolme $K > 0$ pevné,
+    potom k $\e = \frac{\frac{A}{2}}{K}:$
+    $$\exists n_2 \in \N, \fa n \geq n_2, n\in\N: |b_n| < \frac{\frac{A}{2}}{K}.$$
+    Zvolme $n_3 = \max \{n_0, n_1, n_2\}.$ Potom:
+    $$\fa n \geq n_3, n\in\N: \frac{a_n}{b_n} > 
+    \frac{\frac{A}{2}}{\frac{\frac{A}{2}}{K}} = K.$$
+\end{proof}
+
+\subsection{Monotónní posloupnosti}
+
+\begin{theorem}[O limitě monotónní posloupnosti]
+    \label{th:monotonniposl}
+    Každá monotónní posloupnost má limitu.
+\end{theorem}
+
+\begin{proof}
+    Nechť je \buno posloupnost $\seq{a_n}$ neklesající. Položme
+    $$A = \sup \{a_n, n\in \N\}.$$ Tvrdím, že $\lim a_n = A.$
+    \begin{enumerate}[i.]
+        \item \Necht $A \in \R$ a $\e > 0$. Z definice suprema:
+            $$\exists n_0 \in \N: a_{n_0} > A - \e.$$
+            Potom $\fa n \geq n_0, n\in\N$ platí: 
+            \begin{align*}
+                A &\geq a_n \tag{supremum} \\
+                  &\geq a_{n_0} \tag{motononie} \\
+                  &> A - \e
+            \end{align*}
+            a tedy $\fa n \geq n_0, n\in\N: |a_n - A| < \e$
+        \item \Necht $A = +\infty$ a $K \in \R$. Z definice suprema:
+            $$\exists n_0 \in \N: a_{n_0} > K.$$
+            Potom $\fa n \geq n_0, n\in\N$ platí: 
+            \begin{align*} 
+                a_n &\geq a_{n_0} \tag{monotonie} \\
+                    &>K.
+            \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}[Příklad využití Věty~\ref{th:monotonniposl}]
+    Určeme limitu (pokud existuje) rekursivně zadané posloupnosti $\seq{x_n}:$
+    \begin{align*}
+        x_1 &= 2 \\
+        x_{n+1} &= \frac{x_n^2 + 2}{2x_n}
+    \end{align*}
+
+    Dokažme nejprve, že $\fa n \in \N: x_n > 0;$ toto pozorování se nám bude
+    hodit později. Využijeme indukci:
+    \begin{itemize}
+        \item Pro $n=1$ platí $x_1 = 2 > 0.$
+        \item Nechť $x_n > 0.$ Potom $\frac{x_n^2 + 2}{2x_n}$ je zřejmě také
+            větší než $0,$ jelikož jak čitatel, tak jmenovatel jsou větší 
+            než $0.$
+    \end{itemize}
+
+    Nyní dokažme, že daná posloupnost $\seq{x_n}$ je nerostoucí, tj. $\fa n 
+    \in N: x_{n+1} \leq x_n.$ Pro $x_n > 0$ je tato nerovnost ekvivalentní:
+    \begin{align*}
+        \frac{x_n^2 + 2}{2x_n} &\leq x_n \\
+        x_n^2 + 2 &\leq 2x_n^2 \\
+        2 &\leq x_n^2 \\
+        \sqrt{2} &\leq x_n
+    \end{align*}
+    Je třeba tedy dokázat tvrzení: $\fa n \in \N: x_n \geq \sqrt{2}.$ Využijme
+    znovu indukci:
+    \begin{itemize}
+        \item Pro $n=1$ platí: $2 \geq \sqrt{2}.$
+        \item Nechť $x_n \geq \sqrt{2}$. Potom:
+            \begin{align*}
+                x_{n+1} &= \frac{x_n^2 + 2}{2x_n} \\
+                &= \frac{x_n^2 +2}{2} \cdot \frac{1}{x_n} \\
+                &\geq \sqrt{2x_n^2} \cdot \frac{1}{x_n} 
+                \tag{vztah aritmetického a geometrického průměru, Věta~\ref{th:agprumer}} \\
+                &= \sqrt{2}
+            \end{align*}
+    \end{itemize}
+
+    Potud jsme o posloupnosti $\seq{x_n}$ dokázali, že je:
+    \begin{itemize}
+        \item nerostoucí -- a podle věty o limitě monotónní posloupnosti 
+            (Věta~\ref{th:monotonniposl}) má tedy limitu,
+        \item zdola omezená -- a tedy její limita je vlastní.
+    \end{itemize}
+    Označme tuto limitu $A$ (tedy: $\lim_{\ntoinfty} x_n = A \in \R$). Potom platí:
+    \begin{align*}
+        A &= \lim_{\ntoinfty} x_{n} \\
+          &= \lim_{\ntoinfty} x_{n+1} \tag{Věta~\ref{th:vybranalimita} a $b_k = x_{k+1}$}\\
+          &= \lim_{\ntoinfty} \frac{x_n^2 + 2}{2x_n} \\
+          &= \frac{\lim x_n \cdot \lim x_n + \lim 2}{2\lim x_n} 
+        \tag{Věta~\ref{th:voal}} \\
+        &= \frac{A\cdot A + 2}{2A}
+    \end{align*}
+    Vyřešením této rovnice získáme $A = \sqrt{2}.$
+\end{remark}
+
+\begin{definition}
+    \Necht $\seq{a_n}_{n\in\N}$ je posloupnost a označme 
+    $$b_k = \sup\{a_n, n\geq k\},$$
+    $$c_k = \inf\{a_n, n\geq k\}.$$
+    Je-li $\seq{a_n}$ shora (zdola) neomezená, pak klademe $\lim_{k \to\infty}
+    b_k = \infty \; (\lim_{k \to \infty} c_k = -\infty).$
+
+    Potom:
+    \begin{itemize}
+        \item Číslo $\lim_{k\to\infty} b_k$ nazýváme \newterm{limes superior} posloupnosti
+    $\seq{a_n}$ a značíme $\lim\sup_{\ntoinfty} a_n.$
+        \item Číslo $\lim_{k\to\infty} c_k$ nazýváme \newterm{limes inferior} posloupnosti
+    $\seq{a_n}$ a značíme $\lim\inf_{\ntoinfty} a_n.$
+    \end{itemize}
+\end{definition}
+
+\begin{remark}
+    Nechť $\seq{a_n}$ je libovolná posloupnost. Potom $\limsup a_n$ a 
+    $\liminf a_n$ existují, jelikož $\seq{b_k}$ a $\seq{c_k}$ jsou monotónní 
+    posloupnosti, které dle věty o limitě monotónní posloupnosti 
+    (Věta~\ref{th:monotonniposl}) mají limitu.
+\end{remark}
+
+\begin{theorem}[vztah limity, limes superior a limes inferior]
+    \label{th:limitalimsupliminf}
+    $$\lim a_n = A \in \Rstar \iff \limsup_{\ntoinfty} a_n = 
+    \liminf_{\ntoinfty} a_n = A \in \Rstar$$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\impliedby$] Nechť jsou $b_k$ a $c_k$ definovány jako v předchozí 
+            definici. Potom:
+            $$\fa k \in \N: c_k \leq a_k \leq b_k,$$
+            Jelikož $\lim c_k = \lim b_k = A \in \Rstar,$ s použitím 
+            Věty~\ref{th:dvastraznici} o dvou strážnících je i 
+            $\lim a_k = A.$
+        \item[$\implies$] Nechť $A \in \R.$ Z definice limity víme:
+            $$\exists n_0 \in \N, \fa n \geq n_0, n \in \N: A - \e < a_n < A + \e.$$
+            Zřejmě také platí:
+                $$\fa n \geq n_0, n\in\N: A -\e \leq c_n \leq a_n \leq b_n \leq A + \e,$$
+            a proto $\lim b_n = \lim c_n = A.$
+
+            \Necht naopak $A = +\infty.$ Potom je posloupnost $\seq{a_n}$ shora 
+            neomezená a $\limsup a_n = +\infty.$
+            Zvolme $K \in \R.$ Z definice limity:
+            $$\exists n_0 \in \N, \fa n \geq n_0, n\in\N: a_n > K.$$
+            Potom $c_{n_0} \geq K.$ Jelikož posloupnost $\seq{c_n}$ je neklesající,
+            platí:
+            $$\fa n \geq n_0, n \in \N: c_n \geq K.$$ 
+            Zřejmě:
+            $$ \lim c_n = +\infty.$$
+            Analogicky pro $A = -\infty.$
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[Bolzano-Weierstrass]
+    \label{th:bolzanoweierstrass}
+    Z každé omezené posloupnosti lze vybrat konvergentní podposloupnost.
+\end{theorem}
+
+\begin{proof}
+    Mějme posloupnost $\seq{a_n}.$ Jelikož je omezená, platí:
+    $$\exists K, L \in \R: \fa n \in \N: K \leq a_n \leq L.$$
+    Rozpůlme interval $[K,L]$ na dva nové intervaly: $[K, \frac{K+L}{2}],
+    [\frac{K+L}{2}, L]$ (bod $\frac{K+L}{2}$ leží v obou intervalech). 
+    Potom alespoň jeden z nových intervalů obsahuje nekonečně mnoho 
+    členů posloupnosti $\seq{a_n}.$ Tento interval označíme $[K_1, L_1]$
+    a znovu jej rozpůlíme na dva podintervaly. Ten, ve kterém se nachází
+    nekonečně mnoho členů posloupnosti $\seq{a_n}$, označíme $[K_2, L_2].$
+
+    Tento postup opakujeme a získáme tak posloupnost intervalů $[K_k, L_k],$ 
+    pro něž platí:
+    \begin{enumerate}[i.]
+        \item $\fa k \in \N: [K_k, L_k] \supset [K_{k+1}, L_{k+1}]$
+        \item $\fa k \in \N: L_k - K_k = (L-K)/2^k,$ a tedy velikost intervalů
+            konverguje k nule.
+        \item $\fa k \in \N: [K_k, L_k]$ obsahuje nekonečně mnoho členů
+            posloupnosti $\seq{a_n}.$
+    \end{enumerate}
+    Můžeme proto vybrat rostoucí posloupnost přirozených čísel $n_k$ takovou, že
+    $\fa k \in \N: a_{n_k} \in [K_k, L_k].$ 
+
+    Díky vlastnosti $(i)$ 
+    posloupnosti intervalů $[K_k, L_k]:$
+    $$\exists x \in \R, \fa k \in \N: x \in [K_k, L_k].$$
+    Tvrdím, že posloupnost $\seq{a_{n_k}}$ konverguje k $x.$ Zvolme $\e > 0$ a
+    $k_0 \in \N$ takové, že 
+    $$\fa k \geq k_0, k \in \N: L_k - K_k < \e.$$
+    Potom
+    $$\fa k \geq k_0, k \in \N: |a_{n_k} - x| < \e,$$
+    jelikož jak $a_{n_k},$ tak $x$ náleží do $[K_k, L_k].$
+\end{proof}
+
+\begin{theorem}[Bolzano-Cauchyho podmínka]
+    \label{th:bolzanocauchy}
+    Posloupnost $\seq{a_n}_{n \in \N}$ má vlastní limitu, právě když
+    splňuje Bolzano-Cauchyho podmínku, tedy:
+    $$\fa \e > 0 \; \exists n_0 \in \N \; \fa m,n \in \N, n \geq n_0, m \geq n_0:
+    |a_n - a_m| < \e.$$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\implies$] $\lim a_n = A \in \R.$ Z definice limity:
+            $$\fa \e > 0 \; \exists n_0 \in \N, \fa n \geq n_0, n\in \N:
+            |a_n - A| < \frac{\e}{2}.$$
+            Pro $m,n \geq n_0$ platí:
+            $$|a_n - a_m| \leq |a_n -A | + |A - a_m| < \frac{\e}{2} + \frac{\e}{2}
+            = \e.$$
+        \item[$\impliedby$] Definujme posloupnosti:
+            $$b_n = \sup\{a_n, a_{n+1}, ...\},$$
+            $$c_n = \inf\{a_n, a_{n+1}, ...\}.$$
+            Posloupnost $\seq{b_n}$ klesá k $\limsup a_n$; posloupnost $\seq{c_n}$
+            stoupá k $\liminf a_n.$ Dále $\fa n \in \N: b_n \geq c_n.$
+            V následujícím ukážeme, že $\liminf a_n = \limsup a_n,$ z čehož za
+            použití věty o vztahu limity, limes superior a limes inferior 
+            (Věta~\ref{th:limitalimsupliminf}) plyne, že posloupnost 
+            $\seq{a_n}$ konverguje.
+
+            Cauchyho podmínka říká, že
+            $$\fa \e > 0 \; \exists n_0 \in \N \; \fa m,n \in \N, n \geq n_0, 
+            m \geq n_0: |a_n - a_m| < \e.$$
+            Zvolíme $m = n_0.$ Potom $\fa n \geq n_0, n\in\N:$
+                $$a_{n_0} - \e < a_n < a_{n_0} + \e$$
+                $$a_{n_0} - \e \leq c_n \leq a_n \leq b_n \leq a_{n_0} + \e$$
+                $$a_{n_0} - \e \leq \liminf a_n \leq a_n \leq \limsup a_n \leq a_{n_0} + \e$$
+            a tedy:
+            $$\fa \e> 0: |\limsup a_n - \liminf a_n| \leq 2\e,$$
+            z čehož vyplývá, že $\limsup a_n = \liminf a_n$ a posloupnost 
+            $\seq{a_n}$ konverguje.
+
+    \end{itemize}
+\end{proof}

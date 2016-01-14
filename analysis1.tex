@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage{csquotes}
+\DeclareQuoteAlias{german}{czech}
+\MakeOuterQuote{"}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{url}
+\usepackage[round]{natbib}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{multicol}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{thmtools}
+
+\usepackage{soulutf8}
+\usepackage{regexpatch}
+
+\usepackage{pgfplots}
+
+% Patch for hyphens
+\makeatletter
+\regexpatchcmd*{\SOUL@eval}{\cO-}{\cA-}{}{}
+\makeatother
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+%\setlength{\parskip}{0.05in}
+%\setlength{\parindent}{0pt}
+
+\newtheorem{theorem}{Věta}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Důsledek}
+\newtheorem{observation}[theorem]{Pozorování}
+\newtheorem{proposition}[theorem]{Tvrzení}
+\newtheorem{metaproposition}[theorem]{Metatvrzení}
+
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definice}
+\newtheorem{algorithm}[theorem]{Algoritmus}
+%\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Poznámka}
+\declaretheorem[name=Příklad,style=definition,qed=$\diamondsuit$,sibling=theorem]{example}
+%\newtheorem{example}[theorem]{Příklad}
+
+\newcommand*{\newterm}[1]{\ul{#1}}
+
+\newcommand*{\R}{\mathbb{R}}
+\newcommand*{\Rn}{\mathbb{R}^n}
+\newcommand*{\Rstar}{\R^*}
+\newcommand*{\C}{\mathbb{C}}
+\newcommand*{\Cn}{\mathbb{C}^n}
+\newcommand*{\Cnn}{\mathbb{C}^{n\times n}}
+\newcommand*{\N}{\mathbb{N}}
+\newcommand*{\Z}{\mathbb{Z}}
+\newcommand*{\Q}{\mathbb{Q}}
+
+\newcommand*{\e}{\varepsilon}
+
+\newcommand*{\Necht}{Nechť }
+\newcommand*{\necht}{nechť }
+\newcommand*{\buno}{bez újmy na obecnosti }
+\newcommand*{\tz}{tak, že }
+
+\newcommand*{\ntoinfty}{n\to\infty}
+\newcommand*{\xtoa}{x \to a}
+\newcommand*{\limxtoa}{\lim_{\xtoa}}
+\newcommand*{\limxo}{\lim_{x \to 0}}
+\newcommand*{\limxa}{\lim_{x \to a}}
+\newcommand*{\limyo}{\lim_{y \to 0}}
+\newcommand*{\limho}{\lim_{h \to 0}}
+\newcommand*{\limhop}{\lim_{h \to 0+}}
+\newcommand*{\limhom}{\lim_{h \to 0-}}
+\newcommand*{\limxinf}{\lim_{x \to \infty}}
+\newcommand*{\limxminf}{\lim_{x \to -\infty}}
+\newcommand*{\limninf}{\lim_{n \to \infty}}
+\newcommand*{\limminf}{\lim_{m \to \infty}}
+\newcommand*{\limsupn}{\limsup_{n\to\infty}}
+
+\newcommand*{\ds}{\displaystyle}
+
+\newcommand*{\tfan}{T_n^{f,a}}
+
+\newcommand*{\inv}[1]{#1^{-1}}
+
+\newcommand*{\fa}{\forall}
+\newcommand*{\seq}[1]{\left\{#1\right\}}
+\newcommand*{\rada}[1]{\sum_{n=1}^\infty #1}
+\newcommand*{\qe}{\stackrel{?}{=}}
+
+\DeclareMathOperator{\cotg}{cotg}
+\DeclareMathOperator{\arccotg}{arccotg}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\vnitrek}{int}
+
+\usepackage{xcolor}
+\newcommand\todo[1]{\textcolor{red}{\textbf{#1}}}
+
+\newcommand{\thmfoot}{}
+
+\begin{document}
+
+\title{Matematická analýza I \\ 
+    \vspace{1 mm} {\normalsize Zápisky z přednášek Stanislava 
+        Hencla\footnote{\url{http://www.karlin.mff.cuni.cz/~hencl/}} \ 
+        na MFF UK, zimní semestr, ak. rok 2007/2008}}
+
+\author{Adam Li\v{s}ka\footnote{\url{http://www.adliska.com}}}
+
+\date{\today}
+
+\maketitle
+
+\newpage
+\tableofcontents
+
+\include{01_uvod/01_uvod}
+\include{02_posloupnosti/02_posloupnosti}
+\include{03_funkce/03_funkce}
+\include{04_rady/04_rady}
+
+\end{document}

@@ -1,0 +1,792 @@
+\section{Řady}
+
+\subsection{Úvod}
+
+\begin{definition}
+    \label{df:rady}
+    \Necht $\seq{a_n}_{n\in\N}$ je posloupnost. Číslo $s_m = a_1 + a_2 + \dots
+    + a_m$ nazveme \newterm{$m$-tým částečným součtem} řady $\sum_{n=1}^\infty a_n.$
+    
+    \newterm{Součtem} nekonečné řady $\sum_{n=1}^\infty a_n$ nazveme limitu
+    posloupnosti $\seq{s_m}_{m\in\N},$ pokud tato limita existuje.
+
+    Je-li $\lim_{m\to\infty} s_m$ konečná, pak řekneme, že řada je 
+    \newterm{konvergentní}. Je-li tato limita nekonečná nebo neexistuje,
+    pak řekneme, že řada je \newterm{divergentní}. Tuto limitu budeme
+    značit $\rada{a_n}.$
+\end{definition}
+
+\begin{example}
+    \label{ex:priklady_rad}
+    \leavevmode
+    \begin{itemize}
+        \item $\rada{(-1)^n}$
+            
+            Diverguje, neboť $s_{2k+1}=-1$ a $s_{k} = 0.$
+
+        \item $\rada{\frac{1}{n(n+1)}}$
+            
+            Platí:
+            \begin{align*}
+                \rada{\frac{1}{n(n+1)}}
+                &= \rada{\frac{n + 1 - n}{n(n+1)}} \\
+                &= \rada{\left(\frac{1}{n} - \frac{1}{n+1}\right)} \\
+                &= \underbrace{1 - \frac{1}{2}}_{a_1}
+                   + \underbrace{\frac{1}{2} - \frac{1}{3}}_{a_2} 
+                   + \frac{1}{3} - \frac{1}{4} 
+                   + \frac{1}{4} - \frac{1}{5} + \dots
+            \end{align*}
+            a tedy:
+            $$s_m = 1 - \frac{1}{m}.$$
+            Potom 
+            $$\rada{\frac{1}{n(n+1)}} = 1.$$
+
+        \item Geometrická řada: $\rada{q^{n-1}} = 1 + q + q^2 + q^3 + \dots$
+
+            Pokud $q = 1,$ potom triviálně:
+            $$s_m = m.$$
+            Pro $q \neq 1$ můžeme využít vzorečku $a^n -1 = (a-1)(a^{n-1} 
+            + a^{n-2} + \dots + 1)$ a psát:
+            $$s_m = 1 + q + q^2 + \dots + q^{m-1} = \frac{q^m - 1}{q-1}.$$
+            Pro limitu $s_m$ při $m \to \infty$ platí:
+            $$\lim_{m\to\infty} s_m = \begin{cases}
+                \infty &q\geq1 \\
+                \frac{1}{1-q} &|q|<1 \\
+                \text{neexistuje} &q\leq-1
+            \end{cases}$$
+            a řada $\rada{q^{n-1}}$ konverguje při $|q| < 1.$
+            
+        \item $\rada{\frac{1}{n^2}} = \frac{\pi^2}{6}.$
+
+            Tento výsledek si odvodíme, až když budeme brát Fourierovy řady.
+    \end{itemize}
+\end{example}
+
+\begin{theorem}[nutná podmínka pro konvergenci řad]
+    \label{th:radykonvergencenutna}
+    Jestliže je $\rada{a_n}$ konvergentní, pak $\limninf a_n = 0.$
+\end{theorem}
+
+\begin{proof}
+    Řada $\rada{a_n}$ konverguje, a tedy $s = \lim_{m\to\infty} s_m \in \R.$ Potom
+    $$\limminf s_{m+1} = \limminf s_m = s.$$
+    Dále:
+    \begin{align*}
+        0 
+        &= s-s \\
+        &= \limminf s_{m+1} - \limminf s_m \\
+        &= \limminf (s_{m+1} - s_m) \tag{aritmetika limit, Věta~\ref{th:voal}}  \\
+        &= \limminf a_{m+1} = \limminf a_m.
+    \end{align*}
+\end{proof}
+
+\begin{example}
+    Geometrická řada $\rada{q^{n-1}}$ konverguje, právě když $|q| < 1.$ Zároveň
+    platí:
+    $$|q| < 1 \implies \limninf q^{n-1} = 0.$$
+\end{example}
+
+\begin{remark}
+    \label{rm:konvergence_harmonicke_rady}
+    Implikaci v předešlé větě nelze obrátit. Uvažujme například harmonickou
+    řadu: 
+    $$\rada{\frac{1}{n}}.$$
+    Pro částečné součty $m$ a $2m$ členů platí:
+    \begin{align*}
+        s_m &=1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{m} \\
+        s_{2m} &= 1 + \frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{m} + \frac{1}{m+1} + \frac{1}{m+2} + \dots + \frac{1}{2m} \\
+        s_{2m} - s_m &= \frac{1}{m+1} + \frac{1}{m+2} + \dots + \frac{1}{2m} \\
+                     &\geq \frac{1}{2m} + \frac{1}{2m} + \dots + \frac{1}{2m} \\
+                     &= m \frac{1}{2m} = \frac{1}{2},
+    \end{align*}
+    a tedy:
+    $$\fa m \in \N: s_{2m}-s_m \geq \frac{1}{2}.$$
+    Posloupnost $\seq{s_m}_{m\in\N}$ tím nesplňuje Bolzano-Cauchyho
+    podmínku (Věta~\ref{th:bolzanocauchy}) a nemá vlastní limitu.
+\end{remark}
+
+\begin{theorem}[linearita konvergentních řad]
+    \label{th:linearitakonvrad}
+    \leavevmode
+    \begin{enumerate}[(i)]
+        \item \Necht $\alpha \in \R \setminus \{0\},$ pak
+            $$\rada{a_n} \text{ konverguje} \iff \rada{\alpha a_n} \text{ konverguje.}$$
+
+        \item \Necht $\rada{a_n}$ konverguje a $\rada{b_n}$ konverguje,
+            pak $$\rada{(a_n + b_n)} \text{ konverguje.}$$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Jednoduchý, s využitím věty o aritmetice limit (Věta~\ref{th:voal}).
+\end{proof}
+
+\subsection{Řady s nezápornými členy}
+
+\begin{observation}
+    Nechť $\fa n \in \N: a_n \geq 0.$ Potom
+    $\rada{a_n} \in \R$ nebo $\rada{a_n} = +\infty.$
+\end{observation}
+    
+\begin{proof}
+    Díky nezápornosti členů $a_n$ je posloupnost částečných součtů 
+    $\seq{s_m}$ neklesající a tedy dle věty o limitě 
+    monotónní posloupnosti (Věta~\ref{th:monotonniposl}) má limitu.
+\end{proof}
+
+\begin{theorem}[srovnávací kritérium]
+    \label{th:srovnavacikrit}
+    \Necht $\rada{a_n}$ a $\rada{b_n}$ jsou řady s nezápornými členy a nechť
+    existuje $n_0 \in \N$ \tz pro všechna $n\in\N,n\geq n_0$ platí $a_n \leq b_n.$
+    Pak
+    \begin{enumerate}[(i)]
+        \item $\displaystyle \rada{b_n} \text{ konverguje} \implies \rada{a_n} \text{ konverguje,}$
+        \item $\displaystyle \rada{a_n} \text{ diverguje} \implies \rada{b_n} \text{ diverguje.}$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[(i)]
+        \item Označme částečné součty:
+            \begin{align*}
+                s_m &= a_1 + a_2 + \dots + a_m \\
+                \sigma_m &= b_1 + b_2 + \dots + b_m.
+            \end{align*}
+            Jelikož $\rada{b_n}$ konverguje, označme $\limminf \sigma_m = \sigma.$
+            Pro všechna $m \geq n_0$ platí:
+            \begin{align*}
+                s_m &= a_1 + a_2 + \dots + a_{n_0} + a_{n_0 + 1} + \dots + a_m \\
+                    &\leq a_1 + a_2 + \dots + a_{n_0} + b_{n_0 + 1} + \dots + b_m \\
+                    &\leq a_1 + a_2 + \dots + a_{n_0} + \sigma_m \\
+                    &\leq a_1 + a_2 + \dots + a_{n_0} + \sigma.
+            \end{align*}
+            Posloupnost $\seq{s_m}_{m \in \N}$ je tedy neklesající posloupnost omezená shora
+            číslem $(a_1 + \dots + a_{n_0} + \sigma) \in \R$ a dle věty o monotónní
+            posloupnosti (Věta~\ref{th:monotonniposl}) má vlastní limitu.
+        \item Ekvivalentní s bodem (i): $(A \implies B) \implies (\lnot B \implies \lnot A).$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[limitní srovnávací kritérium]
+    \Necht $\rada{a_n}$ a $\rada{b_n}$ jsou řady s nezápornými členy a nechť
+    $$\limninf \frac{a_n}{b_n} = K \in \Rstar.$$
+    \begin{enumerate}[(i)]
+        \item Jestliže $K \in (0, \infty),$ pak $\displaystyle \rada{b_n} 
+            \text{ konverguje} \iff \rada{a_n} \text{ konverguje.}$
+         \item Jestliže $K = 0,$ pak $\displaystyle \rada{b_n} 
+            \text{ konverguje} \implies \rada{a_n} \text{ konverguje.}$
+         \item Jestliže $K = \infty,$ pak $\displaystyle \rada{a_n} 
+            \text{ konverguje} \implies \rada{b_n} \text{ konverguje.}$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Jelikož obě řady jsou řady s nezápornými členy, platí, že $K \geq 0.$
+    \begin{enumerate}[(i)]
+        \item Z definice limity vyplývá, že pro $\e = \frac{K}{2}:$
+            $$\exists n_0 \in \N \; \fa n \geq n_0, n\in\N: \left|\frac{a_n}{b_n}
+            -K\right| < \frac{K}{2},$$
+            a tedy $\fa n \geq n_0, n\in\N:$ 
+            $$\frac{K}{2} < \frac{a_n}{b_n} < \frac{3}{2}K,$$
+            $$\frac{K}{2}b_n < a_n < \frac{3}{2}Kb_n.$$
+            Potom: 
+            \begin{align*}
+                \rada{a_n} \text{ konverguje} 
+                &\implies \rada{\frac{K}{2}b_n} \text{ konverguje}
+                    \tag{srovnávací kritérium, Věta~\ref{th:srovnavacikrit}} \\
+                &\implies \rada{b_n} \text{ konverguje}
+                    \tag{linearita konvergentních řad, 
+                    Věta~\ref{th:linearitakonvrad}}
+            \end{align*}
+            Opačný směr řešíme podobně: 
+            \begin{align*}
+                \rada{b_n} \text{ konverguje} 
+                &\implies \rada{\frac{3}{2}Kb_n} \text{ konverguje}
+                    \tag{linearita konvergentních řad} \\
+                &\implies \rada{a_n} \text{ konverguje}
+                   \tag{srovnávací kritérium}
+            \end{align*}
+
+        \item Zvolme $\e = 1.$ Potom
+            $$\exists n_0 \in \N\; \fa v \geq n_0, n\in\N: \left|\frac{a_n}{b_n}\right| < 1$$
+            a tedy
+            $$\fa n \geq n_0, n\in\N: a_n < b_n.$$
+            Potom, pokud $\rada{b_n}$ konverguje, tak podle srovnávacího kritéria
+            (Věta~\ref{th:srovnavacikrit}) konverguje i $\rada{a_n}.$
+
+        \item Zvolme $L = 1.$ Potom dle definice nevlastní limity 
+            (Definice~\ref{df:nevlastnilimitaposl}):
+            $$\exists n_0 \in \N\; \fa v \geq n_0, n\in\N: \frac{a_n}{b_n} > L = 1,$$
+            a tedy
+            $$\fa n \geq n_0, n\in\N: a_n > b_n.$$
+            Pokud konverguje $\rada{a_n},$ pak dle srovnávacího kritéria 
+            (Věta~\ref{th:srovnavacikrit}) konverguje i $\rada{b_n}.$
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    Určete, zda-li následující řady konvergují:
+    \begin{multicols}{2}
+        \begin{enumerate}[(i)]
+            \item $\displaystyle \rada{\frac{n-\sqrt{n}}{n^2 + 3n}},$
+            \item $\displaystyle \rada{\frac{n^5}{3^n}}.$
+        \end{enumerate}
+    \end{multicols}
+    Řešení:
+    \begin{enumerate}[(i)]
+        \item
+            Pokud si z této řady vezmeme jen nejdůležitější členy, vidíme, že je podobná
+            řadě $\rada{\frac{n}{n^2}} = \rada{\frac{1}{n}},$ o které víme, že diverguje 
+            (Poznámka~\ref{rm:konvergence_harmonicke_rady}). Označme 
+            $a_n = \frac{n-\sqrt{n}}{n^2 + 3n}$ a $b_n = \frac{1}{n}$ a pokusme se použít
+            limitní srovnávací kritérium:
+            \begin{align*}
+                \limninf \frac{a_n}{b_n}
+                &=\limninf \frac{\frac{n-\sqrt{n}}{n^2 + 3n}}{\frac{1}{n}} \\
+                &= \limninf \frac{n - \sqrt{n}}{n + 3} \\
+                &= \limninf \frac{1 - \frac{1}{\sqrt{n}}}{1 + \frac{3}{n}} \\
+                &=1
+            \end{align*}
+            Dle limitního srovnávacího kritéria, bodu (i) diverguje i
+            $\rada{\frac{n-\sqrt{n}}{n^2 + 3n}}.$
+        \item Označme podobně $a_n = \frac{n^5}{3^n}$ a $b_n = \frac{1}{2^n}.$
+            Řada $\rada{b_n}$ konverguje, jelikož se jedná o geometrickou řadu
+            a $q = \frac{1}{2} < 1$ (Poznámka~\ref{ex:priklady_rad}).
+            Dále
+            $$\limninf \frac{a_n}{b_n} = \frac{\frac{n^5}{3^n}}{\frac{1}{2^n}}
+            = \frac{n^5}{\left(\frac{3}{2}\right)^n} = 0.$$
+            Dle limitního srovnávacího kritéria, bodu (ii) konverguje i řada 
+            $\rada{n^5}{3^n}.$
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}[Cauchyho odmocninové kritérium]
+    \Necht $\rada{a_n}$ je řada s nezápornými členy. 
+    \begin{enumerate}[(i)]
+        \item $\displaystyle \exists q \in (0,1) \; \exists n_0 \in \N \; 
+            \fa n \in \N, n\geq n_0: \sqrt[n]{a_n} \leq q 
+            \implies \rada{a_n} \text{ konverguje,}$
+        \item $\displaystyle \limsup_{n\to\infty} \sqrt[n]{a_n} < 1 
+            \implies \rada{a_n} \text{ konverguje,}$
+        \item $\displaystyle \lim_{n\to\infty} \sqrt[n]{a_n} < 1 
+            \implies \rada{a_n} \text{ konverguje,}$
+        \item $\displaystyle \limsup_{n\to\infty} \sqrt[n]{a_n} > 1 
+            \implies \rada{a_n} \text{ diverguje,}$
+        \item $\displaystyle \lim_{n\to\infty} \sqrt[n]{a_n} > 1 
+            \implies \rada{a_n} \text{ diverguje.}$
+
+
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[(i)]
+        \item Označme $b_n = q^n.$ Jelikož $q \in (0,1),$ geometrická řada
+            $\rada{b_n}$ konverguje (Příklad~\ref{ex:priklady_rad}). 
+            Dále, jelikož dále $\fa n \geq n_0, n\in\N: a_n \leq b_n,$
+            dle srovnávacího kritéria (Věta~\ref{th:srovnavacikrit}) konverguje
+            i řada $\rada{a_n}.$
+
+        \item Označme $\limsup \sqrt[n]{a} = A.$ Zvolme $\e = \frac{1-A}{2}.$
+            Potom $A + \e < 1.$ Dle definice limity:
+            $$\exists n_0 \in \N, \fa n\in\N,n \geq n_0: 
+            \sup\{\sqrt[k]{a_k},k\geq n\} \leq A + \e,$$
+            a tedy
+            $$\fa n\in\N, n \geq n_0: \sqrt[n]{a_n} \leq A + \e.$$ 
+            Označme $q = A + \e.$ Potom dle předchozího bodu (i) důkazu 
+            řada $\rada{a_n}$ konverguje.
+
+        \item Jelikož existuje $\limninf \sqrt[n]{a_n},$ existuje dle
+            věty o vztahu limity a limes superior
+            (Věta~\ref{th:limitalimsupliminf}) i limes superior a tyto dvě
+            limity se rovnají. Dle bodu
+            (ii) řada $\rada{a_n}$ konverguje.
+
+        \item Jelikož 
+            $$\limsup_{n\to\infty} \sqrt[n]{a_n} > 1,$$
+            existuje vybraná posloupnost $\seq{a_{n_k}}_{k=1}^\infty$ \tz
+            $$\fa k  \in \N: \sqrt[n_k]{a_{n_k}},$$
+            a tedy $\fa k \in \N: a_{n_k} > 1.$ Tím není splněna nutná
+            podmínka pro konvergenci řad (Věta~\ref{th:radykonvergencenutna})
+            a řada $\rada{a_n}$ diverguje.
+
+        \item Vyplývá z předchozího bodu (iv).
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    Určete, zda-li následující řada konverguje:
+    $$\rada{\frac{n^5}{3^n}}.$$
+
+    Pokusíme zjistit $\limninf \sqrt[n]{a_n}$ a případně použít Cauchyho 
+    odmocninové kritérium. Tedy:
+    $$\limninf \sqrt[n]{a_n}
+    = \limninf \sqrt[n]{\frac{n^5}{3^n}}
+    = \limninf \frac{\sqrt[n]{n^5}}{3}
+    = \frac{1}{3}.$$
+    Jelikož $\limninf \sqrt[n]{a_n} < 1$, tak dle Cauchyho odmocninového
+    kritéria řada $\rada{a_n}$ konverguje.
+\end{example}
+
+\begin{theorem}[d'Alambertovo podílové kritérium]
+    \Necht $\rada{a_n}$ je řada s kladnými členy.
+    \begin{enumerate}[(i)]
+        \item $\displaystyle \exists q \in (0,1) \; \exists n_0 \in \N \;
+            \fa n \in \N,n\geq n_0: \frac{a_{n+1}}{a_n} < q \implies
+            \rada{a_n} \text{ konverguje}.$
+        \item $\displaystyle \limsupn \frac{a_{n+1}}{a_n} < 1 \implies
+            \rada{a_n} \text{ konverguje}.$
+        \item $\ds \limninf \frac{a_{n+1}}{a_n} < 1 \implies
+            \rada{a_n} \text{ konverguje}.$
+        \item $\ds \limninf \frac{a_{n+1}}{a_n} > 1 \implies
+            \rada{a_n} \text{ diverguje}.$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[(i)]
+        \item Pro $n \geq n_0$ platí:
+            $$a_{n+1} < qa_n < q^2a_{n-1} < \dots < q^{n-n_0+1}a_{n_0}.$$
+            Geometrická řada 
+            $$\rada{q^n\underbrace{a_{n_0}q^{1-n_0}}_{\text{konst.}}}$$
+            konverguje (Příklad~\ref{ex:priklady_rad}) a tedy dle srovnávacího
+            kritéria (Věta~\ref{th:srovnavacikrit}) konverguje i řada $\rada{a_n}.$
+        \item Označme $\limsupn \frac{a_{n+1}}{a_n} = A < 1$ a zvolme $\e = \frac{1-A}{2}.$
+            Dle definice limes superior existuje $n_0 \in \N$ \tz:
+            $$\fa n \in \N, n\geq n_0: \sup\left\{\frac{a_{k+1}}{a_k}, k \geq n\right\} < A + \e.$$
+            Označme $q = A + \e.$ Potom platí:
+            $$\fa n \in \N, n\geq n_0: \frac{a_{n+1}}{a_n} < q.$$
+            Dle předchozího bodu (i) řada $\rada{a_n}$ konverguje.
+        \item Jelikož existuje $\limninf \frac{a_{n+1}}{a_n},$ existuje i
+            $\limsupn \frac{a_{n+1}}{a_n}.$ Zbytek dle předchozího bodu (ii).
+        \item Dle definice limity:
+            $$\exists n_0 \in \N \; \fa n \in \N, n\geq n_0: \frac{a_{n+1}}{a_n} > 1.$$
+            Posloupnost je tedy počínaje indexem $n_0$ rostoucí a tím pádem nesplňuje
+            nutnou podmínku konvergence (Věta~\ref{th:radykonvergencenutna}),
+            jelikož její limita nemůže být nulová.
+    \end{enumerate}
+\end{proof}
+
+\begin{example}
+    Určete, zda-li následující řady konvergují:
+    \begin{multicols}{2}
+        \begin{enumerate}[(i)]
+            \item $\ds \rada{\frac{n^5}{3^n}},$
+            \item $\ds \rada{\frac{c^n}{n!}}, c > 0.$
+        \end{enumerate}
+    \end{multicols}
+
+    Řešení:
+    \begin{enumerate}[(i)]
+        \item Označme $a_n = \frac{n^5}{3^n}.$ 
+            Spočtěme limitu podílu dvou následujících členů posloupnosti 
+            $\seq{a_n}:$
+            $$\limninf \frac{a_{n+1}}{a_n} 
+            = \limninf \frac{\frac{(n+1)^5}{3^{n+1}}}{\frac{n^5}{3^n}}
+            = \limninf \frac{3^n(n+1)^5}{3^{n+1}n^5}
+            = \limninf \frac{1}{3} \limninf \frac{(n+1)^5}{n^5} 
+            = \frac{1}{3}\cdot 1 = \frac{1}{3} < 1.$$
+            Jelikož je tato limita menší než 1, můžeme za použití d'Alambertova
+            podílového kritéria říci, že řada $\rada{\frac{n^5}{3^n}}$ konverguje.
+
+        \item Analogicky:
+            $$\limninf \frac{a_{n+1}}{a_n}
+            = \limninf \frac{\frac{c^{n+1}}{(n+1)!}}{\frac{c^n}{n!}} 
+            = \limninf \frac{c}{n+1} = 0 < 1.$$
+            Řada $\rada{\frac{c^n}{n!}}, c > 0$ konverguje.
+    \end{enumerate}
+\end{example}
+
+\begin{remark}
+    d'Alambertovo podílové kritérium nám nepomůže v případě, že
+    $$\limninf \frac{a_{n+1}}{a_n} = 1.$$ 
+    Uvažujme například následující dvě řady:
+    $$\left(\rada{\frac{1}{n}}\right) \text{ a } \left(\rada{\frac{1}{n^2}}\right).$$
+    Pro obě posloupnosti platí, že
+    $$\limninf \frac{a_{n+1}}{a_n} = 1,$$
+    nicméně harmonická řada $\rada{\frac{1}{n}}$ diverguje 
+    (Poznámka~\ref{rm:konvergence_harmonicke_rady}), kdežto řada
+    $\rada{\frac{1}{n^2}}$ konverguje (viz dále).
+\end{remark}
+
+\begin{theorem}[Raabeho kritérium]
+    \Necht $\rada{a_n}$ je řada s kladnými členy.
+    \begin{enumerate}[(i)]
+        \item $\ds \limninf n(\frac{a_n}{a_{n+1}} -1) > 1 \implies 
+            \rada{a_n} \text{ konverguje},$
+        \item $\ds \limninf n(\frac{a_n}{a_{n+1}} -1) < 1 \implies
+            \rada{a_n} \text{ diverguje}.$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Bez důkazu.
+\end{proof}
+
+\begin{theorem}[kondenzační kritérium]
+    \Necht $\rada{a_n}$ je řada s nezápornými členy splňující $a_{n+1} \leq a_n$
+    pro všechna $n \in \N.$ Pak
+    $$\rada{a_n} \text{ konverguje} \iff \rada{2^na_{2^n}} \text{ konverguje}.$$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\implies$]
+            Označme:
+            $$s_n = a_1 + a_2 + \dots + a_n.$$
+            Potom:
+            $$s_{2^n} - s_{2^{n-1}} = \underbrace{a_{2^n} + a_{2^n -1} 
+                + a_{2^n-2} + \dots + a_{2^{n-1}+1}}_{2^{n-1} \text{ členů}}$$
+            Jelikož $\fa n \in \N: a_{n+1} \leq a_n,$ platí:
+            $$ 2^{n-1}a_{2^{n-1}} \geq s_{2^n} - s_{2^{n-1}} \geq 2^{n-1}a_{2^n}.$$
+            Tuto sadu nerovností sečteme pro $n=1,\dots,k:$
+            \begin{align*}
+                \sum_{n=1}^k 2^{n-1}a_{2^{n-1}}
+                &\geq \sum_{n=1}^k (s_{2^n}-s_{2^{n-1}}) \\
+                &= (s_{2^k} - s_{2^{k-1}}) + (s_{2^{k-1}} - s_{2^{k-2}})
+                    + \dots + (s_2 - s_1) \\
+                &= s_{2^k} - s_1 \\
+                &\geq \sum_{n=1}^k 2^{n-1}a_{2^n}.
+            \end{align*}
+
+            Nechť řada $\rada{a_n}$ konverguje. Potom existuje $\lim_{k \to \infty}
+            (s_{2^k} - s_1),$ řada $\rada{(s_{2^n} - s_{2^{n-1}})}$ konverguje
+            a dle srovnávacího kritéria (Věta~\ref{th:srovnavacikrit}) konverguje
+            i řada $\rada{2^{n-1}a_{2^n}}$ a dle linearity konvergentních řad
+            (Věta~\ref{th:linearitakonvrad})
+
+        \item[$\impliedby$] Nechť řada $\rada{2^na_{2^n}}$ konverguje. Potom
+            konverguje i řada $\rada{2^{n-1}a_{2^{n-1}}}.$
+
+            Označme $\rada{2^{n-1}a_{2^{n-1}}} = A \in \R.$ Potom dle předchozího bodu:
+            $$\fa k \in \N: s_{2^k} \leq A + s_1.$$
+            Posloupnost $\seq{s_{2^k}}_{k \in \N}$ je rostoucí a omezená shora 
+            číslem $A + s_1 \in \R$, 
+            a proto má dle věty o limitě monotónní posloupnosti 
+            (Věta~\ref{th:monotonniposl}) konečnou limitu. Řada $\rada{a_n}$ 
+            tedy konverguje.
+    \end{itemize}
+\end{proof}
+
+\begin{example}
+    Dokažte následující dvě tvrzení:
+    \begin{enumerate}[(i)]
+        \item Řada $\rada{\frac{1}{n^\alpha}}$ konverguje, právě když 
+            $\alpha > 1.$
+        \item Řada $\sum_{n=2}^\infty \frac{1}{n\log^\alpha n}$ konverguje,
+            právě když $\alpha > 1.$
+    \end{enumerate}
+
+    Řešení:
+    \begin{enumerate}[(i)]
+        \item
+            Pro $\alpha \leq 0$ platí, že $\limninf \frac{1}{n^\alpha} \neq 0,$ řada
+            $\rada{\frac{1}{n^\alpha}}$ nesplňuje nutnou podmínku konvergence 
+            (Věta~\ref{th:radykonvergencenutna}), a proto diverguje.
+
+            \Necht $\alpha > 0.$ Platí, že $\limninf \frac{1}{n^\alpha} = 0.$ Dále, dle
+            kondenzačního kritéria platí:
+            $$\rada{\frac{1}{n^\alpha}} \text{ konverguje}
+            \iff \rada{2^n\left(\frac{1}{2^n}\right)^\alpha} 
+            = \rada{\left(2^{1-\alpha}\right)^n} \text{ konverguje}.$$
+            Řada $\rada{\left(2^{1-\alpha}\right)^n}$ je geometrická řada s 
+            $q = 2^{1-\alpha},$ která konverguje (Příklad~\ref{ex:priklady_rad}), 
+            právě když $q<1,$ tj. $\alpha > 1.$
+
+        \item Uvažujme případ $\alpha > 0.$ Posloupnost 
+            $\seq{\frac{1}{n\log^\alpha n}}$ klesá k nule a řada 
+            $\sum_{n=2}^\infty \frac{1}{n\log^\alpha n}$ konverguje, právě když 
+            konverguje řada:
+            $$\sum_{n=2}^\infty 2^n \frac{1}{2^n\log^\alpha 2^n} 
+            = \sum_{n=2}^\infty \frac{1}{\log^\alpha 2^n} 
+            = \frac{1}{\log^\alpha 2} \sum_{n=2}^\infty \frac{1}{n^\alpha} 
+            $$
+            Znovu jsme získali geometrickou řadu a ta konverguje, když 
+            $\frac{1}{n^\alpha} < 1,$ tj. když $\alpha > 1.$
+    \end{enumerate}
+\end{example}
+
+\subsection{Neabsolutní konvergence řad}
+
+\begin{definition}
+    \Necht pro řadu $\rada{a_n}$ platí, že $\rada{|a_n|}$ konverguje. Pak říkáme,
+    že $\rada{a_n}$ \newterm{konverguje absolutně}.
+\end{definition}
+
+\begin{theorem}[Bolzano-Cauchyho podmínka pro konvergenci řad]
+    \label{th:bolzano_cauchy_rady}
+    Řada $\rada{a_n}$ konverguje, právě tehdy, když je splněna následující
+    podmínka
+    $$\fa \e > 0 \; \exists n_0 \in \N \; \fa m,n \in \N, m\geq n_0, n\geq n_0:
+    \left|\sum_{j=n+1}^m a_j \right| < \e.$$
+\end{theorem}
+
+\begin{proof}
+    Řada $\rada{a_n}$ konverguje, právě když existuje vlastní limita posloupnosti
+    částečných součtů $\limminf s_m.$ Dle Bolzano-Cauchyho podmínky pro
+    posloupnosti (Věta~\ref{th:bolzanocauchy}) tato limita existuje,
+    právě když:
+    $$\fa \e > 0 \; \exists n_0 \in \N \; \fa m,n \in \N, m \geq n_0, 
+    n \geq n_0: |s_m - s_n| = \left|\sum_{j=n+1}^m a_j \right|  < \e.$$
+\end{proof}
+
+\begin{theorem}[vztah konvergence a absolutní konvergence]
+    Nechť řada $\rada{a_n}$ konverguje absolutně, pak řada $\rada{a_n}$
+    konverguje.
+\end{theorem}
+
+\begin{proof}
+    Dle Bolzano-Cauchyho podmínky pro konvergenci řad 
+    (Věta~\ref{th:bolzano_cauchy_rady}) řada $\rada{|a_n|}$ konverguje, 
+    právě když:
+    $$\fa \e > 0 \; \exists n_0 \in \N \; \fa m,n \in \N, m\geq n_0, n\geq n_0:
+        \left|\sum_{j=n}^m |a_j| \right| < \e.$$
+    Dále platí (trojúhelníková nerovnost, Věta~\ref{th:triangleineq}):
+    $$ \left|\sum_{j=n}^m a_j \right| \leq \left|\sum_{j=n}^m |a_j| \right| < \e,$$
+    a tedy Bolzano-Cauchyho podmínka pro konvergenci řad je splněna i pro 
+    řadu $\rada{a_n}$ a ta tedy konverguje.
+\end{proof}
+
+\begin{lemma}[Abelova parciální sumace]
+    \label{lm:abelova_parcialni_sumace}
+    Nechť $a_1,\dots,a_n, b_1, \dots, b_n \in \R.$ Označme $s_k = \sum_{i=1}^k a_i.$
+    Pak platí
+    $$\sum_{i=1}^n a_ib_i = \sum_{i=1}^{n-1} s_i(b_i-b_{i+1}) + s_nb_n.$$
+    Jestliže navíc $b_1 \geq b_2 \geq \dots \geq b_n \geq 0,$ pak
+    $$\left|\sum_{i=1}^n a_ib_i\right|\leq b_1 \max |s_i|.$$
+\end{lemma}
+
+\begin{proof}
+    Platí:
+    \begin{align*}
+        \sum_{i=1}^n a_ib_i 
+        &= a_1b_1 + a_2b_2 + a_3b_3 + \dots + a_nb_n \\
+        &= \underbrace{s_1}_{a_1}b_1 +
+            \underbrace{(s_2-s_1)}_{a_2}b_2 + 
+            (s_3-s_2)b_3 + \dots + (s_n - s_{n-1})b_n \\
+        &= s_1(b_1-b_2) + s_2(b_2-b_3) + \dots + s_{n-1}(b_{n-1} -b_n) + s_nb_n \\
+        &= \sum_{i=1}^{n-1} s_i(b_i-b_{i+1}) + s_nb_n.
+    \end{align*}
+
+    Jestliže navíc $b_1 \geq b_2 \geq \dots \geq b_n \geq 0,$ platí:
+    \begin{align*}
+        \left|\sum_{i=1}^n a_ib_i \right|
+        &= \left|\sum_{i=1}^{n-1} s_i(b_i - b_{i+1}) + s_nb_n\right| \\
+        &\leq \sum_{i=1}^{n-1}|s_i|(b_i-b_{i+1}) + |s_n|b_n \tag{$b_i - b_{i+1} \geq 0, b_n \geq 0$} \\
+        &\leq \max_{i=1,\dots,n} |s_i| \left(\sum_{i=1}^{n-1}(b_i - b_{i+1}) + b_n\right) \\
+        &= \max_{i=1,\dots,n}|s_i| \cdot b_1.
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[Abel-Dirichletovo kritérium]
+    \label{th:abel_dirichletovo_kriterium}
+    \Necht $\seq{a_n}_{n\in\N}$ je posloupnost reálných čísel a $\seq{b_n}_{n\in\N}$
+    je nerostoucí posloupnost nezáporných čísel. Jestliže je některá z následujících
+    podmínek splněna, pak je řada $\rada{a_nb_n}$ konvergentní.
+    \begin{itemize}
+        \item[(A)] $\ds \rada{a_n}$ je konvergentní.
+        \item[(D)] $\ds \limninf b_n = 0$ a $\ds \rada{a_n}$ má omezené částečné
+            součty, tedy:
+            $$\exists K > 0 \; \fa m \in \N: |s_m| = \left|\sum_{i=1}^m a_i\right|
+            < K.$$
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[(A)] Jelikož řada $\rada{a_n}$ konverguje, platí, dle Bolzano-Cauchyho
+            podmínky pro konvergenci řad (Věta~\ref{th:bolzano_cauchy_rady}), že
+            pro pevné $\e > 0$ existuje $n_0 \in \N$ \tz
+            $$\fa m,n \in \N, m,n \geq n_0: |a_m + a_{m-1} + \dots + a_{n+1}| < \e.$$
+            Nyní bychom chtěli z předpokladů věty dokázat Bolzano-Cauchyho podmínku 
+            i pro řadu $\rada{a_nb_n}.$ Pro dané $\e$ zvolíme stejné $n_0$
+            jako výše. Potom za použití Abelovy parciální sumace 
+            (Lemma~\ref{lm:abelova_parcialni_sumace}) pro $t_k=\sum_{i=n+1}^ka_i$
+            platí:
+            \begin{align*}
+                |a_mb_m + a_{m-1}b_{m-1} + \dots + a_{n+1}b_{n+1}|
+                &\leq \max_{i=n+1, \dots, m}|t_i| \cdot b_{n+1} \\
+                &\leq \max_{i=n+1, \dots, m}|t_i| \cdot b_1 
+                    \tag{$\seq{b_n}$ je nerostoucí} \\
+                &\leq \e \cdot b_1.
+                    \tag{Bolzano-Cauchyho podmínka pro $\seq{a_n}$}
+            \end{align*}
+            
+        \item[(D)] 
+            Dle definice limity pro dané $\e> 0$ existuje $n_0 \in \N$ \tz
+            $$\fa n \in \N,
+            n\geq n_0: |b_n| < \e.$$ Potom znovu za použití Abelovy parciální sumace 
+            (Lemma~\ref{lm:abelova_parcialni_sumace}) pro $t_k=\sum_{i=n+1}^ka_i$
+            a $m,n\geq n_0$ platí:
+            \begin{align*}
+                |a_mb_m + a_{m-1}b_{m-1} + \dots + a_{n+1}b_{n+1}|
+                &\leq \max_{i=n+1, \dots, m}|t_i| \cdot b_{n+1} \\
+                &= \max_{i=n+1, \dots, m}|s_i -s_n| \cdot b_{n+1} \\
+                &\leq \max_{i=n+1, \dots, m}(|s_i| + |s_n|) \cdot b_{n+1}
+                    \tag{trojúhelníková nerovnost, Věta~\ref{th:triangleineq}} \\
+                &\leq 2K\e.
+                    \tag{$\seq{a_n}$ má omezené částečné součty}
+            \end{align*}
+    \end{itemize}
+\end{proof}
+
+\begin{remark}
+    Řada $\rada{a_nb_n}$ konverguje za podmínky (A), i pokud neplatí,
+    že $\fa n \in \N: b_n \geq 0.$ \Necht je posloupnost $\seq{b_n}$
+    nerostoucí a nechť $\limninf b_n = b < 0.$ Potom:
+    $$\rada{a_nb_n} = \rada{a_n(b_n-b)} + \rada{a_nb}.$$
+    Jelikož $\rada{a_n}$ konverguje a $\fa n \in \N: (b_n - b) \geq 0,$ 
+    řada $\rada{a_n(b_n-b)}$ konverguje dle podmínky (A). Řada $\rada{a_nb}$
+    konverguje dle linearity konvergence řad, a konečně řada $\rada{a_nb_n}$
+    konverguje, jelikož se rovná součtu dvou konvergentních řad.
+\end{remark}
+
+\begin{example}
+    Určete, zda-li následující řady konvergují:
+    \begin{multicols}{3}
+        \begin{enumerate}[(i)]
+            \item $\ds \rada{\frac{(-1)^n}{n}},$
+            \item $\ds \rada{\frac{\sin (n)}{\log(n+1)}},$
+            \item $\ds \rada{\frac{\cos(n)}{\sqrt{n}}\arctan(n)}.$
+        \end{enumerate}
+    \end{multicols}
+
+    Řešení:
+    \begin{enumerate}[(i)]
+        \item Posloupnost $\seq{(-1)^n}_{n\in\N}$ má omezené částečné součty a 
+            posloupnost $\seq{\frac{1}{n}}_{n\in\N}$ je nerostoucí. Dle
+            Abel-Dirichletova kritéria (D) řada konverguje.
+
+        \item Podobně, posloupnost $\seq{\sin(n)}_{n\in\N}$ má omezené částečné 
+            součty (zatím bez důkazu) a posloupnost 
+            $\seq{\frac{1}{\log(n+1)}}_{n\in\N}$ je nerostoucí. Dle 
+            Abel-Dirichletova kritéria (D) řada konverguje.
+
+        \item Posloupnost $\seq{\cos(n)}_{n\in\N}$ má omezené částečné 
+            součty a posloupnost $\seq{\frac{1}{\sqrt{n}}}_{n\in\N}$ je nerostoucí.
+            Řada $\rada{\frac{\cos(n)}{\sqrt{n}}}$ tedy konverguje a dle linearity
+            konvergence řad konverguje i $\rada{-\frac{\cos(n)}{\sqrt{n}}}.$ Dále,
+            posloupnost $\seq{-\arctan(n)}$ je nerostoucí a klesá k $-\frac{\pi}{2}.$
+            Dle podmínky (A) Abel-Dirichletova kritéria řada
+            $\rada{\frac{\cos(n)}{\sqrt{n}}\arctan(n)}$ konverguje.
+
+
+    \end{enumerate}
+\end{example}
+
+\begin{theorem}[Leibnizovo kritérium]
+    \Necht $\seq{a_n}_{n\in\N}$ je nerostoucí posloupnost nezáporných čísel.
+    Pak
+    $$\rada{(-1)^na_n} \text{ konverguje} \iff \limninf a_n = 0.$$
+\end{theorem}
+
+\begin{proof}
+    Posloupnost $\seq{(-1)^n}$ má omezené součty a $\limninf a_n = 0.$ Potom
+    dle Abel-Dirichletova kritéria (Věta~\ref{th:abel_dirichletovo_kriterium})
+    je řada $\rada{(-1)^na_n}$ konvergentní.
+\end{proof}
+
+\subsection{Přerovnání řad}
+
+\begin{definition}
+    \Necht $\rada{a_n}$ je řada a $p: \N \rightarrow \N$ je bijekce. Řadu 
+    $\rada{a_{p(n)}}$ nazýváme \newterm{přerovnáním řady} $\rada{a_n}.$
+\end{definition}
+
+\begin{theorem}[přerovnání absolutně konvergentní řady]
+    Nechť $\rada{a_n}$ je absolutně konvergentní řada a $\rada{a_{p(n)}}$ je její
+    přerovnání. Pak $\rada{a_{p(n)}}$ je absolutně konvergentní a má stejný součet
+    jako $\rada{a_n}.$
+\end{theorem}
+
+\begin{proof}
+    Jelikož $\rada{|a_n|}$ konverguje, pro $\e > 0$ existuje dle Bolzano-Cauchyho
+    podmínky pro konvergenci řad (Věta~\ref{th:bolzano_cauchy_rady}) 
+    $n_0 \in \N$ \tz
+    $$\fa m,n \in \N, m,n \geq n_0: \left|\sum_{n+1}^m |a_i|\right| < \e.$$
+    
+    Nyní chceme ukázat, že Bolzano-Cauchyho podmínka platí i pro 
+    přerovnanou řadu $\rada{|a_{p(n)}|}.$ Pro již dané $\e > 0$ a zjištěné 
+    $n_0 \in \N$ zvolme
+    $\widetilde{n_0} = \max_{i=1, \dots, n_0} p(i).$ Nechť $m,n\geq 
+    \widetilde{n_0}.$ Pak:
+    $$\left|\sum_{n+1}^m a_{p(i)}\right| 
+    \leq \sum_{n+1}^m |a_{p(i)}| 
+    \leq \sum_{n_0+1}^\infty |a_i| 
+    \leq \e.$$
+\end{proof}
+
+\begin{theorem}[Riemann]
+    Neabsolutně konvergentní řadu lze přerovnat k libovolnému součtu z $\Rstar.$
+    Neboli: \Necht $\rada{a_n}$ konverguje, $\rada{|a_n|} = \infty$ a nechť 
+    $A \in \Rstar.$ Pak existuje bijekce $p: \N \rightarrow \N$ \tz
+    $$\rada{a_{p(n)}} = A.$$
+\end{theorem}
+
+\begin{proof}
+    Bez důkazu.
+\end{proof}
+
+\subsection{Součin řad}
+
+\begin{definition}
+    \Necht $\rada{a_n}$ a $\rada{b_n}$ jsou řady. \newterm{Cauchyovským součinem}
+    těchto řad nazveme řadu
+    $$\sum_{k=2}^\infty\left(\sum_{i=1}^{k-1}a_{k-i}b_i\right).$$
+\end{definition}
+
+\begin{remark}
+    Trochu jiný, ale ekvivalentní pohled: 
+    Cauchyovským součinem řad $\rada{a_n}$ a $\rada{b_n}$ 
+    je řada $\sum_{n=2}^\infty{c_n},$ kde
+    $$c_n = \sum_{k=1}^{n-1}a_kb_{n-k}.$$
+    Potom:
+    \begin{align*}
+        &c_1 \text{ není definováno} \\
+        &c_2 = a_1b_1 \\
+        &c_3 = a_1b_2 + a_2b_1 \\
+        &c_4 = a_1b_3 + a_2b_2 + a_3b_1 \\
+        &\text{atd.}
+    \end{align*}
+\end{remark}
+
+\begin{theorem}[o součinu řad]
+    Nechť $\rada{a_n}$ a $\rada{b_n}$ konvergují absolutně. Pak:
+    $$\sum_{k=2}^\infty\left(\sum_{i=1}^{k-1}a_{k-i}b_i\right) 
+    = \left(\rada{a_n}\right)\cdot \left(\rada{b_n}\right).$$
+\end{theorem}
+
+\begin{proof}
+    Řady $\rada{a_n}$ a $\rada{b_n}$ absolutně konvergují, a proto existuje 
+    $K \in \R$ \tz $\rada{|a_n|} < K$ a $\rada{|b_n|} < K.$
+    Označme částečné součty řad $\rada{a_n},$ $\rada{b_n}$ a jejich součinu
+    postupně $s_n$, $\sigma_n$ a $S_n.$ Platí
+    $$\limninf s_n = s = \rada{a_n}, \; \limninf \sigma_n = \sigma = \rada{b_n}.$$
+    Dále, z aritmetiky limit posloupností (Věta~\ref{th:voal}) platí, že k 
+    pevnému $\e > 0$ existuje $n_1 \in \N$ \tz:
+    $$\fa n \in \N, n \geq n_1: |s\sigma - s_n\sigma_n| < \e.$$
+    Pro již dané $\e$ dále dle Bolzano-Cauchyho podmínky pro konvergenci řad
+    (Věta~\ref{th:bolzano_cauchy_rady}) existuje $n_2 \in \N$ \tz:
+    $$\sum_{n=n_2}^\infty |a_n| < \e, \sum_{n=n_2}^\infty |b_n| < \e.$$
+    Označme $n_0 = \max(n_1,n_2).$ Potom:
+    \begin{align*}
+        |S_n - s_{n_0}\sigma_{n_0}| 
+        &\leq \sum_{\substack{i,j=1\\i \geq n_0 \lor j\geq n_0}}^\infty |a_i||b_i| \\
+        &\leq \left(\sum_{i=n_0}^\infty|a_i|\right)
+              \cdot
+              \left(\sum_{j=1}^\infty|b_j|\right) 
+              +
+              \left(\sum_{i=n_0}^\infty|b_i|\right)
+              \cdot
+              \left(\sum_{j=1}^\infty|a_j|\right) \\
+        &\leq \e\cdot K + K \cdot \e,
+    \end{align*}
+    a tedy:
+    $$|S_n - s\sigma| \leq (2K + 1) \e.$$
+
+\end{proof}

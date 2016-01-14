@@ -1,0 +1,2290 @@
+\section{Funkce jedné reálné proměnné}
+
+\subsection{Základní definice}
+
+\begin{definition}
+    \newterm{Funkcí jedné reálné proměnné} rozumíme zobrazení
+    $$f: M \rightarrow \R,$$
+    kde $M \subset \R.$
+\end{definition}
+
+\begin{definition}
+    Řekneme, že funkce $f: M \rightarrow \R, M \subset \R$ je:
+    \begin{itemize} 
+        \item \newterm{rostoucí}, pokud $\fa x,y \in M, x < y: f(x) < f(y),$
+        \item \newterm{klesající}, pokud $\fa x,y \in M, x < y: f(x) > f(y),$
+        \item \newterm{nerostoucí}, pokud $\fa x,y \in M, x < y: f(x) \geq f(y),$
+        \item \newterm{neklesající}, pokud $\fa x,y \in M, x < y: f(x) \leq f(y).$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Řekneme, že funkce $f: M \rightarrow \R, M \subset \R$ je:
+    \begin{itemize}
+        \item \newterm{sudá}, pokud $\fa x \in M: (-x \in M) \; \& \; (f(x) = f(-x)),$
+        \item \newterm{lichá}, pokud $\fa x \in M: (-x \in M) \; \& \; (f(x) =- f(-x)),$
+        \item \newterm{periodická}, pokud $\exists p > 0, \fa x \in M: (x+p \in M) \; \& \; 
+            (x-p \in M) \; \& \; (f(x) = f(x+p)).$
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    Řekneme, že funkce $f: M \rightarrow \R, M \subset \R$ je \newterm{omezená}
+    (omezená shora, omezená zdola), jestliže $f(M)$ je omezená (omezená
+    shora, omezená zdola) podmnožina $\R.$
+\end{definition}
+
+\begin{definition}
+    \Necht $\delta > 0$ a $a \in \R.$ \newterm{Prstencové okolí} bodu je:
+    \begin{align*}
+        P(a, \delta) &= (a - \delta, a+ \delta) \setminus \{a\}, \\
+        P(+\infty, \delta) &= (\frac{1}{\delta}, +\infty),\\
+        P(-\infty, \delta) &= (-\frac{1}{\delta}, -\infty).
+    \end{align*}
+    \newterm{Pravé a levé prstencové okolí} bodu $a$ je:
+    \begin{align*}
+        P_+(a, \delta) &= (a, a+\delta), \\
+        P_-(a, \delta) &= (a-\delta, a).
+    \end{align*}
+    \newterm{Okolí bodu} je: 
+    \begin{align*}
+        U(a, \delta) &= (a - \delta, a+ \delta), \\
+        U(+\infty, \delta) &= (\frac{1}{\delta}, +\infty),\\
+        U(-\infty, \delta) &= (-\frac{1}{\delta}, -\infty).
+    \end{align*}
+    \newterm{Pravé a levé okolí} bodu $a$ je:
+    \begin{align*}
+        U_+(a, \delta) &= [a, a+\delta), \\
+        U_-(a, \delta) &= (a-\delta, a].
+    \end{align*}
+\end{definition}
+
+\begin{definition}
+    \Necht $f:M \rightarrow \R, M \subset \R.$ Řekneme, že $f$ má v bodě $a \in 
+    \Rstar$ \newterm{limitu} $A \in \Rstar,$ jestliže platí:
+    $$\fa \e > 0 \; \exists \delta > 0 \; \fa x \in P(a,\delta): f(x) \in U(A,\e).$$
+    Značíme:
+    $$\lim_{x\to a} f(x) = A.$$
+\end{definition}
+
+\begin{remark}[Poznámky k definici limity]
+    \leavevmode
+    \begin{itemize}
+        \item Funkce $f$ nemusí být v bodě $a \in \Rstar$ definována, aby v něm
+            měla limitu. Z definice limity vyplývá, že pokud $\lim_{x\to a} f(x)$
+            existuje, tak je funkce $f$ definována na nějakém prstencovém okolí
+            bodu $a.$
+
+            Navíc, je-li $f$ v bodě $a$ definována, na hodnotě $f(a)$ nezáleží.
+        \item Pokud $\lim_{\xtoa} f(x)$ existuje a je rovna $A$, tak potom je
+            buď \newterm{vlastní} ($A \in \R$) nebo \newterm{nevlastní}
+            ($A = \pm \infty$).
+
+        \item $\lim_{\xtoa} f(x)$ je nazývá \newterm{limitou ve vlastním bodě},
+            pokud $a \in \R$, nebo \newterm{limitou v nevlastním bodě},
+            pokud $a = \pm \infty.$
+    \end{itemize}
+\end{remark}
+
+\begin{definition}
+    \Necht $f:M \rightarrow \R, M \subset \R.$ Řekneme, že $f$ má v bodě $a \in 
+    \Rstar$ \newterm{limitu zprava (zleva)} rovnou $A \in \Rstar,$ jestliže platí:
+    $$\fa \e > 0 \; \exists \delta > 0 \; \fa x \in P_+(a,\delta): 
+    f(x) \in U(A,\e)$$ 
+    $$(\fa \e > 0 \; \exists \delta > 0 \; \fa x \in P_-(a,\delta): 
+    f(x) \in U(A,\e)).$$
+    Značíme:
+    $$\lim_{x\to a+} f(x) = A$$
+    $$(\lim_{x\to a-} f(x) = A).$$
+\end{definition}
+
+\begin{observation}[Vztah limity a jednostranných limit]
+    \label{obs:jednostrannelimity}
+    \Necht $f:M \rightarrow \R, M \subset \R, a \in \Rstar, A \in \Rstar.$ 
+    Potom:
+    $$\lim_{\xtoa} f(x) = A \iff \lim_{\xtoa +} f(x) = \lim_{\xtoa -} f(x) = A.$$
+\end{observation}
+
+\begin{remark}[Příklady limit]
+    \leavevmode
+    \begin{itemize}
+        \item $f(x) = x$ 
+            
+            Její limita v bodě $a \in \Rstar:$
+            $$\lim_{\xtoa} f(x) = a.$$
+            K $\e > 0$ volme $\delta = \e.$ Potom $f(P(a,\delta)) 
+            \subseteq U(a,\e).$
+
+        \item $f(x) = k$ 
+            
+            $\fa a \in \Rstar: \lim_{\xtoa} f(x) = k.$
+
+        \item $f(x) = \sgn(x):$
+            \begin{center}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                            axis lines=middle,
+                            xlabel=$x$,
+                            ylabel={$\sgn(x)$},
+                            xmin=-3, xmax=3,
+                            ymin=-1.5, ymax=1.5,
+                            xtick=\empty,
+                            ytick={0, 1},
+                            extra y ticks={-1},
+                            extra y tick style={
+                                tick label style={anchor=west, xshift=3pt},
+                            },
+                            function line/.style={
+                                black,
+                                thick,
+                                samples=2,
+                            },
+                            single dot/.style={
+                                black,
+                                mark=*,
+                            },
+                            empty point/.style={
+                                only marks,
+                                mark=*,
+                                mark options={fill=white, draw=black},
+                            },
+                        ]
+                        \addplot[function line, domain=\pgfkeysvalueof{/pgfplots/xmin}:0] {-1};
+                        \addplot[function line, domain=0:\pgfkeysvalueof{/pgfplots/xmax}] {1};
+                        \addplot[single dot] coordinates {(0, 0)};
+                        \addplot[empty point] coordinates {(0, -1) (0, 1)};
+                    \end{axis}
+                \end{tikzpicture}
+            \end{center}
+            Z grafu je zřejmé, že jednostranné limity se sobě nerovnají:
+            $$\lim_{x \to 0 +} \sgn(x) = 1,$$ 
+            $$\lim_{x \to 0 -} \sgn(x) = -1,$$ 
+            a tedy dle pozorování o vztahu limity a jednostranných limit
+            (Pozorování~\ref{obs:jednostrannelimity})
+            $\lim_{x \to 0} \sgn(x)$ neexistuje. 
+        
+        \item Dirichletova funkce:
+            $$D(x) = \begin{cases}
+                1, & \text{pokud $x \in \Q,$} \\
+                0, & \text{pokud $x \in \R \setminus \Q.$}
+            \end{cases}$$
+
+            Tato funkce nemá limitu nikde, jelikož dle věty o hustotě $\Q$ 
+            a $\R \setminus \Q$ (Věta~\ref{th:hustotaqrq})
+            každé prstencové okolí bodu 
+            $a\in \Rstar$ obsahuje alespoň jedno racionální a iracionální číslo.
+            
+        \item Riemannova funkce:
+            $$R(x) = \begin{cases}
+                \frac{1}{q}, & \text{pokud $x \in \Q,$ tj. $x = \frac{p}{q},$ kde
+                $p \in \Z, q\in\N,$ a $p,q$ jsou nesoudělná,}\\
+                0, & \text{pokud $x \in \R \setminus \Q.$}
+            \end{cases}$$
+
+            Jako domácí cvičení dokažte:
+            $$\fa a \in \R: \lim_{\xtoa} R(x) = 0.$$
+    \end{itemize}
+\end{remark}
+
+\begin{definition}
+    \Necht $f:M \rightarrow \R, M \subset \R, a \in M.$ Řekneme, že $f$ je v 
+    bodě \newterm{spojitá (spojitá zleva, spojitá zprava)}, jestliže:
+    $$\lim_{x \to a} f(x) = f(a) \;\; (\lim_{x \to a+} f(x) = f(a),\;
+    \lim_{x \to a-} f(x) = f(a))$$
+\end{definition}
+
+\begin{remark}[Příklady spojitých a nespojitých funkcí]
+    \leavevmode
+    \begin{itemize}
+        \item $f(x) = x$
+
+            Spojitá na $\R.$
+
+        \item $f(x) = \sgn(x)$
+
+            Spojitá na $\R \setminus \{0\}.$
+
+        \item $f(x) = D(x),$ Dirichletova funkce
+
+            Není spojitá v žádném bodě $\R.$
+
+        \item $f(x) = R(x),$ Riemannova funkce
+
+            Spojitá v $\R \setminus \Q.$
+    \end{itemize}
+\end{remark}
+
+\subsection{Věty o limitách}
+
+\begin{theorem}[Heine]
+    \label{th:heine}
+    Nechť $A \in \Rstar, f: M \rightarrow \R$ a $f$ je definována na prstencovém
+    okolí bodu $a \in \Rstar.$ Následující tvrzení jsou ekvivalentní:
+    \begin{enumerate}[i.]
+        \item $\lim_{x\to a} f(x) = A$
+        \item pro každou posloupnost $\seq{x_n}_{n \in \N}$ takovou, že:
+            $$\fa n \in \N \; x_n \in M, x_n \neq a, \text{a zároveň} 
+            \lim_{n \to \infty} x_n = a$$
+            platí:
+            $$\lim_{n\to\infty} f(x_n) = A.$$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\implies$] Z definice limity:
+            $$\fa \e > 0 \; \exists \delta > 0 \; \fa x \in P(a,\delta): 
+            f(x) \in U(A,\e).$$
+            Nechť máme dále posloupnost $\seq{x_n},$ jež splňuje podmínky
+            bodu $(ii)$. Jelikož $\lim x_n = a$ a $\fa n \in \N: x_n \neq a$, 
+            tak k $\delta > 0:$
+            $$\exists n_0 \in \N, \fa n \geq n_0, n\in\N: x_n \in P(a,\delta)$$
+            a tedy 
+            $$\fa n \geq n_0, n \in \N: f(x_n) \in U(A, \e).$$ 
+            Potom
+            $$\lim_{\ntoinfty} f(x_n) = A.$$
+        \item[$\impliedby$]
+            Implikaci dokážeme nepřímo, tj. dokážeme tvrzení 
+            $\neg (i.) \implies \neg (ii.),$
+            tedy že z tvrzení, že limita funkce $f$ neexistuje nebo není
+            rovna $A,$ vyplývá existence 
+            alespoň jedné posloupnosti $\seq{x_n}$, která splňuje zadaná 
+            kritéria a zároveň $\lim f(x_n) \neq A.$
+
+            Pokud $\lim_{\xtoa} f(x)$ neexistuje nebo není rovna $A,$ potom
+            $$\exists \e > 0 \; \fa \delta > 0 \; \exists x \in P(a,\delta):
+            f(x) \not \in U(A,\e).$$
+            Pro $\delta_n = \frac{1}{n}, n=1,2,3,\dots$ vezmeme takové $x$ a
+            označíme ho $x_n.$ 
+            
+            Zřejmě platí, že $\lim_{\ntoinfty} x_n = a.$ Jelikož dané elementy
+            $x_n$ vybíráme z prstencového okolí $a,$ platí, že $\fa n \in \N:
+            x_n \neq a.$ Z definice této posloupnosti navíc vyplývá, že 
+            $\fa n \in \N: f(x_n) \not \in U(A,\e),$ takže $\lim_{\ntoinfty}
+            f(x_n) \neq A.$ Tím je implikace splněna.
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[o jednoznačnosti limity]
+    Funkce $f$ má v daném bodě nejvýše jednu limitu.
+\end{theorem}
+
+\begin{proof}
+    Sporem. Nechť $A_1$ a $A_2$ jsou dvě různé limity funkce $f$ daném bodě 
+    $a \in \Rstar.$  Mějme dále posloupnost $\seq{x_n}$, $\lim_{\ntoinfty} x_n = a,$
+    $\fa n \in \N: x_n \neq a.$ Potom dle Heineho (Věta~\ref{th:heine})
+    $\lim_{\ntoinfty} f(x_n) = A_1$ a zároveň $\lim_{\ntoinfty} f(x_n) = A_2.$
+    Dostáváme tím spor s větou o jednoznačnosti limity posloupnosti 
+    (Věta~\ref{th:jednoznacnostlimity}).
+\end{proof}
+
+\begin{theorem}[limita a omezenost]
+    \Necht $f$ má vlastní limitu v bodě $a\in\Rstar.$ Pak existuje $\delta > 0$
+    tak, že $f$ je na $P(a,\delta)$ omezená.
+\end{theorem}
+
+\begin{proof}
+    \Necht $\lim_{\xtoa} f(x) = A \in \R.$ Z definice limity vyplývá, že:
+    $$\fa \e > 0 \; \exists \delta > 0: f(P(a, \delta)) \subseteq U(A, \e).$$
+    Jelikož je limita vlastní, platí dále:
+    $$U(A, \e) = (A-\e, A + \e).$$
+
+    Zvolme $\e = 1$. Platí:
+    $$\exists \delta > 0 \; \fa x \in P(a,\delta): f(x) \in U(A,1) = (A - 1, A+1),$$
+    a tedy $f(x)$ je omezená na $P(a, \delta).$
+\end{proof}
+
+\begin{theorem}[o aritmetice limit funkcí]
+    \label{th:voalf}
+    \Necht $a \in \Rstar,$ $\lim_{\xtoa} f(x) = A \in \Rstar,$ a $\lim_{\xtoa}
+    g(x) = B \in \Rstar.$ Pak platí:
+    \begin{enumerate}[i.]
+        \item $\lim_{\xtoa} (f(x) + g(x)) = A+B,$ pokud je výraz $A+B$ definován;
+        \item $\lim_{\xtoa} f(x)g(x) = AB,$ pokud je výraz $AB$ definován;
+        \item $\lim_{\xtoa} \frac{f(x)}{g(x)} = \frac{A}{B},$ pokud je výraz 
+            $\frac{A}{B}$ definován.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Dokážeme pouze pro bod $(i)$; ostatní případy se řeší analogicky.
+
+    Zvolme libovolnou posloupnost $\seq{x_n},$ splňující
+    $$\lim_{\ntoinfty} x_n = a, \fa n \in \N: x_n \neq a.$$
+    Potom dle Heineho (Věta~\ref{th:heine}):
+    $$\lim_{\ntoinfty} f(x_n) = A,$$
+    $$\lim_{\ntoinfty} g(x_n) = B.$$
+    a dle věty o aritmetice limit posloupností (Věta~\ref{th:voal}):
+    $$\lim_{\ntoinfty} (f(x_n) + g(x_n)) = A + B.$$
+    Protože posloupnost $\seq{x_n}$ je libovolná, dle Heineho:
+    $$\lim_{\xtoa} (f(x) + g(x)) = A+B.$$
+\end{proof}
+
+\begin{corollary}
+    \Necht jsou funkce $f$ a $g$ spojité v bodě $a \in \R.$ Pak jsou i 
+    funkce $f + g$, $f\cdot g$ spojité v bodě $a.$ Pokud je navíc $g(a) \neq 0$,
+    pak je i funkce $\frac{f}{g}$ spojitá v $a.$
+\end{corollary}
+
+\begin{theorem}[Limita a uspořádání]
+    \label{th:limitaausporadanifce}
+    \Necht $a \in \Rstar.$
+    \begin{enumerate}[i.]
+        \item \Necht $\limxtoa f(x) > \limxtoa g(x).$ Pak existuje prstencové
+            okolí $P(a,\delta)$ tak, že:
+            $$\fa x \in P(a,\delta): f(x) > g(x).$$
+
+        \item \Necht existuje prstencové okolí $P(a, \delta)$ tak, že:
+            $$\fa x \in P(a, \delta): f(x) \leq g(x).$$
+            \Necht existují $\limxtoa f(x)$ a $\limxtoa g(x).$ Potom platí:
+            $$\limxtoa f(x) \leq \limxtoa g(x).$$
+
+        \item \Necht na nějakém prstencovém okolí $P(a, \delta)$ platí $f(x)
+            \leq h(x) \leq g(x).$ \Necht $\limxtoa f(x) = \limxtoa g(x) = A 
+            \in \Rstar.$
+            Pak existuje $\limxtoa h(x)$ a všechny tři limity se rovnají.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item \Necht $\limxtoa f(x) = A,$ $\limxtoa g(x) = B, A > B.$ Zvolme
+            $0 < \e < \frac{A-B}{2}.$ Dle definice limity:
+            $$\exists \delta_1: f(P(a,\delta_1)) \subseteq U(A, \e),$$
+            $$\exists \delta_2: g(P(a,\delta_2)) \subseteq U(B, \e).$$
+            Zvolme $\delta_0 = \min\{\delta_1, \delta_2\}.$ Zřejmě:
+            $$\fa x \in P(a,\delta_0): f(x) > g(x).$$
+
+        \item Sporem. Důkaz je analogický k bodu ($ii$) v důkazu věty o 
+            limitě a uspořádání posloupností (Věta~\ref{th:limitaausporadani}).
+
+        \item Pro $\e > 0$ existují $\delta_1, \delta_2$ jako v bodě $(i)$. Pro
+            $\delta_0 = \min\{\delta, \delta_1, \delta_2\}$ platí:
+            $$h(P(a, \delta_0)) \subseteq U(A, \e),$$
+            a tedy $\limxtoa h(x) = A.$
+
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Mějme funkce $f: M \rightarrow \R, M \subset \R$ a $g: N \rightarrow \R, 
+    N \subset \R.$ Pokud $g(N) \subseteq M$, potom funkci $h: N \rightarrow \R,
+    h(x)=f(g(x))$ nazveme \newterm{složenou funkcí}. 
+    
+    Složenou funkci $h$ značíme: $h = f \circ g.$
+    Funkci $f$ se říká \newterm{vnější funkce}, funkci $g$ \newterm{vnitřní funkce}.
+\end{definition}
+
+\begin{remark}[Vztah limit vnější, vnitřní a složené funkce]
+    Nechť:
+    $$\lim_{\xtoa} g(x) = A,$$
+    $$\lim_{x \to A} f(x) = B.$$
+    Platí obecně:
+    $$\lim_{\xtoa} f(g(x)) = B?$$
+    Neplatí! Uvažujme následující dvě funkce:
+    $$g(x) = 3 \; \fa x \in N,$$
+    $$f(x) = \begin{cases}
+        1 &\text{pro $x = 3 $} \\
+        0 &\text{pro $x \neq 3$}
+    \end{cases}$$
+    Zřejmě:
+    $$\lim_{x \to 0} g(x) = \underbrace{3}_{A},$$
+    $$\lim_{x \to A=3} f(x) = \underbrace{0}_{B}.$$
+    Limita složené funkce:
+    $$\lim_{x \to 0} f(g(x)) = \lim_{x \to 0} f(3) = \lim_{x \to 0} 1 = 1 \neq B.$$
+
+    Schéma z počátku poznámky nicméně platí při splnění dodatečných 
+    podmínek, které jsou popsány v následující větě.
+\end{remark}
+
+\begin{theorem}[Limita složené funkce]
+    \label{th:slozenafunkce}
+    Nechť funkce $f$ a $g$ splňují:
+    \begin{enumerate}[i.]
+        \item $\lim_{x \to a} g(x) = A,$
+        \item $\lim_{y \to A} f(y) = B.$
+    \end{enumerate}
+    Je-li navíc splněna alespoň jedna z podmínek:
+    \begin{itemize}
+        \item[(P1)] $f$ je spojitá v $A,$
+        \item[(P2)] $\exists \eta > 0 \; \fa x \in P(a,\eta): g(x) \neq A,$
+    \end{itemize}
+    pak platí $\lim_{x \to a} f(g(x)) = B.$
+\end{theorem}
+
+\begin{remark}
+    Funkce $f$ a $g$ z předchozí poznámky nesplňovaly podmínky (P1) a (P2).
+    Funkce $f$ nebyla spojitá v $A = 3$ a pro funkci $g$ neexistovalo
+    prstencové okolí bodu $a = 0,$ ve kterém nenabývala své limity $A = 3.$
+\end{remark}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[(P1)] Díky existenci limity a spojitosti funkce $f$ v bodě $A$ 
+            platí, že ke zvolenému $\e > 0$:
+            $$\exists \varphi > 0: f(U(A,\varphi)) \subseteq U(B,\e).$$
+            Dále, k danému $\varphi$:
+            $$\exists \chi > 0: g(P(a, \chi)) \subseteq U(A,\varphi).$$
+            Nakonec:
+            $$f(g(P(a, \chi))) \subseteq f(U(A, \varphi)) \subseteq U(B,\e),$$
+            a tedy $\lim_{x \to a} f(g(x)) = B.$
+        \item[(P2)]Díky existenci limity funkce $f$ v bodě $A$ 
+            platí, že ke zvolenému $\e > 0$:
+            $$\exists \varphi > 0: f(P(A,\varphi)) \subseteq U(B,\e).$$
+            Dále, k danému $\varphi$:
+            $$\exists \chi > 0: g(P(a, \chi)) \subseteq U(A,\varphi).$$
+            Pro $\psi = \min(\chi, \eta)$ díky podmínce (P2) dále platí:
+            $$g(P(a, \psi)) \subseteq P(A,\varphi).$$
+            Nakonec:
+            $$f(g(P(a, \psi))) \subseteq f(P(A, \varphi)) \subseteq U(B,\e),$$
+            a tedy $\lim_{x \to a} f(g(x)) = B.$
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[limita monotónní funkce]
+    \label{th:limitamonotonnifce}
+    Nechť funkce $f$ je monotónní na intervalu $(a,b), \; a,b \in \Rstar.$
+    Potom existuje $\lim_{x \to a+} f(x)$ i $\lim_{x \to b-} f(x).$
+\end{theorem}
+
+\begin{proof}
+    Větu dokážeme pro $f$ neklesající a pro $\lim_{x \to a+}.$ 
+    Ostatní případy se dokáží analogicky.
+
+    Definujme množinu $M = f((a,b)) = \{f(x), x \in (a,b)\}$, položme
+    $A \coloneqq \inf M$ a zvolme $\e > 0.$ Z vlastností infima 
+    (Definice~\ref{def:inf}) víme, že:
+    $$\exists y_0 = f(x_0) \in M: A \leq y_0 < A + \e.$$
+    Potom díky monotonii funkce $f$:
+    $$\fa x, \; a < x < x_0: f(x) \in U(A,\e).$$
+    Nyní zvolíme $\delta > 0$ takové, aby $P_+(a,\delta) \subseteq (a,x_0).$
+    Potom:
+    $$\fa x \in P_+(a,\delta): f(x) \in U(A,\e),$$
+    a tedy $\lim_{x \to a+} f(x) = A.$
+\end{proof}
+
+\subsection{Funkce spojité na intervalu}
+
+\begin{definition}
+    Množina $M \subseteq \R$ je \newterm{interval}, pokud 
+    $\exists a,b \in \Rstar$ tak, že: 
+    $$M = \{x \in \R: a \prec x \prec b \},$$ 
+    kde relace $\prec$ je buď $\leq$ nebo $<.$
+
+    Body $a,b$ nazýváme \newterm{krajními body} intervalu; ostatní body 
+    intervalu $M$ nazýváme \newterm{vnitřními body}.
+\end{definition}
+
+\begin{observation}
+    \label{obs:intervalconvex}
+    Množina $M \subseteq \R$ je interval, právě když
+    $$\fa x,y,z\in \R: x\leq z\leq y, x \in M, y\in M \implies z \in M,$$
+    tj. právě když je \newterm{konvexní podmnožinou} $\R$.
+\end{observation}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\implies$] Zřejmé: Každý interval je konvexní množina.
+        \item[$\impliedby$] Nechť $M \subseteq \R$ je konvexní množina.
+            Označme $a \coloneqq \inf M$, $b \coloneqq \sup M.$
+            Potom
+            $$(a,b) \subseteq M \subseteq [a,b].$$
+            Proč? Pokud $x \in (a,b),$ potom z definice suprema a infima
+            $\exists \alpha, \beta \in M: \alpha < x < \beta.$ Díky konvexivitě
+            je i $x \in M.$ Pokud naopak $x \in M,$ z definice suprema a infima
+            vyplývá $a \leq x$ a $x \leq b$, a tedy $x \in [a,b].$
+
+            Množina $M$ se tedy od $(a,b)$ liší jen eventuálním přidáním
+            jednoho nebo obou bodů $a,b$, a je tedy intervalem.
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+    \Necht $f$ je funkce a $J$ interval. Řekneme, že $f$ je 
+    \newterm{spojitá na intervalu} $J$, 
+    jestliže je spojitá ve všech vnitřních bodech $J$. Je-li počáteční bod $J$
+    prvkem $J$, tak požadujeme i spojitost zprava v tomto bodě, a je-li koncový
+    bod $J$ prvkem $J$, tak požadujeme i spojitost zleva v tomto bodě.
+\end{definition}
+
+\begin{theorem}[Darboux]
+    \label{th:darboux}
+    \Necht $f$ je spojitá na $[a,b]$ a platí $f(a) < f(b).$ Pak pro každé $y \in 
+    (f(a),f(b))$ existuje $x \in (a,b)$ tak, že $f(x) = y.$
+\end{theorem}
+
+\begin{proof}
+    Definujme množinu $M \coloneqq \{x \in [a,b], f(x) < y \}.$ Označme dále 
+    $x_0 = \sup M.$ Tvrdím, že $f(x_0) = y.$ Toto tvrzení nyní dokážeme
+    sporem s vlastnostmi suprema.
+
+    Nechť platí $f(x_0) < y.$ Zvolme $\e = \frac{y - f(x_0)}{2} > 0.$ Jelikož
+    dle předpokladů je $f$ spojitá v $x_0$, existuje $\delta > 0 \; 
+    \fa x \in U(x_0, \delta): f(x) \in U(f(x_0), \e),$ neboli $f(x) < y.$ 
+    Zde nicméně dostáváme spor s definicí suprema: $x_0$ nemůže býti 
+    supremem množiny $M$, neboť existují $x > x_0,$ pro které také 
+    platí $f(x) < y.$
+
+    Nechť naopak platí $f(x_0) > y.$ Zvolme $\e = \frac{f(x_0) - y}{2} > 0.$
+    Jelikož je $f$ spojitá, existuje $\delta > 0 \; \fa x \in U(x_0, \delta):
+    f(x) \in U(f(x_0), \e),$ neboli $f(x) > y.$ Potom ale $\fa x \in (x_0-\delta,
+    x_0): f(x) > y$ a tedy $x_0 - \delta$ je také horní závora množiny $M$ 
+    a dostáváme se tak do sporu s druhou vlastností suprema.
+\end{proof}
+
+\begin{theorem}[Zobrazení intervalu spojitou funkcí]
+    Nechť $J$ je interval. \Necht funkce $f: J \rightarrow \R$ je spojitá.
+    Pak je množina $f(J)$ také interval.
+\end{theorem}
+
+\begin{proof}
+    Nechť $x,y \in f(J), z \in \R$ a $x \leq z \leq y.$ Potom $x = f(\alpha)$
+    a $y = f(\beta)$ pro $\alpha, \beta \in J.$ Nechť bez újmy na obecnosti 
+    $\alpha \leq \beta.$
+
+    Protože zúžená funkce $f: [\alpha, \beta] \rightarrow \R$ je spojitá
+    a $f(\alpha) \leq z \leq f(\beta),$ podle Darbouxovy věty 
+    (Věta~\ref{th:darboux}) máme
+    i $z = f(\gamma)$ pro nějaké $\gamma \in [\alpha,\beta].$ Množina $f(J)$ je 
+    tedy konvexní a dle Pozorování~\ref{obs:intervalconvex} je tedy interval.
+\end{proof}
+
+\begin{definition}
+    Nechť $f: M \rightarrow \R, M \subseteq \R.$ Řekneme, že funkce $f$ nabývá v
+    bodě $a\in M$
+    \begin{center}
+        \begin{tabular}{lr}
+            \newterm{maxima} na $M$, jestliže $\fa x \in M:$ &$f(x) \leq f(a),$ \\
+            \newterm{minima} na $M$, jestliže $\fa x \in M:$ &$f(x) \geq f(a),$ \\
+            \newterm{ostrého maxima} na $M$, jestliže $\fa x \in M, x \neq a:$ &$f(x) < f(a),$ \\
+            \newterm{ostrého minima} na $M$, jestliže $\fa x \in M, x \neq a:$ &$f(x) > f(a),$ \\
+        \end{tabular}
+    \end{center}
+    \newterm{lokálního maxima (ostrého lokálního maxima, ostrého lokálního minima,
+    lokálního minima)}, jestliže existuje $\delta > 0$ tak, že $f$ nabývá na $M
+    \cap U(a,\delta)$ svého maxima (ostrého maxima, ostrého minima, minima).
+\end{definition}
+
+\begin{observation}[Heineho věta pro spojitost]
+    \label{obs:heinespojitost}
+    Následující tvrzení jsou ekvivalentní:
+    \begin{enumerate}[i.]
+        \item $f$ je spojitá v $a$, tj. $\lim_{\xtoa} f(x) = f(a);$
+        \item pro každou posloupnost $\seq{x_n}_{n \in \N}$ takovou, že:
+            $$\fa n \in \N \; x_n \in M, x_n \neq a, \text{a zároveň} 
+            \lim_{n \to \infty} x_n = a$$
+            platí:
+            $$\lim_{n\to\infty} f(x_n) = f(a).$$
+    \end{enumerate}
+\end{observation}
+
+\begin{theorem}[spojitost funkce a nabývání extrémů]
+    \label{th:spojitaextremy}
+    Nechť $f$ je spojitá funkce na intervalu $[a,b]$. Pak funkce $f$ nabývá na 
+    $[a,b]$ svého maxima a minima.
+\end{theorem}
+
+\begin{proof}
+    Označme $A \coloneqq \sup \{f(x), x \in [a,b]\}.$ Z vlastností suprema
+    existuje posloupnost $\seq{x_n}$ taková, že $\lim_{\ntoinfty} f(x_n) = A$, 
+    např. $f(x_1) > A -1, f(x_2) > A - \frac{1}{2}, f(x_3) > A - \frac{1}{3},$ atd.
+
+    Jelikož $\fa n \in \N: x_n \in [a, b]$, posloupnost $\seq{x_n}$ je omezená, 
+    a tedy dle Bolzano-Weierstrassovy věty (Věta~\ref{th:bolzanoweierstrass})
+    existuje vybraná konvergentní podposloupnost $\seq{x_{n_k}}$:
+    $$\lim_{k \to \infty} x_{n_k} = z \in [a,b].$$
+    Jelikož je funkce $f$ v bodě $z$ spojitá, platí dle Heineho věty pro
+    spojitost (Pozorování~\ref{obs:heinespojitost}):
+    $$\lim_{k \to \infty} f(x_{n_k}) = f(z).$$
+    Zároveň ale víme, že 
+    $$\lim_{\ntoinfty} f(x_n) = A$$
+    Dle věty o limitě vybrané posloupnosti (Věta~\ref{th:vybranalimita}) je i
+    $$\lim_{k \to \infty} f(x_{n_k}) = A$$
+    a dle věty o jednoznačnosti limity posloupnosti 
+    (Věta~\ref{th:jednoznacnostlimity}) platí $f(z) = A,$ 
+    a tedy funkce $f$ nabývá svého maxima $A$ v bodě $z \in [a,b].$
+
+    Důkaz minima je analogický.
+\end{proof}
+
+\begin{theorem}[spojitost funkce a omezenost]
+    \Necht $f$ je spojitá funkce na intervalu $[a,b].$ Pak je funkce $f$ na 
+    $[a,b]$ omezená.
+\end{theorem}
+
+\begin{proof}
+    Dle věty o spojitosti funkce a nabývání extrémů (Věta~\ref{th:spojitaextremy})
+    nabývá funkce $f$ na $[a,b]$ svého maxima ($A$) i minima ($B$). 
+    Potom $\fa x \in [a,b]: B \leq f(x) \leq A$ a funkce $f$ je tedy na intervalu
+    $[a,b]$ omezená.
+\end{proof}
+
+\begin{definition}
+    Nechť $f$ je funkce a $J$ interval. Řekneme, že $f$ je \newterm{prostá} na $J$,
+    pokud $\fa x,y \in J: x \neq y \implies f(x) \neq f(y).$
+
+    Pro prostou funkci $f: J \rightarrow \R$ definujeme \newterm{inversní funkci}
+    $f^{-1}: f(J) \rightarrow \R$ předpisem: $f^{-1}(y) = x \iff f(x) = y.$
+\end{definition}
+
+\begin{theorem}[o inversní funkci]
+    \label{th:inversnifce}
+    \Necht $f$ je spojitá a rostoucí (klesající) funkce na intervalu $J$. Potom
+    je funkce $f^{-1}$ spojitá a rostoucí (klesající) na itervalu $f(J).$
+\end{theorem}
+
+\begin{proof}
+    Nechť je $f$ například rostoucí. Nejprve dokážeme sporem, že i $\inv{f}$
+    je rostoucí. Nechť existují $y_1,y_2 \in f(J), y_1 < y_2$ tak, že $\inv{f}(y_1) 
+    > \inv{f}(y_2).$ Potom ovšem dostáváme spor:
+    $y_1 = f(\inv{f}(y_1)) > f(\inv{f}(y_2)) = y_2.$
+
+    Dokažme nyní spojitost $\inv{f}.$ Zvolme $y_0 \in f(J), y_0 = f(x_0), \e > 0$ a 
+    uvažujme nejprve možnost, kdy $y_0$ je vnitřní bod $f(J)$ (a tedy $x_0$ 
+    je vnitřní bod $J$). Potom existují $x_1,x_2$ tak,
+    že $x_1 < x_0 < x_2$ a $(x_1,x_2) \subseteq U(x_0, \e).$ Zvolme
+    $\delta > 0$ tak, aby $U(y_0,\delta) \subseteq (f(x_1), f(x_2)).$ Potom:
+    $$\inv{f}(U(y_0,\e)) \subseteq \inv{f}(f(x_1),f(x_2)) = (x_1,x_2) \subseteq
+    U(x_0,\e) = U(\inv{f}(y_0),\e).$$
+
+    Uvažujme dále možnost, že je $J$ uzavřený interval a $x_0$ je jeho levý 
+    krajní bod. Zvolme $x_1 \in U_+(x_0, \e)$ a $\delta = f(x_1) - y_0.$ Potom
+    díky monotonii funkce $\inv{f}$ platí pro všechny $y \in U_+(y_0, \delta):$
+    $$\inv{f}(y) \in U_+(x_0, \e) \subseteq U(x_0, \e).$$
+    Pravý krajní bod se řeší analogicky.
+\end{proof}
+
+\subsection{Elementární funkce}
+
+\subsubsection{Exponenciála a logaritmus}
+
+\begin{theorem}[Zavedení exponenciály]
+    \label{th:exp}
+    Existuje právě jedna funkce $\exp : \R \rightarrow \R$ splňující následující
+    dvě podmínky:
+    \begin{enumerate}[i.]
+        \item $\exp(x+y) = \exp(x)\exp(y),$
+        \item $\fa x \in \R: \exp(x) \geq 1+x$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Předpokládejme nejprve, že daná funkce existuje, a ukažme si, že v tom případě
+    je definována jednoznačně: Postupně odvodíme několik jejích vlastností, až se
+    tak dostaneme k jejímu jednoznačnému vyjadření. Poté dokážeme i její 
+    existenci\footnote{Důkaz této věty jsem zpracoval na základě 
+    poznámek Petra Baudiše z přednášek Luboše Picka: \url{http://math.or.cz/analyza}.}.
+
+    \begin{enumerate}[A.]
+        \item Jednoznačnost.
+
+            \begin{enumerate}[1.]
+                \item $\fa n \in \N \; \fa x \in \R: \exp(nx) = \exp(x)^n.$
+
+                    Důkaz indukcí:
+                    \begin{enumerate}[I.]
+                        \item $\exp(1x) = \exp(x)$
+                        \item $\exp((n+1)x) = \exp(nx + x) = \exp(nx)\exp(x) = (\exp(x))^n
+                            \exp(x) = (\exp(x))^{n+1}$
+                    \end{enumerate}
+
+                \item $\exp(0) = 1.$
+                    
+                    Rozepišme nejprve výraz $\exp(0)$:
+                    $$\exp(0) = \exp(0 + 0) \stackrel{i.}{=} \exp(0)\exp(0) = (\exp(0))^2.$$
+                    $\exp(0)$ tedy může být buď $0$ nebo $1$. První možnost je 
+                    ve sporu s podmínkou $(ii)$, a proto $\exp(0) = 1.$
+
+                \item $\fa x \in \R: \exp(-x) = \frac{1}{\exp(x)} \land \exp(x) \neq 0.$
+
+                    $1 = \exp(0) = \exp(x-x) = \exp(x)\exp(-x).$
+
+                \item $\lim_{x \to \infty} \exp(x) = +\infty.$
+
+                    Plyne z podmínky $(ii)$ a Věty~\ref{th:limitaausporadanifce} (limita a 
+                    uspořádání).
+
+                \item $\lim_{x \to -\infty} \exp(x) = 0.$
+
+                    Vyplývá z předchozích dvou bodů.
+
+                \item $\fa x \in \R: \exp(x) > 0.$
+
+                    $\exp(x) = \exp(\frac{x}{2} + \frac{x}{2}) \stackrel{i.)}{=}
+                                    \exp(\frac{x}{2})\exp(\frac{x}{2}) \geq 0.$
+
+                \item $\fa x > 0: \exp(x) > 1.$
+
+                    Vyplývá z podmínky $(ii).$
+
+                \item Exponenciála je rostoucí funkce na $\R.$
+
+                    $\fa x, y \in \R, x < y: 1 \stackrel{7.}{<} \exp(y - x) = 
+                    \frac{\exp(y)}{\exp(x)}$. Jelikož se jedná o kladnou funkci, platí
+                    $\exp(y) > \exp(x).$
+
+                \item $\lim_{x \to 0} \frac{\exp(x) -1}{x} = 1.$
+
+                    $$\frac{1}{\exp(x)} \stackrel{3.}{=} \exp(-x) \stackrel{ii.}{\geq} 1-x,$$          
+                    a tedy: $$1 + x \stackrel{(ii.)}{\leq} \exp(x) \leq \frac{1}{1-x}.$$ 
+                    Další úpravou získáváme:
+                    $$x \leq \exp(x) -1  \leq \frac{1}{1-x} - 1 = \frac{x}{1-x}$$
+                    a po vydělení výrazem $x$:
+                    $$1 \leq \frac{\exp(x) - 1}{x} \leq \frac{1}{1-x}.$$
+                    Výslednou limitu získáme díky Větě~\ref{th:limitaausporadanifce} 
+                    (limita a uspořádání).
+
+                \item $\exp(x)$ je spojitá na $\R.$
+                    \begin{align*}
+                        \lim_{x \to x_0} (\exp(x) - \exp(x_0)) &= \lim_{x \to x_0} 
+                        (\exp((x-x_0) + x_0) - \exp(x_0)) \\
+                        &= \lim_{x\to x_0} (\exp(x - x_0)\exp(x_0) - \exp(x_0)) \\
+                        &= \lim_{x \to x_0} \exp(x_0) \underbrace{\frac{\exp(x-x_0) - 1}{x - x_0}}_{\to 1} 
+                        \underbrace{(x - x_0)}_{\to 0} \\
+                        &= 0
+                    \end{align*}
+
+                \item $\fa x \in \R: \exp(x) = \lim_{\ntoinfty} 
+                    \left(1 + \frac{x}{n}\right)^n$
+
+                    Pokud se nám podaří dokázat tuto rovnost, dokážeme
+                    díky jednoznačnosti limity posloupnosti (Věta~\ref{th:jednoznacnostlimity})
+                    i jednoznačnost definice exponenciály.
+
+                    Dle podmínky $(ii)$ platí:
+                    $$\exp\left(-\frac{x}{n}\right) \geq 1 - \frac{x}{n}$$
+                    Zvolme $k > |x|.$ Pro $n \geq k, n \in \N$ je i pravá strana 
+                    nerovnice kladná a při umocnění obou stran na $n$-tou dostáváme:
+                    $$\exp\left(-\frac{x}{n}\right)^n \stackrel{1.}{=} 
+                    \exp\left(-n\frac{x}{n}\right) = \exp(-x) 
+                        \stackrel{3.}{=} \frac{1}{\exp(x)}
+                        \geq \left(1-\frac{x}{n}\right)^n$$
+                    a tedy:
+                    $$\exp{x} \leq \frac{1}{\left(1 - \frac{x}{n}\right)^n}$$
+                    Můžeme tedy psát:
+                    $$\left(1 + \frac{x}{n}\right)^n \leq \exp\left(\frac{x}{n}\right)^n
+                    = \exp(x) \leq \frac{1}{\left(1 - \frac{x}{n}\right)^n}$$
+                    a po vydělení výrazem $\left(1 + \frac{x}{n}\right)^n$:
+                    $$1 \leq \frac{\exp(x)}{\left(1 + \frac{x}{n}\right)^n} 
+                    \leq \frac{1}{\left(1 - \frac{x^2}{n^2}\right)^n}$$
+                    Dle Bernoulliho (Věta~\ref{th:bernoulli}) dále platí:
+                    $$\frac{1}{\left(1 - \frac{x^2}{n^2}\right)^n} \leq
+                    \frac{1}{\left(1 - \frac{x^2}{n}\right)}$$
+                    a proto:
+                    $$1 \leq \frac{\exp(x)}{\left(1 + \frac{x}{n}\right)^n} 
+                    \leq \underbrace{\frac{1}{\left(1 - \frac{x^2}{n}\right)}}_{\to 1 \text{ při } n \to \infty}$$
+                    Nyní již stačí využít strážníků (Věta~\ref{th:limitaausporadani})
+                    k dokázání limity z počátku.             
+            \end{enumerate}
+
+        \item Existence. 
+
+            V následujících bodech ukážeme, že posloupnost:
+                $$a_n = \left(1 + \frac{x}{n}\right)^n$$
+            je pro dostatečně velká $n$ neklesající a omezená pro všechna $x \in \R,$
+            což zaručí, že tato posloupnost má limitu a že tato limita je vlastní
+            (viz také Větu~\ref{th:monotonniposl}). 
+            Tím dokončíme formální zavedení exponenciály.
+
+            \begin{enumerate}[I.]
+                \item Monotonie.
+
+                    Podobně jako výše zvolme $k > |x|.$ Pro $n \geq k, n \in \N$
+                    platí:
+                    $$\sqrt[n+1]{\left(1 + \frac{x}{n}\right)^n} \leq 
+                    \frac{n\cdot(1+\frac{x}{n})+1}{n+1} = 1 + \frac{x}{n+1}$$
+
+                    Zde jsme využili vztahu geometrického a aritmetického průměru
+                    (Věta~\ref{th:agprumer}) pro $z_1 = z_2 = \dots = z_n = 1 + 
+                    \frac{x}{n}$ a $z_{n+1} = 1.$ Pokud umocnímě obě strany 
+                    nerovnosti na $(n+1)$-tou, dostáváme:                    
+                    $$\left(1 + \frac{x}{n}\right)^n \leq 
+                    \left(1 + \frac{x}{n+1}\right)^{n+1},$$
+                    a tedy platí $\fa n \geq k: a_n \leq a_{n+1}.$ Posloupnost
+                    $\seq{a_n}$ je tedy neklesající.
+
+                \item Omezenost.
+
+                    Nyní ukážeme, že posloupnost $\seq{a_n}$ má omezenou 
+                    podposloupnost $\seq{a_{n_k}}.$ Z toho pak vyplývá, že 
+                    i posloupnost $\seq{a_n}$ je omezená\footnote{Zde
+                    využíváme jednoduchého pozorování, které tvrdí, že
+                    posloupnost, která je monotónní a která má omezenou
+                    podposloupnost, je omezená. Nechť $\seq{a_n}$ je 
+                    neklesající posloupnost a nechť pro její podposloupnost 
+                    $\seq{a_{n_k}}$ platí: $\fa k \in \N: |a_{n_k}| \leq L.$ 
+                    Nechť, pro spor, posloupnost $\seq{a_n}$ není omezená. 
+                    Potom $\fa K \; \exists n_0: a_{n_0} > K.$ Díky 
+                    monotonii dále platí: $\fa n \geq n_0: a_n > K.$ 
+                    Zvolme $K = L.$ Potom $\fa k \geq n_0: n_k \geq k \geq n_0: 
+                    a_{n_k} > L,$ čímž dostáváme spor s omezeností
+                    podposloupnosti $\seq{a_{n_k}}.$}.
+
+                    Zvolme $k > |x|.$ Dokážeme, že
+                    $$\fa n \in \N: \left(1 + \frac{x}{nk}\right)^{nk} 
+                    \leq \left(1 - \frac{x}{k}\right)^{-k},$$
+                    a tedy, že $\fa n\in \N: a_{nk} \leq
+                    \left(1 - \frac{x}{k}\right)^{-k}.$
+                    
+                    Pro zvolené $k$ a pro $\fa n \in \N$ platí:
+                    \begin{align*}
+                        \left(1 + \frac{x}{nk}\right)^{-n} 
+                            &= \left(\frac{nk+x}{nk}\right)^{-n} \\
+                            &= \left(\frac{nk}{nk + x}\right)^n \\
+                            &= \left(1 - \frac{x}{nk + x}\right)^n \\
+                            &\geq 1 - \frac{nx}{nk + x} \tag{Bernoulliho nerovnost,
+                                Věta~\ref{th:bernoulli}} \\
+                                &\geq 1 - \frac{x}{k} \tag{$\frac{x}{k} \geq \frac{nx}{nk+x}$} \\
+                                &> 0.
+                    \end{align*}
+                    Po umocnění obou stran nerovnice na $k$-tou dostáváme:
+                    $$\left(1 + \frac{x}{nk}\right)^{-nk}
+                    \geq \left(1 - \frac{x}{k}\right)^k$$
+                    a po úpravě:
+                    $$\left(1 + \frac{x}{nk}\right)^{nk} 
+                    \leq \left(1 - \frac{x}{k}\right)^{-k}$$
+            \end{enumerate}
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Funkci inversní k exponenciále $\exp$ nazveme \newterm{logaritmus} $\log.$
+\end{definition}
+
+\begin{theorem}[Vlastnosti logaritmu]
+    Funkce $\log$ splňuje:
+    \begin{enumerate}[a)]
+        \item $\log: (0, \infty) \rightarrow \R$ je spojitá rostoucí
+            funkce.
+        \item $\fa x,y > 0: \log(xy) = \log(x) + \log(y).$
+        \item $\lim_{x \to 1} \frac{\log(x)}{x - 1} = 1.$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    V důkazech budeme využívat vlastnosti exponenciály dokázané v předchozí
+    větě (Věta~\ref{th:exp}).
+    \begin{enumerate}[a)]
+        \item Exponenenciála $\exp: \R \rightarrow (0, \infty)$ je rostoucí
+            a spojitá funkce. Podle věty o inversní 
+            funkci (Věta~\ref{th:inversnifce}) je tedy i logaritmus jako
+            její inversní funkce spojitá a rostoucí funkce.
+            
+        \item $\log(x) = A, x = \exp(A)$ a $\log(y) = B, y = \exp(B).$
+            Potom:
+            $$xy = \exp(A)\exp(B) = \exp(A + B)$$
+            a tedy
+            $$\log(xy) = A + B = \log(x) + \log(y).$$
+
+        \item Definujme funkce
+            $$f(y) = \frac{\exp(y) - 1}{y}, \; g(x) = \log(x)$$ 
+            pro jejichž limity platí: 
+            $$\lim_{y \to 0} f(y) = 1, \; \lim_{x \to 1} g(x) = 0\footnote{Víme, 
+                že $\exp(0) = 1$ a tedy $\log(1) = 0.$ Dále víme, že
+                logaritmus je spojitá funkce.}.$$
+            Potom pro limitu složené funkce $f(g(x))$ v bodě $1$ platí:
+            $$\lim_{x \to 1} f(g(x)) = 1.$$
+            Zde jsme využili větu o limitě složené funkce 
+            (Věta~\ref{th:slozenafunkce}) a její podmínky (P2), 
+            tj. že funkce $\log$ nenabývá v prstencovém okolí bodu $1$ hodnoty $0.$
+            Můžeme tedy psát:
+            $$1 = \lim_{x \to 1} f(g(x)) = \lim_{x \to 1} \frac{\exp(\log(x)) - 1}
+            {\log(x)} = \lim_{x \to 1} \frac{x - 1}{\log(x)}.$$
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Nechť $a > 0$ a $b \in \R.$ Pak definujeme \newterm{obecnou mocninu} jako:
+    $$a^b \coloneqq \exp(b\log(a)).$$
+    Je-li navíc $b > 0,$ pak definujeme \newterm{logaritmus při základu $b$}
+    následovně:
+    $$\log_b(a) \coloneqq \frac{\log(a)}{\log(b)}.$$
+\end{definition}
+
+\begin{remark}[Korektnost definice obecné mocniny]
+    Pro $x > 0$ platí:
+    \begin{align*}
+        x^n &= \exp(n\log(x)) \tag{nová definice} \\
+            &= \exp(\log(x^n)) \tag{matematickou indukcí} \\
+            &= x^n \tag{stará definice}
+    \end{align*}
+\end{remark}
+
+\begin{remark}[Logaritmus při základu $10$]
+    Na případu $b = 10$ ukážeme, že $b^{\log_b(x)} = x,$ a tedy že definice 
+    logaritmu při základu $b$ je korektní:
+    $$10^{\log_{10}(x)} = 10^{\frac{\log(x)}{\log(10)}} = 
+    (e^{\log(10)})^{\frac{\log(x)}{\log(10)}} = e^{\log(x)} = x.$$
+\end{remark}
+
+\begin{remark}[Odmocnina jako obecná mocnina]
+    $$\sqrt[n] x = \begin{cases}
+        \exp\left(\frac{1}{n}\log(x)\right) &x>0, \\
+        0 &x = 0.
+    \end{cases}$$
+\end{remark}
+
+\subsubsection{Goniometrické funkce}
+\begin{theorem}
+    \label{th:goniom}
+    Existuje právě jedna funkce $\sin:\R \rightarrow \R$ a právě jedna
+    funkce $\cos:\R \rightarrow \R$ splňující:
+    \begin{enumerate}[a)]
+        \item \begin{tabular}[t]{ll}
+                $\fa x,y \in \R:$
+                &$\sin(x +y) = \sin x \cos y + \cos x \sin y$ \\
+                &$\cos(x + y) = \cos x \cos y - \sin x \sin y$ \\
+                &$\cos(-x) = \cos x,$ \\
+                &$sin(-x) = -\sin x,$
+            \end{tabular}
+        \item $\exists \pi > 0$ tak, že $\sin$ je rostoucí na $[0, \frac{\pi}{2}]$
+            a $\sin(\frac{\pi}{2}) = 1,$
+        \item $$\lim_{x \to 0} \frac{\sin x}{x} = 1.$$
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}[Další vlastnosti goniometrických funkcí]
+    Ze "základních" vlastností goniometrických funkcí uvedených v předchozí 
+    větě lze odvodit jejich další vlastnosti: periodicita, intervaly monotónnosti, 
+    ostatní součtové vzorce, atd. V následujícím textu budeme předpokládat,
+    že tyto vlastnosti známe ze střední školy, a dokazovat je nebudeme.
+\end{remark}
+
+\begin{remark}
+    Dokažme tuto limitu:
+    $$\lim_{x \to 0} \frac{1 - \cos x}{x^2}.$$
+    Nejprve daný výraz v několika krocích upravíme:
+    $$\lim_{x \to 0} \frac{1 - \cos x}{x^2} = \lim_{x \to 0}\frac{1 - \cos x}{x^2}
+    \frac{1 + \cos x}{1 + \cos x} = \lim_{x \to 0} \frac{1 - \cos^2 x}{x^2}
+    \frac{1}{1 + \cos x} = \lim_{x \to 0} \frac{\sin^2 x}{x^2} \frac{1}{1 + \cos x}.$$
+
+    Jelikož
+    $$\lim_{x \to 0} \frac{\sin^2 x}{x^2} = \left(\lim_{x\to 0} 
+    \frac{\sin x}{x}\right)^2 = 1$$
+    a kosinus je spojitá funkce (jak dokážeme později), můžeme využít věty o
+    aritmetice limit (Věta~\ref{th:voalf}) a psát:
+    $$\lim_{x \to 0} \frac{1 - \cos x}{x^2} = 
+    \lim_{x \to 0} \frac{\sin^2 x}{x^2} \frac{1}{1 + \cos x}
+    = \left(\lim_{x\to 0}  \frac{\sin x}{x}\right)^2 \lim_{x \to 0}
+    \frac{1}{1 + \cos x} = \frac{1}{2}.$$
+\end{remark}
+
+\begin{definition}
+    Pro $x \in \R \setminus \{\frac{\pi}{2} + k\pi, k \in \Z\}$ a
+    $y \in \R \setminus \{k\pi, k \in \Z\}$ definujeme funkce \newterm{tangens}
+    a \newterm{kotangens} předpisem:
+    $$\tan x = \frac{\sin x}{\cos x} \text{ a } \cotg y = \frac{\cos y}{\sin y}.$$
+\end{definition}
+
+\begin{theorem}[spojitost sinu a kosinu]
+    Funkce $\sin, \cos, \tan$ a $\cotg$ jsou spojité na svém definičním oboru.
+\end{theorem}
+
+\begin{proof}
+    Začněme sinem. Nechť $a \in \R.$ Potom:
+        \begin{align*}
+            \lim_{x \to a} (\sin x - \sin a) 
+            &= \lim_{x \to a} 2\cdot\sin\left(\frac{x - a}{2}\right)
+                \cos\left(\frac{x-a}{2}\right) \tag{goniometrický vzorec} \\
+            &= \lim_{x \to a} 2 \cdot 
+                \underbrace{\frac{\sin\left(\frac{x - a}{2}\right)}{\frac{x - a}{2}}}_{\to 1}
+                \underbrace{\frac{x - a}{2}}_{\to 0} 
+                \underbrace{\cos\left(\frac{x-a}{2}\right)}_{\leq 1}
+                \tag{viz níže} \\
+            &= 0.
+        \end{align*}
+    Ve druhém kroku jsme využili věty o limitě složené funkce (Věta~\ref{th:slozenafunkce})
+    pro:
+    $$f(y) = \frac{\sin y}{y} \text{ a } g(x) = \frac{x-a}{2}$$
+    a to za podmínky (P2).
+
+    Nyní dokážeme spojitost pro kosinus. Pokud do vzorce:
+    $$\sin(x + y) = \sin x \cos y + \cos x \sin y$$
+    dosadíme $y = \frac{\pi}{2},$ získáme následující vztah mezi sinem 
+    a kosinem:
+    $$\cos x = \sin(x + \frac{\pi}{2}).$$ 
+    Dle věty o limitě složené funkce (Věta~\ref{th:slozenafunkce})
+    je tedy kosinus spojitý, neboť jak sinus, tak $x \rightarrow x + \frac{\pi}{2}$
+    jsou spojité funkce.
+
+    Dle věty o aritmetice limit funkcí (Věta~\ref{th:voalf}) (limita podílu) 
+    jsou i $\tan$ a $\cotg$ spojité funkce.
+\end{proof}
+
+\begin{definition}
+    Nechť
+    \begin{align*}
+        \sin^* x &= \sin x \text{ pro } x \in [-\frac{\pi}{2}, \frac{\pi}{2}], \\
+        \cos^* x &= \cos x \text{ pro } x \in [0, \pi], \\
+        \tan^* x &= \tan x \text{ pro } x \in (-\frac{\pi}{2}, \frac{\pi}{2}) \text{ a} \\
+        \cotg^* x &= \cotg x \text{ pro } x \in (0, \pi).
+    \end{align*}
+    Definujeme $\arcsin$ (resp. $\arccos$, $\arctan$, $\arccotg$) jako inversní
+    funkce k funkci $\sin^*$ (resp. $\cos^*, \tan^*, \arctan^*$).
+\end{definition}
+
+\begin{remark}
+    $\arcsin(\sin x) = x$ pouze pro $x \in [-\frac{\pi}{2}, \frac{\pi}{2}].$
+\end{remark}
+
+\begin{remark}[Příklady limit]
+    \leavevmode
+    \begin{itemize}
+        \item $\lim_{x \to 0} \frac{\arcsin x}{x}.$
+
+            Definujme následující dvě funkce:
+            $$f(y) = \begin{cases}
+                \frac{\sin y}{y} &y \neq 0 \\
+                1 &y = 0
+            \end{cases}, \; g(x) = \arcsin x.$$
+            Potom limita jejich složené funkce v bodě $0$ se rovná převrácené
+            hodnotě hledané limity:
+            $$\lim_{x \to 0} f(g(x)) = \limxo \frac{\sin(\arcsin x)}{\arcsin x} 
+            = \limxo \frac{x}{\arcsin x}$$
+            Víme dále, že:
+            $$\limxo g(x) = 0 \text{ a } \limxo f(y) = 1.$$
+            Za použití věty o limitě složené funkce (Věta~\ref{th:slozenafunkce})
+            a podmínky (P1) (funkce $f$ je v bodě $0$ spojitá):
+            $$\limxo f(g(x)) = 1,$$
+            a tedy:
+            $$\lim_{x \to 0} \frac{\arcsin x}{x} = 1.$$
+
+        \item $\lim_{\ntoinfty} n\cdot\sin(\frac{1}{n}).$
+
+            $$\lim_{\ntoinfty} n\cdot\sin(\frac{1}{n}) = \lim_{\ntoinfty}
+            \frac{\sin(\frac{1}{n})}{\frac{1}{n}} = 1.$$
+    \end{itemize}
+\end{remark}
+
+\subsection{Derivace funkce}
+
+\begin{definition}
+    Nechť $f$ je reálná funkce a $a \in \R.$ Pak \newterm{derivací $f$ v bodě $a$}
+    budeme rozumět:
+    $$f'(a) = \limho \frac{f(a+h) - f(a)}{h};$$
+    \newterm{derivací $f$ v bodě $a$ zprava} budeme rozumět:
+    $$f_+'(a) = \limhop \frac{f(a+h) - f(a)}{h};$$
+    \newterm{derivací $f$ v bodě $a$ zleva} budeme rozumět:
+    $$f_-'(a) = \limhom \frac{f(a+h) - f(a)}{h}.$$
+\end{definition}
+
+\begin{remark}
+    $$f'(a) = \limho \frac{f(a+h) - f(a)}{h} = \limxa \frac{f(x) - f(a)}{x-a}.$$
+\end{remark}
+
+\begin{remark}[Příklady limit]
+    \leavevmode
+    \begin{itemize}
+        \item $f(x) = x^n, a \in \R, n \in \N.$
+            \begin{align*}
+                f'(a) &= \limho \frac{(a+h)^n - a^n}{h}  \\
+                &= \limho \frac{a^n + \binom{n}{1}a^{n-1}h
+                + \binom{n}{2}a^{n-2}h^2 + \dots + \binom{n}{n}h^n - a^n}{h} \\
+                &=\binom{n}{1}a^{n-1} \\
+                &=na^{n-1}.
+            \end{align*}
+
+        \item $f(x) = \sgn(x).$
+
+            Vyjádřeme nejdříve jednostranné limity:
+            $$f_+'(0) = \limhop \frac{f(h) - f(0)}{h} = \limhop \frac{1-0}{h} = 
+            +\infty,$$
+            $$f_-'(0) = \limhom \frac{f(h) - f(0)}{h} = \limhom \frac{-1-0}{h} = 
+            +\infty.$$
+            Díky vztahu limity a jednostranných limit 
+            (Pozorování~\ref{obs:jednostrannelimity}) můžeme psát:
+            $$\sgn' 0 = +\infty.$$
+
+        \item $f(x) = |x|.$
+            $$f_+'(0) = \limhop \frac{f(h) - f(0)}{h} = \limhop \frac{h}{h} = 1,$$
+            $$f_-'(0) = \limhom \frac{f(h) - f(0)}{h} = \limhom \frac{-h}{h} = -1$$
+            Derivace $f(x)$ v bodě $0$ neexistuje.
+
+        \item $f(x) = \exp x.$
+
+            Vyjádřeme derivaci funkce $\exp$ v bodě $a \in \R:$
+            $$\limho \frac{\exp(a+h) - \exp a}{h} 
+            = \limho \frac{\exp a \exp h - \exp a}{h} 
+            = \limho \frac{\exp a \cdot (\exp h - 1)}{h}.$$
+            Jelikož $\limho \exp a = \exp a$ a 
+            $\limho \frac{\exp h - 1}{h} = 1,$ získáme za použití
+            věty o aritmetice limit funkcí (Věta~\ref{th:voalf}) následující rovnost:
+            $$f'(a) = \limho \exp a \cdot \limho \frac{\exp h -1}{h} = \exp a.$$
+
+        \item $f(x) = \log x.$
+            $$\limho \frac{\log(a+h) - \log(a)}{h} 
+            = \limho \frac{\log\left(1 + \frac{h}{a}\right)}{\frac{h}{a}}\cdot \frac{1}{a}
+            = \frac{1}{a}.$$
+   \end{itemize}
+\end{remark}
+
+\begin{theorem}[vztah derivace a spojitosti]
+    \label{th:derivacespojitost}
+    \Necht má funkce $f$ v bodě $a \in \R$ vlastní derivaci $f'(a) \in \R.$ Pak
+    je $f$ v bodě $a$ spojitá.
+\end{theorem}
+
+\begin{proof}
+    Chceme dokázat, že $\limxa (f(x) - f(a)) = 0:$
+    $$\limxa (f(x) - f(a)) = \limxa \frac{f(x) - f(a)}{x-a}(x-a) =
+    \limxa \frac{f(x) - f(a)}{x-a} \limxa (x-a) = f'(a) \cdot 0 = 0.$$
+\end{proof}
+
+\begin{remark}
+    \label{rm:jednostrannaderivacespojitost}
+    Podobná věta platí i pro jednostranné limity. Platí-li $f'_+(a) \in \R,$
+    je funkce $f$ spojitá v bodě $a$ zprava.
+\end{remark}
+
+\begin{theorem}
+    Nechť $f'(a)$ a $g'(a)$ existují. Potom:
+    \begin{enumerate}[i.]
+        \item $(f+g)'(a) = f'(a) + g'(a),$ pokud má pravá strana smysl.
+        \item Nechť je $g$ spojitá v $a,$ pak $(fg)'(a) = f'(a)g(a) + f(a)g'(a),$
+            pokud má pravá strana smysl.
+        \item \Necht je $g$ spojitá v $a$ a $g(a) \neq 0,$ pak 
+            $\left(\frac{f}{g}\right)'(a) = \frac{f'(a)g(a) - f(a)g'(a)}{g^2(a)},$
+            pokud má pravá strana smysl.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item 
+            \begin{align*}
+                (f+g)'(a) &= \\
+                          &= \limho \frac{f(a+h) + g(a + h) - f(a) - g(a)}{h}  \\
+                &= \limho \frac{f(a+h) - f(a)}{h} + \limho \frac{g(a+h) - g(a)}{h} \\
+                &= f'(a) + g'(a).
+            \end{align*}
+
+        \item \begin{align*}
+                (fg)'(a) &= \\
+                &=\limho \frac{f(a+h)g(a+h) - f(a)g(a)}{h} \\
+                &=\limho \frac{f(a+h)g(a+h) - f(a)g(a+h) + f(a)g(a+h) - f(a)g(a)}{h} \\
+                &=\limho \frac{f(a+h)-f(a)}{h}  \limho g(a+h)  + 
+                \limho f(a) \limho \frac{g(a+h)-g(a)}{h} \\
+                &= f'(a)g(a) -f(a)g'(a).
+            \end{align*}
+                Spojitosti funkce $g$ jsme využili při vyjádření limity: 
+            $\limho g(a+h) = g(a).$
+
+        \item Funkce $g$ spojitá v $a$ a $g(a) \neq 0,$ tedy $\exists \delta >0 \;
+            \fa h \in U(a,\delta): g(a+h) \neq 0.$ Dále:
+            \begin{align*}
+                \left(\frac{f}{g}\right)'(a) &= \\
+                &= \limho \frac{\frac{f(a+h)}{g(a+h)}-\frac{f(a)}{g(a)}}{h} \\
+                &= \limho \frac{f(a+h)g(a) - f(a)g(a) + f(a)g(a) -f(a)g(a+h)}{g(a+h)g(a)h} \\
+                &= \limho \frac{1}{g(a+h)g(a)}  
+                \left( \limho g(a) \limho \frac{f(a+h) - f(a)}{h}
+                +\limho (-f(a)) \limho \frac{g(a+h) - g(a)}{h}\right) \\
+                &= \frac{1}{g^2(a)} \left(g(a)f'(a) - f(a)g'(a)\right).
+            \end{align*}
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[derivace složené funkce]
+    \Necht $f$ má derivaci v bodě $y_0, g$ má derivaci v $x_0$ a je v $x_0$ spojitá
+    a $y_0 = g(x_0).$ Pak:
+    $$(f \circ g)'(x_0) = f'(y_0)g'(x_0) = f'(g(x_0))g'(x_0),$$
+    je-li výraz vpravo definován.
+\end{theorem}
+
+\begin{example}
+    Určete derivaci funkce $e^{x^2}$ v bodě $a$.
+
+    Funkce $e^{x^2}$ je složená funkce $f(g(x)):$
+    $$f(y) = e^y, g(x) = x^2, f'(y) = e^y, g'(x) = 2x$$
+    Potom:
+    $$(e^{x^2})' = e^{x^2} \cdot 2x.$$
+\end{example}
+
+\begin{proof}
+    Potřebujeme upravit následující limitu:
+    $$\limho \frac{f(g(x+h)) - f(g(x))}{h}.$$
+    Z existence derivace funkce $f$ v bodě $y_0$ víme, že tato funkce je 
+    definována na jistém okolí toho bodu: $U(y_0, \e).$ Funkce $g$ je spojitá
+    v $x_0$ a $g(x_0) = y_0.$ Z toho vyplývá, že $\exists \delta >0:
+    g(U(x_0, \delta)) \subseteq U(y_0, \e)$ a tedy že složená funkce
+    $f \circ g$ je definovaná na $U(x_0, \delta).$
+    
+    Zabývejme se nejprve případem, kdy derivace funkce $f$ v bodě $y_0$ je vlastní,
+    tj. $f'(y_0) \in \R.$ Definujme následující funkci:
+    $$F(y) \coloneqq 
+        \begin{cases}
+            \frac{f(y) - f(y_0)}{y-y_0} &y \neq y_0 \\
+            f'(y_0) &y=y_0.
+        \end{cases}
+    $$
+    Funkce $F$ je spojitá v bodě $y_0.$ Díky spojitosti funkce $g$ platí 
+    $\lim_{x \to x_0} g(x) = g(x_0) = y_0.$ Dle věty o limitě 
+    složené funkce (Věta~\ref{th:slozenafunkce}), podmínka (P1) platí:
+    \begin{align*}
+        f'(y_0) &= \lim_{y \to y_0} F(y) \\
+                &= \lim_{x \to x_0} F(g(x)) \\
+                &= \lim_{x \to x_0} \frac{f(g(x)) - f(g(x_0))}{x-x_0} \\
+                &= \lim_{x \to x_0} \frac{f(g(x)) - f(g(x_0))}{g(x)-g(x_0)} \cdot \frac{g(x) - g(x_0)}{x-x_0} \\
+                &= \lim_{x\to x_0} F(g(x)) \frac{g(x) - g(x_0)}{x-x_0} \\
+                &= \lim_{x\to x_0} F(g(x)) \lim_{x \to x_0} \frac{g(x)-g(x_0)}{x-x_0} \\
+                &= f'(y_0)g'(x_0).
+    \end{align*}
+
+    Uvažujme nyní případ, kdy derivace funkce $f$ v bodě $y_0$ je nevlastní, 
+    tj. $f'(y_0) = \pm \infty.$ V tomto případě musí platit, že 
+    $g'(x_0) \neq 0,$ jinak by nebyl výraz $f'(y_0)g'(x_0)$ definován.
+    Z toho vyplývá, že:
+    $$\exists \delta > 0 \; \fa x \in P(x_0, \delta): \frac{g(x) - g(x_0)}{x-x_0}
+    \neq 0,$$
+    a tedy, že na tomto okolí $g(x) \neq g(x_0).$ Definujme dále funkci 
+    $F(y)$ pro $y \neq y_0$:
+    $$F(y) = \frac{f(y) - f(y_0)}{y - y_0}.$$
+    Potom můžeme psát:
+    \begin{align*}
+        \lim_{x \to x_0} \frac{f(g(x)) - f(g(x_0))}{x-x_0} 
+        &= \lim_{x \to x_0} F(g(x)) \cdot \frac{g(x)-g(x_0)}{x-x_0} \\
+        &= f'(y_0)g'(x_0) \tag{viz níže} 
+    \end{align*}
+    V posledním kroce jsme vuyžili věty o limitě složené funkce 
+    (Věta~\ref{th:slozenafunkce}) a podmínky (P2): $g(x)$ nenabývá své limity
+    na okolí $x_0.$
+\end{proof}
+
+\begin{theorem}[derivace inversní funkce]
+    \label{th:derivaceinv}
+    \Necht $f$ je na intervalu $(a,b)$ spojitá a rostoucí (klesající). \Necht
+    $f$ má v bodě $x_0 \in (a,b)$ derivaci $f'(x_0)$ vlastní a různou od nuly.
+    Potom má funkce $f^{-1}$ derivaci v bodě $y_0 = f(x_0)$ a platí:
+    $$(f^{-1})'(y_0) = \frac{1}{f'(f^{-1}(y_0))}.$$
+\end{theorem}
+
+\begin{proof}
+    Definujme funkci $F(x):$
+    $$F(x) = 
+        \begin{cases}
+            \frac{f(x) - f(x_0)}{x-x_0} &x \neq x_0 \\
+            f'(x_0) &x=x_0.
+        \end{cases}
+    $$
+    Tato funkce je spojitá v bodě $x_0$. Definujme dále funkci $g(y):$
+    $$g(y) = f^{-1}(y).$$
+    Funkce inversní k $f$ je spojitá (Věta~\ref{th:inversnifce}), a tedy:
+    $$\lim_{y \to y_0} g(y) = \lim_{y \to y_0} f^{-1}(y) = f^{-1}(y_0).$$
+    Potom dle věty o limitě složené funkce (Věta~\ref{th:slozenafunkce}, (P1)):
+    $$\lim_{y\to y_0} F(g(y)) = f'(x_0).$$
+    Zároveň ovšem:
+    \begin{align*}
+        \lim_{y\to y_0} F(g(y)) 
+        &= \lim_{y\to y_0} \frac{f(f^{-1}(y)) - f(f^{-1}(y_0))}{f^{-1}(y) - f^{-1}(y_0)} \\
+        &= \lim_{y\to y_0} \frac{y - y_0}{f^{-1}(y) - f^{-1}(y_0)}
+    \end{align*}
+    Nakonec tedy:
+    $$(f^{-1})'(y_0) = \lim_{y\to y_0}\frac{f^{-1}(y) - f^{-1}(y_0)}{y - y_0} = \frac{1}{f'(x_0)}$$
+\end{proof}
+
+\begin{remark}[Derivace elementárních funkcí]
+    \label{rm:derivaceelfce}
+    \leavevmode
+    \begin{itemize}
+        \item $(k)' = 0,$ $k$ je konstanta.
+        \item $(x^n)' = nx^{n-1}, n \in \N, x \in \R.$
+        \item $(e^x)' = e^x, x \in \R.$
+        \item $x^a, x> 0, a \in \R:$
+            $$(x^a)' = (e^{a\log x})' = e^{a \log x} \cdot (a \log x)' = 
+            x^a \cdot \frac{a}{x} = ax^{a-1}.$$
+        \item $\sin x:$
+            \begin{align*}
+                (\sin x)' &= \limho \frac{\sin(x+h) - \sin(x)}{h} \\
+                          &= \limho \frac{2\sin(\frac{x+h-x}{2})\cos(\frac{x+h+x}{2})}{h} \\
+                          &= \limho \frac{\sin(\frac{h}{2})}{\frac{h}{2}} \cdot \limho \cos(x + \frac{h}{2}) \\
+                          &= 1 \cdot \cos x = \cos x.
+            \end{align*}
+        \item $\cos x:$
+            \begin{align*}
+                (\cos x)' &= \limho \frac{\cos(x+h) - \cos x}{h} \\
+                          &= \limho \frac{-2\sin(x+\frac{h}{2})\sin(\frac{h}{2})}{h} \\
+                          &= - \limho \frac{\sin(\frac{h}{2})}{\frac{h}{2}} \cdot \limho \sin(x + \frac{h}{2}) \\
+                          &= -\sin x.
+            \end{align*}
+        \item $\tan x:$
+            \begin{align*}
+                (\tan x)' &= \left(\frac{\sin x}{\cos x}\right)' \\
+                         &= \frac{\sin' x \cos x - \sin x \cos' x}{\cos^2 x} \\
+                         &= \frac{\cos^2 x + \sin^2 x}{\cos^2 x} \\
+                         &= \frac{1}{\cos^2 x}.
+            \end{align*}
+
+        \item $(\cotg x)' = - \frac{1}{\sin^2 x},$ analogicky.
+        \item $\arcsin x, x \in (-1, 1):$
+            \begin{align*}
+                (\arcsin x)' &= \frac{1}{\sin' y} \tag{pro $y = \arcsin x$, Věta~\ref{th:derivaceinv}} \\
+                             &= \frac{1}{\cos y} \\
+                             &= \frac{1}{\sqrt{1 - x^2}}. \tag{$\cos^2 y = 1 - \sin^2 y = 1 - x^2$}
+            \end{align*}
+        \item $(\arccos x)' = -\frac{1}{\sqrt{1 - x^2}}.$
+        \item $(\arctan x)' = \frac{1}{1 + x^2}.$
+        \item $(\arccotg x)' = - \frac{1}{1 + x^2}$
+    \end{itemize}
+\end{remark}
+
+\begin{theorem}[Fermatova]
+    \label{th:fermat}
+    \Necht $a \in \R$ je bod lokálního extrému funkce $f$ na $M.$ Pak $f'(a)$ 
+    neexistuje nebo $f'(a) = 0.$
+\end{theorem}
+
+\begin{proof}
+    Sporem. \Necht v bodě $a$ existuje nenulová derivace, tj. 
+    $f'(a) \neq 0.$ \Necht je \buno $f'(a) > 0.$ Potom:
+    $$\exists \delta > 0 \; \fa x \in P(a, \delta): \frac{f(x) - f(a)}{x-a} > 0.$$
+    Zvolme $\e = \frac{f'(a)}{2}.$ Potom:
+    $$\exists \delta > 0 \; \fa x \in P(a, \delta): 
+        |\frac{f(x) - f(a)}{x-a} - f'(a)| < \frac{f'(a)}{2}.$$
+    Po úpravě:
+    $$\fa x \in P(a, \delta): 0 < \frac{f'(a)}{2} < \frac{f(x) - f(a)}{x-a}.$$
+    Potom pro $x \in P_+(a, \delta): x - a> 0,$ a tedy $f(x) - f(a) > 0.$ Naopak,
+    pro $x \in P_-(a, \delta): x - a < 0,$ a tedy $f(x) - f(a) < 0.$
+    V tom případě ovšem bod $a$ není ani lokálním maximem, ani lokálním minimem.
+\end{proof}
+
+\begin{remark}
+    V typické úloze máme spojitou funkci na intervalu $[a,b]$ a naším úkolem je
+    nalézt její maxima a minima:
+    \begin{enumerate}[a.]
+        \item Dle věty o spojitosti funkce a nabývání extrémů 
+            (Věta~\ref{th:spojitaextremy}) víme, že tato funkce nabývá na daném
+            intervalu $[a,b]$ svých extrémů.
+        \item Dále dle Fermatovy věty (Věta~\ref{th:fermat}) víme, v jakých 
+            bodech se tyto extrémy mohou nacházet, tj. víme, kde hledat:
+            $$\{x \in [a,b], f'(x) = 0 \} 
+            \cup \{x \in [a,b], f'(x) \text{ neexistuje}\}
+            \cup \{a,b\}$$
+    \end{enumerate}
+\end{remark}
+
+\begin{theorem}[Rolleova]
+    \label{th:rolle}
+    \Necht $f$ je spojitá na intervalu $[a,b],$ $f'(x)$ existuje pro každé
+    $x \in (a,b)$ a $f(a) = f(b).$ Pak existuje $\xi \in (a,b): f'(\xi) = 0.$
+\end{theorem}
+
+\begin{proof}
+    Pokud pro $\fa x \in [a,b]: f(x) = f(a),$ potom $\fa x \in (a,b): f'(x) = 0.$ 
+
+    \Necht existuje $x \in (a,b)$ \tz $f(x) \neq f(a).$ \Necht \buno $f(x) > f(a).$
+    Spojitá funkce na $[a,b]$ nabývá extrémů, a tedy dle Věty~\ref{th:spojitaextremy}:
+    $$\exists \xi \in [a,b]: f(\xi) = \max_{x \in [a,b]} f(x).$$
+    Jelikož víme, že $\exists x \in (a,b)$ \tz $f(x) > f(a),$ vyplývá, že $\xi \neq a$
+    a $\xi \neq b.$ Dále z předpokladů víme, že $f'(x)$ existuje pro všechna 
+    $x \in (a,b).$ Z toho nutně vyplývá, že $f'(\xi) = 0.$
+\end{proof}
+
+\begin{theorem}[Lagrangeova věta o střední hodnotě]
+    \label{th:lagrangemean}
+    \Necht je funkce $f$ spojitá na intervalu $[a,b]$ a má derivaci v každém bodě
+    intervalu $(a,b).$ Pak existuje $\xi \in (a,b)$ \tz
+    $$f'(\xi) = \frac{f(b) - f(a)}{b -a}.$$
+\end{theorem}
+
+\begin{proof}
+    Definujme následující funkci:
+    $$F(x) \coloneqq f(x) - f(a) - \frac{f(b) - f(a)}{b - a}(x-a).$$
+    Tato funkce je spojitá na $[a,b]$ a zároveň má derivaci na $(a,b).$ Dále
+    $F(a) = F(b) = 0.$ Funkce $F(x)$ tedy na intervalu $[a,b]$ splňuje podmínky
+    Rolleovy věty (Věta~\ref{th:rolle}), ze které vyplývá, že existuje $\xi \in
+    (a,b)$ \tz $F'(\xi) = 0.$ Potom:
+    $$0 = F'(\xi) = f'(\xi) - 0 - \frac{f(b) - f(a)}{b-a} \cdot 1,$$
+    a tedy:
+    $$f'(\xi) = \frac{f(b) - f(a)}{b-a}.$$
+\end{proof}
+
+\begin{theorem}[Cauchyho věta o střední hodnotě]
+    \label{th:cauchymean}
+    \Necht $f,g$ jsou spojité funkce na intervalu $[a,b]$ takové, že $f$ má v každém
+    bodě $(a,b)$ derivaci a $g$ má v každém bodě $(a,b)$ vlastní derivaci různou 
+    od nuly. Pak existuje $\xi \in (a,b)$ \tz
+    $$\frac{f'(\xi)}{g'(\xi)} = \frac{f(b) - f(a)}{g(b) - g(a)}.$$
+\end{theorem}
+
+\begin{proof}
+    Z předpokladů vyplývá, že $g(b) \neq g(a), $ protože jinak by dle Rolleovy 
+    věty (Věta~\ref{th:rolle}) existovalo $x \in (a,b): g'(x) = 0.$
+    Definujme podobně jako výše následující funkci:
+    $$H(x) \coloneqq (f(b) - f(a))(g(x)-g(a)) - (f(x) - f(a))(g(b) - g(a)).$$
+    Funkce $H(x)$ je spojitá na $[a,b]$ a má na intervalu $(a,b)$ derivaci.
+    Dále $H(a) = H(b) = 0$ a tedy dle Rolleovy věty (Věta~\ref{th:rolle})
+    $$\exists \xi \in (a,b): H'(\xi) = 0.$$
+    Potom:
+    $$0 = H'(\xi) = (f(b) - f(a))(g'(\xi) - 0) - (f'(x)-0)(g(b) - g(a))$$
+    a tedy:
+    $$\frac{f'(\xi)}{g'(\xi)} = \frac{f(b) - f(a)}{g(b) - g(a)}.$$
+\end{proof}
+
+\begin{theorem}[l'Hospitalovo pravidlo]
+    \label{th:lhospital}
+    \leavevmode
+    \begin{enumerate}[(i)]
+        \item \Necht $a \in \Rstar, \lim_{x \to a+} f(x) = \lim_{x \to a+} g(x) = 0$
+            a \necht existuje $\lim_{x \to a+} \frac{f'(x)}{g'(x)}.$ Pak
+            $$ \lim_{x \to a+} \frac{f(x)}{g(x)} = \lim_{x \to a+} \frac{f'(x)}{g'(x)}.$$
+        \item \Necht $a \in \Rstar, \lim_{x \to a+} |g(x)| = \infty$
+            a \necht existuje $\lim_{x \to a+} \frac{f'(x)}{g'(x)}.$ Pak
+            $$ \lim_{x \to a+} \frac{f(x)}{g(x)} = \lim_{x \to a+} \frac{f'(x)}{g'(x)}.$$
+   \end{enumerate}
+\end{theorem}
+
+\begin{remark}[Příklad využití l'Hospitalova pravidla]
+    Vypočtěte následující limitu:
+    $$\limxo \frac{\sin x - x}{x^3}.$$
+    Limita je typu $\frac{0}{0}, $ je zde tedy šance na použití bodu (i) z 
+    l'Hospitalova pravidla. Vyjádřeme limitu derivací:
+    $$\limxo \frac{(\sin x - x)'}{(x^3)'} = \limxo \frac{\cos x - 1}{3x^2}.$$
+    Dostali jsme znovu limitu typu $\frac{0}{0}.$ Pokusme se znovu zderivovat jak
+    čitatel, tak jmenovatel:
+    \begin{align*}
+        \limxo \frac{(\cos x - 1)'}{(3x^2)'} &= \limxo \frac{-\sin x}{6x} \\
+                                             &= \limxo \frac{-1}{6} \cdot \limxo \frac{\sin x}{x} \\
+                                             &= -\frac{1}{6} \tag{$\limxo \frac{\sin x}{x} = 1$, Věta~\ref{th:goniom}}
+    \end{align*}
+    Díky l'Hospitalovu pravidlu dostáváme:
+    $$\limxo \frac{\sin x - x}{x^3} = \limxo \frac{\cos x - 1}{3x^2} = \limxo \frac{-\sin x}{6x}  = - \frac{1}{6}.$$
+    Mimochodem, pro vyjádření poslední limity jsme mohli místo vlastností sina
+    použít další iteraci l'Hospitalova pravidla; výsledek bychom dostali stejný.
+\end{remark}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[(i)]
+        \item 
+            \begin{itemize}
+                \item $a \in \R, \lim_{x \to a+} \frac{f'(x)}{g'(x)} = A \in \Rstar.$
+
+                    Jelikož limita je definována pouze pro reálné funkce, 
+                    vyplývá z existence $\lim_{x \to a+} \frac{f'(x)}{g'(x)},$
+                    že:
+                    $$\exists \delta > 0 \; \fa x \in P_+(a, \delta): f'(x) \in \R
+                    \text{ a } g'(x) \in \R \setminus \{0\}.$$
+
+                    Dodefinujme funkce $f$ a $g$ \tz $f(a) = g(a) = 0.$ Vezměme
+                    nějaké $x \in P_+(a, \delta).$ Funkce $f$ a $g$ jsou
+                    spojité na $[a,x], $ neboť mají vlastní derivaci na 
+                    intervalu $(a,x]$ a v bodě $a$ jsme spojitost dodefinovali.
+                    Tím jsou splněny předpoklady Cauchyho věty o střední
+                    hodnotě (Věta~\ref{th:cauchymean}) a platí, že 
+                    $$\fa x \in P_+(a, \delta) \; \exists \xi(x) \in (a,x):
+                    \frac{f'(\xi(x))}{g'(\xi(x))} = \frac{f(x) - f(a)}{g(x) - g(a)}
+                    \stackrel{\text{při }a=0}{=} \frac{f(x)}{g(x)}$$
+
+                    Zvolme $\e > 0.$ Z existence
+                    $\lim_{x \to a+} \frac{f'(x)}{g'(x)}$ víme, že 
+                    $$\exists \delta_1 < \delta \; \fa x \in P_+(a, \delta_1):
+                    \frac{f'(x)}{g'(x)} \in U(A, \e).$$
+
+                    Nyní, $\fa x \in P_+(a, \delta_1)$ platí, že $a < \xi(x) < x,$
+                    a tedy $\frac{f'(\xi(x))}{g'(\xi(x))} \in U(A, \e)$, a tím
+                    pádem i $\frac{f(x)}{g(x)} \in U(A, \e).$ Proto:
+                    $$\lim_{x \to a+} \frac{f(x)}{g(x)} = A.$$
+
+                \item $a = - \infty, \lim_{x \to a+} \frac{f'(x)}{g'(x)} = A \in \Rstar.$
+
+                    Jelikož platí:
+                    $$\lim_{x \to -\infty} h(x) = C \iff \lim_{x \to 0+} h(-\frac{1}{x}) = C,$$
+                    můžeme tento případ převést na předchozí pomocí substituce.
+
+                    Definujme následující dvě funkce:
+                    $$F(y) = f(-\frac{1}{y}), \; G(y) = g(-\frac{1}{y}).$$
+                    Jejich derivace jsou rovny:
+                    $$F'(y) = f'(-\frac{1}{y})(\frac{1}{y^2}), 
+                    \; G'(y) = g'(-\frac{1}{y})(\frac{1}{y^2}).$$
+                    Potom:
+                    $$\lim_{x \to -\infty}\frac{f(x)}{g(x)} = 
+                    \lim_{y \to 0+} \frac{F(y)}{G(y)} =
+                    \lim_{y \to 0+} \frac{F'(y)}{G'(y)} = 
+                    \lim_{y \to 0+} \frac{f'(-\frac{1}{y})(\frac{1}{y^2})}{g'(-\frac{1}{y})(\frac{1}{y^2})} =
+                    \lim_{x \to -\infty} \frac{f'(x)}{g'(x)}.$$
+            \end{itemize}
+
+        \item Tuto variantu si dokážeme pouze pro případ 
+            $a \in \R, \lim_{x \to a+} \frac{f'(x)}{g'(x)} = A \in \R, 
+            \lim_{x \to a+} g(x) = \infty.$
+
+            Zvolme $0<\e<1.$ Z předpokladů víme, že:
+            $$\exists \delta_1 > 0 \; \fa y \in P_+(a, \delta_1): 
+            |\frac{f'(y)}{g'(y)} - A| < \e.$$
+            Zvolme pevné $y \in P_+(a, \delta_1).$ Z $\lim_{x \to 0+} g(x) = \infty$
+            dále vyplývá, že:
+            $$\exists \delta_2 < \delta_1 \; \fa x \in P_+(a, \delta_2):
+            |\frac{g(y)}{g(x)}| < \e \land |\frac{f(y)}{g(x)}| < \e.$$
+
+            Nechť $x \in P_+(a, \delta_2): a < x < y.$ Potom na $[x,y]$ splňují
+            funkce $f,g$ předpoklady Cauchyho věty o střední hodnotě 
+            (Věta~\ref{th:cauchymean}), a tedy:
+            $$\exists \xi \in (x,y): \frac{f(y) - f(x)}{g(y)-g(x)} = 
+            \frac{f'(\xi)}{g'(\xi)}.$$
+            Potom:
+            $$f(y) - f(x) = \frac{f'(\xi)}{g'(\xi)} g(y) - 
+            \frac{f'(\xi)}{g'(\xi)} g(x).$$
+            Po vydělení obou stran rovnice výrazem $\frac{1}{g(x)}:$
+            $$\frac{f(y)}{g(x)} - \frac{f(x)}{g(x)} = 
+            \frac{f'(\xi)}{g'(\xi)}\frac{g(y)}{g(x)} - 
+            \frac{f'(\xi)}{g'(\xi)}\frac{g(x)}{g(x)}.$$
+            Po úpravách:
+            $$\frac{f(x)}{g(x)}  =\frac{f'(\xi)}{g'(\xi)} + 
+            \frac{f(y)}{g(x)} -\frac{f'(\xi)}{g'(\xi)}\frac{g(y)}{g(x)}.$$
+            Potom:
+            \begin{align*}
+                |\frac{f(x)}{g(x)} - A| &= |\frac{f'(\xi)}{g'(\xi)} + 
+                \frac{f(y)}{g(x)} -\frac{f'(\xi)}{g'(\xi)}\frac{g(y)}{g(x)} - A| \\
+                &\leq |\frac{f'(\xi)}{g'(\xi)} - A| + 
+                |\frac{f'(\xi)}{g'(\xi)}\frac{g(y)}{g(x)}| +
+                |\frac{f(y)}{g(x)}| \tag{trojúhelníková nerovnost} \\
+                &< \e + (|A| + \e)\e + \e.
+            \end{align*}
+            A tedy:
+            $$\lim_{x \to a+} \frac{f(x)}{g(x)} = A.$$
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}[derivace a limita derivace]
+    \label{th:derlimder}
+    \Necht je funkce $f$ spojitá zprava v $a$ a \necht existuje $\lim_{x \to a+}
+    f'(x) = A \in \Rstar.$ Pak $f'_+(a) = A.$
+\end{theorem}
+
+\begin{proof}
+    Vyjádřeme $f'_+(a)$ pomocí definice:
+    \begin{align*}
+        f'_+(a) &= \lim_{x \to a+} \frac{f(x) - f(a)}{x-a} \\
+                &\stackrel{?}{=} \lim_{x \to a+} \frac{f'(x)}{1} 
+                    \tag{L'Hospitalovo pravidlo, nutno ověřit podmínky} \\
+                &= A.
+    \end{align*}
+    Nyní je třeba ověřit, že použití L'Hospitalova pravidla 
+    (Věta~\ref{th:lhospital}) bylo korektní. Jde jednoduše nahlédnout, že
+    se jedná o případ (i): $\frac{0}{0}.$ 
+\end{proof}
+
+\begin{definition}
+    \Necht $J$ je interval. Množinu všech vnitřních bodů $J$ nazýváme 
+    \newterm{vnitřek} J a značíme $\vnitrek J.$
+\end{definition}
+
+\begin{theorem}[o vztahu derivace a monotonie]
+    \label{th:derivacemonotonie}
+    \Necht $J \subseteq \R$ je interval a $f$ je spojitá na $J$ a v každém
+    vnitřním bodě $J$ má derivaci.
+    \begin{enumerate}[(i)]
+        \item Je-li $f'(x) > 0$ na $\vnitrek J$, pak je $f$ rostoucí na $J.$
+        \item Je-li $f'(x) < 0$ na $\vnitrek J$, pak je $f$ klesající na $J.$
+        \item Je-li $f'(x) \geq 0$ na $\vnitrek J$, pak je $f$ neklesající na $J.$
+        \item Je-li $f'(x) \leq 0$ na $\vnitrek J$, pak je $f$ nerostoucí na $J.$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Ukážeme si pouze první případ; ostatní se dokazují analogicky.
+
+    Mějme body $a,b \in J, a < b.$ Funkce $f$ je spojitá na $[a,b]$ a má derivaci
+    v každém vnitřním bodu intervalu $(a,b).$ Dle Lagrangeovy věty o střední
+    hodnotě (Věta~\ref{th:lagrangemean}) platí, že
+    $$\exists \xi \in (a,b): f'(\xi) = \frac{f(b) - f(a)}{b-a}.$$ Jelikož
+    dle předpokladů $f'(\xi) > 0$ a zároveň $b-a>0$, musí platit i $f(b) - f(a) > 0.$
+    Funkce $f$ je tedy na intervalu $J$ rostoucí.
+\end{proof}
+
+\begin{remark}
+    Implikace v předchozí větě neplatí v opačném směru: Uvažujte například
+    funkci $f(x) = x^3$ a případ (i).
+\end{remark}
+
+\begin{definition}
+    \Necht $n \in \N, a \in \R$ a \necht $f$ má vlastní $n$-tou derivaci na okolí
+    bodu $a.$ Pak \newterm{$(n+1)$-ní derivací} funkce $f$ v bodě $a$ budeme rozumět:
+    $$f^{(n+1)}(a) = \lim_{h \to 0} \frac{f^{(n)}(a + h) - f^{(n)}(a)}{h}.$$
+\end{definition}
+
+\subsection{Konvexní a konkávní funkce}
+
+\begin{definition}
+    \Necht $f$ má vlastní derivaci v bodě $a \in \R.$ Označme
+    $$T_a = \{[x,y], x \in \R, y = f(a) + f'(a)(x-a)\}.$$
+    Řekneme, že bod $[x, f(x)], x \in D_f$ leží \newterm{nad (pod) tečnou} $T_a,$
+    jestliže platí:
+    $$f(x) > f(a) + f'(a)(x-a) (f(x) < f(a) + f'(a)(x-a)).$$
+\end{definition}
+
+\begin{definition}
+    Funkce $f$ má v bodě $a$ \newterm{inflexi} ($a$ je \newterm{inflexní bod}),
+    jestliže $f'(a) \in \R$ a existuje $\Delta > 0$ \tz
+    \begin{enumerate}[(i)]
+        \item $\fa x \in (a-\Delta, a): [x,f(x)]$ leží nad tečnou,
+        \item $\fa x \in (a, a+ \Delta): [x,f(x)]$ leží pod tečnou,
+    \end{enumerate}
+    nebo
+    \begin{enumerate}[(i)]
+        \item $\fa x \in (a-\Delta, a): [x,f(x)]$ leží pod tečnou,
+        \item $\fa x \in (a, a+ \Delta): [x,f(x)]$ leží nad tečnou.
+    \end{enumerate}
+\end{definition}
+
+\begin{theorem}[nutná podmínka pro inflexi]
+    \Necht $f''(a) \neq 0.$ Pak $a$ není inflexní bod funkce $f.$
+\end{theorem}
+
+\begin{proof}
+    \Necht je \buno $f''(a) > 0,$ a tedy
+    $$\lim_{x \to a} \frac{f'(x) - f'(a)}{x-a} > 0.$$
+    Ukážeme, že body $[x,f(x)]$ leží nad tečnou $T_a$
+    jak v levém, tak v pravém okolí bodu $a.$
+
+    Díky předpokladu $f''(a) > 0$ existuje $\delta > 0$ \tz:
+    $$\fa x \in P_+(a,\delta): f'(x) > f'(a) \land
+    \fa x \in P_-(a, \delta): f'(x) < f'(a).$$
+
+    Zvolme libovolné $y \in P_+(a,\delta).$ Funkce $f$ je spojitá na $[a,y]$ a
+    má vlastní derivace ve všech bodech intervalu $(a,y).$ Potom dle
+    Langrageovy věty o střední hodnotě (Věta~\ref{th:lagrangemean}):
+    $$\exists \xi_1 \in (a,y): f'(a) < f'(\xi_1) = \frac{f(y) - f(a)}{y-a}.$$
+    Pro všechna $y \in P_+(a,\delta)$ tedy platí:
+    $$f(y) > f(a) + f'(a)(y-a);$$
+    jinými slovy, leží nad tečnou $T_a.$
+
+    Zvolme nyní libovolné $z \in P_-(a, \delta).$ Analogicky ukážeme, že
+    $$\exists \xi_2 \in (z, a): f'(a) > f'(\xi_2) = \frac{f(a) - f(z)}{a-z},$$
+    a tedy, že pro všechna $z \in P_-(a, \delta):$
+    $$f(z)>f(a) + f'(a)(z-a)$$
+\end{proof}
+
+\begin{theorem}[postačující podmínka pro inflexi]
+    \label{th:inflexepostac}
+    \Necht existuje $f'(a) \in \R$ a \necht existuje $\delta > 0$ \tz:
+    $$\fa x \in P_+(a, \delta): f''(x) > 0 
+    \land \fa x \in P_-(a, \delta): f''(x) < 0.$$
+    Pak $z$ je inflexní bod $f.$
+\end{theorem}
+
+\begin{proof}
+    Jelikož $f''(a) > 0$ na $P_+(a, \delta),$ je dle věty o vztahu derivace
+    a monotonie (Věta~\ref{th:derivacemonotonie}) $f'(x)$ rostoucí na 
+    $P_+(a, \delta),$ a tedy $\fa x \in P_+(a, \delta): f'(x) > f'(a).$
+
+    Zvolme $x \in P_+(a,\delta).$ Dle Lagrangeovy věty o střední hodnotě 
+    (Věta~\ref{th:lagrangemean}) platí, že:
+    $$\exists \xi_1 \in (a,x): f'(a) < f'(\xi_1) = \frac{f(x) - f(a)}{x-a}.$$
+    Z tohoto vztahu vyplývá, že funkce je nad tečnou $T_a$ v pravém okolí
+    bodu $a.$
+    
+    Analogicky ukážeme, že v levém okolí bodu $a$ je funkce pod tečnou $T_a$,
+    čímž jsou splněny podmínky pro inflexi.
+\end{proof}
+
+\begin{definition}
+    Funkci $f$ na intervalu $I$ nazveme \newterm{konvexní (konkávní)}, jestliže:
+    $$\fa x_1,x_2,x_3 \in I, x_1 < x_2 < x_3 \implies
+    \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}$$
+    $$\left(\fa x_1,x_2,x_3 \in I, x_1 < x_2 < x_3 \implies
+    \frac{f(x_2) - f(x_1)}{x_2 - x_1} \geq \frac{f(x_3) - f(x_1)}{x_3 - x_1}\right).$$
+    Funkci nazveme \newterm{ryze konvexní (ryze konkávní)}, je-li příslušná
+    nerovnost ostrá.
+\end{definition}
+
+\begin{remark}[ekvivalentní definice konvexity]
+    Funkce $f$ je na intervalu $J$ konvexní, pokud:
+    $$\fa \alpha \in (0,1) \; \fa x,y \in J: f(\alpha x + (1-\alpha)y) \leq
+    \alpha f(x) + (1-\alpha)f(y).$$
+\end{remark}
+
+\begin{lemma}
+    \label{lm:konvexita}
+    \Necht je funkce $f$ na intervalu $I$ konvexní, pak:
+    $$\fa x_1,x_2,x_3 \in I, x_1 < x_2 < x_3 \implies
+    \frac{f(x_2) - f(x_1)}{x_2 - x_1} \leq \frac{f(x_3) - f(x_1)}{x_3 - x_1}
+    \leq \frac{f(x_3) - f(x_2)}{x_3 - x_2}.$$
+\end{lemma}
+
+\begin{proof}
+    Platnost první nerovnosti je dána již z definice konvexnosti. Nás proto
+    zajímá druhá nerovnost, tj. chceme dokázat, že platí:
+    $$\fa x_1,x_2,x_3 \in I, x_1 < x_2 < x_3 \implies
+    \frac{f(x_3) - f(x_1)}{x_3 - x_1}
+    \leq \frac{f(x_3) - f(x_2)}{x_3 - x_2}.$$
+    Platí:
+    \begin{align*}
+        \frac{f(x_3) - f(x_2)}{x_3 - x_2} 
+        &= \frac{f(x_3) - f(x_1) + f(x_1) - f(x_2)}{x_3 - x_2} \\
+        &=    \frac{f(x_3) - f(x_1)}{x_3 - x_2} - \frac{f(x_2) - f(x_1)}{x_2 - x_1} \frac{x_2 - x_1}{x_3 - x_2} \\
+        &\geq \frac{f(x_3) - f(x_1)}{x_3 - x_2} - \frac{f(x_3) - f(x_1)}{x_3 - x_1} \frac{x_2 - x_1}{x_3 - x_2} \tag {z definice konvexity} \\
+        &\geq \frac{f(x_3) - f(x_1)}{x_3 - x_2} - \frac{f(x_3) - f(x_1)}{x_3 - x_2} \frac{x_2 - x_1}{x_3 - x_1} \\
+        &\geq \frac{f(x_3) - f(x_1)}{x_3 - x_2} \left(1 - \frac{x_2 - x_1}{x_3 - x_1}\right) \\
+        &\geq \frac{f(x_3) - f(x_1)}{x_3 - x_2} \left(\frac{x_3 - x_1 - x_2 + x_1}{x_3 - x_1}\right) \\
+        &= \frac{f(x_3) - f(x_1)}{x_3 - x_1}
+    \end{align*}
+\end{proof}
+
+\begin{lemma}
+    \Necht je funkce $f$ na intervalu $I$ ryze konvexní, pak:
+    $$\fa x_1,x_2,x_3 \in I, x_1 < x_2 < x_3 \implies
+    \frac{f(x_2) - f(x_1)}{x_2 - x_1} < \frac{f(x_3) - f(x_1)}{x_3 - x_1}
+    < \frac{f(x_3) - f(x_2)}{x_3 - x_2}.$$
+\end{lemma}
+
+\begin{theorem}[konvexita a jednostranné derivace]
+    \label{th:konvexitajednostrannederivace}
+    \Necht je funkce $f$ na intervalu $J$ konvexní a $a \in \vnitrek J.$
+    Pak $f'_+(a) \in \R$ a $f'_-(a) \in \R.$
+\end{theorem}
+
+\begin{proof}
+    Omezíme se na důkaz existence $f'_+(a).$ Případ jednostranné derivace zleva
+    se dokazuje analogicky.
+
+    Naším úkolem je dokázat, že limita:
+    $$\lim_{x \to a+} \frac{f(x) - f(a)}{x-a}$$
+    existuje a že je reálná. Z konvexity funkce $f$ na $J$ vyplývá, že
+    existuje $\delta > 0$ \tz funkce 
+    $$H(x) = \frac{f(x) - f(a)}{x-a}$$
+    je na $(a, a+\delta)$ neklesající a tedy dle věty o limitě monotónní funkce
+    (Věta~\ref{th:limitamonotonnifce}) má limitu $A$.
+
+    Navíc, nechť $y \in J, y<a.$ Potom dle lemmatu~\ref{lm:konvexita} platí:
+    $$\fa x \in (a, a+\delta): \frac{f(a) - f(y)}{a-y} \leq \frac{f(x) - f(a)}{x-a}.$$
+    Funkce $H(x)$ je tedy na $(a, a+\delta)$ omezená zdola a $A \in \R.$
+\end{proof}
+
+\begin{theorem}
+    \Necht $f$ je konvexní na otevřeném intervalu $J.$ Pak je $f$ spojitá na $J.$
+\end{theorem}
+
+\begin{proof}
+    Uvažujme libovolný bod $a \in \vnitrek J.$ Funkce $f$ je konvexní a tedy 
+    dle věty o konvexitě a jednostranných derivacích 
+    (Věta~\ref{th:konvexitajednostrannederivace}) existují jednostranné
+    derivace funkce $f$ v bodě $a.$ Z věty o vztahu derivace a 
+    spojistosti a následující poznámky (Věta~\ref{th:derivacespojitost}, 
+    Poznámka~\ref{rm:jednostrannaderivacespojitost}) dále vyplývá, že funkce 
+    funkce $f$ je v bodě $a$ spojitá zleva i zprava, a tedy spojitá.
+\end{proof}
+
+\begin{theorem}[vztah druhé derivace a konvexity (konkávity)]
+    \Necht $f$ má na intervalu $(a,b)$ spojitou první derivaci.
+    \begin{enumerate}[(i)]
+        \item Jestliže $\fa x \in (a,b): f''(x) \geq 0,$ pak $f$ je konvexní na $(a,b).$
+        \item Jestliže $\fa x \in (a,b): f''(x) \leq 0,$ pak $f$ je konkávní na $(a,b).$
+        \item Jestliže $\fa x \in (a,b): f''(x) > 0,$ pak $f$ je ryze konvexní na $(a,b).$
+        \item Jestliže $\fa x \in (a,b): f''(x) < 0,$ pak $f$ je ryze konkávní na $(a,b).$
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Ukážeme si pouze případ (i); ostatní se dokazují analogicky. 
+    
+    Nechť $x_1,x_2,x_3 \in (a,b), x_1 < x_2 < x_3.$ Dle Lagrangeovy věty
+    o střední hodnotě (Věta~\ref{th:lagrangemean}):
+    $$\exists \xi_1, \xi_2: f'(\xi_1) = \frac{f(x_2)-f(x_1)}{x_2-x_1} \land
+    f'(\xi_2) = \frac{f(x_3)-f(x_2)}{x_3-x_2}.$$
+    Dále, jelikož $\fa x \in (a,b): f''(x) \geq 0,$ první derivace funkce $f$ je
+    dle věty o vztahu derivace a monotonie (Věta~\ref{th:derivacemonotonie})
+    neklesající funkce. Protože $\xi_1 < \xi_2$, platí $f'(\xi_1) \leq f'(\xi_2),$
+    a tedy:
+    $$\frac{f(x_2)-f(x_1)}{x_2-x_1} \leq \frac{f(x_3)-f(x_2)}{x_3-x_2},$$
+    po úpravě:
+    $$f(x_3) \geq (f(x_2)-f(x_1))\frac{x_3-x_2}{x_2-x_1} + f(x_2).$$
+    Odečtěme od obou stran nerovnice výraz $f(x_1):$
+    $$f(x_3) -f(x_1) \geq (f(x_2)-f(x_1))\frac{x_3-x_2}{x_2-x_1} + f(x_2)-f(x_1)$$
+    a následně je vynásobme výrazem $\frac{1}{x_3-x_1}$ a upravme:
+    \begin{align*}
+        \frac{f(x_3) -f(x_1)}{x_3 -x_1} 
+        &\geq (f(x_2)-f(x_1)) \left(\frac{x_3-x_2}{(x_2-x_1)(x_3-x_1)} + \frac{1}{x_3-x_1}\right) \\
+        &= (f(x_2)-f(x_1)) \frac{x_3-x_2+x_2-x_1}{(x_2-x_1)(x_3-x_1)} \\
+        &= \frac{f(x_2)-f(x_1)}{x_2-x_1}.
+    \end{align*}
+    Tím jsme ukázali, že funkce $f$ je konvexní $(a,b).$
+\end{proof}
+
+\subsection{Průběh funkce}
+
+\begin{definition}
+    Řekneme, že funkce $ax + b, a,b \in \R,$ je asymptotou funkce $f$ v $+\infty$ 
+    ($-\infty$), jestliže:
+    $$\lim_{x \to \infty} (f(x)-(ax+b)) = 0$$
+    $$(\lim_{x \to -\infty} (f(x)-(ax+b)) = 0)$$
+\end{definition}
+
+\begin{theorem}[tvar asymptoty]
+    Funkce $f$ má v $\infty$ asymptotu $ax+b,$ právě když
+    $$\lim_{x\to\infty}\frac{f(x)}{x} = a\in\R \; \text {a} \; 
+    \lim_{x\to\infty}(f(x) - ax) = b \in \R.$$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\implies$] Použijeme větu o aritmetice limit funkcí 
+            (Věta~\ref{th:voalf}) a rozepíšeme obě limity. Pro koeficient $a$:
+            $$\limxinf \frac{f(x)}{x} 
+            \qe \limxinf \frac{f(x) - (ax + b)}{x} + \limxinf \frac{ax+b}{x}
+            \qe \frac{0}{\infty} + a = a.$$
+            Rozepsání je platné, jen pokud pravé strany mají smysl (proto ty 
+            otazníky nad rovnítky). V tomto případě smysl mají a použití věty o 
+            aritmetice limit funkcí je tedy korektní.
+
+            Podobně pro koeficient $b:$
+            $$\limxinf (f(x) - ax) 
+            \qe \limxinf (f(x) - ax + b) + \limxinf b 
+            \qe 0 + b = b.$$
+        \item[$\impliedby$]
+            $$\limxinf (f(x) - (ax + b)) 
+            \qe \limxinf (f(x) - ax) - \lim b
+            \qe b - b = 0.$$
+    \end{itemize}
+\end{proof}
+
+\begin{remark}
+    \label{rm:prubehfce}
+    Při vyšetření průběhu funkce provádíme následující kroky:
+    \begin{enumerate}
+        \item Určíme definiční obor a obor spojitosti funkce.
+        \item Zjistíme průsečíky se souřadnými osami.
+        \item Zjistíme symetrii funkce: lichost, sudost, periodicita.
+        \item Dopočítáme limity v "krajních bodech definičního oboru."
+        \item Spočteme první derivaci, určíme intervaly monotonie a 
+            nalezneme lokální a globální extrémy.
+        \item Spočteme druhou derivaci a určíme intervaly, kde je $f$ konvexní
+            nebo konkávní. Určíme inflexní body.
+        \item Vypočteme asymptoty funkce.
+        \item Načrtneme graf funkce a určíme obor hodnot.
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    Vyšetřete průběh funkce:
+    $$f(x) = \sqrt[3]{(x+2)^2} - \sqrt[3]{(x-2)^2}.$$
+    \begin{enumerate}
+        \item Určíme definiční obor a obor spojitosti funkce. 
+            
+            $D_f = \R, $ funkce je spojitá na $\R.$
+
+        \item Zjistíme průsečíky se souřadnými osami. 
+            
+            Položme $x=0:$ 
+            $$f(0) = \sqrt[3]{(0+2)^2} - \sqrt[3]{(0 - 2)^2} = 0,$$
+            a $y=0:$
+            \begin{align*}
+                0 &= \sqrt[3]{(x+2)^2} - \sqrt[3]{(x-2)^2} \\
+                \sqrt[3]{(x+2)^2} &=  \sqrt[3]{(x-2)^2} \\
+                x^2 + 4x + 4 &= x^2 -4x + 4 \\
+                x&=0.
+            \end{align*}
+            Jediný průsečík s osami $x$ a $y$ je bod $P[0,0].$
+        
+        \item Zjistíme symetrii funkce: lichost, sudost, periodicita.
+
+            Pro určení parity funkce vyjádříme $f(-x):$
+            \begin{align*}
+                f(-x) 
+                &= \sqrt[3]{(-x+2)^2} - \sqrt[3]{(-x-2)^2} \\
+                &= \sqrt[3]{(-1)^2(x-2)^2} - \sqrt[3]{(-1)^2(x+2)^2} \\
+                &= \sqrt[3]{(x-2)^2} - \sqrt[3]{(x+2)^2} \\
+                &= -1 (\sqrt[3]{(x+2)^2} - \sqrt[3]{(x-2)^2}) \\
+                &= -f(x).
+            \end{align*}
+            Funkce $f$ je lichá.
+        \item Dopočítáme limity v "krajních bodech definičního oboru."
+
+            \begin{align*}
+                \limxinf f(x) 
+                &= \limxinf \sqrt[3]{(x+2)^2} - \sqrt[3]{(x - 2)^2} \\
+                &= \limxinf \sqrt[3]{(x+2)^2} - \sqrt[3]{(x - 2)^2} 
+                \frac{\sqrt[3]{(x+2)^4} + \sqrt[3]{(x+2)^2(x - 2)^2} + \sqrt[3]{(x - 2)^4}}{\sqrt[3]{(x+2)^4} + \sqrt[3]{(x+2)^2(x - 2)^2} + \sqrt[3]{(x - 2)^4}} \\
+                &= \limxinf \frac{(x+2)^2 - (x-2)^2}{\sqrt[3]{(x+2)^4} + \sqrt[3]{(x+2)^2(x - 2)^2} + \sqrt[3]{(x - 2)^4}} \tag{vzorec pro $a^3 - b^3$} \\
+                &\sim \limxinf \frac{x}{x^{\frac{4}{3}}} 
+                = \limxinf \frac{1}{x^{\frac{1}{3}}} = 0.
+            \end{align*}
+
+        \item Spočteme první derivaci, určíme intervaly monotonie a 
+            nalezneme lokální a globální extrémy.
+            
+            \begin{enumerate}
+                \item Derivace.
+                    \begin{align*}
+                        f'(x) 
+                        &= \frac{2}{3}(x+2)^{\frac{2}{3}-1} \cdot 1 
+                            - \frac{2}{3}(x-2)^{\frac{2}{3}-1}\cdot 1 \\
+                        &= \frac{2}{3}\left(\frac{1}{\sqrt[3]{x+2}} - \frac{1}{\sqrt[3]{x-2}}\right)
+                    \end{align*}
+                    Tento výraz platí pro $\fa x \neq \pm2.$ Pro určení derivace v bodech
+                    $x = \pm 2$ se pokusíme využít věty o derivaci a limitě derivace
+                    (Věta~\ref{th:derlimder}):
+                    $$\lim_{x \to 2+} f'(x) = -\infty \implies f'_+(2) = -\infty,$$
+                    $$\lim_{x \to 2-} f'(x) = +\infty \implies f'_-(2) = +\infty.$$
+                    Díky lichosti funkce platí:
+                    $$f'_+(-2) = -f'_+(2) = +\infty,$$
+                    $$f'_-(-2) = -f'_-(2) = -\infty.$$
+                \item Intervaly monotonie.
+
+                    Určíme intervaly, kde $f'(x) > 0,$ $f'(x) < 0$ a $f'(x) =0:$
+                    \begin{align*}
+                        f'(x) > 0 
+                        &\iff \frac{1}{\sqrt[3]{x+2}} > \frac{1}{\sqrt[3]{x-2}} \\
+                        &\iff \frac{1}{x+2} > \frac{1}{x-2} \\
+                        &\iff x \in (-2,2).
+                    \end{align*}
+                    Podobně
+                    $$f'(x) < 0 \iff x \in (-\infty,-2) \lor x \in (2,+\infty).$$
+                    Dále vyplývá, že $\fa x \in D_f: f'(x) \neq 0.$
+
+                \item Globální extrémy.
+                    
+                    Dle Fermatovy věta (Věta~\ref{th:fermat}) hledáme globální 
+                    extrémy v bodech, kde $f'(x) = 0$ nebo $f'(x)$ neexistuje.
+                    V našem případě: $x \in \{-2,2\}.$ 
+                    
+                    Dle intervalů monotonie určíme,
+                    že $f$ má globální minimum v bodě $-2$ a to $-\sqrt[3]{4^2}$
+                    a globální maximum v bodě $2$ a to $\sqrt[3]{4^2}.$
+
+                \item První hrubý náčrt grafu funkce.
+
+                    Víme, že v $\limxminf f(x) = 0,$ poté funkce klesá až do bodu
+                    $x = -2,$ poté roste do bodu $x=2$ a pak zase klesá, až k nule
+                    ($\limxinf f(x) = 0$).
+                        \begin{center}
+                            \begin{tikzpicture}
+                                \begin{axis}[
+                                        axis lines=middle,
+                                        xlabel=$x$,
+                                        ylabel={$f(x)$},
+                                        xmin=-4, xmax=4,
+                                        ymin=-1.5, ymax=1.5,
+                                        xtick={-2, 2},
+                                        ytick=\empty,
+                                        function line/.style={
+                                            black,
+                                            thick,
+                                            samples=2,
+                                        },
+                                        single dot/.style={
+                                            black,
+                                            mark=*,
+                                        },
+                                        empty point/.style={
+                                            only marks,
+                                            mark=*,
+                                            mark options={fill=white, draw=black},
+                                        },
+                                    ]
+                                    \addplot[function line, domain=\pgfkeysvalueof{/pgfplots/xmin}:-2] {-1-0.1*x};
+                                    \addplot[function line, domain=-2:2] {0.4*x};
+                                    \addplot[function line, domain=2:\pgfkeysvalueof{/pgfplots/xmax}] {1-0.1*x};
+                                    \addplot[single dot] coordinates {(0, 0)};
+                                \end{axis}
+                            \end{tikzpicture}
+                        \end{center}
+        \end{enumerate}
+
+        \item Spočteme druhou derivaci a určíme intervaly, kde je $f$ konvexní
+            nebo konkávní. Určíme inflexní body.
+            \begin{enumerate}
+                \item Druhá derivace.
+
+                    $\fa x \in D_f \setminus \{\pm 2\}$ platí:
+                    $$f''(x) = -\frac{2}{9}\left((x+2)^{-\frac{4}{3}} - (x-2)^{-\frac{4}{3}}\right).$$
+                \item Konvexita, konkávita.
+
+                    Musíme určit intervaly, ve kterých $f''(x) > 0$ nebo
+                    $f''(x) < 0.$ Platí:
+                    $$f''(x) > 0 \iff (x+2)^{-\frac{4}{3}} < (x-2)^{-\frac{4}{3}},$$
+                    $$f''(x) < 0 \iff (x+2)^{-\frac{4}{3}} > (x-2)^{-\frac{4}{3}},$$
+                    a tedy funkce $f$ je:
+                    \begin{itemize}
+                        \item konvexní na $(0,2)$ a $(2, +\infty),$
+                        \item konkávní na $(-\infty, -2)$ a $(-2,0).$
+                    \end{itemize}
+                \item Inflexní bod.
+
+                    Z výrazu pro druhou derivaci víme, že $f''(x) = 0 \iff x =0.$
+                    Zároveň jsme již určili, že $f''(x) < 0$ na $(-2,0)$ a 
+                    $f''(x) > 0$ na $(0,2).$ Tím jsme splinili postačující podmínku
+                    pro inflexi (Věta~\ref{th:inflexepostac}), a proto se v 
+                    $x=0$ nachází inflexní bod.
+            \end{enumerate}
+        \item Vypočteme asymptoty funkce.
+
+            Jelikož $\limxinf f(x) = \limxminf f(x) = 0,$ asymptoty splývají s
+            osou $x.$
+
+        \item Načrtneme graf funkce a určíme obor hodnot.
+            \begin{center}
+                \begin{tikzpicture}
+                    \begin{axis}[
+                            axis lines=middle,
+                            xlabel=$x$,
+                            ylabel={$f(x)$},
+                            function line/.style={
+                                black,
+                                thick,
+                                samples=200,
+                            },
+                        ]
+                        \addplot[function line, domain=-3:3] {((x+2)^2)^(1/3) - ((x-2)^2)^(1/3)};
+                    \end{axis}
+                \end{tikzpicture}
+            \end{center}
+
+            $H_f = [-\sqrt[3]{4^2},\sqrt[3]{4^2}].$
+    \end{enumerate}
+\end{example}
+
+\subsection{Taylorův polynom}
+
+\begin{definition}
+    \Necht $f$ je reálná funkce, $a \in \R$ a existuje vlastní $n$-tá derivace
+    $f$ v bodě $a.$ Pak polynom
+    $$\tfan(x) = f(a) + f'(a)(x-a) + \dots + \frac{1}{n!}f^{(n)}(x-a)^n$$
+    nazýváme \newterm{Taylorovým polynomem řádu $n$ funkce $f$ v bodě $a$}.
+\end{definition}
+
+\begin{remark}[vlastnosti Taylorova polynomu]
+    \leavevmode
+    \begin{itemize}
+        \item $\deg \tfan(x) \leq n.$
+        \item Derivace Taylorova polynomu:
+            \begin{align*}
+                (\tfan)'(x) 
+                &= 0 + f'(a) \cdot 1 + \dots + \frac{1}{n!} \cdot f^{(n)}(a)\cdot n \cdot (x-a)^{n-1} \\
+                &= T^{f',a}_{n-1}(x).
+            \end{align*}
+    \end{itemize}
+\end{remark}
+
+\begin{lemma}
+    \label{lm:taylorqp0}
+    \Necht $Q$ je polynom, $a \in \R, \deg Q \leq n$ 
+    a $\limxa \frac{Q(x)}{(x-a)^n} = 0.$ Pak $Q \equiv 0.$
+\end{lemma}
+
+\begin{proof}
+    Lemma dokážeme indukcí. V základním kroce ($n=1$) je polynom $Q$ lineární. 
+    Dále:
+    \begin{align*}
+        Q(a)
+        &= \limxa \left(\frac{Q(x)}{x-a}(x-a)\right) \\
+        &\qe \limxa \frac{Q(x)}{x-a} \cdot \limxa (x-a)^n 
+            \tag{aritmetika limit funkcí, Věta~\ref{th:voalf}}\\
+        &= 0 \cdot 0 = 0. \tag{předpoklad}
+    \end{align*}
+    Polynom $Q$ tedy můžeme vyjádřit jako $Q(x) = c(x-a).$ Nakonec
+    odvodíme, že koeficient $c$ je roven nule, jelikož:
+    $$ 0 = \limxa \frac{Q(x)}{x-a} = \limxa \frac{c(x-a)}{x-a} = \limxa c = c.$$
+
+    V indukčním kroce ($n-1 \rightarrow n$) platí podobně jako výše, že $a$ je
+    kořenem polynomu $Q,$ a proto jej můžeme vyjádřit jako:
+    $$Q(x) = (x-a)R(x),$$
+    kde $R$ je polynom a $\deg R \leq n-1.$ Dle indukčního předpokladu je 
+    $R \equiv 0$, a tedy i $Q \equiv 0.$
+\end{proof}
+
+\begin{theorem}[o nejlepší aproximaci Taylorovým polynomem]
+    \Necht $a \in \R, f^{(n)}(a) \in \R$ a $P$ je polynom stupně nejvýše $n.$ Pak
+    $$\limxa \frac{f(x) - P(x)}{(x-a)^n} = 0 \iff P = \tfan. $$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\impliedby$]
+            Využijeme matematickou indukci. Pro případ $n=1:$
+            \begin{align*}
+                \limxa \frac{f(x) - T^{f,a}_1}{x-a} 
+                &= \limxa \frac{f(x) - f(a) - f'(a)(x-a)}{x-a} \\
+                &= \limxa \left(\frac{f(a)-f(a)}{x-a} - f'(a)\right) \\
+                &= f'(a) - f'(a) = 0.
+            \end{align*}
+            Indukční krok:
+            \begin{align*}
+                \limxa \frac{f(a) - \tfan(x)}{(x-a)^n}
+                &= \limxa \frac{f'(x) - (\tfan)'(x)}{n(x-a)^{n-1}}
+                    \tag{L'Hospital (Věta~\ref{th:lhospital}),
+                    $\frac{0}{0}$} \\
+                &= \frac{1}{n} \limxa \frac{f'(x) - T^{f',a}_{n-1}(x)}{(x-a)^{n-1}} \\
+                &= \frac{1}{n}\cdot0 = 0\tag{indukční předpoklad}
+            \end{align*}
+
+        \item[$\implies$]
+            Rozepišme limitu na levé straně implikace za použití věty 
+            o limitě limit funkcí (Věta~\ref{th:voalf}) jako součet dvou limit:
+            $$\limxa \frac{P(x) - \tfan(x)}{(x-a)^n} 
+            \qe \underbrace{\limxa \frac{P(x) - f(x)}{(x-a)^n}}_{A} 
+                + \underbrace{\limxa \frac{f(x) - \tfan(x)}{(x-a)^n}}_{B}$$
+            Výraz $A$ je roven nule dle předpokladů. Výraz $B$ je dle předchozího
+            bodu taktéž roven nule, a proto
+            $$\limxa \frac{P(x) - \tfan(x)}{(x-a)^n}  = 0$$
+            Díky lemmatu~\ref{lm:taylorqp0} platí $P = \tfan.$
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}[Taylor, či obecný tvar zbytku]
+    \Necht funkce $f$ má vlastní $(n+1)$-ní derivaci v intervalu $[a,x]$ a \necht
+    $\phi$ je spojitá funkce v $[a,x]$ a má vlastní derivaci v $(a,x),$ která je
+    v každém bodě tohoto intervalu různá od nuly. Pak existuje $\xi \in (a,x)$ \tz
+    $$f(x) - \tfan(x) = \frac{1}{n!}\frac{\phi(x)-\phi(a)}{\phi'(\xi)}f^{(n+1)}(\xi)(x-\xi)^n.$$
+    Speciálně existuje $\xi_1 \in (a,x)$ \tz
+    $$f(x) - \tfan(x) = \frac{1}{(n+1)!}f^{(n+1)}(\xi_1)(x-a)^{n+1} \; 
+    \text{(Lagrangeův tvar zbytku)}$$
+    a existuje $\xi_2 \in (a,x)$ \tz
+    $$f(x) - \tfan(x) = \frac{1}{n!}f^{(n+1)}(\xi_2)(x-\xi_2)^n(x-a). \;
+    \text{(Cauchyho tvar zbytku)}$$
+\end{theorem}
+
+\begin{proof}
+    Rozdíl $f(x) - \tfan(x)$ nazýváme zbytek. Pro $t \in [a,x]$ definujme 
+    následující funkci:
+    $$F(t) = f(x) - T_n^{f,t}(x) = f(x) - \left(f(t) + f'(t)(x-t) + \dots + \frac{f^{(n)}(t)}{n!}(x-t)^n\right)$$
+    Tato funkce je:
+    \begin{itemize}
+        \item spojitá na $[a,x],$
+        \item má vlastní derivaci na $(a,x),$
+        \item $F(x) = 0,$
+        \item $F(a) = f(x) - \tfan(x).$ 
+    \end{itemize}
+    Dle Cauchyho věty o střední hodnotě (Věta~\ref{th:cauchymean}):
+    $$\exists \xi \in (a,x): \frac{F'(\xi)}{\phi'(\xi)} = \frac{F(x) - F(a)}{\phi(x) - \phi(a)} = \frac{0 - (f(x) - \tfan(x))}{\phi(x) - \phi(a)},$$
+    z čehož po úpravě dostáváme:
+    $$f(x) - \tfan(x) = -\frac{F'(\xi)}{\phi'(\xi)}(\phi(x)-\phi(a)).$$
+    Vyjádřeme si nyní derivaci funkce $F:$
+    \begin{align*}
+        F'(t)
+        &= 0 - (f'(t) + f''(t)(x-t) + f'(t)(-1) + \dots + \frac{f^{(n+1)}(t)}{n!}(x-t)^n + \frac{f^{(n)}}{n!}n(x-t)^{n-1}(-1) \\
+        &= -\frac{f^{(n+1)}(t)}{n!}(x-t)^n.
+    \end{align*}
+    Tento výraz nyní můžeme dosadit do vzorce zbytku, který jsme vyjádřili výše,
+    a získáme výraz pro obecný tvar zbytku:
+    \begin{align*}
+        f(x) - \tfan(x) 
+        &= -\frac{-\frac{f^{(n+1)}(\xi)}{n!}(x-\xi)^n}{\phi'(\xi)}(\phi(x)-\phi(a)) \\
+        &= \frac{1}{n!}\frac{\phi(x)-\phi(a)}{\phi'(\xi)}f^{(n+1)}(\xi)(x-\xi)^n.
+    \end{align*}
+
+    Pro Lagrangeův tvar zbytku volíme $\phi(t) = (x-t)^{n+1}.$ Potom:
+    \begin{align*}
+        \phi(x) - \phi(a) &= 0 - (x-a)^{n+1}, \\
+        \phi'(t) &= (n+1)(x-t)^n(-1), 
+    \end{align*}
+    a po dosazení do obecného tvaru zbytku pro $\xi_1 \in (a,x):$
+    \begin{align*}
+        f(x) - \tfan(x) 
+        &= \frac{1}{n!}\frac{-(x-a)^{n+1}}{(n+1)(x-\xi_1)^n(-1)}f^{(n+1)}(\xi_1)(x-\xi_1)^n \\
+        &=  \frac{1}{(n+1)!}f^{(n+1)}(\xi_1)(x-a)^{n+1} 
+    \end{align*}
+    
+    Podobně pro Cauchyho tvar zbytku volíme $\phi(t) = t.$ Potom:
+    \begin{align*}
+        \phi(x) - \phi(a) &= x-a, \\
+        \phi'(t) &= 1, 
+    \end{align*}
+    a po dosazení do obecného tvaru zbytku pro $\xi_2 \in (a,x):$
+    \begin{align*}
+        f(x) - \tfan(x) 
+        &= \frac{1}{n!}\frac{x-a}{1}f^{(n+1)}(\xi_2)(x-\xi_2)^n \\
+        &= \frac{1}{n!}(x-a)f^{(n+1)}(\xi_2)(x-\xi_2)^n 
+    \end{align*}
+
+\end{proof}
+
+\begin{remark}
+    Taylorova věta platí i pro interval $(x,a).$ 
+\end{remark}
+
+\begin{example}[Taylorův polynom pro exponenciálu]
+    Z poznámky~\ref{rm:derivaceelfce} víme, že
+    $$(e^x)' = (e^x)'' = \dots = (e^x)^{(n)} = e^x.$$
+    Jelikož při $x=0$ jsou všechny derivace rovny $1,$ platí:
+    $$T^{exp, 0}_n = \sum_{j=0}^n \frac{x^j}{j!}.$$
+    Zvolme pevné $x.$ Potom pro dané $n$ existuje $\xi_n \in (0, x)$ (nebo $(x,0),$
+    pokud je $x < 0$) \tz pro Lagrangeův tvar zbytku platí:
+    $$e^x - T^{exp, 0}_n =e^x - \sum_{j=0}^n \frac{x^j}{j!} 
+    = \frac{1}{(n+1)!}e^{\xi_n}x^{n+1}$$
+    Jelikož $e^{\xi_n} \leq e^{|x|}$ a $x^{n+1} \leq |x|^{n+1},$ platí:
+    $$|e^x - T^{exp, 0}_n| \leq \frac{e^{|x|}|x|^{n+1}}{(n+1)!}.$$
+    Za použití věty o dvou strážnících (Věta~\ref{th:dvastraznici}) a 
+    $\limninf \frac{x^n}{n!} = 0$ dostáváme:
+    $$\limninf e^x - T^{exp, 0}_n = 0$$
+    a tedy:
+    $$\fa x \in \R: e^x = \sum_{j=0}^\infty \frac{x^j}{j!}.$$
+    Speciálně pro $e:$
+    $$e = e^1 = \sum_{j=0}^\infty \frac{1^j}{j!}= 1 + \frac{1}{1} + \frac{1}{2!}
+    + \dots + \frac{1}{n!} + \dots$$
+\end{example}
+
+\begin{example}
+    Spočtěte hodnotu $e$ s chybou $0.001.$
+
+    Vyjádřeme $e$ jako součet dvou sum:
+    $$e = \sum_{j=0}^\infty \frac{1}{j!} = \sum_{j=0}^n \frac{1}{j!} + \sum_{j=n+1}^\infty \frac{1}{j!}.$$
+    Chceme, aby:
+    $$\sum_{j=n+1}^\infty \frac{1}{j!} < 0.001,$$
+    a naším úkolem je zjistit hodnotu $n$, tj. zjistit, kolik členů Taylorova
+    polynomu musíme spočítat pro zajištění dané přesnosti. Platí:
+    \begin{align*}
+        \sum_{j=n+1}^\infty \frac{1}{j!}
+        &= \sum_{j=0}^\infty \frac{1}{(n+1+j)!} \\
+        &\leq \frac{1}{(n+1)!}\sum_{j=0}^\infty \frac{1}{(n+1)^j}
+            \tag{$(n+1+j)! \geq (n+1)!(n+1)^j$} \\
+        &= \frac{1}{(n+1)!} \frac{1}{1 - \frac{1}{n+1}} 
+            \tag{součtový vzorec geometrické řady}\\
+        &= \frac{1}{(n+1)!} \frac{n+1}{n} \\
+        &= \frac{1}{n\cdot n!}
+    \end{align*}
+    Již při $n = 6$ je $\frac{1}{n\cdot n!} < 0.001,$ a nám tedy stačí 
+    spočítat prvních 6+1 členů Taylorova polynomu ($n$ se počítá od nuly):
+    $$e \approx 1 + \frac{1}{1} + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + 
+    \frac{1}{120} + \frac{1}{720}.$$
+\end{example}
+
+\begin{example}
+    Dokažte, že číslo $e$ je iracionální.
+
+    Sporem. \Necht $e = \frac{p}{q},$ kde $p,q \in \N.$ Z předchozího příkladu víme,
+    že:
+    $$\sum_{n=0}^q \frac{1}{n!} < e = \sum_{n=0}^q \frac{1}{n!} 
+    + \sum_{n=q+1}^\infty \frac{1}{q!} < \sum_{n=0}^q\frac{1}{n!} + \frac{1}{q\cdot q!}$$
+    Vynásobme nerovnici výrazem $(q\cdot q!)$ a získáme:
+    $$\underbrace{(q\cdot q!)\sum_{n=0}^q \frac{1}{n!}}_{A} 
+    < pq!
+    < \underbrace{(q\cdot q!) \sum_{n=0}^q \frac{1}{n!}}_{A} + 1.$$
+    Jelikož $A \in \N$ i $pq! \in \N,$ dostáváme spor, jelikož 
+    $pq!$ by muselo být přirozené číslo mezi $A$ a $A+1.$
+\end{example}
+
+\begin{example}[Taylorův polynom pro funkci $\sin$]
+    \Necht $a = 0.$ Potom platí:
+    \begin{align*}
+        &\sin'(x) = \cos(x), \; \sin'(a) = 1, \\
+        &\sin''(x) = -\sin(x), \; \sin''(a) = 0, \\
+        &\sin'''(x) = -\cos(x), \; \sin'''(a) = -1, \\
+        &\sin^{(4)}(x) = \sin(x), \; \sin^{(4)}(a) = 0. \\
+        &\sin^{(5)}(x) = \cos(x), \; \sin^{(5)}(a) = 1, \; \text{atd.}
+    \end{align*}
+    Potom:
+    $$T^{\sin,0}_n(x) = (0) + \left(\frac{1}{1!}x\right) 
+    + \left(\frac{1}{2!}0x^2 \right) 
+    + \left(\frac{1}{3!}(-1)x^3\right) 
+    + \left(\frac{1}{4!}0x^4 \right) 
+    + \left(\frac{1}{5!}1x^5 \right) 
+    + \dots$$
+    Dále:
+    \begin{align*}
+        \left|\sin(x) - T^{\sin,0}_n\right| 
+        &= \left|\frac{1}{n+1}!f^{(n+1)}(\xi)x^{n+1}\right| \\
+        &\leq \left|\frac{x^{n+1}}{(n+1)!}\right|
+    \end{align*}
+    a tím pádem $\limninf (\sin(x) - T^{\sin,0}_n) = 0.$
+    Můžeme tedy psát:
+    $$\sin(x) = \sum_{n=0}^{\infty} (-1)^n\frac{x^{2n+1}}{(2n+1)!}.$$
+    Podobně pro $\cos(x):$
+    $$\cos(x) = \sum_{n=0}^{\infty} (-1)^n\frac{x^{2n}}{(2n)!}.$$
+\end{example}
