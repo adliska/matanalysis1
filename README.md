@@ -1,4 +1,7 @@
-# Matematická analýza I.
-Zápisky z přednášek [Stanislava Hencla](http://www.karlin.mff.cuni.cz/~hencl)
-na MFF UK, zimní semestr, ak. rok 2007/2008.
-Více na http://www.adliska.com/notes/.
+# Zápisky z přednášek na MFF UK, obor Obecná informatika
+
+PDF jsou dostupné na http://www.adliska.com/notes/.
+
+* Matematická analýza I.,
+  [Stanislav Hencl](http://www.karlin.mff.cuni.cz/~hencl), zimní semestr, 
+  ak. rok 2007/2008.
