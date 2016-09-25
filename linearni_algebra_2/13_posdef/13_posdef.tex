@@ -1,0 +1,165 @@
+\section{Pozitivně definitní matice}
+
+\begin{observation}
+    Nechť $V \cong \Cn$ je prostor se skalárním součinem. Potom
+    existuje matice $\mat{E}$ taková, že $\forall \vu, \vv \in V:
+    \scp{\vu}{\vv} = \vv^\herm \mat{E} \vu$.
+\end{observation}
+
+\begin{proof}
+    Vezmeme kanonickou bázi $\Cn$: $\{\veone, \dots, \ven\}$. Potom:
+    $$\scp{\vu}{\vv} = \scp{\sum_{i=1}^n u_i\vei}{\sum_{j=1}^n v_j\vej} = 
+    \sum_{i,j=1}^n u_i\overline{v_j}\scp{\vei}{\vej}$$
+    a tedy lze vzít $(\mat{E})_{ij} = \scp{\vei}{\vej}$.
+\end{proof}
+
+\begin{remark}
+    Pro standardní skalární součin $\scp{\vu}{\vv} = \sum_{i=1}^n 
+    \overline{v_i}u_i$ máme $\mat{E} = \mIn$.
+\end{remark}
+
+\begin{observation}
+    Matice $\mat{E}$ je hermitovská.
+\end{observation}
+
+\begin{definition}
+    Splňuje-li hermitovská matice $\mA \in \Cnn$ vlastnost, že
+    $\forall \vx \in \Cn \setminus \{0\}: \vx^\herm\mA\vx > 0,$ tak potom
+    se nazývá \newterm{pozitivně definitní}.
+\end{definition}
+
+\begin{theorem}
+    Pro hermitovskou matice $\mA$ jsou následující podmínky ekvivalentní:
+    \begin{enumerate}[i.]
+        \item $\mA$ je pozitivně definitní.
+        \item $\mA$ má všechny vlastní čísla kladná.
+        \item Existuje regulární matice $\mU$ taková, že $\mA = \mU^\herm\mU$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$1 \implies 2$:] Nechť $\vx$ je vlastní vektor k vlastnímu
+            číslu $\lambda$. Potom: $$\mA\vx = \lambda\vx \implies
+            \vx^\herm \mA \vx = \vx^\herm \lambda \vx = \lambda\vx^\herm\vx$$
+            $\mA$ je pozitivně definitní, a tedy $\vx^\herm\mA\vx > 0$.
+            Jelikož výsledkem výrazu $\vx^\herm\vx$ je vždy kladné číslo,
+            musejí i vlastní čísla matice $\mA$ být kladná.
+        \item[$2\implies3$:] Jelikož $\mA$ je hermitovská, existuje unitární
+            matice $\mR$ taková, že $\mA = \mR^\herm\mD\mR$, kde $\mD$ je 
+            diagonální matice s kladnou diagonálou (viz \ref{th:hermunitr}).
+            Vezmu: $$(\mat{\widetilde{D}})_{ij} = \begin{cases}
+                \sqrt{(\mD)_{ii}} &i=j \\
+                0 &i \neq j
+            \end{cases}.$$ Potom $\mat{U} = \mat{\widetilde{D}}\mR$ je
+            regulární (jelikož jak $\mat{\widetilde{D}}$, tak $\mR$ jsou
+            regulární) a $$\mat{U}^\herm\mat{U} = 
+            (\mat{\widetilde{D}}\mR)^\herm\mat{\widetilde{D}}\mR = 
+            \mR^\herm \mat{\widetilde{D}}^\herm \mat{\widetilde{D}} \mR = 
+            \mR^\herm \mD \mR = \mA.$$
+        \item[$3\implies1$:] $\vx^\herm\mA\vx = \vx^\herm \mat{U}^\herm\mat{U}
+            \vx = (\mat{U}\vx)^\herm \mat{U}\vx > 0,$ kde vektor $\vx$ je
+            netriviální, $\mat{U}$ je regulární a tedy $\mat{U}\vx$ je 
+            netriviální.
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+    Nechť matice $\mA$ je pozitivně definitní a nechť $\mU$ je trojúhelníková
+    matice s kladnou diagonálou taková, že $\mU^\herm\mU = \mA$. Tento 
+    rozklad pozitivně definitní matice se nazývá \newterm{Choleského 
+    rozklad}.
+\end{definition}
+
+\begin{proposition}
+    Pro pozitivně definitní matici $\mA$ existuje právě jedna trojúhelníková
+    matice s kladnou diagonálou $\mU$ taková, že $\mA = \mU^\herm\mU$.
+\end{proposition}
+
+\begin{proof}
+    Důkaz provedeme sestavením algoritmu, jehož vstupem je hermitovská 
+    matice a výstupem její Choleského rozklad nebo tvrzení, že 
+    daná matice není positivně definitní.
+
+    Pro $i \coloneqq 1, \dots, n$ proveď:
+    $$(\mU)_{ii} \coloneqq \sqrt{a_{ii} - \sum_{k=1}^{i-1}
+    \overline{u_{ki}}u_{ki}}.$$
+    Pokud $u_{ii} = 0$ nebo $u_{ii} \not \in \R$, stop: $\mA$ není positivně
+    definitní.
+
+    Pro $j \coloneqq (i+1), \dots, n$ proveď:
+    $$u_{ij} \coloneqq \frac{1}{u_{ii}} (a_{ij} - \sum_{k=1}^{i-1} 
+    \overline{u_{ki}}u_{kj}).$$
+\end{proof}
+
+\begin{proposition}[Rekurentní podmínka na test pozitivní definitnosti]
+    Bloková matice 
+    $$\mA = \begin{pmatrix}[c|c]
+        \alpha &\vec{a}^\herm \\
+        \hline
+        \vec{a} &\mAtilde
+    \end{pmatrix}$$
+    je pozitivně definitní, právě když $\alpha > 0$ a $\mAtilde - 
+    \frac{1}{\alpha}\va\va^\herm$ je pozitivně definitní.
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\impliedby$:] Nechť $\vx \in \Cn$ je libovolný netriviální
+            vektor. Potom
+            \begin{align*}
+                \vx^\herm \mA \vx &= \left(\overline{x_1}|
+                    \widetilde{\vx}^\herm\right)
+                    \begin{pmatrix}[c|c]
+                        \alpha &\vec{a}^\herm \\
+                        \hline
+                        \vec{a} &\mAtilde
+                    \end{pmatrix}
+                    \colvec{x_1\\ \widetilde{\vx}} \\
+                &= \left(\alpha\overline{x_1} + \widetilde{\vx}^\herm,
+                    \overline{x_1}\va^\herm + \widetilde{\vx}^\herm\mAtilde\right)
+                    \colvec{x_1\\\widetilde{\vx}} \\
+                &= \alpha\overline{x_1}x_1 + x_1\widetilde{\vx}^\herm\va +
+                    \overline{x_1}\va^\herm\widetilde{\vx} 
+                    + \widetilde{\vx}^\herm\mAtilde\widetilde{\vx} 
+                    - \frac{1}{\alpha}\widetilde{\vx}^\herm\va\va^\herm\widetilde{\vx}
+                    + \frac{1}{\alpha}\widetilde{\vx}^\herm\va\va^\herm\widetilde{\vx} \\
+                &= \widetilde{\vx}^\herm (\mAtilde - \frac{1}{2}\va\va^\herm)\widetilde{\vx}
+                    + (\sqrt{\alpha}\overline{x_1} + \frac{1}{\sqrt{\alpha}}\widetilde{x}^\herm\va)
+                    (\sqrt{\alpha}x_1 + \frac{1}{\sqrt{\alpha}}\va^\herm\widetilde{x})
+            \end{align*}
+
+            První člen nezáporný; je kladný, je-li vektor $\widetilde{x}$ 
+            netriviální. Druhý člen představuje součin komplexně sdružených 
+            čísel a je tedy také nezáporný. Alespoň jedna z těchto dvou
+            nerovností ovšem musí být ostrá.
+        \item[$\implies$:] $\mA$ je pozitivně definitní,
+            $\vx^\herm\mA\vx > 0$ pro všechny netriviální $\vx$ a tedy
+            speciálně pro $\veone:$ $\veone^\herm\mA\veone = \alpha > 0$
+            Nechť $\widetilde{\vx} \in \C^{n-1}$ je libovolný vektor. Zvolíme
+            $x_1 \coloneqq -\frac{1}{\alpha}\va^\herm\widetilde{vx}$
+            a položíme $\vx \coloneqq \colvec{x_1\\\widetilde{\vx}}.$ Potom
+            \begin{align*}
+                0 &< \vx^\herm\mA\vx \\
+                  &= \widetilde{\vx}^\herm (\mAtilde - \frac{1}{2}\va\va^\herm)\widetilde{\vx}
+                    + (\sqrt{\alpha}\overline{x_1} + \frac{1}{\sqrt{\alpha}}\widetilde{x}^\herm\va)
+                    (\sqrt{\alpha}x_1 + \frac{1}{\sqrt{\alpha}}\va^\herm\widetilde{x}),
+                    \tag{už spočteno dříve}
+            \end{align*}
+            kde druhý člen po dosazení $x_1$ je roven nule a první člen tedy
+            musí být kladný.
+    \end{itemize}
+\end{proof}
+
+\begin{proposition}[Jakobiho podmínka]
+    Hermitovská matice $\mA \in \Cnn$ je pozitivně definitní právě tehdy, když
+    mají matice $\mat{A_n}, \mat{A_{n-1}}, \dots, \mat{A_1}$ kladný 
+    determinant, kde $\mat{A_i}$ značí matici vzniklou z $\mA$ vymazáním
+    posledních $n-i$ řádků a sloupců.
+\end{proposition}
+
+\begin{remark}
+    Z výpočetního hlediska není tento test efektivní.
+\end{remark}

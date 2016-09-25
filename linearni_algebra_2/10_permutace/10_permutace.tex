@@ -1,0 +1,245 @@
+\section{Permutace}
+
+\begin{definition}
+    \newterm{Permutace} na množině $\{1, \dots, n\}$ je zobrazení 
+    $p: \{1, \dots, n\} \rightarrow \{1, \dots, n\}$, které je vzájemně
+    jednoznačné. Množinu všech permutací na $\{1, \dots, n\}$ budeme 
+    značit $S_n$.
+\end{definition}
+
+\begin{remark}[Zápis permutace]
+    \label{rem:experm}
+    \leavevmode
+    \begin{itemize}
+        \item Tabulkou
+            \begin{center}
+                \begin{tabular}{c | c c c c}
+                    $i$ &1 &2 &3 &4 \\
+                    \hline
+                    $p(i)$ &4 &2 &1 &3
+                \end{tabular}
+            \end{center}
+            či zkráceně jako $(4,2,1,3)$.
+        \item Grafem
+            \begin{center}
+                \begin{tikzpicture}[node/.style={circle,draw,font=\Large\bfseries}]
+                    \tikzset{edge/.style = {->,> = latex'}}
+                    \node (n1) at (1,2) {1};
+                    \node (n2) at (2,2) {2};
+                    \node (n3) at (1,1) {3};
+                    \node (n4) at (2,1) {4};
+
+                    \foreach \from/\to in {n1/n4,n4/n3,n3/n1}
+                        \draw[edge] (\from) to (\to);
+                    \path
+                    (n2) edge [loop above] node {} (n2);
+
+                    \node (na1) at (6,2) {1};
+                    \node (na2) at (7,2)  {2};
+                    \node (na3) at (8,2)  {3};
+                    \node (na4) at (9,2) {4};
+                    \node (nb1) at (6,1) {1};
+                    \node (nb2) at (7,1)  {2};
+                    \node (nb3) at (8,1)  {3};
+                    \node (nb4) at (9,1) {4};
+
+                    \foreach \from/\to in {na1/nb4,na2/nb2,na3/nb1, na4/nb3}
+                        \draw[edge] (\from) to (\to);
+                \end{tikzpicture}
+            \end{center}
+        \item Permutační maticí $\mat{A_p}$: 
+            $$ (\mat{A_p})_{ij} = \begin{cases}
+                1 &\text{pokud } j=p(i), \\
+                0 &\text{jinak.}
+            \end{cases}$$
+            V našem případě: 
+            $$\mat{A_p} = \begin{pmatrix}
+                0 &0 &0 &1 \\
+                0 &1 &0 &0 \\
+                1 &0 &0 &0 \\
+                0 &0 &1 &0
+            \end{pmatrix}$$
+        \item Cykly: $(1,4,3)(2)$
+    \end{itemize}
+\end{remark}
+
+\begin{observation}
+    Skládání permutací není komutativní.
+\end{observation}
+
+\begin{proof}
+    Použijme zkrácený zápis tabulkou. Potom:
+    $(1, 3, 2) \circ (2,1,3) = (3, 1, 2)$, kdežto $(2,1,3) \circ (1,3,2) 
+    = (2,3,1)$
+\end{proof}
+
+\begin{definition}
+    Mějme permutaci $p$. Permutace $p^{-1}$ taková, že $$p \circ p^{-1} = 
+    p^{-1} \circ p = id,$$ se nazývá \newterm{inverzní permutace} k 
+    permutaci $p$. Plyne, že $p(i) = j \iff p^{-1}(j) = i$.
+\end{definition}
+
+\begin{remark}
+    K permutaci $p = (4,2,1,3)$ z Poznámky~\ref{rem:experm} je inverzní
+    permutací permutace $q = (3,2,4,1)$.
+\end{remark}
+
+\begin{definition}
+    \newterm{Transpozice} je taková permutace, která obsahuje jeden cyklus
+    délky $2$ a $n-2$ cyklů délky $1$.
+\end{definition}
+
+\begin{remark}
+    Transpozice je tedy taková permutace, ve které si dva prvky prohodí pozice 
+    a ostatní prvky se zobrazí na sebe, např.
+    \begin{center}
+        \begin{tikzpicture}[node/.style={circle,draw,font=\Large\bfseries}]
+            \tikzset{edge/.style = {->,> = latex'}}
+
+            \node (na1) at (6,2) {1};
+            \node (na2) at (7,2)  {2};
+            \node (na3) at (8,2)  {3};
+            \node (na4) at (9,2) {4};
+            \node (nb1) at (6,1) {1};
+            \node (nb2) at (7,1)  {2};
+            \node (nb3) at (8,1)  {3};
+            \node (nb4) at (9,1) {4};
+
+            \foreach \from/\to in {na1/nb1,na2/nb4,na3/nb3, na4/nb2}
+            \draw[edge] (\from) to (\to);
+        \end{tikzpicture}
+    \end{center}
+\end{remark}
+
+\begin{observation}
+    Každou permutaci lze složit z transpozic.
+\end{observation}
+
+\begin{proof}
+    Indukcí podle součtu délek cyklů délky větší než $2$. Použijeme zápis
+    pomocí cyklů. V každém kroku rozdělíme cyklus $(1, \dots, k)$ délky $k$
+    na cyklus $(1,k)$ délky $2$ a cyklus $(1, \dots, k-1)$ délky $k-1$. 
+    Postupně lze takto každý cyklus $(1, \dots, k)$ délky $k$ lze rozdělit 
+    na $k-1$ cyklů délky $2$.
+\end{proof}
+
+\begin{definition}
+    Nechť $p$ je permutace na množině $\{1, \dots, n\}$. Potom 
+    \newterm{inverzí} permutace $p$ rozumíme každou dvojici $i,j \in \{1, 
+    \dots, n\}: i < j \land p(i) > p(j)$. Celkový počet inverzí permutace
+    $p$ budeme značit $I(p)$.
+\end{definition}
+
+\begin{remark}
+    Vraťme se znovu k permutaci $p = (4,2,1,3)$ z Poznámky~\ref{rem:experm}. 
+    V této permutaci se nacházejí inverze $(1,3), (1,4), (1,2)$ a $(2,3)$. 
+    
+    Celkový počet inverzí pro permutaci zapsanou ve zkráceném 
+    zápise tabulkou, $(4,2,1, 3)$ lze vypočítat jednoduše: Bereme postupně 
+    čísla od začátku a ptáme se, kolik je před nimi větších čísel. 
+    Před $4$ žádné, před $2$ jedno, před $1$ dvě, před $3$ jedno. Proč tento
+    postup funguje je zřejmé ze zápisu permutace grafem:
+    \begin{center}
+        \begin{tikzpicture}[node/.style={circle,draw,font=\Large\bfseries}]
+            \tikzset{edge/.style = {->,> = latex'}}
+            \node (na1) at (6,2) {1};
+            \node (na2) at (7,2)  {2};
+            \node (na3) at (8,2)  {3};
+            \node (na4) at (9,2) {4};
+            \node (nb1) at (6,1) {1};
+            \node (nb2) at (7,1)  {2};
+            \node (nb3) at (8,1)  {3};
+            \node (nb4) at (9,1) {4};
+
+            \foreach \from/\to in {na1/nb4,na2/nb2,na3/nb1, na4/nb3}
+            \draw[edge] (\from) to (\to);
+        \end{tikzpicture}
+    \end{center}
+
+\end{remark}
+
+\begin{definition}
+    \newterm{Znaménkem permutace} $p$ se rozumí číslo: $$\sgn(p) \coloneqq
+    (-1)^{I(p)}$$
+\end{definition}
+
+\begin{observation}
+    $\forall p,q \in S_n: \sgn(p) \cdot \sgn(q) = \sgn(q \circ p)$
+\end{observation}
+
+\begin{proof}
+    Ukážeme, že $\exists k \in \mathbb{Z}: I(q \circ p) = I(p) + I(q) + 2k$.
+    Potom už jednoduše vyplyne, že 
+    \begin{multline*} 
+        \sgn(q \circ p) = (-1)^{I(q \circ p)} = (-1)^{I(p) + I(q) + 2k} = \\
+        (-1)^{I(p)} \cdot (-1)^{I(q)} \cdot (-1)^{2k} = 
+        (-1)^{I(p)} \cdot (-1)^{I(q)} = \sgn(p) \cdot \sgn(q)
+    \end{multline*}
+   
+    Nechť $i < j$. Potom může nastat jedna z následujících možností:
+    \begin{itemize}
+            \centering
+        \item[$(--)$:] $p(i) < p(j) \land q(p(i)) < q(p(j)),$
+        \item[$(-+)$:] $p(i) < p(j) \land q(p(i)) > q(p(j)),$
+        \item[$(+-)$:] $p(i) > p(j) \land q(p(i)) > q(p(j)),$
+        \item[$(++)$:] $p(i) > p(j) \land q(p(i)) < q(p(j)),$
+    \end{itemize}
+    kde $+$ značí přítomnost inverze v zobrazení $p$, resp. $q$, a $-$ její
+    nepřítomnost. Takto přiřadíme každou dvojici prvků $i<j$ do příslušné 
+    přihrádky; výsledné počty prvků v jednotlivých přihrádkách označíme 
+    jako $I_{--}, I_{-+}, I_{+-}, I_{++}$.
+
+    Je zřejmé, že dvojice v přihrádkách $(+-)$ a $(++)$ představují 
+    inverze 
+    v $p$, dvojice v přihřádkách $(-+)$ a $(++)$ inverze v $q$ a nakonec 
+    dvojice v přihrádkách $(-+)$ a $(+-)$ inverze v $q \circ p$. Můžeme 
+    tedy psát: $$I(q \circ p) = I_{-+} + I_{+-} 
+    = (I_{-+} + I_{++}) + (I_{+-} + I_{++}) - 2\cdot I_{++} 
+    = I(q) + I(p) + 2k.$$
+\end{proof}
+
+\begin{corollary}
+    \label{cor:sgnpsgnp-1}
+    Nechť $p \in S_n$. Potom $\sgn(p) = \sgn(p^{-1})$.
+\end{corollary}
+
+\begin{proof}
+    $1 = \sgn(id) = \sgn(p^{-1} \circ p) = \sgn(p^{-1}) \sgn(p),$ z čehož
+    nutně vyplývá, že $\sgn(p) = \sgn(p^{-1}).$
+\end{proof}
+
+\begin{observation}
+    Nechť $t \in S_n$ je transpozice. Potom $\sgn(t) = -1.$
+\end{observation}
+
+\begin{proof}
+    V transpozici se vyskytuje lichý počet inverzí: 
+    \begin{center}
+        \begin{tikzpicture}[node/.style={circle,draw,font=\Large\bfseries}]
+            \tikzset{edge/.style = {->,> = latex'}}
+
+            \node (na1) at (6,2) {1};
+            \node (na1b) at (7,2) {...};
+            \node (na2) at (8,2)  {i};
+            \node (na3) at (9,2)  {...};
+            \node (na4) at (10,2) {j};
+            \node (na5) at (11,2) {...};
+            \node (nan) at (12,2) {n};
+            \node (nb1) at (6,1) {1};
+            \node (nb1b) at (7,1) {...};
+            \node (nb2) at (8,1)  {i};
+            \node (nb3) at (9,1)  {...};
+            \node (nb4) at (10,1) {j};
+            \node (nb5) at (11,1) {...};
+            \node (nbn) at (12,1) {n};
+
+            \foreach \from/\to in {na1/nb1,na1b/nb1b, na2/nb4,na3/nb3, na4/nb2, na5/nb5, nan/nbn}
+            \draw[edge] (\from) to (\to);
+        \end{tikzpicture}
+    \end{center}
+\end{proof}
+
+\begin{corollary}
+    $sgn(p) = (-1)^{\text{\# transposic v libovolném rozkladu $p$}} = 
+    (-1)^{\text{\# sudých cyklů v $p$}}$
+\end{corollary}

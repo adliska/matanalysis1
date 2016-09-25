@@ -1,0 +1,354 @@
+\section{Řešení soustav: Gaussova eliminační metoda}
+
+Pro řešení soustav lineárních rovnic se používají tzv. elementární
+ekvivalentní (řádkové) úpravy.
+
+\begin{definition}
+    \newterm{Elementární úpravou} matice $\mat{A}$ vznikne matice $\mat{A'}$ 
+    (značíme $\mat{A} \sim \mat{A'}$), a to buď:
+    \begin{enumerate}
+        \item vynásobením $i$-tého řádku číslem $t \neq 0$:
+            \begin{equation*}
+                  a'_{kl} = \begin{cases}
+                      t \cdot a_{il}, & \text{pokud $k=i$}.\\
+                      a_{kl}, & \text{jinak}.
+                        \end{cases}
+            \end{equation*}
+        \item přičtením $j$-tého řádku k $i$-tému:
+            \begin{equation*}
+                  a'_{kl} = \begin{cases}
+                      a_{il} + a_{jl}, & \text{pokud $k=i$}.\\
+                      a_{kl}, & \text{jinak}.
+                        \end{cases}
+            \end{equation*}
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    Z těchto dvou úprav se dají odvodit i úpravy:
+    \begin{itemize}
+        %\setcounter{enumi}{2}
+        \item přičtení $t$-násobku $j$-tého řádku k $i$-tému,
+        \item záměna $i$-tého a $j$-tého řádku.
+    \end{itemize}
+\end{remark}
+
+Nyní ukážeme, že výše zmíněné elementární úpravy nemění množinu řešení 
+soustavy.
+
+\begin{theorem}
+    Nechť $\mat{A}\vec{x}=\vec{b}$ a $\mat{A'}\vec{x}=\vec{b'}$ jsou
+    soustavy takové, že $(\mat{A}|\vec{b}) \sim (\mat{A'}|\vec{b'})$. 
+        Potom obě soustavy mají shodné množiny řešení.
+\end{theorem}
+
+\begin{proof}
+    Stačí dokázat pro úpravy 1 a 2 a pro $i$-tý řádek (jelikož ostatní řádky
+    se nemění).
+    \begin{enumerate}
+        \item Vynásobení $i$-tého řádku číslem $t \neq 0$. 
+            
+            Předpokládejme nejprve, že $\vx$ je 
+            řešením $\mat{A}\vec{x}=\vec{b}$.
+            \begin{align*}
+                a'_{i1}x_1 + a'_{i2}x_2 + \dots + a'_{in}x_n &= 
+                t \cdot a_{i1}x_1 + t \cdot a_{i2}x_2 + \dots 
+                + t \cdot a_{in}x_n \tag{definice 1. úpravy} \\
+                &= t \cdot (a_{i1}x_1 + a_{i2}x_2 + \dots + a_{in}x_n) 
+                \tag{distributivita násobení ku sčítání zleva} \\
+                &= t \cdot b_i \tag{předpoklad $\mat{A}\vec{x}=\vec{b}$ 
+                $i$-té rovnice} \\
+                    &= b'_i \tag{definice 1. úpravy}
+            \end{align*}
+
+            Obráceně, předpokládejme nyní, že $\vec{x}$ je řešením
+            $\mat{A'}\vec{x} = \vec{b'}$.
+            \begin{align*}
+                a_{i1}x_1 + \dots + a_{in}x_n &= 
+                \frac{t}{t}(a_{i1}x_1 + \dots + a_{in}x_n) \\
+                &= \frac{1}{t}(ta_{i1}x_1 + \dots + ta_{in}x_n) \\
+                &= \frac{1}{t}(a'_{i1}x_1 + \dots + a'_{in}x_n) \\
+                &= \frac{1}{t}b'_i 
+                = \frac{1}{t}tb_i 
+                = b_i
+            \end{align*}
+        \item Přičtení $i$-tého řádku k $j$-tému.
+
+            Předpokládejme, že $\vec{x}$ je řešením $\mat{A}\vec{x}=\vec{b}$.
+            \begin{align*}
+                a'_{i1}x_1 + a'_{i2}x_2 + \dots + a'_{in}x_n &= 
+                (a_{i1} + a_{j1})x_1 + \dots + (a_{in} + a_{jn})x_n\\
+                &= (a_{i1}x_1 + \dots + a_{in}x_n) + (a_{j1}x_1 + \dots +
+                a_{jn}x_n) \\
+                &= b_i + b_j = b'_i
+            \end{align*}
+
+            Předpokládejme, že $\vec{x}$ je řešením $\mat{A'}\vec{x} = \vec{b'}$.
+            \begin{align*}
+                a_{i1}x_1 + \dots + a_{in}x_n &= 
+                                              (a_{i1}x_1 + \dots +
+                a_{in}x_n) + (a_{j1}x_1 + \dots + a_{jn}x_n) 
+                - (a_{j1}x_1 + \dots + a_{jn}x_n) \\
+                &= (a_{i1} + a_{j1})x_1 + \dots + (a_{in} + a_{jn})x_n -
+                (a_{j1}x_1 + \dots + a_{jn}x_n) \\
+                &= a'_{i1}x_1 + \dots + a'_{in}x_n - (a_{j1}x_1 + \dots +
+                a_{jn}x_n) \\
+                &= b'_i - b_j = (b_i + b_j) - b_j = b_i
+            \end{align*}
+    \end{enumerate}
+\end{proof}
+
+Postup řešení soustavy lineárních rovnic:
+\begin{enumerate}
+    \item Sestavíme rozšířenou matici soustavy.
+    \item Tuto matici elementárními úpravami převedeme na odstupňovaný tvar.
+    \item Pomocí zpětné substituce popíšeme všechna řešení.
+\end{enumerate}
+
+\begin{definition}
+    Říkáme, že matice $\mat{A} \in \mathbb{R}^{m \times n}$ je v
+    \newterm{odstupňovaném tvaru}, pokud nenulové řádky jsou \emph{ostře}
+    uspořádány podle počtu počátečních nul a nulové řádky jsou 
+    až za nenulovými.\footnote{Ostré uspořádání zajistí, že v matici nejsou 
+    žádné dva nenulové řádky o stejném počtu počátečních nul.} Formálně: 
+    $\exists r \in \{0; \dots; m\}$ takové, že:
+    \begin{enumerate}
+        \item označíme-li pro $i \in \{1; \dots; r\}$: 
+            $$j(i) := min\{j|a_{ij} \neq 0\},$$ 
+            tak platí: $j(1) < j(2) < \dots < j(r) \le n$
+        \item $\forall i > r, \forall j: a_{ij} = 0$
+    \end{enumerate}
+    Prvkům $a_{i,j(i)}$ pro $i = 1, \dots, r$ se říká \newterm{pivoty}.
+\end{definition}
+
+\begin{algorithm}
+    Algoritmus \newterm{Gaussovy eliminace} pro úpravu dané matice 
+    $\mat{A} \in \mathbb{R}^{m \times n}$ na odstupňovaný tvar 
+    elementárními řádkovými úpravami:
+    \begin{enumerate}
+        \item Setřídíme řádky vzestupně podle počátečních nul.
+        \item Pokud mají dva nenulové řádky stejně počátečních nul, tj. $j(i) =
+            j(i+1)$, potom k~$(i+1)$-tému řádku přičteme vhodný násobek
+            $i$-tého řádku:
+            $$-\frac{a_{i+1,j(i)}}{a_{i,j(i)}}$$
+        \item Kroky 1 a 2 opakujeme, dokud některé řádky mají steně mnoho
+            počátečních nul. 
+        \item Matice $\mat{A}$ je v odstupňovaném tvaru.
+    \end{enumerate}
+\end{algorithm}
+
+\begin{remark}[Složitost a konečnost Gaussovy eliminace]
+    Algoritmus Gaussovy eliminace je konečný, jelikož v každém kroku vzroste počet nul o
+    jednu. Nejvýše tedy můžeme dosáhnout $m \cdot n$ iterací. Celková složitost
+    algoritmu je $\bigo{mn(m\log{m} + n)}$. 
+    
+    Tato složitost lze zlepšit, 
+    pokud ušetříme třídění: pro $i=1,...,m$ hledáme první sloupec $j(i)$ takový,
+    že $a_{i,j(i)} \neq 0$ nebo $a_{k,j(i)} \neq 0$ pro nějaké $k > i$. V prvním
+    případně eliminujeme prvky pod $a_{i,j(i)}$; v druhém nejprve zaměníme
+    $i$-tý a $j$-tý řádek a teprve potom eliminujeme. Složitost v tomto případě
+    je $\bigo{n^2m}$.
+        \end{remark}
+
+\begin{observation}
+    \label{obs:pivotvb}
+    Nechť $(\mat{A'}|\vec{b'})$ je matice soustavy v odstupňovaném tvaru.
+    Pokud poslední sloupec $\vec{b'}$ obsahuje pivot, potom soustava nemá
+    řešení.
+\end{observation}
+
+\begin{definition}
+    Pro matici soustavy $(\mat{A'}|\vec{b'})$ v odstupňovaném tvaru nazveme
+    proměnné, jež odpovídají sloupcům s pivoty v $\mat{A'}$, \newterm{bázovými
+    proměnnými}.\footnote{Bázové proměnné jsou tedy proměnné $x_{j(i)}$ pro
+    $i=1,\dots,r$ (nenulové řádky).} Ostatní proměnné se nazývají
+    \newterm{volné}.
+\end{definition}
+
+\begin{theorem}[Věta o jednoznačnosti řešení]
+    \label{th:jednoznacnostreseni}
+    Nechť $(\mat{A'}|\vec{b'})$ je rozšířená matice soustavy v odstupňovaném
+    tvaru, kde sloupec $\vec{b'}$ neobsahuje pivot. Potom libovolné hodnoty
+    volných proměnných lze doplnit jednoznačně hodnotami bázových proměnných
+    na řešení celé soustavy $\mat{A'}\vec{x} = \vec{b'}$.
+\end{theorem}
+
+\begin{proof}
+    Větu dokážeme indukcí pro $i=r,r-1,r-2,\dots,1$.
+
+    Nechť $x_{j(i)}$ je $i$-tá bázová proměnná a hodnoty následujících
+    bázových proměnných a všech volných proměnných jsou dány. Potom $i$-tá
+    rovnice soustavy zní:
+    \begin{equation}
+        \label{eq:jednoznacnostreseni}
+        0x_1 + 0x_2 + \dots + 0x_{j(i) -1} + a'_{i,j(i)}x_{j(i)} +
+        a'_{i,j(i)+1}x_{j(i)+1} + \dots + a'_{in}x_n = b'_i
+    \end{equation}
+    Nechť $\alpha = a'_{i,j(i)+1}x_{j(i)+1} + \dots + a'_{in}x_n$. Hodnotu
+    tohoto výrazu známe (viz předpoklady). Z~rovnice 
+    \ref{eq:jednoznacnostreseni} se potom stává lineární rovnice s jednou
+    neznámou a nenulovým koeficientem a ta má jednoznačné řešení:
+    \begin{equation*}
+        a'_{i,j(i)}x_{j(i)} + \alpha = b'_i
+    \end{equation*}
+\end{proof}
+
+\begin{corollary}
+    Každé řešení soustavy lze získat zpětnou substitucí.
+\end{corollary}
+
+\begin{proof}
+    Nechť $\vec{x}=\rowvec{x_1,\dots,x_n}^\top$ je libovolné řešení. Vezmeme z
+    $\vec{x}$ hodnoty volných proměnných a zpětnou substitucí dopočítáme
+    bázové proměnné. Díky jednoznačnosti musíme dostat zpět $\vec{x}$.
+\end{proof}
+
+\begin{theorem}
+    Pro každou matici $\mat{A}$ platí, že sloupce s pivoty libovolné
+    matice v odstupňovaném tvaru, kterou lze z $\mat{A}$ získat
+    elementárními úpravami, jsou určeny jednoznačně.
+\end{theorem}
+
+\begin{proof}
+    Sporem. Předpokládejme, že $\mat{A'},\mat{A''} \sim \mat{A}$ mají pivoty
+    v různých sloupcích. Sestrojme rozšířené matice soustav $(\mat{A}|0)$,
+    $(\mat{A'}|0)$ a $(\mat{A''}|0)$. Nechť dále bez újmy na obecnosti $x_k$
+    je proměnná, která je v $(\mat{A'}|0)$ bázická a zároveň v
+    $(\mat{A''}|0)$ volná, a všechny následující proměnné mají v obou
+    soustavách stejný charakter.
+
+    Zafixujeme hodnoty volných proměnných $x_j$ pro $j > k$, ale potom $x_k$
+    je určena jednoznačně v $(\mat{A'}|0)$ a zároveň může mít libovolnou
+    hodnotu v $(\mat{A''}|0)$. Spor, jelikož obě soustavy mají mít stejné
+    množiny řešení.
+\end{proof}
+
+\begin{definition}
+    \newterm{Hodnost matice} $\mat{A}$ je rovna počtu pivotů v libovolné 
+    matici $\mat{A'}$ v odstupňovaném tvaru, kterou lze z $\mat{A}$ získat
+    elementárními úpravami. Značí se $\rank(\mat{A})$.
+\end{definition}
+
+\begin{theorem}
+    Soustava $\mat{A}\vec{x} = \vec{b}$ má alespoň jedno řešení, právě když
+    platí $\rank(\mat{A}) = \rank(\mat{A}|\vec{b})$.
+\end{theorem}
+
+\begin{proof}
+    Nechť má soustava alespoň jedno řešení a nechť $(\mat{A}|\vec{b}) \sim
+    (\mat{A'}|\vec{b'})$. Potom
+    \begin{align*}
+        \rank(\mat{A}|\vec{b}) &= 
+            \rank(\mat{A'}|\vec{b'}) \tag{dle definice hodnosti} \\
+            &= \rank(\mat{A'}) \tag{dle Pozorování \ref{obs:pivotvb}} \\
+            &= \rank(\mat{A}) \tag{dle definice hodnosti}
+    \end{align*}
+
+    Opačně, nechť platí $\rank(\mat{A}) = \rank(\mat{A}|\vec{b})$. Potom
+    \begin{align*}
+        \rank(\mat{A'}|\vec{b'}) &=
+            \rank(\mat{A}|\vec{b}) \tag{dle definice hodnosti} \\
+            &= \rank(\mat{A}) \tag{předpoklad} \\
+            &= \rank(\mat{A'}). \tag{dle definice hodnosti}
+    \end{align*}
+    Jelikož $\rank(\mat{A'}|\vec{b'}) = \rank(\mat{A'})$, soustava
+    $(\mat{A'}|\vec{b'})$ nemá pivot v posledním sloupci. Díky Větě
+    \ref{th:jednoznacnostreseni} má tedy alespoň jedno řešení.
+\end{proof}
+
+\begin{definition}
+    \newterm{Homogenní soustava lineárních rovnic} je soustava tvaru 
+        $\mat{A}\vec{x} = \mathbf{0}$.
+\end{definition}
+
+\begin{observation}
+    \label{obs:resenihomogennisoustavy}
+    Jsou-li $\vec{\bar{x}}$ a $\vec{x'}$ řešeními soustavy $\mat{A}\vec{x} =
+    \vec{b}$, pak $\vec{\bar{x}} - \vec{x'}$ je řešením $\mat{A}\vec{x} =
+    \mathbf{0}$.
+\end{observation}
+
+\begin{proof}
+    Podívejme se na $i$-tý řádek soustavy $\mat{A}\vec{x} = \mathbf{0}$ po
+    dosazení $\vec{\bar{x}} - \vec{x'}$ za $\vec{x}$:
+    \begin{align*}
+        a_{i1}(\overline{x}_1 - x'_1) + \dots + a_{in}(\bar{x}_n - x'_n) &= 
+            (a_{i1}\bar{x}_1 + \dots + a_{in}\bar{x}_n) - (a_{i1}x'_1 + \dots
+            + a_{in}x'_n) \\
+            &= b_i - b_i = 0
+    \end{align*}
+\end{proof}
+
+\begin{observation}
+    Jsou-li $\vec{\bar{x}}$ řešením $\mat{A}\vec{x} = \vec{b}$ a $\vec{x'}$
+    řešením $\mat{A}\vec{x} = \mathbf{0}$, pak $\vec{\bar{x}} + \vec{x'}$ je
+    řešením $\mat{A}\vec{x} = \vec{b}$.
+\end{observation}
+
+\begin{proof}
+    Viz důkaz Pozorování \ref{obs:resenihomogennisoustavy}.
+\end{proof}
+
+\begin{theorem}
+    Nechť $\mat{A} \in \mathbb{R}^{m \times n}$ je matice hodnosti $r < n$.
+    Pak existují řešení $\vec{h^1},\vec{h^2},\dots,\vec{h^{n-r}}$ soustavy 
+    $\mat{A}\vec{x} = \mathbf{0}$ taková, že každé řešení homogenní 
+    soustavy $\mat{A}\vec{x} = \mathbf{0}$ 
+    lze vyjádřit ve tvaru $\vec{x} = p_1\vec{h^1} + p_2\vec{h^2} + \dots +
+    p_{n-r}\vec{h^{n-r}}$, kde $p_1,\dots,p_{n-r}$ jsou vhodná reálná čísla.
+\end{theorem}
+
+\begin{proof}
+    Nechť $\mat{A'} \sim \mat{A}$ je v odstupňovaném
+    tvaru. Všechny proměnné lze vyjádřit pomocí volných proměnných
+    (indukcí podobně jako ve Větě \ref{th:jednoznacnostreseni}). Tyto volné
+    proměnné použijeme jako parametry $p_1,\dots,p_{n-r}$. 
+    Řešení $\vec{h^1},\dots,\vec{h^{n-r}}$ jsou vektory koeficientů volných
+    proměnných.
+
+    Mějmě například matici
+    \[ \mat{A} = \begin{pmatrix}
+            1 &2 &3 &4\\
+            0 &1 &2 &3\\ 
+            0 &0 &0 &0\\
+            0 &0 &0 &0\\
+    \end{pmatrix}  \]
+    Proměnné $x_1$ a $x_2$ jsou bázové; proměnné $x_3$ a $x_4$ jsou volné.
+    Vyjádříme všechny proměnné pomocí volných proměnných:
+    \begin{align*}
+        x_4 &= x_4 \\
+        x_3 &= x_3 \\
+        x_2 &=-2x_3 - 3x_4 \\
+        x_1 &= -2x_2 - 3x_3 - 4x_4 = 4x_3 + 6x_4 - 3x_3 - 4x_4 = x_3 + 2x_4
+    \end{align*}
+
+    Řešení $\vec{h^1}$, odpovídající volné proměnné $x_3$, a řešení
+    $\vec{h^2}$, odpovídající volné proměnné $x_4$, potom vyjádříme pomocí
+    koeficientů volných proměnných:
+    \begin{align*}
+        \vec{h^1} = \colvec{1\\-2\\1\\0}; \vec{h^2} = \colvec{2\\-3\\0\\1} 
+    \end{align*}
+
+\end{proof}
+
+\begin{corollary}
+    Každé řešení řešitelné soustavy $\mat{A}\vec{x} = \vec{b}$ lze vyjádřit
+    ve tvaru:
+    $$ \vec{x} = \vec{x^0} + p_1\vec{h}^1 + \dots + p_{n-r}\vec{h}^{n-r},$$
+    kde $r = \rank(\mat{A})$, $\vec{h}^1,\dots,\vec{h}^{n-r}$ jsou řešeními homogenní
+    soustavy $\mat{A}\vec{x} = \mathbf{0}$, $p_1,\dots,p_n$ jsou vhodná
+    reálná čísla a $\vec{x}^0$ je libovolné řešení $\mat{A}\vec{x} =
+    \vec{b}$.
+\end{corollary}
+
+\begin{proof}
+    Nechť $\bar{\vec{x}}$ je libovolné řešení soustavy $\mat{A}\vec{x} =
+    \vec{b}$. Potom $\vec{\bar{x}} - \vec{x}^0$ je řešení $\mat{A}\vec{x} =
+    \mathbf{0}$ a lze vyjádřit jako
+    $$(\bar{\vec{x}} - \vec{x}^0) = \sum_{i=1}^{n-r}{p_i\vec{h}^i}.$$
+\end{proof}
+
+\begin{definition}
+    Matice v \newterm{redukovaném odstupňovaném tvaru} má všechny pivoty 
+    rovny 1 a ve sloupcích nad pivoty pouze nuly.
+\end{definition}

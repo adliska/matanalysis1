@@ -1,0 +1,400 @@
+\section{Determinant}
+
+\subsection{Definice a základní vlastnosti}
+
+\begin{definition}
+    \label{def:det}
+    Nechť $\mat{A}$ je čtvercová matice řádu $n$ nad tělesem $K$
+    Potom \newterm{determinant} matice $\mA$ je dán výrazem:
+    $$\det(\mA) \coloneqq \sum_{p \in S_n} \sgn(p)\cdot 
+    \prod_{i=1}^n a_{i, p(i)}.$$
+    Formálně jde o zobrazení $\det(\bullet): K^{n \times n} \rightarrow K.$
+\end{definition}
+
+\begin{remark}
+    Mějme matici $\mA = \begin{pmatrix} a_{11} &a_{12} \\ a_{21} &a_{22}
+    \end{pmatrix}$. Množina všech permutací na množině $\{1, 2\}$, t.j.
+    $S_2$, obsahuje dva prvky: identitu $(1,2)$ se znaménkem $1$ a 
+    transposici $(2,1)$ se znaménkem $-1$. Potom:
+    $$\det(\mA) = (+1) \cdot a_{11}a_{22} + (-1) \cdot a_{12}a_{21}.$$
+\end{remark}
+
+\begin{observation}
+    \label{obs:detaeqdetat}
+    $\det(\mA) = \det(\mAt)$
+\end{observation}
+
+\begin{proof}
+    \begin{align*}
+        \det(\mAt) &= \sum_{p \in S_n} \sgn(p) \prod_{i=1}^n 
+            (\mAt)_{i,p(i)} \tag{definice determinantu}\\
+            &= \sum_{p \in S_n} \sgn(p) \prod_{i=1}^n a_{p(i),i} 
+            \tag{transpozice matice $\mA$} \\
+            &= \sum_{p \in S_n} \sgn(p) \prod_{i=1}^n a_{i,q(i)} 
+            \tag{při volbě $q = p^{-1}$} \\
+            &= \sum_{q \in S_n} \sgn(q) \prod_{i=1}^n a_{i,q(i)} 
+            \tag{$\sgn(p) = \sgn(q)$, Důsledek~\ref{cor:sgnpsgnp-1}} \\
+            &= \det(\mA) \tag{dle Definice \ref{def:det}}
+    \end{align*}
+\end{proof}
+
+\begin{observation}
+    \label{obs:prerovnanisloupcu}
+    Přerovnání sloupců matice $\mA$ podle permutace $q$:
+    \begin{itemize}
+        \item nezmění $\det(\mA)$, je-li $\sgn(q) = 1$,
+        \item změní znaménko $\det(\mA)$, je-li $\sgn(q) = -1$.
+    \end{itemize}
+\end{observation}
+
+\begin{proof}
+    Označme $\mat{A'}$ přerovnanou matice. Platí $a'_{ij} = 
+    a_{i, q^{-1}(j)}.$ Dále:
+    \begin{align*}
+        \det(\mat{A'}) &= \sum_{p \in S_n} \sgn(p) \prod_{i=1}^n a'_{i,p(i)} \\
+            &= \sum_{p \in S_n} \sgn(p) \prod_{i=1}^n a_{i, q^{-1}(p(i))} \\
+            &= \sum_{p \in S_n} 
+                \lefteqn{\underbrace{\phantom{\sgn(q)\sgn(q^{-1})}}_{=1}}
+                \sgn(q) 
+                \overbrace{\sgn(q^{-1})\sgn(p)}^{=\sgn(q^{-1} \circ p)}
+                \prod_{i=1}^n a_{i, q^{-1}(p(i))} \\
+            &= \sgn(q) \sum_{p \in S_n} \sgn(q^{-1} \circ p) \prod_{i=1}^n
+                a_{i, (q^{-1}\circ p)(i)} \\
+            &= \sgn(q)\det(\mA)
+    \end{align*}
+\end{proof}
+
+\begin{remark}[Důsledky Pozorování~\ref{obs:prerovnanisloupcu}]
+    \label{rem:prerovnani}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item Stejné tvrzení platí i pro řádky, díky 
+            Pozorování~\ref{obs:detaeqdetat} ($\det(\mA) = \det(\mAt)$).
+        \item Záměna dvou řádků (sloupců) změní znaménko determinantu.
+        \item Jsou-li dva řádky stejné, je determinant 
+            nulový.\footnote{V tělesech charakteristiky $2$ může být i $-1$.}
+    \end{enumerate}
+\end{remark}
+
+\begin{proposition}
+    \label{prop:linearitadet}
+    Determinant je lineární funkcí každého řádku i sloupce dané matice.
+    \begin{enumerate}[i.]
+        \item Linearita vůči skalárnímu násobku:
+            $$\begin{vmatrix}
+                  a_{1,1} &\dots &a_{1,n} \\
+                \vdots &\vdots &\vdots \\
+                ta_{i,1} &\dots &ta_{i,n} \\
+                \vdots &\vdots &\vdots \\
+                a_{n,1} &\dots &a_{n,n} 
+            \end{vmatrix} = t \begin{vmatrix}
+                  a_{1,1} &\dots &a_{1,n} \\
+                \vdots &\vdots &\vdots \\
+                a_{i,1} &\dots &a_{i,n} \\
+                \vdots &\vdots &\vdots \\
+                a_{n,1} &\dots &a_{n,n} 
+            \end{vmatrix}$$
+         \item Linearita vůči sčítání:
+            $$\begin{vmatrix}
+                  a_{1,1} &\dots &a_{1,n} \\
+                \vdots &\vdots &\vdots \\
+                a_{i,1}+b_{i,1} &\dots &a_{i,n}+b_{i,n}\\
+                \vdots &\vdots &\vdots \\
+                a_{n,1} &\dots &a_{n,n} 
+            \end{vmatrix} = \begin{vmatrix}
+                  a_{1,1} &\dots &a_{1,n} \\
+                \vdots &\vdots &\vdots \\
+                a_{i,1} &\dots &a_{i,n} \\
+                \vdots &\vdots &\vdots \\
+                a_{n,1} &\dots &a_{n,n} 
+            \end{vmatrix} + \begin{vmatrix}
+                  a_{1,1} &\dots &a_{1,n} \\
+                \vdots &\vdots &\vdots \\
+                b_{i,1} &\dots &b_{i,n} \\
+                \vdots &\vdots &\vdots \\
+                a_{n,1} &\dots &a_{n,n} 
+            \end{vmatrix}$$
+       \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item Linearita vůči skalárnímu násobku:
+            \begin{align*}
+                \det(\mat{A'}) 
+                    &= \sum_{p \in S_n} \sgn(p) \prod_{i=1}^n a'_{i, p(i)} \\
+                    &= \sum_{p \in S_n} \sgn(p) (a_{1,p(1)} \cdot ~ \dots ~
+                        \cdot ta_{i,p(i)} \cdot ~ \dots ~ \cdot a_{n,p(n)}) \\
+                    &= t \det(\mA)
+            \end{align*}
+        \item Analogicky.
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    Nechť $\mA \in K^{n\times n}$ a $i,j \leq n, i \neq j$. Potom přičtení 
+    $t$-násobku $j$-tého řádku k $i$-tému nezmění determinant.
+\end{corollary}
+
+\begin{proof}
+    Nechť $\mat{A'}$ je výsledná matice. Potom dle 
+    Tvrzení~\ref{prop:linearitadet}:
+    \begin{align*}
+        \det(\mat{A'}) &= \begin{vmatrix} 
+                            a_{1,1} &\dots &a_{1,n} \\
+                            \vdots &\vdots &\vdots \\
+                            a_{i,1}+ta_{j,1} &\dots &a_{i,n}+ta_{j,n}\\
+                            \vdots &\vdots &\vdots \\
+                            a_{n,1} &\dots &a_{n,n}
+                        \end{vmatrix} \\
+                        &= \underbrace{\begin{vmatrix} 
+                            a_{1,1} &\dots &a_{1,n} \\
+                            \vdots &\vdots &\vdots \\
+                            a_{i,1} &\dots &a_{i,n}\\
+                            \vdots &\vdots &\vdots \\
+                            a_{n,1} &\dots &a_{n,n}
+                \end{vmatrix}}_{=\det(\mA)} + t \cdot \underbrace{\begin{vmatrix} 
+                            a_{1,1} &\dots &a_{1,n} \\
+                            \vdots &\vdots &\vdots \\
+                            a_{j,1} &\dots &a_{j,n}\\
+                            \vdots &\vdots &\vdots \\
+                        a_{n,1} &\dots &a_{n,n}
+                        \end{vmatrix}}_{=\det(\mB)}\\
+                        &= \det(\mA)
+    \end{align*}
+    Matice označená jako $\mB$ má na místě $i$-tého řádku kopii řádku $j$-tého.
+    Jelikož má dva řádky stejné, její determinant je roven nule (podle bodu iii.
+    Poznámky~\ref{rem:prerovnani}).
+\end{proof}
+
+\begin{remark}[Výpočet determinantu]
+    Matici převedeme na trojúhelníkovou přičítáním $t$-násobků jiných řádku,
+    podobně jako při Gaussově eliminaci. Potom $$\det(\mA) = a_{11}a_{22}\dots
+    a_{nn}.$$
+    
+    Pamatujme, že:
+    \begin{itemize}
+        \item buď neměníme pořadí řádků, anebo si pamatujeme změnu znaménka.
+        \item nenásobíme řádky $t$, neboť by se determinant změnil $t$-krát.
+        \item lze upravovat i po sloupcích.
+    \end{itemize}
+
+    Takto lze vypočítat determinant v polynomiálním čase $\bigo{n^3}$, podobně 
+    jako Gaussova eliminace.
+\end{remark}
+
+\begin{theorem}
+    \label{th:detabdetadetb}
+    Nechť $\mA$ a $\mB$ jsou čtvercové matice nad T. Potom platí:
+    $$ \det(\mA\cdot\mB) = \det(\mA) \det(\mB).$$
+\end{theorem}
+
+\begin{proof}
+    Je-li $\mA$ nebo $\mB$ singulární, je i jejich součin singulární. Potom
+    $\det(\mA\cdot \mB) = 0 = \det(\mA)\det(\mB)$.
+
+    Předpokládejme, že matice $\mA$ je regulární. Rozložíme $\mA$
+    jako součin matic elementárních úprav: 
+    $\mA = \mat{E_1}\mat{E_2} \dots \mat{E_k}.$ Potom:
+    \begin{align*} 
+        \det(\mA\mB) &= \det(\mat{E_1}\mat{E_2}\dots\mat{E_k}\mB) \\
+                     &\stackrel{*}{=} \det(\mat{E_1}) 
+                        \det(\mat{E_2}\dots\mat{E_k}\mB) \\
+                        &= \det(\mat{E_1}) \dots \det(\mat{E_n}) \det(\mB)
+                        \tag{iterací předchozího kroku} \\
+                        &= \det(\underbrace{\mat{E_1}\dots\mat{E_n}}_{\mA})
+                        \det(\mB)
+    \end{align*}
+
+    Rovnítko s hvězdičkou platí, jelikož:
+    \begin{itemize}
+        \item pokud je $\mat{E_1}$ matice záměny dvou řádku, je 
+            $\det(\mat{E_1}\mC) = -1\det(\mC)$ a $\det(\mat{E_1})\det(\mC) = 
+            -1\det(\mC)$,
+        \item pokud je $\mat{E_1}$ matice vynásobení řádku skalárem $t$, potom
+            $\det(\mat{E_1}\mC) = t\det(\mC)$ a $\det(\mat{E_1})\det(\mC) = 
+            t\det(\mC)$,
+        \item pokud je $\mat{E_1}$ matice přičtení $j$-tého řádku k $i$-tému,
+            potom
+            $\det(\mat{E_1}\mC) = 1\det(\mC)$ a $\det(\mat{E_1})\det(\mC) = 
+            1\det(\mC)$.
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Čtvercová matice $\mA$ je regulární, právě když $\det(\mA) \neq 0$
+\end{theorem}
+
+\begin{corollary}
+    \label{cor:detai}
+    Je-li matice $\mA$ regulární, potom:
+    $$\det(\invmat{A}) = \frac{1}{\det(\mA)}.$$
+\end{corollary}
+
+\begin{proof}
+     $$1 = \det(\identmat{n}) = \det(\mA \mAi) = \det(\mA)\det(\mAi)$$
+\end{proof}
+
+\begin{observation}[Rozvoj determinantu podle $i$-tého řádku]
+    \label{obs:rozvojdet}
+    Nechť $\mat{A^{ij}}$ značí matici, která vznikne z 
+    $\mA \in K^{n \times n}$ vypuštěním $i$-tého řádku a $j$-tého sloupce.
+    Pak platí pro libovolné $i \in \{1, \dots, n\}$:
+    $$\det(\mA) = \sum_{j=1}^n a_{ij} (-1)^{i+j} \det(\mat{A^{ij}}).$$
+\end{observation}
+
+\begin{proof}
+    \begin{align*}
+        \begin{vmatrix}
+            \vdots &\vdots &\vdots &\vdots \\
+            a_{i1} &a_{i2} &\dots &a_{in} \\
+            \vdots &\vdots &\vdots &\vdots
+        \end{vmatrix}
+        &=  
+        \begin{vmatrix}
+            \vdots &\vdots &\vdots &\vdots \\
+            a_{i1} &0 &\dots &0 \\
+            \vdots &\vdots &\vdots &\vdots
+        \end{vmatrix}
+        +
+        \begin{vmatrix}
+            \vdots &\vdots &\vdots &\vdots \\
+            0 &a_{i2} &\dots &0 \\
+            \vdots &\vdots &\vdots &\vdots
+        \end{vmatrix}
+        +
+        \dots
+        +
+        \begin{vmatrix}
+            \vdots &\vdots &\vdots &\vdots \\
+            0 &0 &\dots &a_{in} \\
+            \vdots &\vdots &\vdots &\vdots
+        \end{vmatrix}
+        \tag{Tvrzení~\ref{prop:linearitadet}} \\
+        &= 
+        a_{i1}
+        \begin{vmatrix}
+            \vdots &\vdots &\vdots &\vdots \\
+            1 &0 &\dots &0 \\
+            \vdots &\vdots &\vdots &\vdots
+        \end{vmatrix}
+        +
+        a_{i2}
+        \begin{vmatrix}
+            \vdots &\vdots &\vdots &\vdots \\
+            0 &1 &\dots &0 \\
+            \vdots &\vdots &\vdots &\vdots
+        \end{vmatrix}
+        +
+        \dots
+        +
+        a_{in}
+        \begin{vmatrix}
+            \vdots &\vdots &\vdots &\vdots \\
+            0 &0 &\dots &1 \\
+            \vdots &\vdots &\vdots &\vdots
+        \end{vmatrix}
+        \tag{Tvrzení~\ref{prop:linearitadet}} \\
+        &=
+        \sum_{j=1}^n a_{ij}(-1)^{i+j}\det(\mat{A^{ij}}) 
+        \tag{viz výklad níže}
+    \end{align*}
+
+    Uvažujme následující matici:
+    $$\mC = \begin{pmatrix}
+        a_{11} &\dots  &a_{1j} &\dots  &a_{1n} \\
+        \vdots &\vdots &\vdots &\vdots &\vdots \\
+        0      &\dots  &1      &\dots  &0 \\
+        \vdots &\vdots &\vdots &\vdots &\vdots\\
+        a_{n1} &\dots  &a_{nj} &\dots  &a_{nn}
+      \end{pmatrix}$$
+    tj., matici $\mA$, jejíž $i$-tý řádek obsahuje v $j$-tém sloupci jedničku
+    a jinak nuly. Postupným vyměňováním 
+    řádků $(i,i+1), \dots, (n-1, n)$ se posune $i$-tý řádek na konec matice. 
+    Podobně přesuneme $j$-tý sloupec na konec matice a získáme matici:
+    $$\mat{C'} = \begin{pmatrix}[ccc|c]
+          & & & \\
+          &\mat{A^{ij}} & & \\
+          &  & & \\
+        \hline 
+        0 &\dots  &0      &1  
+      \end{pmatrix}$$
+    jejíž determinant je roven $\det(\mat{A^{ij}})$. Při přesouvání řádků
+    a sloupců jsme využili $(n-i) + (n-j)$ transpozic, a tudíž:
+    $$\det(\mC) = (-1)^{(n-i) + (n-j)} \det(\mat{A^{ij}}) = 
+    (-1)^{(i+j)}\det(\mat{A^{ij}}).$$
+\end{proof}
+
+
+\begin{definition}
+    Pro čtvercovou matici $\mA$ definujeme \newterm{adjungovanou matici}
+    $\adj(\mA)$:
+    $$\adj(\mA)_{ij} = (-1)^{i+j} (\det(\mat{A^{ji}}))$$
+    (Poznámka: Všimněte si prohozeného pořadí indexů.)
+\end{definition}
+
+\begin{theorem}
+    Pro každou regulární matici $\mA$ nad tělesem T platí:
+    $$ \mAi = \frac{1}{\det(\mA)} \adj(\mA).$$
+\end{theorem}
+
+\begin{proof}
+    Z Pozorování~\ref{obs:rozvojdet} plyne, že
+    $$\text{$i$-tý řádek $\mA\cdot i$-tý sloupec $\adj(\mA) = \det(\mA)$}$$
+    Podobně:
+    \begin{multline*}
+        \text{$k$-tý řádek $\mA\cdot i$-tý sloupec $\adj(\mA) = $} \\ 
+        \text{determinant matice vzniklé z $\mA$ překopírováním $k$-tého 
+        řádku na $i$-tý}
+    \end{multline*}
+    Výraz $\mA \cdot \adj(\mA)$ je tedy roven matici, která má na diagonále 
+    $\det(\mA)$ a mimo diagonálu nuly.
+\end{proof}
+
+\begin{theorem}[Cramerovo pravidlo]
+    Nechť $\mA$ je regulární matice. Řešení soustavy $\mA\vx=\vb$ lze zapsat
+    jako:
+    $$x_i = \frac{\det(\mat{A_{i\rightarrow\vb}})}{\det(\mA)},$$
+    kde $\mat{A_{i\rightarrow\vb}}$ je matice, která vznikne z $\mA$ 
+    nahrazením $i$-tého sloupce vektorem $\vb$.
+\end{theorem}
+
+\begin{proof}
+    \begin{multline*}
+        \mA\vx=\vb \implies \vx = \mAi\vb = \frac{1}{\det(\mA)} \adj(\mA)\vb \\
+        \implies x_i = \frac{1}{\det(\mA)}(\adj(\mA)\vb)_i = \frac{1}{\det(\mA)}
+        \sum_{j=1}^n(\adj(\mA))_{ij}b_j = \frac{1}{\det(\mA)} 
+        \det(\mat{A_{i\rightarrow\vb}})
+    \end{multline*}
+\end{proof}
+
+\subsection{Poznámky na konec}
+
+\begin{remark}[Různé druhy obalů]
+    Nechť $X = \{\vxone, \dots, \vxn\}$ je konečná množina v $\Rn$. Definujme
+    následující obaly:
+    \begin{itemize}
+        \item \newterm{Lineární obal}: $\obal(X) = \left\{ \sum a_i\vxi, a_i 
+            \in \R \right\}$
+        \item \newterm{Afinní obal}: $\aff(X) = \left\{ \sum a_i\vxi, a_i 
+            \in \R, \sum a_i = 1 \right\}$ 
+        \item \newterm{Konvexní obal}: $\conv(X) = \left\{ \sum a_i\vxi, a_i 
+            \in \R, \sum a_i = 1, a_i \in [0,1] \right\}$ 
+        \item \newterm{Rovnoběžnostěn}: $\mathop{\mathrm{P}}(X) = \left\{ 
+                \sum a_i\vxi, a_i \in \R, a_i \in [0,1] \right\}$
+    \end{itemize}
+\end{remark}
+
+\begin{remark}[Geometrický význam determinantu]
+    $|\det(\mA)|$ udává objem rovnoběžnostěnu určeného řádky nebo sloupci
+    matice $\mA.$
+\end{remark}
+
+\begin{observation}
+    Je-li $f: \Rn \rightarrow \Rn$ lineární zobrazení a $\mA$ je matice tohoto
+    zobrazení, potom platí, že objem těles se mění podle předpisu:
+    $$ \mathop{\mathrm{vol}}(f(V)) = |\det({\mA})| 
+    \underbrace{\mathop{\mathrm{vol}}(V)}_{\text{původní objem}}.$$
+\end{observation}
+

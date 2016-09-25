@@ -2,4 +2,6 @@
 *.log
 *.toc
 *.out
-analysis1.pdf
+**/analysis1.pdf
+**/linalg1.pdf
+**/linalg2.pdf

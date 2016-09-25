@@ -1,0 +1,259 @@
+\section{Algebraická tělesa}
+
+\begin{definition}
+    \newterm{Binární operací} na množině $K$ rozumíme zorazení
+    $K \times K \to K$.
+\end{definition}
+
+\begin{remark}
+    Příklady binárních operací na $\mathbb{N}$:
+    \begin{enumerate}[i.]
+        \item $\varphi(a,b) = a + b$
+        \item $\varphi(a,b) = \min\{a;b\}$
+        \item $\varphi(a,b) = a+ 18$
+    \end{enumerate}
+    Naopak zobrazení $\varphi(a,b) = a + b - 18$ binární operací na
+    $\mathbb{N}$ není, jelikož výsledek této operace může být záporný.
+
+    Binární operaci můžeme definovat i tabulkou, např. na množině $\{0;1\}$:
+    \begin{center}
+        \begin{tabular}{c | c c}
+            $a \backslash b$ & 0 & 1 \\
+            \hline
+            0 & 0 & 1 \\
+            1 & 0 & 0
+        \end{tabular}
+    \end{center}
+    Toto zobrazení odpovídá logické funkci $\varphi(a,b) = \lnot a \land b$.
+
+    Binární zobrazení lze definovat např. i na reálných polynomech jedné
+    proměnné: $\varphi(p(x), q(x)) = (p+q)(x)$.
+\end{remark}
+
+\begin{definition}
+    Nechť $K$ je množina a $+, \cdot$ jsou dvě binární operace na $K$.
+    Strukturu $(K, +, \cdot)$ nazveme \newterm{tělesem}, pokud jsou splněny
+    následující axiomy:
+    \begin{enumerate}
+        \item[(SA)] $\forall a,b,c \in K: (a+b)+c = a+(b+c)$ (sčítání je
+            asociativní)
+        \item[(SK)] $\forall a,b \in K: a+b = b+a$ (sčítání je komutativní)
+        \item[(S0)] $\exists 0 \in K: \forall a \in K : a + 0 = a$
+            (existence nulového prvku)
+        \item[(SI)] $\forall a \in K: \exists {-a} \in K: a + (-a) = 0$
+            (existence opačného prvku)
+        \item[(NA)] $\forall a,b,c \in K: (a \cdot b) \cdot c = a \cdot (b
+            \cdot c)$
+        \item[(NK)] $\forall a,b \in K: a \cdot b = b \cdot a$
+        \item[(N1)] $\exists 1 \in K: \forall a \in K : a \cdot 1 = a$
+        \item[(NI)] $\forall a \in K \setminus \{0\}: \exists a^{-1} \in K: a \cdot
+            a^{-1} = 1$ (existence inverzního prvku)
+        \item[(D)] $\forall a,b,c \in K: a \cdot (b + c) = a \cdot b + a
+            \cdot c$ (distributivita násobení vůči sčítání)
+        \item[(01)] $0 \neq 1$ (axiom netriviality)
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}[Značení]
+    \leavevmode
+    \begin{multicols}{3}
+        \begin{itemize}
+            \item $ab \coloneqq a \cdot b$
+            \item $a - b \coloneqq a + (-b)$
+            \item $\frac{a}{b} \coloneqq a \cdot b^{-1}$
+        \end{itemize}
+    \end{multicols}
+\end{remark}
+
+\begin{remark}[Příklady těles] 
+    \leavevmode
+    \begin{multicols}{2}
+        \begin{enumerate}[i.]
+            \item $(\mathbb{Q}, +, \cdot)$
+            \item $(\mathbb{R}, +, \cdot)$
+            \item $(\mathbb{C}, +, \cdot)$
+            \item $(\mathbb{Z}_p,+, \cdot)$, t.j. počítání ve zbytkových
+                třídách modulo prvočíslo
+            \item $(\text{racionální lomené funkce}, +, \cdot)$
+        \end{enumerate}
+    \end{multicols}
+\end{remark}
+
+\begin{remark}[Příklady struktur, jež nejsou tělesa]
+    \leavevmode
+    \begin{multicols}{3}
+        \begin{enumerate}[i.]
+            \item $(\mathbb{N}, +, \cdot)$
+            \item $(\mathbb{Z}, +, \cdot)$
+            \item $(\mathbb{Z}_4, +, \cdot)$, $(\mathbb{Z}_6, +, 
+                \cdot)$\footnote{Důvody viz Tvrzení \ref{proposition:zp}}
+            \item $(\mathbb{R}^n, +, \cdot)$
+            \item $(\text{polynomy}, +, \cdot)$
+        \end{enumerate}
+    \end{multicols}
+\end{remark}
+
+\begin{metaproposition}
+    Všechny definice a věty o řešení soustav a počítání s maticemi nad
+    $\mathbb{R}$ platí také pro soustavy a matice nad libovolným tělesem,
+    jelikož z $\mathbb{R}$ jsme využili pouze vlastnosti dané axiomy tělesa.
+\end{metaproposition}
+
+\begin{observation}
+    Prvky $0, {-a}, 1, a^{-1}$ jsou vždy určeny jednoznačně.
+\end{observation}
+
+\begin{proof}
+    \leavevmode
+        Jednoznačnost $0$ dokážeme sporem. Nechť $0, \bar{0}$ jsou dva 
+            různé neutrální prvky $0 \neq \bar{0}$. Potom:
+            \begin{align*}
+                0 &= 0 + \bar{0} \tag{S0} \\
+                  &= \bar{0} + 0 \tag{SK} \\
+                  &= \bar{0} \tag{S0}
+            \end{align*}
+        Jednoznačnost ${-a}$ dokážeme taktéž sporem. 
+        Nechť $-a$ a $\overline{-a}$ jsou opačné prvky k $a$ a 
+            $-a \neq \overline{-a}$:
+            \begin{align*}
+                -a &= -a + 0 \tag{S0} \\
+                   &= -a + (a + (\overline{-a})) \tag{SI} \\
+                   &= \overline{-a} + (a + (-a)) \tag {SK, SA} \\
+                   &= \overline{-a} + 0 = \overline{-a} \tag{SI, S0}
+            \end{align*}
+        Zbytek analogicky.
+\end{proof}
+
+\begin{observation}
+    Nechť $K$ je algebraické těleso. Potom:
+        \begin{enumerate}[i.]
+            \item $\forall a \in K: -(-a) = a$
+            \item $\forall b \in K \setminus \{0\}: (b^{-1})^{-1} = b$
+        \end{enumerate}
+\end{observation}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item $-(-a) = -(-a) + 0 = -(-a) + (a + (-a)) = a + (-a + -(-a)) 
+            = a + 0 = a$
+        \item $(b^{-1})^{-1} = (b^{-1})^{-1} \cdot 1 = (b^{-1})^{-1} \cdot 
+            (b \cdot b^{-1}) = ((b^{-1})^{-1} \cdot b^{-1}) \cdot b = 
+            1 \cdot b = b$
+    \end{enumerate}
+\end{proof}
+
+\begin{observation}
+    Nechť K je algebraické těleso. Potom:
+    \begin{enumerate}[i.]
+        \item $\forall a \in K: a \cdot 0 = 0$
+        \item $\forall a \in K \setminus \{0\}: a \cdot (-1) = -a$
+    \end{enumerate}
+\end{observation}
+   
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item $a \cdot 0 = a \cdot 0 + 0 = a \cdot 0 + (a \cdot 0 - a \cdot 
+                0) = (a \cdot 0 + a \cdot 0) - a \cdot 0 = a \cdot (0 + 0) 
+                - a \cdot 0 = a \cdot 0 - a \cdot 0 = 0$
+        \item $a \cdot (-1) = a\cdot(-1) + 0 = a\cdot(-1) + a - a = a \cdot
+            (-1) + a \cdot 1 - a = a \cdot (-1 + 1) -a = a \cdot 0 - a = -a$
+    \end{enumerate}
+\end{proof}
+
+\begin{observation}
+    \label{obs:abeq0}
+    Pokud $a \cdot b = 0$, potom buď $a = 0$ nebo $b = 0$.
+\end{observation}
+
+\begin{proof}
+    Sporem. Nechť $a \neq 0$ a $b \neq 0$. Potom existují opačné prvky $a^{-1}$
+    a $b^{-1}$. Dále: $0 = \inv{b} \cdot \inv{a} \cdot 0 = \inv{b} \cdot 
+    \inv{a} \cdot a \cdot b = \inv{b} \cdot 1 \cdot b = \inv{b} \cdot b = 1$.
+\end{proof}
+
+\begin{observation}
+    \leavevmode
+    $\forall a, b, a', b', a' \neq 0: a + x = b$ a $a' \cdot x = b'$ mají 
+    právě jedno řešení.
+\end{observation}
+
+\begin{proof}
+    Sporem. Nechť $x_1$ a $x_2$ jsou dvě různá řešení rovnice $a + x = b$. 
+    Potom: 
+    $$ x_1 = x_1 + 0 = x_1 + a - a = (x_1 + a) - a = b - a = (a+x_2) - a = 
+    x_2.$$
+
+    Podobně, nechť $x_1$ a $x_2$ jsou dvě různá řešení rovnice $a' \cdot 
+    x = b'$. Potom:
+    $$x_1 = x_1 \cdot 1 = x_1 \cdot a \cdot a^{-1} = b\cdot a^{-1} = a 
+    \cdot x_2 \cdot a^{-1} = x_2.$$
+\end{proof}
+
+\begin{observation}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item $\forall a,b,c: a + b = a + c \iff b = c$
+        \item $\forall a \neq 0,b,c: a \cdot b = a \cdot c \iff b = c$
+    \end{enumerate}
+\end{observation}
+
+\begin{proposition}
+    \label{proposition:zp}
+    Struktura $\mathbb{Z}_p$ je těleso, právě když $p$ je prvočíslo.
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item $\implies$: Nepřímo. $p$ je složené, t.j. $\exists a,b: p = a 
+            \cdot b$. Potom v $\mathbb{Z}_p$ neplatí Pozorování 
+            \ref{obs:abeq0}.
+        \item $\impliedby$: Předpokládáme, že $p$ je prvočíslo. Potom musíme
+            ověřit všech 10 axiomů. Jediný obtížný axiom je existence opačného
+            prvku (NI): $\forall a \neq 0 \exists \inv{a}: 
+            a \cdot \inv{a} = 1$, t.j. $a \cdot \inv{a} = 1 \mod{p}$.
+
+            $\forall a$ definujeme zobrazení $f_a: \{1, 2, \dots, p-1\} 
+            \rightarrow \{1, 2, \dots, p-1\}$ takové, že: $$f_a(x) = 
+            a \cdot x \mod{p}.$$ 
+            Potřebujeme ukázat, že zobrazení $f_a$ je prosté. Poté už vyplyne,
+            že je zároveň i na a tedy, že $\exists x: f_a(x) = 1$ čili 
+            $x = \inv{a}$.
+
+            Důkaz provedeme sporem. Kdyby $f_a$ nebylo prosté, potom 
+            $\exists x' \neq x'': f_a(x') = f_a(x'')$, tedy 
+            $ax' \equiv ax'' \mod{p}$, čili $a \cdot (x' - x'') \equiv 0 
+            \mod{p}$.
+    \end{itemize}
+\end{proof}
+
+\begin{theorem}
+    Konečné těleso s $n$ prvky existuje, právě když $n$ je mocnina prvočísla.
+\end{theorem}
+
+\begin{remark}
+    Konečné těleso s $n$ prvky se značí $GF(n)$ (z anglického 
+    ``\newterm{Galois Field}'').
+\end{remark}
+
+\begin{definition}
+    Pokud $\exists k \in \mathbb{N}$ takové, že v tělese $K$ platí:
+    $$ \underbrace{1+1+\dots+1}_{k} = 0$$
+    tak potom nejmenší takové $k$ se nazývá 
+    \newterm{charakteristika tělesa} $K$. Pokud takové $k$ neexistuje, 
+    říkáme, že těleso $K$ má charakteristiku $0$.
+\end{definition}
+
+\begin{theorem}
+    Charakteristika tělesa je vždy $0$ nebo prvočíslo.
+\end{theorem}
+
+\begin{proof}
+    Sporem. Nechť $k$ je složené, t.j. $\exists a, b: k = a \cdot b$.
+    Potom $$ 0 = \underbrace{1 + 1 + \dots + 1}_{k} = 
+    \underbrace{(1 + \dots + 1)}_{a} \cdot \underbrace{(1 + \dots + 1)}_{b} =
+    x \cdot y,$$
+    což je spor, jelikož $x \neq 0$ a $y \neq 0$.
+\end{proof}

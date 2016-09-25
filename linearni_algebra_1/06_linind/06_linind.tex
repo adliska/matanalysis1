@@ -1,0 +1,375 @@
+\section{Lineární nezávislost}
+
+\begin{definition}
+    Nechť $V$ je vektorový prostor nad tělesem $K$. Daná $n$-tice vektorů
+    $\vvone, \vvtwo, \dots, \vvn \in V$ je \newterm{lineárně nezávislá}, 
+    pokud rovnice:
+    $$a_1\cdot\vvone + a_2\cdot\vvtwo + \dots + a_n\cdot\vvn = \vzero$$
+    má pouze triviální řešení $a_1 = a_2 = \dots = a_n = 0$. V opačném 
+    případě je daná $n$-tice vektorů \newterm{lineárně závislá}.
+\end{definition}
+
+\begin{remark}[Poznámky k definici lineární nezávislosti]
+    \leavevmode
+    \begin{itemize}
+        \item Na pořadí vektorů nezáleží.
+        \item Pokud $\exists i \neq j: \vvi = \vvj$, potom je daná $n$-tice
+            vektorů lineárně závislá.
+        \item Pokud $\exists i: \vvi = \vzero$, potom je daná $n$-tice vektorů 
+            lineárně závislá.
+        \item Rozšířená definice: Nekonečná množina je lineárně nezávislá,
+            pokud všechny její konečné podmnožiny jsou lineárně nezávislé.
+        \item Co znamená, že daná $n$-tice vektorů je lineárně závislá?
+            Alespoň jeden vektor $\vvi$ lze vyjádřit jako lineární kombinace
+            ostatních vektorů (nikoliv nutně všech).
+    \end{itemize}
+\end{remark}
+
+\begin{remark}[Příklady lineární (ne)závislosti]
+    \leavevmode
+    \begin{itemize}
+        \item Nechť $X \subseteq \mathbb{R}^2$ a $X \neq \emptyset$.
+            \begin{itemize}
+                \item $X = \{\vx\}$. Lineárně závislá, pouze když $\vx$ je 
+                    počátek; jinak lineárně nezávislá.
+                \item $X = \{\vx, \vy\}$. Pokud $\vzero \in X$, tak $X$ je 
+                    lineárně závislá. Podobně, leží-li $\vx$ a $\vy$ na 
+                    přímce procházející počátkem. V ostatních případech 
+                    je $X$ lineárně nezávislá.
+            \end{itemize}
+        \item Řádky nebo sloupce jednotkové nebo regulární matice jsou 
+            lineárně nezávislé.
+        \item Nenulové řádky matice v odstupňovaném tvaru jsou lineárně
+            nezávislé.
+        \item Nechť je $V$ prostor polynomů nad $\mathbb{R}$. Potom
+            $X = \{x^0, x^1, \dots, x^n, \dots \}$ je lineárně nezávislá.
+    \end{itemize}
+\end{remark}
+
+\begin{observation}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item Nechť $X$ je lineárně nezávislá a $Y \subseteq X$. 
+            Potom $Y$ je také lineárně nezávislá.
+        \item Nechť $X$ je lineárně závislá a $X \subseteq Y$. Potom $Y$ 
+            je také lineárně závislá.
+    \end{enumerate}
+\end{observation}
+
+\begin{observation}
+    $X$ je lineárně nezávislá, právě když $\forall u \in X: u \not \in 
+    \obal(X \setminus \{u\})$.
+\end{observation}
+
+\begin{remark}[Ověřování lineární (ne)závislosti]
+    Nechť $X \subseteq K^n, X = \{\vvone, \dots, \vvk \}.$ Pro ověření
+    lineární závislosti se nabízí dvě metody:
+    \begin{enumerate}[i.]
+        \item Řešíme $a_1\cdot\vvone + \dots + a_k\cdot \vvk = \vzero$, 
+            t.j. homogenní soustavu s $n$ řádky a $k$ sloupci, a hledáme
+            netriviální řešení.
+        \item Sestavíme matici, kde $\vvone, \dots, \vvk$ tvoří řádky,
+            a tuto matici převedeme do odstupňovaného tvaru. Dostaneme-li
+            nulový řádek, je daná $k$-tice lineárně závislá; v opačném
+            případě je lineární nezávislá.
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    \newterm{Bazí prostoru} $V$ nazvneme libovolnou množinu $X \subseteq V$,
+    která je lineárně nezávislá a navíc generuje celý prostor $V$, t.j. 
+    $\obal(X) = V$.
+\end{definition}
+
+\begin{remark}[Význam báze]
+    Díky tomu, že báze generuje celý prostor $V$, lze
+    každý vektor $\vu \in V$ vyjádřit jako lineární kombinaci vektorů z báze.
+    Navíc, jak ukazuje následující pozorování, díky lineární nezávislosti
+    vektorů báze je toto vyjádření jednoznačné.
+\end{remark}
+
+\begin{observation}
+    Nechť $X = \{\vvone, \dots, \vvn\}$ je konečná báze prostoru $V$ 
+    a~nechť $\vu \in V$. Jelikož $X$ generuje celý prostor $V$, lze
+    vektor $\vu$ vyjádřit jako lineární kombinaci vektorů báze: 
+    $$\vu = \sum_{i=1}^k a_i \cdot \vvi.$$ Toto vyjádření je jednoznačné.
+\end{observation}
+
+\begin{proof}
+    Sporem. Nechť existují dvě různá vyjádření vektoru $\vu$ jako lineární
+    kombinace vektorů báze, $\sum_{i=1}^k a_i \cdot \vvi$, a 
+    $\sum_{i=1}^k {a'}_i \cdot \vvi$. Jelikož jsou tato vyjádření různá, 
+    tak $\exists i: a_i - {a'}_i \neq 0$. Dále:
+    \begin{align*}
+        \vzero &= \vu - \vu\\
+               &= \sum_{i=1}^k {a}_i \cdot \vvi 
+                - \sum_{i=1}^k {a'}_i \cdot \vvi\\
+               &= \sum_{i=1}^k ({a}_i - {a'}_i) \cdot \vvi,
+    \end{align*}
+    čímž dostáváme spor s lineární nezávislostí vektorů báze.
+\end{proof}
+
+\begin{definition}
+    Nechť $X = \{\vvone, \dots, \vvn\}$ je konečná uspořádaná báze 
+    prostoru $V$ nad $K$. Pro libovolný vektor $\vu \in V$ nazveme 
+    koeficienty $(a_1, \dots, a_n)^\top \in K^n$ z jednoznačného 
+    vyjádření: $$ \vu = \sum_{i=1}^n a_i \cdot \vvi$$
+    \newterm{vektorem souřadnic} vektoru $\vu$ vůči bázi $X$. Značí se
+    $[\vu]_X = (a_1, \dots, a_n)$.
+\end{definition}
+
+\begin{remark}[Příklad bází a vektorů souřadnic]
+    \leavevmode
+    \begin{itemize}
+        \item Nechť $V = \{\text{kvadratické polynomy}\}$ a báze 
+            $X = \{x^2, x^1, x^0\}.$ Potom funkci $f = 2x^2 + 3x - 1$ lze 
+            vyjádřit vektorem souřadnic jako $[f]_X = (2; 3; -1)^\top$.
+        \item Pro vektorový prostor $V = K^n$ nazveme \newterm{kanonickou
+            bází} bázi tvořenou vektory $\{\vec{e_1}, \dots, \vec{e_n}\}$, 
+            kde $\vec{e_i}$ je $i$-tý sloupec jednotkové matice.
+    \end{itemize}
+\end{remark}
+
+\begin{proposition}
+    Nechť $X$ je taková množina, že generuje celý vektorový prostor $V$, t.j.
+    $\obal(X) = V$, ale $\forall Y \subset X: \obal(Y) \neq V$. Potom $X$ 
+    je báze vektorového prostoru $V$.
+\end{proposition}
+
+\begin{proof}
+    Musíme ověřit obě podmínky báze:
+    \begin{enumerate}[i.]
+        \item $\obal(X) = V$ víme z předpokladů.
+        \item Lineární nezávislost množiny $X$ plyne z toho, že $\forall
+            \vu \in X: \vu \not \in \obal(X \setminus \{\vu\})$.
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    Z každého konečného systému generátorů lze vybrat bázi.
+\end{corollary}
+
+\begin{proof}
+    Stačí vzít nějakou minimální vzhledem k inkluzi, která generuje $V$.
+\end{proof}
+
+\begin{theorem}
+    Každý vektorový prostor má bázi.
+\end{theorem}
+
+\begin{proof}
+    Bez důkazu pro vektorové prostory s nekonečným systémem generátorů,
+    jelikož by byl třeba axiom výběru.
+\end{proof}
+
+\begin{lemma}[Lemma o výměně]
+    \label{lemma:ovymene}
+    Nechť $\{\vvone, \dots, \vvn\}$ je systém generátorů $V$ a $\vu \in V$. 
+    Potom pro všechna $i$ taková, pro která existuje výjádření 
+    $\vu = \sum_{j = 1}^n a_j \cdot \vvj$, kde $a_i \neq 0$, platí, že 
+    $\{\vvone, \dots, \vec{v_{i-1}}, \vu, \vec{v_{i+1}}, \dots, \vvn\}$ je 
+    opět systém generátorů $V$.
+\end{lemma}
+
+\begin{proof}
+    Vyjádříme $\vvi$ jako: 
+    $$\vvi = \frac{1}{a_i}\left(\vu - \sum_{j=1, j \neq i}^{n} a_j\vvj\right).$$ 
+    Potom libovolné $\vw \in V, \vw = \sum_{j=1}^{n} b_j\vvj$ lze zapsat jako:
+    \begin{align*}
+        \vw &= \sum_{j=1, j \neq i}^{n} b_j\vvj + b_i \cdot
+            \frac{1}{a_i}\left(\vu - \sum_{j=1, j \neq i}^{n} a_j\vvj\right) \\
+            &= \sum_{j=1, j \neq i}^{n} b_j\vvj + \frac{b_i}{a_i}\vu 
+            - \sum_{j=1, j \neq i}^{n} \frac{b_ia_j}{a_i}\vvj \\
+            &= \frac{b_i}{a_i}\vu + \sum_{j=1, j \neq i}^{n} 
+                \left(b_j - \frac{b_ia_j}{a_i}\right)\vvj
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[Steinitzova věta o výměně]
+    \label{theorem:steinitz}
+    Nechť $V$ je vektorový prostor, $X$ je linárně nezávislá ve $V$ a $Y$
+    je konečný systém generátorů $V$. Potom existuje $Z$ takové, že
+    $X \subseteq Z \subseteq X \cup Y, L(Z) = V$ a $|Z| = |Y|$. Navíc platí
+    $|X| \leq |Y|$.
+\end{theorem}
+
+\begin{proof} Označme $X \setminus Y = \{u_1, \dots, u_n\}$ a položme $Z_0 
+    \coloneqq Y$. Pro $i = 1, \dots, n$ provedeme: $Z_{i-1}$ generuje $V$. 
+    Vyjádříme $u_i$ vůči $Z_{i-1}$: $$u_i = \sum_{w_j \in Z_{i-1}} a_jw_j.$$
+    $X$ je lineárně nezávislá, a tedy $a_j \neq 0$ pro nějaké 
+    $w_j \in Y \setminus X$. Položíme $Z_i \coloneqq Z_{i-1} \cup \{u_i\} 
+    \setminus {w_j}.$ Dle lemmatu o výměně $\obal(Z_i) = V$. Nakonec, 
+    $Z \coloneqq Z_n, |Z| = |Z_n| = |Z_{n-1}| = \dots = |Z_0| = |Y|.$ 
+    
+    Pokud by $|X| > |Y|$, potom $\exists i < n: Z_i \subset X$ a 
+    $\obal(Z_i) = V$. Dostáváme spor s lineární nezávislostí množiny $X$.
+\end{proof}
+
+\begin{corollary}
+    Pokud má vektorový prostor $V$ konečnou bázi, potom všechny jeho báze
+    mají stejnou mohutnost.
+\end{corollary}
+
+\begin{proof}
+    Nechť $X$ a $Y$ jsou dvě různé báze vektorového prostoru $V$. Potom:
+    \begin{enumerate}[a.]
+        \item $X$ je lineárně nezávislá a $\obal(Y) = V$. Potom dle 
+            Věty~\ref{theorem:steinitz} je $|X| \leq |Y|$.
+        \item Podobně $Y$ je lineárně nezávislá, $\obal(X) = V$ a 
+            $|Y| \leq |X|$.
+    \end{enumerate}
+
+    Vyplývá, že $|X| = |Y|$.
+\end{proof}
+
+\begin{corollary}
+    Pokud má vektorový prostor $V$ konečný systém generátorů, potom lze 
+    každou lineárně nezávislou množinu $X$ doplnit na bázi.
+\end{corollary}
+
+\begin{definition}
+    Nechť má vektorový prostor $V$ konečnou bázi. Potom se o $V$ říká, 
+    že je \newterm{konečně generovaný} a mohutnost jeho libovolné báze
+    nazveme \newterm{dimenzí} prostoru $V$. Značí se $\dm V$.
+\end{definition}
+
+\begin{remark}[Příklady bází a jejich dimenzí]
+    \leavevmode
+    \begin{itemize}
+        \item $\dm K^n = n$
+        \item Je-li matice $\mat{A}$ v odstupňovaném tvaru, potom 
+            $\dm R(\mat{A}) = \rank \mat{A}$.
+    \end{itemize}
+\end{remark}
+
+\begin{observation}
+    Je-li $W$ podprostor vektorového prostoru $V$ konečné dimenze, pak
+    $\dm W \leq \dm V$.
+\end{observation}
+
+\begin{proof}
+    Báze $W$ je lineárně nezávislá v $V$, ale lze ji doplnit na bázi 
+    celého prostoru $V$.
+\end{proof}
+
+\begin{observation}
+    Pro podprostory $U, V \subseteq W$, kde $\dm W < \infty$, platí:
+    $$\dm U + \dm V = \dm U \cap V + \dm(\obal(U \cup V)).$$
+\end{observation}
+
+\begin{observation}
+    \label{obs:dimradima}
+    Pro všechna $\mat{A} \in K^{m \times n}$ platí $\dm R(\mat{A}) 
+    = \rank \mat{A}.$
+\end{observation}
+
+\begin{proof}
+    Je-li $\mat{A} \sim \mat{A'}$ v odstupňovaném tvaru: $$\dm R(\mat{A})
+    = \dm R(\mat{A'})  = \rank \mat{A'} = \rank \mat{A}.$$
+\end{proof}
+
+\begin{remark}
+    Pozorování~\ref{obs:dimradima} lze využít k nalezení báze a určení
+    dimenze podmnožin $K^n$: Sestavíme matici z vektorů po řádcích a 
+    převedeme ji do odstupňovaného tvaru. Výsledné nenulové řádky tvoří 
+    bázi.
+\end{remark}
+
+\begin{theorem}
+    \label{theorem:dimradimsa}
+    Nechť $\mat{A} \in K^{m \times n}$. Potom platí:
+    $$\dm R(\mat{A}) = \dm S(\mat{A}).$$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[I.]
+        \item Nejdříve ukážeme, že přinásobením matice zleva dimenze
+            sloupcového prostoru nevzroste. Matice $\mat{R}$ a $\mat{A}$
+            jsou dány. Spočteme $\mat{A'} = \mat{R} \cdot \mat{A}$.
+            Označme $\vuone, \cdots, \vun$ sloupce matice $\mat{A}$ a
+            $\vec{{u'}_1}, \cdots, \vec{{u'}_n}$ sloupce matice $\mat{A'}$. 
+            Platí $\vec{{u'}_i} = \mat{R} \cdot \vui$. 
+
+            Nechť $w' \in S(\mat{A'})$, tedy $w' = \sum_{i=1}^{n} a_i 
+            \vec{{u'}_i} =
+            \sum_{i=1}^{n} a_i \cdot \mat{R} \cdot \vui = \mat{R} \cdot 
+            \sum_{i=1}^{n} a_i \vui = \mat{R} \cdot \vw$ pro nějaké 
+            $\vw \in S(A)$.
+
+            Nyní vyjádříme $\vw$ vůči bázi $\vvone, \cdots, \vvd$ prostoru 
+            $S(\mat{A})$, čili $\vw = \sum_{i=1}^{d} b_i \vvi$. Potom
+            $\vec{w'} = \mat{R} \cdot \vw = \mat{R} \cdot \sum_{i=1}^{n} 
+            b_i \vvi = \sum_{i=1}^{d} b_i \mat{R} \vvi = \sum_{i=1}^{d} 
+            b_i \vec{{v'}_i}$, kde $\vec{{v'}_i} \in S(\mat{A'})$, 
+            čili $\vec{{v'}_1}, \cdots, \vec{{v'}_d}$ tvoří systém 
+            generátorů $S(\mat{A'})$.
+
+            Tedy: $\dm S(\mat{A'}) \leq \dm S(\mat{A})$.
+
+        \item Je-li matice $\mat{R}$ regulární, dimenze zůstane zachována:
+            $\mat{A} = \invmat{R} \cdot \mat{A'}$, tedy $\dm S(\mat{A}) 
+            \leq \dm S(\mat{A'})$.
+
+        \item Pro matici $\mat{A'}$ v odstupňovaném tvaru platí 
+            $\dm R(\mat{A'}) = \dm S(\mat{A'})$, jelikož sloupce s pivoty
+            jsou lineárně nezávislé a tvoří bázi $S(\mat{A'})$.
+
+        \item Pro danou matici $\mat{A}$ nalezneme $\mat{A'} \sim \mat{A}$,
+            $\mat{A'}$ je v odstupňovaném tvaru. Víme, že platí: 
+            $\mat{A'} = \mat{R} \cdot \mat{A}$, $\mat{R}$ je regulární.
+
+            $\dim{S(\mat{A})} \stackrel{\text{II}}{=} \dm S(\mat{A'})
+            \stackrel{\text{III}}{=} \dm R(\mat{A'}) 
+            \underbrace{=}_{\text{Pozorování~\ref{obs:dimradima}}} 
+                \dm R(\mat{A})$
+    \end{enumerate}
+\end{proof}
+
+\begin{corollary}
+    $\rank \mat{A} = \rank \transmat{A}$
+\end{corollary}
+
+\begin{corollary}
+    Nechť $\mat{R}$ je regulární. Potom: 
+            $$\rank \mat{A} = \rank \mat{R} \cdot \mat{A}$$
+            $$\rank \mat{A} = \rank \mat{A} \cdot \mat{R}$$
+\end{corollary}
+
+\begin{corollary}
+    $S(\mat{A} \cdot \mat{B}) \subseteq S(\mat{A})$ a 
+            $R(\mat{A} \cdot \mat{B}) \subseteq R(\mat{B})$
+\end{corollary}
+
+\begin{proof}
+    $S(\mat{AB}) = \obal(\{x | x=\mat{A}\cdot u, \text{$u$ je sloupec 
+    $\mat{B}$}\})
+    = \{x' | x' = \mat{A} \cdot u', u' \in S(\mat{B}) \} \subseteq
+    \{x' | x' = \mat{A} \cdot u', u' \in K^n \} = S(\mat{A})$
+\end{proof}
+
+\begin{corollary}[Při násobení padáme s hodností]
+    $\rank \mat{AB} \leq min \{ \rank \mat{A}; \rank \mat{B} \}$ .
+\end{corollary}
+
+\begin{proposition}
+    Pro matici $\mat{A}$ řádu $m \times n$ platí:
+    $$\dm Ker(\mat{A}) + \rank \mat{A} = n$$
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item Hodnost matice $\rank \mat{A}$ určuju počet pivotů, tedy
+            počet bázových proměnných.
+        \item Pokud $\vec{x} \in Ker(\mat{A})$, potom $\vec{x}$ řeší 
+            $\mat{A}\vec{x} = \vec{0}$. Vektor $\vec{x}$ lze vyjádřit jako:
+            $$\vec{x} = p_1\vec{x^1} + \cdots + p_2\vec{x^{n-r}}$$
+            Množina $\left\{\vec{x^i}\right\}^{n-r}_{i=1}$ generuje 
+            $Ker(\mA)$. Navíc, $x_i$ jsou lineárně nezávislé, 
+            jelikož $\vec{x_i}$ má ve složce odpovídající $i$-té volné proměnné 
+            jedničku, zatímco ostatní složky jsou rovny nule. 
+            Plyne, že $\left\{\vec{x^i}\right\}^{n-r}_{i=1}$ je báze
+            $Ker(\mA)$ a $\dm Ker(\mat{A}) = n-r$.
+    \end{enumerate}
+\end{proof}

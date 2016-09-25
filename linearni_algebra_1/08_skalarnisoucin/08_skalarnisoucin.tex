@@ -1,0 +1,224 @@
+\section{Skalární součin}
+
+\begin{definition}
+    Nechť $V$ je vektorový prostor nad $\mathbb{C}$. Zobrazení, které
+    dvojici vektorů $\vec{u}, \vec{v} \in V$ přiřadí 
+    $\langle\vec{u}|\vec{v}\rangle \in \mathbb{C}$, se nazývá 
+    \newterm{skalární součin}, pokud splňuje následující axiomy:
+    \begin{itemize}
+        \item[(N)] $\forall \vec{u} \in V: \langle \vec{u} | \vec{u}
+            \rangle = 0 \iff \vec{u} = \vzero$
+        \item[(L1)] $\forall \vec{u},\vec{v}, \vec{w} \in V:
+            \langle \vec{u} + \vec{v} | \vec{w} \rangle = 
+            \scp{\vec{u}}{\vec{w}} + \scp{\vec{v}}{\vec{w}}$
+        \item[(L2)] $\forall \vec{u}, \vec{v} \in V, \forall a \in
+            \mathbb{C}: \scp{a\cdot\vec{u}}{\vec{v}} = a\cdot
+            \scp{\vec{u}}{\vec{v}}$
+        \item[(KS)] $\forall \vec{u}, \vec{v} \in V: 
+            \scp{\vec{u}}{\vec{v}} = \overline{\scp{\vec{v}}{\vec{u}}}$
+        \item[(P)] $\forall \vec{u} \in V: \scp{\vec{u}}{\vec{u}} 
+            \geq 0$ 
+    \end{itemize}
+\end{definition}
+
+\begin{remark}[Poznámka k axiomu (P)]
+    Jelikož $\forall \vec{u} \in V: \scp{\vec{u}}{\vec{u}} \geq 0$, 
+    vyplývá tedy, že $\scp{\vec{u}}{\vec{u}} \in \mathbb{R}$.
+\end{remark}
+
+\begin{remark}[Příklady skalárních součinů]
+    \leavevmode
+    \begin{itemize}
+        \item Skalární součin pro aritmetické vektorové prostory:
+            \begin{itemize}
+                \item $V = \mathbb{C}^n: \scp{\vec{u}}{\vec{v}} = 
+                    \sum_{i=1}^n u_i \overline{v_i}$
+                \item $V = \mathbb{R}^n: \scp{\vec{u}}{\vec{v}} = 
+                    \sum_{i=1}^n u_i v_i$
+            \end{itemize}
+        \item Skalární součin na $\mathbb{R}^n$ definovaný pomocí
+            regulární matice: $\scp{\vec{u}}{\vec{v}} = \vec{u}^\top
+            \cdot \transmat{A} \cdot \mat{A} \cdot \vec{v}$
+        \item Skalární součin na prostoru reálných spojitých funkcí
+            integrovatelných na intervalu $(a;b)$: 
+            $\scp{f(x)}{g(x)} \coloneqq \int_a^b f(x)g(x) \,dx$
+    \end{itemize}
+\end{remark}
+
+\begin{observation}
+    $\scp{\vx}{\vzero} = \scp{\vzero}{\vx} = 0$
+\end{observation}
+
+\begin{proof}
+    $\scp{\vx}{\vzero} = \scp{\vx}{0 \cdot \vx} = 0 \cdot \scp{\vx}{\vx}
+    = \scp{0\cdot \vx}{\vx} = \scp{\vzero}{\vx}$
+\end{proof}
+
+\begin{definition}
+    \label{def:normaskalarnisoucin}
+    Nechť $V$ je vektorový prostor se skalárním součinem, potom
+    \newterm{norma} odvozená od skalárního součinu je zobrazení
+    $\|\bullet\|: V \rightarrow \mathbb{R}$ dané předpisem:
+    $$\|\vec{u}\| \coloneqq \sqrt{\scp{\vec{u}}{\vec{u}}}.$$
+\end{definition}
+
+\begin{remark}[Geometrická interpretace normy a skalárního součinu
+    v $\mathbb{R}^n$]
+    \leavevmode
+    \begin{itemize}
+        \item $\|\vec{u}\|$ určuje délku vektoru $\vec{u}$
+        \item $\|\vec{u} - \vec{v}\|$ určuje vzdálenost vektorů
+            $\vec{u}$ a $\vec{v}$
+        \item $\scp{\vec{u}}{\vec{v}}$ určuje úhel mezi vektory
+            $\vec{u}$ a $\vec{v}$
+    \end{itemize}
+\end{remark}
+
+\begin{observation}
+    Pro standardní skalární součin a jím určenou normu na 
+    $\mathbb{R}^n$ platí: 
+    $$ \scp{\vec{u}}{\vec{v}} = \|\vec{u}\|\cdot\|\vec{v}\|\cdot \cos 
+    \varphi,$$
+    kde $\varphi$ je úhel sevřený vektory $\vec{u}$ a $\vec{v}$.
+\end{observation}
+
+\begin{proof}
+    Vektory $\vec{u}$, $\vec{v}$ a $\vec{u}-\vec{v}$ tvoří trojúhelník.
+    Podle kosinové věty: $$\|\vec{u} - \vec{v}\|^2 = \|\vec{u}\|^2
+    + \|\vec{v}\|^2 - 2 \cdot \|\vec{u}\| \cdot \|\vec{v}\| \cdot 
+    \cos \varphi,$$
+    tedy:
+    $$
+        \scp{\vec{u}-\vec{v}}{\vec{u}-\vec{v}} = \scp{\vec{u}}{\vec{u}} +
+        \scp{\vec{v}}{\vec{v}} - 2 \cdot \|\vec{u}\| \cdot \|\vec{v}\| \cdot 
+        \cos \varphi.$$
+
+    Podle axiomů skalárního součinu ovšem také platí:
+    \begin{align*}
+        \scp{\vec{u}-\vec{v}}{\vec{u}-\vec{v}} &= \\
+        &= \scp{\vec{u}}{\vec{u}-\vec{v}} - \scp{\vec{v}}{\vec{u}-\vec{v}} \\
+        &= \scp{\vec{u} - \vec{v}}{\vec{u}} - \scp{\vec{u} - 
+            \vec{v}}{\vec{v}} \\
+        &= \scp{\vec{u}}{\vec{u}} - \scp{\vec{v}}{\vec{u}} - 
+            \scp{\vec{u}}{\vec{v}} + \scp{\vec{v}}{\vec{v}} \\
+        &= \scp{\vec{u}}{\vec{u}} - 2\cdot \scp{\vec{u}}{\vec{v}} 
+            + \scp{\vec{v}}{\vec{v}}
+    \end{align*}
+
+    Odečteme-li tento výsledek od rovnice kosinové věty, dostáváme (po 
+    úpravách):
+    $$ \scp{\vec{u}}{\vec{v}} = \|\vec{u}\|\cdot\|\vec{v}\|\cdot \cos 
+    \varphi $$
+\end{proof}
+
+\begin{theorem}[Cauchy-Schwarzova nerovnost]
+    Nechť $V$ je vektorový prostor nad $\mathbb{C}$ se skalárním součinem
+    a s normou určenou tímto součinem. Potom platí:
+    $$ \forall u,v \in V: |\scp{\vec{u}}{\vec{v}}| \leq \|\vec{u}\| \cdot
+    \|\vec{v}\|. $$
+\end{theorem}
+
+\begin{proof}
+    Je-li $\vec{u} = \vzero$ nebo $\vec{v} = \vzero$, nerovnost platí. 
+    
+    Určitě $\forall a \in \mathbb{C}: \|\vec{u} + a\cdot\vec{v}\|^2 \geq 0$.
+    Tedy:
+    \begin{align*}
+        0 \leq \|\vec{u} + a\vec{v}\|^2 &= \\
+        &= \scp{\vec{u} + a\vec{v}}{\vec{u} + a\vec{v}} \\
+        &= \scp{\vec{u}}{\vec{u} + a\vec{v}} + \scp{a\vec{v}}{\vec{u} 
+            + a\vec{v}} \\
+        &= \overline{\scp{\vu + a\vv}{\vu}} + a
+            \overline{\scp{\vu + a \vv}{\vv}} \\
+        &= \scp{\vu}{\vu} + \overline{a \scp{\vv}{\vu}} + 
+            a \overline{\scp{\vu}{\vv}} + a  \overline{a}
+            \scp{\vv}{\vv} \\
+        &= \overline{a}\scp{\vec{u}}{\vec{v}} + \scp{\vec{u}}{\vec{u}} +
+            a\scp{\vec{v}}{\vec{u}} + a\overline{a}\scp{\vec{v}}{\vec{v}}
+    \end{align*}
+
+    Dosadíme 
+    $a \coloneqq -\frac{\scp{\vec{u}}{\vec{v}}}{\scp{\vec{v}}{\vec{v}}}$,
+    čímž se zbavíme prvního a posledního členu. Zbývá:
+    \begin{align*}
+        0 &\leq \scp{\vec{u}}{\vec{u}} 
+        -\frac{\scp{\vec{u}}{\vec{v}}\scp{\vec{v}}{\vec{u}}}
+        {\scp{\vec{v}}{\vec{v}}} \\
+        \scp{\vec{u}}{\vec{v}}\scp{\vec{v}}{\vec{u}} &\leq
+        \scp{\vec{u}}{\vec{u}}\scp{\vec{v}}{\vec{v}}
+    \end{align*}
+
+    Upravíme levou stranu nerovnosti:
+    $$\scp{\vec{u}}{\vec{v}}\scp{\vec{v}}{\vec{u}} = 
+        \scp{\vec{u}}{\vec{v}}\overline{\scp{\vec{u}}{\vec{v}}} =
+        |\scp{\vec{u}}{\vec{v}}|^2,$$
+    a tedy:
+    \begin{align*}
+        |\scp{\vec{u}}{\vec{v}}|^2 &\leq
+        \scp{\vec{u}}{\vec{u}}\scp{\vec{v}}{\vec{v}} \\
+        |\scp{\vec{u}}{\vec{v}}| &\leq \|\vec{u}\|\|\vec{v}\|
+    \end{align*}
+\end{proof}
+
+\begin{corollary}[Vztah mezi aritmetickým a kvadratickým průměrem]
+    Nechť $u_i \in \mathbb{R}$. Potom:
+    $$\frac{1}{n}\sum_{i=1}^n u_i \leq \sqrt{\frac{1}{n}\sum_{i=1}^{n} u_i^2}$$
+\end{corollary}
+
+\begin{proof}
+    Položme 
+    \begin{align*} 
+        \vec{v} &= \rowvec{1,1,\dots,1}^\top \\
+        \vec{u} &= (\text{seřazená čísla})^\top.
+    \end{align*}
+    Potom 
+    $$\scp{\vec{u}}{\vec{v}} = \sum_{i=1}^n u_i, 
+    \|\vec{u}\| = \sqrt{\sum_{i=1}^n u_i^2}, \text{ a }
+    \|\vec{v}\| = \sqrt{n}.$$
+\end{proof}
+
+\begin{corollary}[Trojúhelníková nerovnost]
+    Norma odvozená od skalárního součinu splňuje trojúhelníkovou nerovnost:
+    $$\|\vec{u} + \vec{v}\| \leq \|\vec{u}\| + \|\vec{v}\|$$
+\end{corollary}
+
+\begin{proof}
+    \begin{align*}
+        \|\vec{u} + \vec{v}\| &= \sqrt{\scp{\vec{u} + \vec{v}}{\vec{u} + 
+            \vec{v}}} \\
+            &= \sqrt{\scp{\vu}{\vu + \vv} + \scp{\vv}{\vu + \vv}} \\
+            &= \sqrt{\scp{\vu}{\vu} + \scp{\vu}{\vv} + \scp{\vv}{\vu} 
+                + \scp{\vv}{\vv}} \\
+            &= \sqrt{\scp{\vu}{\vu} + \scp{\vu}{\vv} + 
+                \overline{\scp{\vu}{\vv}} + \scp{\vv}{\vv}} \\
+            &\leq \sqrt{\scp{\vu}{\vu} + 2|\scp{\vu}{\vv}| + \scp{\vv}{\vv}}
+                \tag{V $\mathbb{C}$: $a + \overline{a} \leq 2 \cdot |a|$} \\
+            &\leq \sqrt{\scp{\vu}{\vu} + 2\|\vu\|\|\vv\| + \scp{\vv}{\vv}} \\
+            &= \sqrt{\|\vu\|^2 + 2\|\vu\|\|\vv\| + \|\vv\|^2} \\
+            &= \sqrt{\left(\|\vu\| + \|\vv\|\right)^2} = \|\vu\| + \|\vv\|
+    \end{align*}
+\end{proof}
+
+\begin{definition}
+    Obecně \newterm{norma} na vektorovém prostoru $V$ je zobrazení 
+    $\|\bullet\|: V \rightarrow \mathbb{R}$, které splňuje následující
+    podmínky:
+    \begin{enumerate}[i.]
+        \item $\|\vec{0}\| = 0$
+        \item $\|\vu\| \geq 0$
+        \item $\|a \cdot \vu\| = a \cdot \|\vu\|$
+        \item $\|\vu + \vv\| \leq \|\vu\| + \|\vv\|$
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}[Příklady norm]
+    \leavevmode
+    \begin{itemize}
+        \item Norma odvozená od skalárního součinu (viz definici 
+            \ref{def:normaskalarnisoucin}).
+        \item $L_p$ norma, definovaná: $$ \|\vu\|_p = \sqrt[p]{\sum_{i=1}^n
+            |u_i|^p}.$$
+            Obvyklá Eukleidovská norma ($\sqrt{\sum_{i=1}^n |u_i|^2}$) je tedy
+            speciální případ $L_p$ normy s $p = 2$.
+    \end{itemize}
+\end{remark}

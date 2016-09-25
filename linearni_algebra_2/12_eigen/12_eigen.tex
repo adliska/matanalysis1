@@ -1,0 +1,533 @@
+\section{Vlastní čísla a vlastní vektory}
+
+\subsection{Úvod}
+
+\begin{definition}
+    Nechť $V$ je vektorový prostor nad tělesem $T$ a $f: V \rightarrow V$
+    je lineární zobrazení. Potom $\lambda \in T$, pro nějž existuje nenulový
+    vektor $\vx \in V$ takový, že $f(\vx) = \lambda\vx$, nazveme 
+    \newterm{vlastním číslem} zobrazení $f$.
+
+    \newterm{Vlastní vektor} příslušný vlastnímu číslu $\lambda$ je každý
+    nenulový vektor $\vx \in V$ splňující $f(\vx) = \lambda\vx.$
+
+    Je-li $\dm(V) = n < \infty$, potom lze $f$ reprezentovat maticí zobrazení
+    $\mA \in T^{n \times n}$ a můžeme předchozí definici rozšířit i na matice.
+ 
+    Množina všech vlastních čísel matice či zobrazení se nazývá
+    \newterm{spektrum}.
+\end{definition}
+
+\begin{observation}
+    Množina vlastních vektorů příslušných k pevnému vlastnímu číslu $\lambda$
+    tvoří podprostor $V$.
+\end{observation}
+
+\begin{proof}
+    Nechť $\vx$ a $\vy$ jsou vlastní vektory příslušné k vlastnímu číslu 
+    $\lambda$. Potom:
+    $f(c\vx) = cf(\vx) = \lambda c \vx$ a $f(\vx + \vy) = f(\vx) + f(\vy) = \lambda
+    \vx + \lambda \vy = \lambda (\vx + \vy)$.
+\end{proof}
+
+\begin{remark}[Geometrický význam vlastních vektorů]
+    Vlastní vektory jsou vektory, které nemění směr při zobrazení $f$.
+\end{remark}
+
+\begin{theorem}
+    \label{th:indeigenvectors}
+    Nechť $f: V \rightarrow V$ je lineární zobrazení, $\lambda_1, \dots, 
+    \lambda_k$ jsou navzájem různá vlastní čísla zobrazení $f$ a $\vxone,
+    \dots, \vxk$ jsou některé vlastní vektory příslušné k $\lambda_1,
+    \dots, \lambda_k$. Potom $\vxone, \dots, \vxk$ jsou lineárně nezávislé.
+\end{theorem}
+
+\begin{proof}
+    Větu dokážeme indukcí a sporem zároveň. 
+
+    Pro $k=1$ věta platí triviálně. 
+    
+    Předpokládejme, že věta platí pro $k-1$, a předpokládejme dále, že 
+    $\vxone, \dots, \vxk$ jsou lineárně závislé, 
+    t.j. $\exists a_1, \dots,
+    a_n: \sum_{i=1}^k a_i\vxi = \vzero.$ Potom:
+    $$ \vzero = f(\vzero) = f(\sum_{i=1}^k a_i\vxi) = \sum_{i=1}^k a_i f(\vxi) =
+    \sum_{i=1}^k a_i \lambda_i x_i$$
+    a
+    $$\vzero = \lambda_k \vzero = \lambda_k \sum_{i=1}^k a_i\vxi = \sum_{i=1}^k
+    a_i\lambda_k\vxi.$$
+    Potom:
+    $$\vzero = \vzero - \vzero = \sum_{i=1}^k a_i \lambda_i \vxi - \sum_{i=1}^k
+    a_i\lambda_k\vxi = \sum_{i=1}^{k} a_i(\lambda_i - \lambda_k)\vxi =
+    \sum_{i=1}^{k-1} a_i\lambda_i\vxi.$$
+    Tedy, $\vxone, \dots, \vec{x_{k-1}}$ jsou lineárně závislé, což je spor
+    s předpoklady.
+\end{proof}
+
+\begin{corollary}
+    Čtvercová matice řádu $n$ může mít nejvýše $n$ vlastních čísel.
+\end{corollary}
+
+\subsection{Podobné a diagonizovatelné matice}
+
+\begin{remark}
+    Vztah zobrazení $f$ a matice zobrazení $\mA = [f]_{XX}$ není jednoznačný, 
+    jelikož matice zobrazení závisí na volbě báze $X$. Všechny matice
+    zobrazení ovšem musejí mít stejná vlastní čísla (jelikož ta jsou
+    daná zobrazením). Mějme dvě různé báze $X$ a $Y$. Potom:
+    \begin{align*}
+        [f(\vu)]_X &= [f]_{XX}[\vu]_X \\
+        [f(\vu)]_X &= [id]_{YX}[f]_{YY}[id]_{XY}[\vu]_X \\
+    \end{align*}
+    a tedy:
+    $$[f]_{XX} = [id]_{YX}[f]_{YY}[id]_{XY}.$$
+\end{remark}
+
+\begin{definition}
+    Čtvercové matice $\mA$ a $\mB$ stejného řádu se nazývají 
+    \newterm{podobné}, pokud existuje regulární matice $\mR$ taková, že
+    $\mA = \mRi \mB \mR.$
+\end{definition}
+
+\begin{theorem}
+    Jsou-li matice $\mA$ a $\mB$ podobné, t.j. $\mA = \mR \mB \mRi$, 
+    $\lambda$ je vlastní číslo
+    matice $\mA$ a $\vx$ je příslušný vlastní vektor, tak potom $\lambda$
+    je také vlastní číslo matice $\mB$ a $\vy = \mR \vx$ je příslušný
+    vlastní vektor matice $\mB$.
+\end{theorem}
+
+\begin{proof}
+    $\mB\vy = \underbrace{\mR \mA \mRi}_{\mB} \underbrace{\mR \vx}_{\vy} = 
+    \mR \mA \vx = \mR \lambda \vx = \lambda \mR \vx = \lambda \vy$
+\end{proof}
+
+\begin{observation}
+    Vlastní čísla diagonální matice jsou prvky na diagonále a vlastní 
+    vektory jsou příslušné vektory kanonické báze.
+\end{observation}
+
+\begin{definition}
+    Matice se nazývá \newterm{diagonizovatelná}, pokud je podobná
+    nějaké diagonální matici.
+\end{definition}
+
+\begin{remark}[Užití diagonalizace]
+    \leavevmode
+    \begin{itemize}
+        \item Snadný popis vlastních čísel a vlastních vektorů: $\lambda_i
+            = (\mat{D})_{ii}$, $\vec{e_i}$ je příslušný vlastní vektor.
+        \item Snadný výpočet mocnin: Nechť $\mA = \mRi \mD \mR$. Potom:
+            $$ \mA^n = (\mRi \mD \mR) (\mRi \mD \mR) \dots (\mRi \mD \mR)
+            = \mRi \mD^n \mR,$$
+            kde $(\mD^n)_{ii} = ((\mD)_{ii})^n.$
+    \end{itemize}
+\end{remark}
+
+\begin{theorem}
+    Pokud má matice $\mA \in K^{n \times n}$ $n$ různých vlastních čísel, tak potom
+    je diagonizovatelná.
+\end{theorem}
+
+\begin{proof}
+    $\lambda_1, \dots, \lambda_n$ vlastní čísla, $\vx_1, \dots, \vx_n$
+    příslušné lineárně nezávislé vektory. Sestavme matici $\mR$, jejíž
+    sloupce jsou vektory $\vx_1$ až $\vx_n$. Tato matice je regulární,
+    jelikož je sestavena z lineárně nezávislých vektorů 
+    (viz Větu~\ref{th:indeigenvectors}). Potom $\mA\mR = \mR \mD,$
+    kde:
+    $$\mD = \begin{pmatrix}
+        \lambda_1 &0         &\dots  &0 \\
+                0 &\lambda_2 &\dots  &0 \\
+                  &          &\ddots  &  \\
+                0 &\dots     &\dots  &\lambda_n
+    \end{pmatrix},$$
+    a $\mD = \mRi \mA \mR.$
+\end{proof}
+
+\begin{theorem}
+    Matice $\mA \in T^{n \times n}$ je diagonizovatelná, právě když
+    má $n$ lineárně nezávislých vlastních vektorů.
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item[$\implies$] Existuje $\mR$ regulární: $\mRi \mA \mR = \mD$,
+            neboli $\mA \mR = \mR \mD$. Sloupce $\mR$ jsou vlastní vektory a
+            ty jsou lineárně nezávislé, jelikož $\mR$ je regulární.
+        \item[$\impliedby$] Z vlastních vektorů sestavíme $\mR$, ta je 
+            regulární: $\mA \mR = \mR \mD$ a $\mRi \mA \mR = \mD$.
+    \end{itemize}
+\end{proof}
+
+\subsection{Charakteristický mnohočlen}
+
+\begin{definition}
+    Nechť $\mA$ je čtvercová matice nad tělesem $T$. Potom 
+    \newterm{charakteristický mnohočlen} v proměnné $t$ je dán
+    předpisem:
+    $$p_\mA(t) \coloneqq \det(\mA - t\mIn)$$
+\end{definition}
+
+\begin{theorem}
+    Pro matici $\mA \in T^{n \times n}$ platí: $\lambda \in T$ je vlastní
+    číslo matice $\mA$, právě když je kořenem charakteristického 
+    mnohočlenu.
+\end{theorem}
+
+\begin{proof}
+    $\lambda$ je vlastní číslo $\mA \iff \exists \vx \neq \vzero: \mA\vx
+    = \lambda\vx \iff \exists \vx \neq \vzero: \mA\vx - \lambda\vx =
+    \mA \vx - \lambda \mIn \vx = \vzero \iff \exists \vx \neq \vzero:
+    (\mA - \lambda\mIn) \vx = \vzero \iff$ matice $\mA - \lambda\mIn$ 
+    je singulární $\iff \det(\mA - \lambda \mIn) = 0 \iff 
+    p_\mA(\lambda) = 0 \iff \lambda$ je kořenem $p_\mA(t)$.
+\end{proof}
+
+\begin{proposition}
+    Podobné matice mají stejné charakteristické mnohočleny.
+\end{proposition}
+
+\begin{proof}
+    Uvažujme $\mA = \mRi \mB \mR$. Potom 
+    \begin{align*}
+        p_\mA(t) &= \det(\mA-t\mIn) \\
+                 &= \det(\mRi \mB \mR - t \mRi \mIn \mR) 
+                    \tag{Věta~\ref{th:detabdetadetb}}\\
+                 &= \det(\mRi (\mB - t\mIn) \mR) \\
+                 &= \det(\mRi) \det(\mB - t\mIn) \det(\mR)
+                    \tag{Věta~\ref{th:detabdetadetb}, 
+                        Důsledek~\ref{cor:detai}}\\
+                 &= \det(\mB -t\mIn) \\
+                 &= p_\mB(t)
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    Pro libovolné čtvercové matice $\mA$ a $\mB$ mají matice $\mA\mB$
+    a $\mB\mA$ stejná vlastní čísla.
+\end{proposition}
+
+\begin{proof}
+    Použijeme pravidlo pro násobení blokových matic:
+    $$\begin{pmatrix}
+        \mA\mB &\mzero \\
+        \mB &\mzero
+    \end{pmatrix}
+    \begin{pmatrix}
+        \mat{I} &\mA \\
+        \mzero &\mat{I}
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \mA\mB &\mA\mB\mA \\
+        \mB &\mB\mA
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        \mat{I} &\mA \\
+        \mzero &\mat{I}
+    \end{pmatrix}
+    \begin{pmatrix}
+        \mzero &\mzero \\
+        \mB &\mB\mA
+    \end{pmatrix}$$
+    Tedy, $\begin{pmatrix}
+        \mA\mB &\mzero \\
+        \mB &\mzero
+    \end{pmatrix}$ je podobná
+    $\begin{pmatrix}
+        \mzero &\mzero \\
+        \mB &\mB\mA
+    \end{pmatrix}$, tím pádem mají stejné charakteristické mnohočleny:
+    \begin{align*}
+    \det\begin{pmatrix}
+        \mA\mB-t\mat{I} &\mzero \\
+        \mB &-t\mat{I}
+    \end{pmatrix} &= \det(\mA\mB - t\mat{I}) \cdot (-t)^n 
+    = p_{\mA\mB}(t)\cdot(-t)^n \\
+    \det\begin{pmatrix}
+        -t\mat{I} &\mzero \\
+        \mB &\mB\mA -t\mat{I}
+    \end{pmatrix} &= (-t)^n \det(\mB\mA-t\mat{I}) = (-t)^n \cdot p_{\mB\mA}(t)
+    \end{align*}
+    Vyplývá, že $p_{\mA\mB}(t) = p_{\mB\mA}(t)$.
+\end{proof}
+
+\begin{theorem}[Základní věta algebry]
+    Každý mnohočlen stupně alespoň 1 v $\mathbb{C}$ má alespoň jeden kořen.
+\end{theorem}
+
+\begin{proof}
+    Důkaz je poměrně těžký -- větu necháme bez důkazu.
+\end{proof}
+
+\begin{corollary}
+    Každý komplexní mnohočlen lze rozložit na součin jednočlenů.
+\end{corollary}
+
+\begin{proof}
+    Nechť $p(t) = a_nt^n + \dots + a_1t + a_0$ je komplexní mnohočlen
+    a $\lambda_1$ jeho kořen. Jelikož $p(t)$ je dělitelný $(t-\lambda_1)$ 
+    beze zbytku, je $\frac{p_\mA(t)}{t-\lambda_1}$ opět
+    mnohočlen, stupně $n-1$. $p_\mA(t)$ lze tedy rozložit: 
+    $$p_\mA(t) = a_n(t-\lambda_1)^{r_1} \cdot
+    (t-\lambda_2)^{r_2} \dots  (t - \lambda_k)^{r_k},$$ kde $\lambda_1,
+    \dots, \lambda_k$ jsou navzájem různá komplexní čísla a $r_1 + \dots + r_k = n$.
+    Číslo $r_i$ se nazývá \newterm{násobnost kořene} $\lambda_i$.
+\end{proof}
+
+\begin{observation}
+    Nechť $p_\mA(t) = \det(\mA -t\mIn).$ Potom lze $p_\mA(t)$ vyjádřit jako:
+    $$p_\mA(t) = a_nt^n + a_{n-1}t^{n-1} + \dots + a_1t + a_0.$$
+    Platí:
+    \begin{enumerate}[i.]
+        \item $a_n = (-1)^n$
+        \item $a_0 = \lambda_1^{r_1} \cdot \lambda_2^{r_2} \dots \lambda_k^{r_k}
+            = \det(\mA)$
+        \item $a_{n-1} = (-1)^{n-1}(\lambda_1r_1 + \lambda_2r_2 + \dots + 
+            \lambda_kr_k) = (-1)^{n-1}((\mA)_{11} + (\mA)_{22} + \dots +
+            (\mA)_{nn})$
+    \end{enumerate}
+\end{observation}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item Veškerá $(-t)$ se vyskytují na diagonále a existuje pouze jeden
+            způsob, jak je vybrat.
+        \item Po dosazení $t=0: p_\mA(0) = \det(\mA) = \lambda_1^{r_1}\dots
+            \lambda_k^{r_k}$.
+        \item $t^{(n-1)}$ lze ze součinu $(t - \lambda_1)^{r_1}\dots(t - 
+            \lambda_k)^{r_k}$ získat $n$ způsoby; každý dává $\lambda_i$.
+            Navíc, z definice determinantu, $t^{n-1}$ lze získat pouze
+            ze součinu odpovídajícímu identitě: $(t - (\mA)_{11})\dots
+            (t-(\mA)_{nn})$ (není možné ``uhnout'' z diagonály).
+    \end{enumerate}
+\end{proof}
+
+\begin{proposition}
+    Matice $\mA \in \Cnn$ je diagonizovatelná, právě když pro každé vlastní 
+    číslo $\lambda_i$ platí:
+    $$\dm(\Ker(\mA - \lambda_i\mIn)) = r_i.$$
+\end{proposition}
+
+\begin{proof}
+    Matice $\mA$ je diagonizovatelná, právě když existuje báze v $\Cn$ složená
+    z vlastních vektorů. Pro vektory v prostoru $\Ker(\mA - \lambda_i\mIn)$ 
+    platí: $(\mA - \lambda_i\mIn)\vx = \vzero,$ a tedy $\mA\vx = \lambda_i\vx$.
+
+    Z takto získaných vektorů složíme regulární matici $\mR$ a potom
+     $\mA \mR = \mR \mD.$
+\end{proof}
+
+\begin{remark}
+    Existují matice, které nejsou diagonizovatelné. Například:
+    $$\begin{pmatrix}
+        1 &1 \\
+        0 &1
+    \end{pmatrix}$$
+    Tato matice má jedno vlastní číslo $\lambda = 1$ násobnosti 2. Pokud by 
+    byla diagonizovatelná, musela by být podobná matici $\mD = \begin{pmatrix}
+        1 &0 \\
+        0 &1
+    \end{pmatrix}$. Potom: $\mA = \mRi \mD \mR = \mat{I_2}$ a dostáváme spor.
+\end{remark}
+
+\begin{definition}
+    Nechť $\lambda \in \C, k \in \N$. \newterm{Jordanova buňka} 
+    $J_k(\lambda)$ je čtvercová matice řádu $k$ následujícího tvaru:
+    $$\mat{J_k(\lambda)} = \begin{pmatrix}
+        \lambda &1       &0      &\dots  &\dots  &0 \\
+              0 &\lambda &1      &0      &\dots  &0 \\
+         \vdots &\ddots  &\ddots &\ddots &\ddots &\vdots \\
+         \vdots &        &\ddots &\ddots &\ddots &0 \\
+         \vdots &        &       &\ddots &\ddots &1 \\
+              0 &\dots   &\dots  &\dots  &0      &\lambda
+    \end{pmatrix}$$
+\end{definition}
+
+\begin{definition}
+    Matice $\mat{J} \in \Cnn$ je v \newterm{Jordanově normální formě}, pokud
+    je v blokově diagonálním tvaru a bloky na diagonále jsou Jordanovy buňky:
+    $$\mat{J} = \begin{pmatrix}
+        \mat{J_{k_1}(\lambda_1)} &0 &\dots &0 \\
+                              0 &\ddots &\ddots &\vdots \\
+                         \vdots &\ddots &\ddots &0 \\
+                              0 &\dots  &0      &\mat{J_{k_m}(\lambda_m)}
+    \end{pmatrix}$$
+\end{definition}
+
+\begin{theorem}
+    Každá matice $\mA \in \Cnn$ je podobná matici v Jordanově normální formě.
+\end{theorem}
+
+\begin{proof}
+    Bez důkazu.
+\end{proof}
+
+\begin{definition}
+    Nechť $\mA \in \Cnn$. Matici $\mAH$, pro níž platí $(\mAH)_{ij} = 
+    \overline{a_{ji}}$, nazýváme \newterm{hermitovskou transpozicí} matice 
+    $\mA$.
+\end{definition}
+
+\begin{observation}
+    $(\mA\mB)^\herm = \mB^\herm \mA^\herm$, pokud je operace definována.
+\end{observation}
+
+\begin{proof}
+    $(\mA\mB)^\herm_{ij} = \overline{(\mA\mB)_{ji}} = \overline{\sum_{k=1}^n 
+    \mA_{jk} \cdot \mB_{ki}} = \sum_{k=1}^n \overline{\mA_{jk}} \cdot \overline{\mB_{ki}} = 
+    \sum_{k=1}^n \mB^\herm_{ik} \mA^\herm_{kj} = (\mB^\herm \mA^\herm)_{ij}$
+\end{proof}
+
+\begin{observation}
+    Standardní skalární součin na $\Cn$ je možno zapsat jako:
+    $$\scp{\vx}{\vy} = \sum_{i=1}^n x_i \overline{y_i} = \vy^\herm \vx.$$
+\end{observation}
+
+\begin{observation}
+    Je-li matice $\mA$ složena z vektorů ortonormální báze $\Cn$ (vůči
+    standardnímu skalárnímu součinu), tak platí: $$\mA^\herm \mA = \mIn.$$
+\end{observation}
+
+\begin{definition}
+    Komplexní čtvercová matice $\mA$ se nazývá \newterm{unitární}, pokud
+    $\mA^\herm \mA = \mIn.$
+\end{definition}
+
+\begin{definition}
+    Komplexní čtvercová matice $\mA$ se nazývá \newterm{hermitovská}, 
+    pokud $\mA^\herm = \mA.$
+\end{definition}
+
+\begin{remark}
+    Hermitovské matice představují komplexní analogii reálných 
+    symetrických matic. Uvědomme si navíc, že na diagonále hermitovské matice 
+    jsou reálná čísla. 
+\end{remark}
+
+\begin{theorem}
+    \label{th:hermunitr}
+    Nechť $\mA$ je hermitovská matice. Potom:
+    \begin{enumerate}[i.]
+        \item všechna její vlastní čísla jsou reálná, a
+        \item existuje unitární matice $\mR$ taková, že $\mRi \mA \mR$ je 
+            diagonální.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Větu dokážeme indukcí podle řádu matice $n$. Označme $\mat{A_n} = \mA$.
+    Buď $\lambda$ vlastní číslo $\mA$ (jeho existence plyne ze základní
+    věty algebry) a $\vx$ příslušný normovaný vlastní vektor,
+    $\|\vx\| = 1.$ Doplníme $\vx$ na ortonormální bázi $\Cn$ a z těchto
+    vektorů sestavíme unitární matici $\mat{P_n} = (\vx | \dots).$
+    Potom platí: $$(\mPn^\herm \mAn \mPn)^\herm = \mPn^\herm 
+    \underbrace{\mAn^\herm}_{=\mAn} 
+    \underbrace{(\mPn^\herm)^\herm}_{=\mPn} = \mPn^\herm \mAn \mPn,$$
+    a tedy matice $\mPn^\herm \mAn \mPn$ je hermitovská.
+    Jelikož první sloupec součinu $\mAn \mPn$ je $\lambda$-násobek $\vx$,
+    platí, že: $$\mPn^\herm \mAn \mPn = \begin{pmatrix}[c|ccc]
+        \lambda &0 &\dots &0 \\
+        \hline
+        0 & & &\\
+        \vdots & &\mat{A_{n-1}} & \\
+             0 & & &
+    \end{pmatrix},$$
+    kde $\mat{A_{n-1}}$ je hermitovská a $\lambda$ je reálné.
+
+    Z indukce, pro $\mat{A_{n-1}}$ existuje unitární matice $\mat{R_{n-1}}$
+    taková, že $\invmat{R_{n-1}} \mat{A_{n-1}} \mat{R_{n-1}} = \mat{D_{n-1}}.$
+    Položme: $$\mat{S_n} \coloneqq \begin{pmatrix}[c|ccc]
+        1 &0 &\dots &0 \\
+        \hline
+        0 & & &\\
+        \vdots & &\mat{R_{n-1}} & \\
+             0 & & &
+    \end{pmatrix}.$$
+    Tato matice je unitární a její sloupce tvoří ortonormální bázi $\Cn$.
+    Vezměme dále $\mRn \coloneqq \mPn \mat{S_n}.$ $\mPn$ je unitární (jelikož
+    tak byla sestavena). I matice $\mRn$ je unitární, jelikož 
+    $\mat{R_n}^\herm \mRn = (\mPn \mat{S_n})^\herm (\mPn \mat{S_n}) = 
+    \mat{S_n}^\herm \mPn^\herm \mPn \mat{S_n} = \mIn.$
+
+    Zbývá ověřit, že $\invmat{R_n} \mAn \mRn = \mat{D_n}$:\footnote{Uvědomme 
+        si, že pro každou unitární matici $\mR$ platí: 
+    $\invmat{R} = \mR^\herm.$}
+    \begin{align*}
+        \mRn^\herm \mAn \mRn 
+        &= \mat{S_n}^\herm \mPn^\herm \mAn \mPn \mat{S_n} \\
+        &= \begin{pmatrix}[c|ccc]
+            1 &0 &\dots &0 \\
+            \hline
+            0 & & &\\
+            \vdots & &\mat{R_{n-1}}^\herm & \\
+                 0 & & &
+        \end{pmatrix}
+        \begin{pmatrix}[c|ccc]
+            \lambda &0 &\dots &0 \\
+            \hline
+            0 & & &\\
+            \vdots & &\mat{A_{n-1}} & \\
+                 0 & & &
+        \end{pmatrix}
+        \begin{pmatrix}[c|ccc]
+            1 &0 &\dots &0 \\
+            \hline
+            0 & & &\\
+            \vdots & &\mat{R_{n-1}} & \\
+                 0 & & &
+        \end{pmatrix} \\
+        &=
+        \begin{pmatrix}[c|ccc]
+            \lambda &0 &\dots &0 \\
+            \hline
+            0 & & &\\
+            \vdots & &\mat{D_{n-1}} & \\
+                 0 & & &
+        \end{pmatrix}
+        =
+        \mat{D_n}
+    \end{align*}
+\end{proof}
+
+\begin{observation}
+    \label{obs:scpuv=vhu}
+    Nechť $V$ je vektorový prostor se skalárním součinem konečné dimenze
+    a $X=\{\vxone, \dots, \vxn\}$ je jeho libovolná ortonormální báze. 
+    Potom: $$\forall \vu, \vv \in V: \scp{\vu}{\vv} = \sum_{i=1}^n
+    \scp{\vu}{\vxi}\scp{\vxi}{\vv} = [\vv]_X^\herm[\vu]_X.$$
+\end{observation}
+
+\begin{proof}
+    $\vu = \sum_{i=1}^n \alpha_i\vxi, \alpha_i=\scp{\vu}{\vxi} = ([\vu]_X)_i,
+    \vv = \sum_{i=1}^n \beta_i\vxi, \beta_i=\scp{\vv}{\vxi} = ([\vv]_X)_i,
+    \overline{\beta_i} = \scp{\vxi}{\vv}.$ Dále:
+    \begin{align*}
+        \scp{\sum_{i=1}^n \alpha_i\vxi}{\sum_{i=1}^n \beta_i\vxi} 
+            &= \sum_{i,j=1}^n \alpha_i\overline{\beta_i} \scp{\vxi}{\vxj} \\
+            &= \sum_{i=1}^n \alpha_i \overline{\beta_i} \tag{$X$ je 
+                ortonormální báze}
+    \end{align*}
+\end{proof}
+
+\begin{proposition}
+    Nechť $V$ je vektorový prostor konečné dimenze se skalárním součinem,
+    $X = \{\vxone, \dots, \vxn\}$ je jeho ortonormální báze a $f: V 
+    \rightarrow V$ je lineární zobrazení.
+
+    Pak platí, že $f$ zachovává skalární součin, t.j. $\scp{f(\vu)}{f(\vv)} 
+    = \scp{\vu}{\vv}$, právě když $[f]_{XX}$ je unitární.
+\end{proposition}
+
+\begin{proof}
+    \begin{align*}
+        \scp{f(\vu)}{f(\vv)} &= [f(\vv)]_X^\herm[f(\vu)]_X 
+        \tag{Pozorování~\ref{obs:scpuv=vhu}} \\
+                             &= ([f]_{XX}[\vv]_X)^\herm[f]_{XX}[\vu]_X \\
+                             &= [\vv]_X^\herm[f]_{XX}^\herm[f]_{XX}[\vu]_X
+    \end{align*}
+\end{proof}

@@ -1,0 +1,399 @@
+\section{Operace s maticemi, speciální typy matic}
+
+\begin{definition}[Terminologie, značení základních matic]
+    \leavevmode
+    \begin{itemize}
+        \item \newterm{Nulová matice} typu $m \times n$: $\mathbf{0}$, 
+                $\forall{i,j} (\mathbf{0})_{ij} = 0$.
+        \item \newterm{Jednotková matice} řádu $n$ je čtvercová matice 
+            $\identmat{n}$ taková, že:
+            \begin{equation*}
+                (\identmat{n})_{i,j} = \begin{cases}
+                      1, & \text{pokud $i=j$}.\\
+                      0, & \text{jinak}.
+                        \end{cases}
+            \end{equation*}
+            Například: $$\identmat{3} = \begin{pmatrix}
+                            1 &0  &0\\
+                            0 &1 &0\\
+                            0 &0  &1
+                    \end{pmatrix}$$
+        \item \newterm{Hlavní diagonála} čtvercové matice $\mat{A}$ je tvořena 
+            prvky $a_{i,i}$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    \newterm{Transponovaná matice} k matici $\mat{A}$ typu $m \times n$
+    je matice $\transmat{A}$ tupu $n \times m$ definovaná vztahem
+    $\left(\transmat{A}\right)_{ij} = a_{ji}$. 
+    Čtvercová matice se nazývá \newterm{symetrická}, pokud splňuje 
+    $\transmat{A} =  \mat{A}$.
+\end{definition}
+
+\begin{definition}
+    Pro matice $\mat{A}$ a $\mat{B}$ stejného typu definujeme 
+    \newterm{součet matic} $\mat{A}+\mat{B}$ předpisem: 
+    $$\left(\mat{A} + \mat{B} \right)_{ij} = a_{ij} + b_{ij}.$$
+\end{definition}
+
+\begin{definition}
+    Pro $\alpha \in \mathbb{R}$ a matici $\mat{A}$ definujeme 
+    \newterm{$\alpha$-násobek matice} $\mat{A}$ předpisem:
+    $$\left(\alpha\mat{A}\right)_{ij} = \alpha a_{ij}.$$
+    Nulový násobek libovolné matice je nulová matice.
+\end{definition}
+
+\begin{definition}
+    Je-li $\mat{A}$ matice typu $m \times n$ a $\mat{B}$ matice typu $n
+    \times p$, potom definujeme \newterm{součin matic} $\mat{A}$ a 
+    $\mat{B}$ jako matici $\mat{A}\mat{B}$ typu $m \times p$, kde platí:
+    $$\left(\mat{A}\mat{B}\right)_{ij} = \sum_{k=1}^n{a_{ik}b_{kj}}.$$
+\end{definition}
+
+\begin{remark}[Užití součinu]
+    Maticový součin má mnohá využití:
+        \begin{itemize}
+        \item Zápis soustav lineárních rovnic: $\mat{A}\vec{x} = \vec{b}$.
+        \item Elementární úpravy lze vyjádřit součinem (viz podrobněji 
+            Poznámka \ref{remark:elementop} níže).
+        \item Lineární zobrazení a výměna báze lze vyjádřit maticovým součinem
+            (o tomto budeme mluvit podrobněji v kapitole \ref{ch:linzobr}).
+    \end{itemize}
+\end{remark}
+
+\begin{proposition}
+    Jsou-li výsledky operací definovány, pak platí:
+    \begin{multicols}{2}
+        \begin{enumerate}[i.]
+            \item $(\mat{A}+\mat{B})+\mat{C} = \mat{A}+(\mat{B}+\mat{C})$
+            \item $\mat{A} + \mat{0} = \mat{A}$
+            \item $\mat{A} + \mat{B} = \mat{B} + \mat{A}$
+            \item $\forall \mat{A} \exists ! \mat{B}: \mat{A} + \mat{B} = \mat{0}$
+            \item $(\alpha\mat{A})^\top = \alpha\mat{A}^\top$
+            \item $(\mat{A}^\top)^\top = \mat{A}$
+            \item $\alpha(\beta\mat{A}) = (\alpha\beta)\mat{A}$
+            \item $(\alpha + \beta)\mat{A} = \alpha\mat{A} + \beta\mat{A}$
+            \item $(\mat{A} + \mat{B})^\top = \mat{A}^\top + \mat{B}^\top$
+        \end{enumerate}
+    \end{multicols}
+\end{proposition}
+
+\begin{proposition}
+    Maticový součin není komutativní.
+\end{proposition}
+\begin{proof}
+    Pokud matice nejsou čtvercové, důkaz je jednoduchý: Nechť $\mat{A} \in 
+    \mathbb{R}^{a \times b}$, $\mat{B} \in \mathbb{R}^{b \times c}$, a $a
+    \neq c$. Potom součin $\mat{A}\mat{B}$ je definován, kdežto součin 
+    $\mat{B}\mat{A}$ definován není.
+
+    Pro dvě čtvercové matice $\mat{A}$ a $\mat{B}$ řádu $2$ je
+    $$ \mat{A}\mat{B} = \begin{pmatrix}
+        a_{11}b_{11} + a_{12}b_{21} &a_{11}b_{12} + a_{12}b_{22} \\
+        a_{21}b_{11} + a_{22}b_{21} &a_{21}b_{12} + a_{22}b_{22}
+    \end{pmatrix}$$
+    a
+    $$ \mat{B}\mat{A} = \begin{pmatrix}
+        b_{11}a_{11} + b_{12}a_{21} &b_{11}a_{12} + b_{12}a_{22} \\
+        b_{21}a_{11} + b_{22}a_{21} &b_{21}a_{12} + b_{22}a_{22}
+    \end{pmatrix}.$$
+    Je zřejmé, že obecně $\mat{A}\mat{B} \neq \mat{B}\mat{A}$.
+\end{proof}
+
+
+\begin{proposition}
+    Matice $\mat{A}\mat{A}^\top$ je vždy symetrická.
+\end{proposition}
+\begin{proof}
+    Nechť $\mat{A} \in \mathbb{R}^{m \times n}$. Dle definice součinu
+    je matice $\mat{A}\mat{A}^\top$ čtvercová matice typu $m \times m$.
+    Dále: $$(\mat{A}\mat{A}^\top)_{ij} = \sum_{k=1}^{n}{(\mat{A})_{ik}
+    (\mat{A}^\top)_{kj}} = \sum_{k=1}^{n}{(\mat{A}^\top)_{ki}(\mat{A})_{jk}} =
+    (\mat{A}\mat{A}^\top)_{ji}$$.
+\end{proof}
+
+\begin{proposition}
+    Nechť $\mat{A} \in \mathbb{R}^{m \times n}$. Potom platí:
+    $\mat{I_m}\mat{A} = \mat{A} = \mat{A}\mat{I_n}$.
+\end{proposition}
+
+\begin{proposition}
+    Pro násobení blokových matic platí:
+    $$\begin{pmatrix} \mat{A}_1 &\mat{A}_2 \end{pmatrix} \cdot \begin{pmatrix}
+    \mat{B}_1 \\ \mat{B}_2 \end{pmatrix} 
+    = \mat{A}_1\mat{B}_1 + \mat{A}_2\mat{B}_2$$
+    $$\begin{pmatrix} 
+        \mat{A}_1 &\mat{A}_2 \\ \mat{A}_3 &\mat{A}_4
+    \end{pmatrix}
+    \cdot 
+    \begin{pmatrix} 
+        \mat{B}_1 &\mat{B}_2 \\ \mat{B}_3 &\mat{B}_4 
+    \end{pmatrix} =
+    \left(\begin{array}{c|c}
+        \mat{A}_1\mat{B}_1 + \mat{A}_2\mat{B}_3 
+        &\mat{A}_1\mat{B}_2 + \mat{A}_2\mat{B}_4 \\
+        \mat{A}_3\mat{B}_1 + \mat{A}_4\mat{B}_3
+        &\mat{A}_3\mat{B}_2 + \mat{A}_4\mat{B}_4
+    \end{array}\right)$$
+\end{proposition}
+
+\begin{proposition}
+    Pro matice $\mat{A}$, $\mat{B}$ a $\mat{C}$ platí:
+    \begin{multicols}{2}
+        \begin{enumerate}[i.]
+            \item $(\mat{A}\mat{B})^\top = \mat{B}^\top\mat{A}^\top$
+            \item $(\mat{A}\mat{B})\mat{C} = \mat{A}(\mat{B}\mat{C})$
+            \item $(\mat{A} + \mat{B})\mat{C} = \mat{A}\mat{C} + \mat{B}\mat{C}$
+            \item $\mat{A}(\mat{B} + \mat{C}) = \mat{A}\mat{B} + \mat{A}\mat{C}$
+        \end{enumerate}
+    \end{multicols}
+    za předpokladu, že všechny výsledky operací jsou definovány.
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}
+        \item
+            $\mattype{A}{m}{n}$, $\mattype{B}{n}{p}$.
+            $$((\mat{A}\mat{B})^\top)_{ij} 
+                    = (\mat{A}\mat{B})_{ji} %\\
+                    = \sum_{k=1}^{n}{a_{jk}b_{ki}} 
+                    =
+                \sum_{k=1}^{n}{(\mat{A}^\top)_{kj}(\mat{B}^\top)_{ik}} 
+                    = 
+                \sum_{k=1}^{n}{(\mat{B}^\top)_{ik}(\mat{A}^\top)_{kj}} %\\
+                    = (\mat{B}^\top\mat{A}^\top)_{ij}$$
+        \item
+            $\mattype{A}{m}{n}$, $\mattype{B}{n}{p}$, $\mattype{C}{p}{q}$.
+            \begin{multline*}
+                ((\mat{A}\mat{B})\mat{C})_{ij} 
+                    =\sum_{k=1}^{p}(\mat{A}\mat{B})_{ik}\mat{C}_{kj} %\\
+                    =\sum_{k=1}^{p} \left(\sum_{l=1}^{n}
+            a_{il}b_{lk}\right) \cdot c_{kj} 
+                    =\sum_{k=1}^{p}{\sum_{l=1}^{n}{a_{il}b_{lk}c_{kj}}} \\
+                    =\sum_{l=1}^{n}{\sum_{k=1}^{p}{a_{il}b_{lk}c_{kj}}} 
+                    =\sum_{l=1}^{n}a_{il}\cdot
+                        \left(\sum_{k=1}^{p}{b_{lk}c_{kj}}\right) %\\
+                        =\sum_{l=1}^{n}a_{il}\cdot(\mat{B}\mat{C})_{lj} 
+                        =(\mat{A}(\mat{B}\mat{C}))_{ij}
+                    \end{multline*}
+        \item
+            $\mattype{A}{m}{n}$, $\mattype{B}{n}{p}$, $\mattype{C}{p}{q}$.
+            \begin{multline*}
+                ((\mat{A}+\mat{B})\mat{C})_{ij} 
+                = \sum_{k=1}^{n}(\mat{A}+\mat{B})_{ik}\cdot c_{kj} 
+                = \sum_{k=1}^{n} (a_{ik} + b_{ik}) \cdot c_{kj} 
+                = \sum_{k=1}^{n} (a_{ik}c_{kj} + b_{ik}c_{kj}) \\
+                = \sum_{k=1}^{n} a_{ik}c_{kj} + \sum_{k=1}^{n} b_{ik}c_{kj}
+                = (\mat{A}\mat{C})_{ij} + (\mat{B}\mat{C})_{ij} 
+                = (\mat{A}\mat{C} + \mat{B}\mat{C})_{ij}
+            \end{multline*}
+        \item
+            Obdobně.
+    \end{enumerate}
+\end{proof}
+
+\begin{remark}[Složitost násobení matic]
+    Nechť $\mattype{A}{m}{n}$, $\mattype{B}{n}{p}$, $\mattype{C}{p}{q}$.
+    Potom:
+    \begin{itemize}
+        \item Na součin $\mat{A}\mat{B}$ je třeba $mnp$ operací,
+            $(\mat{A}\mat{B})\mat{C}$ $mpq$ operací. Celkem: $mp(n+q)$.
+        \item Na součin $\mat{B}\mat{C}$ je třeba $npq$ operací,
+            $\mat{A}(\mat{B}\mat{C})$ $mnq$ operací. Celkem: $nq(p+m)$.
+    \end{itemize}
+    Pokud $q << m,n,p$, tak poté $nq(m+p) << mp(n+q)$.
+\end{remark}
+
+\begin{remark}[Elementární úpravy jako součin matic]
+    \label{remark:elementop}
+    Nechť $\mat{B}$ vznikne z $\mattype{A}{m}{n}$ vynásobením $i$-tého řádku
+    číslem $t$. Potom platí $\mat{B} = \mat{E}\mat{A}$, kde:
+    \begin{equation*}
+        (\mat{E})_{kj} = \begin{cases}
+            t &\text{pokud $k = j$ a $k = i$;} \\
+            1 &\text{pokud $k = j$ a $k \neq i$;} \\
+            0 &\text{pokud $k \neq j$.}
+        \end{cases}
+    \end{equation*}
+    Jedná se tedy o jednotkovou matici řádu $m$, kde na $i$-tém řádku
+    byla jednička na diagonále nahrazena číslem $t$.
+
+    Nechť naopak $\mat{B}$ vznikne z $\mattype{A}{m}{n}$ přičtením $j$-tého
+    řádku k $i$-tému. Potom platí: $\mat{B} = \mat{E}\mat{A}$, kde:
+    \begin{equation*}
+        (\mat{E})_{kl} = \begin{cases}
+            1 &\text{pokud $k = i$ a $l = j$;} \\
+            1 &\text{pokud $k = l$;} \\
+            0 &\text{jinak.}
+        \end{cases}
+    \end{equation*}
+
+    Mějme například matici $\mattype{A}{3}{4}$. Přičtení třetího řádku k
+            prvnímu lze vyjádřit jako maticový součin 
+            $\mat{E}\mat{A}$, kde:
+            $$ \mat{E} = \begin{pmatrix}
+                1 &0 &1 \\
+                0 &1 &0 \\
+                0 &0 &1
+            \end{pmatrix}.$$
+\end{remark}
+
+\begin{definition}
+    Nechť $\mat{A}$ je čtvercová matice řádu $n$. Pokud existuje matice
+    $\mat{B}$ taková, že $\mat{A}\mat{B} = \mat{I_n}$, potom se $\mat{B}$
+    nazývá \newterm{inverzní maticí} k matici $\mat{A}$ a značí se
+    $\mat{A^{-1}}$.
+
+    Pokud k matici $\mat{A}$ existuje inverzní matice, potom se $\mat{A}$
+    nazývá \newterm{regulární}, v opačném případě se nazývá
+    \newterm{singulární}.
+\end{definition}
+
+\begin{theorem}
+    Pro čtvercovou matici $\mat{A}$ řádu $n$ jsou následující podmínky
+    ekvivalentní:
+    \begin{enumerate}
+        \item Matice $\mat{A}$ je regulární (t.j. $\exists \mat{B}: \mat{A}\mat{B}
+            = \mat{I_n}$).
+        \item $\rank(\mat{A}) = n$.
+        \item Matici $\mat{A}$ lze řádkovými elementárními úpravami převést na
+            $\mat{I_n}$.
+        \item Homogenní soustava $\mat{A}\vec{x} = \mat{0}$ má pouze
+            triviální řešení $\vec{x} = \vec{0}$.
+    \end{enumerate}
+\end{theorem}
+
+
+\begin{proof} 
+    \leavevmode
+    \begin{itemize}
+        \item $3 \implies 2$
+            
+            $\mat{I_n}$ je v odstupňovaném tvaru s $n$ pivoty, tudíž
+            $\rank(\mat{I_n}) = 0$.
+
+        \item $2 \implies 3$
+
+            Převedeme $\mat{A}$ na odstupňovaný tvar. Jelikož matice
+            $\mat{A}$ je čtvercová a $\rank(\mat{A}) = n$, máme v každém
+            sloupci pivot. S pomocí posledního pivotu zeliminuji vše, co je
+            nad ním, přejdu k předposlednímu pivotu, opakuji, atp.
+
+        \item $2 \iff 4$
+
+            $4 \iff \text{matice $\mat{A}$ po převedení do odstupňovaného
+            tvaru nemá žádné volné proměnné} \iff 2$
+
+        \item $2 \implies 1$
+
+            Označme $\vec{e^1}, \vec{e^2}, \dots, \vec{e^n}$ sloupce
+            jednotkové matice. Vyřešíme $n$ soustav tvaru $\mat{A}\vec{x^i} = 
+            \vec{e^i}$ pro $i = 1, \dots, n$. 
+            Jelikož $\rank(\mat{A}) = n$,
+            každá soustava má právě jedno řešení $\vec{x^i}$. Nechť:
+            $$ \mat{B} = \begin{pmatrix}
+                \vdots &\vdots &\dots &\vdots \\
+                \vec{x^1} &\vec{x^2} &\dots &\vec{x^n}\\
+                \vdots &\vdots &\dots &\vdots 
+            \end{pmatrix}$$
+            Potom $\mat{A}\mat{B} = \mat{I_n}$.
+            
+        \item $1 \implies 2$
+
+            Sporem. Nechť matice $\mat{A}$ je regulární a $\rank(\mat{A})
+            < n$. Potom existuje řádek $i$, který lze vynulovat přičtením vhodné
+            kombinace ostatních řádků. Matice $(\mat{A}|\vec{e^i})$ je
+            rozšířená matice soustavy $\mat{A}\vec{x^i} = 
+            \vec{e^i}$. Elementárními úpravami lze $i$-tý řádek této matice
+            upravit na $$\begin{pmatrix} 0 &0 &\dots &0 &| &1\end{pmatrix}.$$
+            Tato soustava ovšem nemá řešení a tudíž inverzní matice
+            $\mat{B}$ neexistuje a matice $\mat{A}$ není regulární.
+    \end{itemize}
+\end{proof}
+
+\begin{corollary}
+    Pokud inverzní matice existuje, je určena jednoznačně.
+\end{corollary}
+
+\begin{proposition}
+    Pro regulární matici $\mat{A}$ platí:
+    $$\mat{A^{-1}}\mat{A} = \mat{A}\mat{A^{-1}} = \mat{I_n}$$
+\end{proposition}
+
+\begin{proof}
+    Nejprve sporem ukážeme, že $\invmat{A}$ je regulární. Nechť
+    $\invmat{A}\vec{x} = \vec{0}$ má netriviální řešení $\vec{x}$. Potom:
+    $$\vec{x} = \identmat{n}\vec{x} = \mat{A}\invmat{A}\vec{x} =
+    \mat{A}\vec{0} = \vec{0}.$$
+
+    Tudíž existuje inverzní matice k matici $\invmat{A}$; označme ji
+    $\invmat{(\invmat{A})}$. Dále platí: $$\invmat{A}\mat{A} =
+    \invmat{A}\mat{A}\identmat{n} =
+    \invmat{A}\mat{A}\invmat{A}\invmat{(\invmat{A})} =
+    \invmat{A}\identmat{n}\invmat{(\invmat{A})} =
+    \invmat{A}\invmat{(\invmat{A})} = \identmat{n}.$$
+\end{proof}
+
+\begin{remark}[Výpočet inverzní matice k dané čtvercové matici $\mat{A}$]
+    \leavevmode
+    \begin{enumerate}
+        \item Sestavíme $\left(\mat{A}|\identmat{n}\right)$ a elementárními
+            řádkovými úpravami ji převedeme na tvar
+            $\left(\identmat{n}|\mat{B}\right)$. Pokud tento postup selže,
+            matice $\mat{A}$ je singulární.
+        \item Označme $\mat{E_1}, \mat{E_2}, \dots, \mat{E_k}$ matice, které
+            byly použity v těchto řádkových úpravách:
+            $$\mat{E_k}\mat{E_{k-1}}\dots\mat{E_1} 
+            \left(\mat{A}|\identmat{n}\right) =
+            \left(\identmat{n}|\mat{B}\right).$$ 
+            Potom $\mat{E_k}\mat{E_{k-1}}\dots\mat{E_1}\mat{A} =
+            \identmat{n}$ a
+            $\mat{E_k}\mat{E_{k-1}}\dots\mat{E_1}\identmat{n} = \mat{B}.$ Z
+            toho vyplývá, že $\mat{B}\mat{A} = \identmat{n}$ a $\mat{B} =
+            \invmat{A}.$
+    \end{enumerate}
+\end{remark}
+
+\begin{observation}
+    Je-li matice $\mat{R}$ regulární, potom: $$ \mat{A} = \mat{B} \iff
+    \mat{A}\mat{R} = \mat{B}\mat{R}.$$
+\end{observation}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item $\implies$: Triviální.
+
+        \item $\impliedby$: $\mat{A} = \mat{A}\identmat{n} = 
+            \mat{A}\mat{R}\invmat{R} =
+            \mat{B}\mat{R}\invmat{R} = \mat{B}\identmat{n} = \mat{B}$
+    \end{itemize}
+\end{proof}
+
+\begin{proposition}
+    Pro regulární matice $\mat{A}$ a $\mat{B}$ stejného řádu platí:
+    \begin{multicols}{2}
+        \begin{itemize}
+            \item $\invmat{(\invmat{A})} = \mat{A}$
+            \item $\mat{A}\mat{B}$ je regulární.
+            \item $\invmat{(\mat{A}\mat{B})} = \invmat{B}\invmat{A}$
+            \item $\invmat{(\transmat{A})} = \transmat{(\invmat{A})}$
+        \end{itemize}
+    \end{multicols}
+\end{proposition}
+
+\begin{remark}[Řešení maticových rovnic]
+    \leavevmode
+    \begin{itemize}
+        \item $\mat{A} + \mat{X} = \mat{B} \implies \mat{X} = \mat{B} -
+            \mat{A} = \mat{B} + (-1)\mat{A}$
+        \item $\alpha\mat{X} = \mat{B} \implies \mat{X} =
+            \frac{1}{\alpha}\mat{B}$
+        \item $\mat{A}\mat{X} = \mat{B} \implies \mat{X} =
+            \invmat{A}\mat{B}$, je-li $\mat{A}$ regulární.
+        \item $\mat{X}\mat{A} = \mat{B} \implies \mat{X} =
+            \mat{B}\invmat{A}$, je-li $\mat{A}$ regulární.
+    \end{itemize}
+\end{remark}

@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{url}
+\usepackage[round]{natbib}
+\usepackage{subfigure}
+\usepackage{enumerate}
+\usepackage{multicol}
+
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+
+\usepackage{soulutf8}
+\usepackage{regexpatch}
+% Patch for hyphens
+\makeatletter
+\regexpatchcmd*{\SOUL@eval}
+{\cO-}
+{\cA-}
+{}{}
+\makeatother
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\setlength{\oddsidemargin}{0.25in}
+\setlength{\textwidth}{6.5in}
+\setlength{\topmargin}{0in}
+\setlength{\textheight}{8.5in}
+%\setlength{\parskip}{0.05in}
+%\setlength{\parindent}{0pt}
+
+\newtheorem{theorem}{Věta}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Důsledek}
+\newtheorem{observation}[theorem]{Pozorování}
+\newtheorem{proposition}[theorem]{Tvrzení}
+\newtheorem{metaproposition}[theorem]{Metatvrzení}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definice}
+\newtheorem{algorithm}[theorem]{Algoritmus}
+%\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Poznámka}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand*{\mat}[1]{\mathbf{#1}}
+\newcommand*{\invmat}[1]{\mat{#1^{-1}}}
+\newcommand*{\identmat}[1]{\mat{I_{#1}}}
+\newcommand*{\transmat}[1]{\mat{#1}^{\top}}
+\newcommand*\colvec[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand*{\rowvec}[1]{\left( #1\right)}
+\newcommand*{\mattype}[3]{\mat{#1} \in \mathbb{R}^{#2 \times #3}}
+\newcommand*{\bigo}[1]{\mathcal{O}(#1)}
+\newcommand*{\rank}{\mathop{\mathrm{rank}}}
+\newcommand*{\obal}{\mathop{\mathrm{span}}}
+\newcommand*{\dm}{\mathop{\mathrm{dim}}}
+\newcommand*{\inv}[1]{#1^{-1}}
+\newcommand*{\scp}[2]{\langle #1 | #2 \rangle}
+
+\newcommand*{\newterm}[1]{\ul{#1}}
+%\DeclareMathOperator{\rank}{rank}
+
+\newcommand*{\va}{\vec{a}}
+\newcommand*{\vn}{\vec{n}}
+\newcommand*{\vu}{\vec{u}}
+\newcommand*{\vv}{\vec{v}}
+\newcommand*{\vw}{\vec{w}}
+\newcommand*{\vx}{\vec{x}}
+\newcommand*{\vy}{\vec{y}}
+\newcommand*{\vz}{\vec{z}}
+\newcommand*{\vzero}{\vec{0}}
+\newcommand*{\vvone}{\vec{v_1}}
+\newcommand*{\vuone}{\vec{u_1}}
+\newcommand*{\vvtwo}{\vec{v_2}}
+\newcommand*{\vvthree}{\vec{v_3}}
+\newcommand*{\vvd}{\vec{v_d}}
+\newcommand*{\vvi}{\vec{v_i}}
+\newcommand*{\vvj}{\vec{v_j}}
+\newcommand*{\vvk}{\vec{v_k}}
+\newcommand*{\vvn}{\vec{v_n}}
+\newcommand*{\vui}{\vec{u_i}}
+\newcommand*{\vun}{\vec{u_n}}
+
+\newcommand*{\mA}{\mat{A}}
+
+
+\begin{document}
+
+\title{Lineární Algebra I. \\ 
+\vspace{1 mm} {\normalsize Zápisky z přednášek Jiřího 
+    Fialy\footnote{\url{http://kam.mff.cuni.cz/~fiala}} \ na MFF UK, 
+    zimní semestr, ak. rok 2007/2008}}
+
+\author{Adam Li\v{s}ka\footnote{\url{http://www.adliska.com}}}
+
+\date{\today}
+
+
+\maketitle
+
+\newpage
+\tableofcontents
+
+\include{01_soustavy/01_soustavy}
+\include{02_reseni/02_reseni}
+\include{03_operace/03_operace}
+\include{04_telesa/04_telesa}
+\include{05_vektory/05_vektory}
+\include{06_linind/06_linind}
+\include{07_linzobr/07_linzobr}
+\include{08_skalarnisoucin/08_skalarnisoucin}
+\include{09_ortogonalita/09_ortogonalita}
+
+\end{document}

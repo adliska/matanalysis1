@@ -1,0 +1,184 @@
+\section{Kvadratické formy}
+
+\begin{definition}
+    Nechť $V$ je vektorový prostor nad tělesem $K$ a $f: V \times V 
+    \rightarrow K$ splňuje:
+    \begin{itemize}
+        \item $\forall \alpha \in K, \forall \vu, \vv \in V:
+            f(\alpha\vu, \vv) = \alpha f(\vu, \vv)$
+        \item $\forall \vu, \vu', \vv \in V: 
+            f(\vu + \vu', \vv) = f(\vu,\vv) + f(\vu', \vv)$
+        \item $\forall \alpha \in K, \forall \vu, \vv \in V: 
+            f(\vu, \alpha\vv) = \alpha f(\vu, \vv)$
+        \item $\forall \vu, \vv, \vv' \in V: 
+            f(\vu, \vv + \vv') = f(\vu, \vv) + f(\vu, \vv')$
+    \end{itemize}
+    Pak se $f$ nazývá \newterm{bilineární forma} na $V$.
+\end{definition}
+
+\begin{definition}
+    Bilineární forma $f$ je \newterm{symetrická}, platí-li:
+    $$\forall \vu, \vv \in V: f(\vu, \vv) = f(\vv, \vu)$$
+\end{definition}
+
+\begin{definition}
+    Zobrazení $g: V \rightarrow K$ se nazývá \newterm{kvadratická forma},
+    pokud $g(\vu) = f(\vu,\vu)$ pro nějakou bilineární formu $f$.
+\end{definition}
+
+\begin{remark}
+    Proč se kvadratická forma jmenuje kvadratická?
+    $$g(\alpha \vu) = f(\alpha \vu, \alpha \vu) = \alpha^2 f(\vu,\vu) =
+    \alpha^2 g(\vu)$$
+\end{remark}
+
+\begin{definition}
+    Je-li $V$ prostor konečné dimenze nad $K$ a 
+    $X = \{\vvone, \dots, \vvn\}$ je jeho báze, tak pro bilineární formu
+    $f: V \times V \rightarrow K$ definujeme \newterm{matici $\mB$ formy $f$}
+    vzhledem k bázi $X$:
+    $$b_{i,j} \coloneqq f(\vvi, \vvj)$$
+\end{definition}
+
+\begin{definition}
+    \newterm{Maticí kvadratické formy} $g$ rozumíme matici 
+    symetrické formy $f$, která formu $g$ vytvořuje.
+\end{definition}
+
+\begin{remark}
+    Vytvořující bilineární forma $f$ musí být symetrická, abychom
+    získali jednoznačně definovanou matici kvadratické formy.
+\end{remark}
+
+\begin{observation}
+    Nechť $V$ je vektorový prostor nad tělesem $K$, $X = \{\vvone, \dots, \vvn\}$
+    je jeho konečná báze, $g: V \rightarrow K$ kvadratická forma a $\mB$ je její 
+    matice vzhledem k bázi $X$. Potom $$g(\vu) = [\vu]_X^\top \mB [\vu]_X$$
+\end{observation}
+
+\begin{proof}
+    $[\vu]_X = \rowvec{\alpha_1, \dots, \alpha_n}^\top,$ neboli $\vu = 
+    \sum_{i=1}^n \alpha_i\vvi.$ Potom:
+    $$g(\vu) = f(\vu, \vu) = f(\sum_{i=1}^n\alpha_i\vvi, \sum_{j=1}^n \alpha_j
+    \vvj) = \sum_{i=1}^n\sum_{j=1}^n \alpha_i \alpha_j f(\vvi, \vvj) =
+    [\vu]_X^\top \mB [\vu]_X$$
+\end{proof}
+
+\begin{definition}
+    \newterm{Analytické vyjádření bilineární formy} $f:V \times V \rightarrow K$
+    vůči konečné bázi $X$ je polynom:
+    $$f(\vu, \vv) = \sum_{i=1}^n \sum_{j=1}^n b_{ij} x_i y_j,$$
+    kde $x_i$ a $y_j$ jsou souřadnice vektorů $\vu$ a $\vv$ vůči bázi $X$.
+
+    Podobně, pro kvadratickou formu:
+    $$g(\vu) = \sum_{i=1}^n \sum_{j=1}^n a_{ij}x_ix_j,$$
+    kde $$a_{ij} = \begin{cases}
+        2b_{ij} &i \neq j \\
+        b_{ij} &i=j
+    \end{cases}$$
+\end{definition}
+
+\begin{remark}
+    Přechod od analytického vyjádření k matici je snadný, ale pouze v tělesech
+    s charakteristikou větší než 2.
+\end{remark}
+
+\begin{observation}
+    Nechť $g: V \rightarrow K$ je kvadratická forma a $\mB$ je její matice vůči
+    bázi $X$. Potom $\mB' = [id]_{YX}^\top \cdot \mB \cdot [id]_{YX}$ je matice téže formy
+    vůči bázi $Y$.
+\end{observation}
+
+\begin{proof}
+    $g(\vu) = [u]_X^\top \mB [\vu]_X = ([id]_{YX}[\vu]_X)^\top \mB 
+    [id]_{YX}[\vu]_Y = [\vu]_Y^\top \underbrace{[id]_{YX}^\top \mB 
+    [id]_{YX}}_{\mB'} [\vu]_Y$
+\end{proof}
+
+\begin{theorem}[Sylvesterův zákon setrvačnosti kvadratických forem]
+    Nechť $V$ je prostor konečné dimenze nad $\R$ a $g: V \rightarrow \R$
+    je kvadratická forma. Potom existuje báze $X$ prostoru $V$ taková, že
+    matice $\mB$ formy $g$ vůči bázi $X$ je diagonální a $b_{ii} \in
+    \{-1;0;1\}$. 
+    Navíc, počet kladných a počet záporných prvků na diagonále nezávisí
+    na volbě $X$ a je pro všechny báze stejný.
+\end{theorem}
+
+\begin{proof}
+    Dokážeme nejprve existenci báze, která splňuje výše uvedené podmínky.
+    Nechť $X_0$ je libovolná báze prostoru $V$ a $\mat{B_0}$ je reálná 
+    symetrická matice. Potom existuje unitární matice $\mR$ taková, že 
+    $\mRi \mB \mR = \mD = \mRt \mat{B_0} \mR.$ Čili, je-li matice $\mR$
+    matice přechodu od $X_1$ k $X_0$, potom je matice formy $g$ vůču $X_1$
+    diagonální ($\mD$).
+
+    Definujme diagonální matici $\mat{\widetilde{D}}$ následovně:
+    $$\widetilde{d}_{ii} = \begin{cases}
+        \sqrt{|d_{ii}|} &d_{ii} \neq 0 \\
+                      1 &d_{ii} = 0
+    \end{cases}$$
+    Potom $\mD = \mat{\widetilde{D}}^\top\mB\mat{\widetilde{D}}$, kde $\mB$
+    je hledaná matice formy $g$. Platí:
+    $$b_{ii} = \begin{cases}
+        1 &d_{ii} > 0 \\
+       -1 &d_{ii} < 0 \\
+        0 &d_{ii} = 0
+    \end{cases}$$
+    Pokud použijeme $\mat{\widetilde{D}}$ jako matici přechodu od $X_2$ k 
+    $X_1$, tak potom $X_2$ je hledaná báze.
+
+    Dokažme nyní druhou část věty, t.j. že  počet kladných a záporných 
+    prvků na diagonále nezávisí na volbě báze. Nechť $X = \{\vvone, \dots,
+    \vvn\}$ a $Y = \{\vwone, \dots, \vwn\}$ jsou dvě různé báze prostoru
+    $X$ takové, že příslušné matice formy $g$ jsou tvaru: 
+    $$\begin{pmatrix}
+        1 \\
+        &\ddots \\
+        & &-1 \\
+        & & &\ddots \\
+        & & & &0 \\
+        & & & & &\ddots \\
+    \end{pmatrix}$$
+    Potom:
+    \begin{enumerate}[i.]
+        \item Počty nul se rovnají.
+            
+            Platí $\mB = [id]_{XY}^\top \mB' [id]_{XY}$, čili 
+            $\rank(\mB) = \rank(\mB')$. Dále: $$(\#0 \text{ v } \mB) = 
+            n - \rank(\mB) = n - \rank(\mB') = (\#0 \text{ v } \mB')$$
+
+        \item Počty jedniček se rovnají.
+
+            Definujme $n^g = \rank(\mB) = \#1 + \#-1$. Víme, že
+            $$g(\vu) = x_1^2 + \dots + x_r^2 - x_{r+1}^2 - x_{n^g}^2,$$
+            pokud $[\vu]_X = \rowvec{x_1, \dots, x_n}^\top$. Tedy 
+            $r = \#1$ v $\mB$. 
+            
+            Podobně:
+            $$g(\vu) = y_1^2 + \dots + y_s^2 - y_{s+1}^2 - y_{n^g}^2,$$
+            pokud $[\vu]_Y = \rowvec{y_1, \dots, y_n}^\top$. Tedy 
+            $s = \#1$ v $\mB'$.
+
+            Nechť dále, pro spor $r \neq s$, bez újmy na obecnosti, $r > s.$
+            Vezmu netriviální vektor $\vz$ z $\obal(\{\vvone, \dots, \vec{v_r}\})
+            \cap \obal(\{\vec{w_{s+1}}, \dots, \vwn\})$. Takový vektor $\vz$ určitě
+            existuje, jelikož
+            $$\dim(\obal(\{\vvone, \dots, \vec{v_r}\})) + 
+            \dim(\obal(\{\vec{w_{s+1}}, \dots, \vwn\})) = r + r-s > n 
+            = \dim(V)$$
+            Potom ale
+            $$g(\vz) = \begin{cases}
+                >0 &\text{pokud některá z prvních $r$ souřadnic $[\vz]_X$
+                    je netriviální a zbytek jsou nuly,} \\
+                \leq 0 &\text{prvních $s$ souřadnic $[\vz]_Y$ je nulových.}
+            \end{cases}$$
+            Dostali jsme spor.
+    \end{enumerate}
+\end{proof}
+
+\begin{definition}
+    Nechť $X$ je báze prostoru $V$ taková, že
+    matice $\mB$ formy $g$ vůči bázi $X$ je diagonální a $b_{ii} \in
+    \{-1;0;1\}$. Potom trojici $(\#-1, \#0, \#1)$ nazýváme 
+    \newterm{signatura formy}.
+\end{definition}

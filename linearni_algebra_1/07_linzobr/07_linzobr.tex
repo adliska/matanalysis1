@@ -1,0 +1,262 @@
+\section{Lineární zobrazení}
+\label{ch:linzobr}
+
+\begin{observation}
+    Nechť $\mat{A} \in K^{m \times n}$ a $f: K^n \rightarrow K^m$ je
+    zobrazení definováno předpisem $f(\vec{u}) = \mat{A} \cdot \vec{u}$.
+    Potom platí:
+    \begin{enumerate}[i.]
+        \item $f(\vec{u} + \vec{v}) = \mat{A}(\vec{u} + \vec{v}) = 
+            \mat{A}\vec{u} + \mat{A}\vec{v} = f(\vec{u}) + f(\vec{v})$
+        \item $f(a\cdot\vec{u}) = \mat{A}(a \cdot \vec{u}) = 
+            a \cdot \mat{A}\vec{u} = a \cdot f(\vec{u})$
+    \end{enumerate}
+\end{observation}
+
+\begin{definition}
+    Nechť $V$ a $W$ jsou vektorové prostory nad stejným tělesem $K$.
+    Zobrazení $f: V \rightarrow W$ se nazývá \newterm{lineární zobrazení},
+    pokud platí:
+    \begin{enumerate}[i.]
+        \item $\forall \vu,\vv \in V: f(\vec{u} + \vec{v}) = f(\vec{u}) 
+            + f(\vec{v})$
+        \item $\forall \vu \in V, \forall a \in K: f(a\cdot\vec{u}) =
+            a \cdot f(\vec{u})$
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}[Příklady lineárních zobrazení]
+    \leavevmode
+    \begin{itemize}
+        \item Pro libovolné $V$ a $W$ můžeme vzít $f(\vec{u}) = \vec{0}$
+            pro $\forall \vu \in V$, tzv. nulové zobrazení.
+        \item Pro $V \subseteq W$ můžeme vzít $f(\vec{u}) = \vec{u}$, čili
+            identita na $V$, neboli vnoření $V$ do $W$.
+        \item Pro aritmetické vektorové prostory $V = K^n$, $W = K^1$ 
+            definujeme projekci na $i$-tou souřadnici $\pi_i$ předpisem:
+            $$\pi_i(\vec{u}) = u_i.$$
+        \item Nechť $V$ je vektorový prostor a $X = \{\vvone, \dots, \vvn\}$ 
+            jeho konečná báze. Nechť dále $\vu, \vv \in V$, 
+            a $\vec{u} = \sum a_i \vec{v_i}$, $\vec{b} = \sum b_i \vec{v_i}.$
+            Potom zobrazení $f: V \rightarrow K^n$ na vektor souřadnic 
+            je lineární zobrazení:
+			\begin{multline*}
+				f(\vec{u} + \vec{v}) = [\vec{u} + \vec{v}]_X = 
+					\left[\sum a_i\vec{v_i} + \sum b_i \vec{v_i}\right]_X = \\
+					\left[\sum (a_i + b_i) \vec{v_i} \right]_X = 
+					[\vec{u}]_X + [\vec{v}]_X = f(\vu) + f(\vv)
+			\end{multline*}
+            Násobení analogicky.
+        \item Geometrická zobrazení v rovině:
+            \begin{itemize}
+                \item Posunutí není lineární zobrazení, jelikož počátek ve
+                    $V$ se musí zobrazit na počátek ve $W$.
+                \item Osová souměrnost, otočení a stejnolehlost jsou
+                    lineární zobrazení, pokud zachovávají počátek.
+            \end{itemize}
+        \item Obecně v $\mathbb{R}^2$:
+            $$f(\vec{u}) = \begin{pmatrix}
+                a &c \\
+                b &d
+            \end{pmatrix} 
+            \begin{pmatrix} u_x \\ u_y \end{pmatrix},$$
+        \item V prostoru diferencovatelných funkcí je derivace lineární
+            zobrazení.
+    \end{itemize}
+\end{remark}
+
+\begin{observation}
+    Nechť $f: U \rightarrow V$ a $g: V \rightarrow W$ jsou lineární 
+    zobrazení. Potom je jejich složení $g \circ f: U \rightarrow W$, 
+    $(g \circ f)(\vec{u}) = g(f(\vec{u}))$ také lineární zobrazení.
+\end{observation}
+
+\begin{proof}
+    Ověříme podmínky:
+    \begin{enumerate}[i.]
+        \item $(g \circ f)(\vec{u} + \vec{v}) = g(f(\vec{u} + \vec{v})) =
+            g(f(\vec{u}) + f(\vec{v})) = g(f(\vec{u})) + g(f(\vec{v})) =
+            (g \circ f)(\vec{u}) + (g \circ f)(\vec{v}).$
+        \item $(g \circ f)(a \cdot \vec{v})$ analogicky.
+    \end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Nechť $V$ a $W$ jsou vektorové prostory nad společným tělesem a $X$ je
+    báze $V$. Potom pro všechna zobrazení $f_0: X \rightarrow W$ existuje
+    právě jedno lineární zobrazení $f: V \rightarrow W$, které rozšiřuje
+    $f_0$: 
+    $$\forall \vec{v} \in X: f(\vec{v}) = f_0(\vec{v}).$$
+\end{theorem}
+
+\begin{proof}
+    Vyjádříme $\vec{u} \in V$ vůči bázi: $\vu = \sum a_i \vec{v_i}$. Potom
+    $f(\vec{u}) = f(\sum a_i \vec{v_i}) = \sum a_i f(\vec{v_i}) = 
+    \sum a_i f_0(\vec{v_i}).$
+\end{proof}
+
+\begin{corollary}
+    Označíme-li $f(V) = \cup_{\vec{u} \in V} f(\vec{u})$, potom $f(V)$ je
+    podprostor prostoru $W$ a $\dm f(V) \leq \dm V$, protože obraz
+    báze $V$ je systém generátorů $f(V)$. 
+\end{corollary}
+
+\begin{definition}
+    Nechť $V$ a $W$ jsou vektorové prostory nad $K$ a 
+	$X = \{\vvone, \dots, \vvn\}$ a $Y = \{\vec{w_1}, \dots, \vec{w_m})$ 
+	jsou jejich báze. Potom pro lineární zobrazení $f: V \rightarrow W$ 
+	nazveme matici $[f]_{XY} \in K^{m\times n}$ sestavenou z vektorů 
+	souřadnic obrazů vektorů báze $X$ vuči $Y$ 
+    \newterm{maticí zobrazení} $f$ vůči bázím $X$ a $Y$:
+    $$ [f]_{XY} = \begin{pmatrix}
+        \vdots &\vdots &\dots &\vdots\\
+        [f(\vec{v_1})]_Y &[f(\vec{v_2})]_Y &\dots &[f(\vec{v_n})]_Y \\
+        \vdots &\vdots &\dots &\vdots 
+    \end{pmatrix}$$
+\end{definition}
+
+\begin{observation}
+    \leavevmode
+    $$ [f(\vec{u})]_Y = [f]_{XY} [\vec{u}]_X$$
+\end{observation}
+
+\begin{proof}
+    Vyjádříme $\vec{u}$ vůči bázi: $\vec{u} = \sum_{i=1}^{n} a_i \vec{v_i}$.
+    Potom $[\vec{u}]_X = (a_1, \dots, a_n)^\top, f(\vec{u}) = 
+    \sum a_i f(\vec{v_i})$ a:
+    $$[f(\vec{u})]_Y = \left[\sum a_i f(\vec{v_i})\right]_Y = 
+    \sum a_i [f(\vec{v_i})]_Y = [f]_{XY}[\vec{u}]_X$$
+\end{proof}
+
+\begin{observation}
+    Jsou-li $U, V$, a $W$ prostory nad $K$ s bázemi $X, Y$ a $Z$, a 
+    $f: U \rightarrow V$ a $g: V \rightarrow W$ jsou lineární zobrazení, tak
+    platí:
+    $$[g \circ f]_{XZ} = [g]_{YZ} [f]_{XY}$$
+\end{observation}
+
+\begin{proof}
+    \leavevmode
+    $$[(g \circ f)(\vec{u})]_Z = [g(f(\vec{u}))]_Z = [g]_{YZ}[f(\vec{u})]_Y =
+    [g]_{YZ}[f]_{XY}[\vec{u}]_X$$
+\end{proof}
+
+\begin{definition}
+    Nechť $V$ je prostor nad $K$ a $X, Y$ jsou jeho dvě konečné báze.
+    \newterm{Maticí přechodu} od báze $X$ k bázi $Y$ rozumíme matici 
+    $[id]_{XY}$, kde $id$ je identita.
+\end{definition}
+
+\begin{observation}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item $[\vec{u}]_Y = [id(u)]_Y = [id]_{XY}[\vec{u}]_X$
+        \item $[id]_{XY}[id]_{YX} = [id]_{YY} = \mat{I_n}$
+    \end{enumerate}
+\end{observation}
+
+\begin{remark}[Výpočet matice přechodu pro $V = K^n$]
+    Pro báze $X = \{\vec{v_1}, \dots, \vec{v_n}\}$ a 
+    $Y = \{\vec{w_1}, \dots, \vec{w_n}\}$ sestavíme matice:
+    $$\mat{A} = \begin{pmatrix}
+        \vdots &\dots &\vdots \\
+        \vec{v_1} &\dots &\vec{v_n} \\
+        \vdots &\dots &\vdots
+    \end{pmatrix}; 
+    \mat{B} = \begin{pmatrix}
+        \vdots &\dots &\vdots \\
+        \vec{w_1} &\dots &\vec{w_n} \\
+        \vdots &\dots &\vdots
+    \end{pmatrix}$$
+    Platí $\vec{u} = \sum a_i \vec{v_i} = \mat{A}[\vec{u}]_X$ a 
+    $\vec{u} = \sum b_i \vec{w_i} = \mat{B}[\vec{u}]_Y$.
+    Potom: 
+    $$\mat{A}[\vec{u}]_X = \mat{B}[\vec{u}]_Y$$
+    $$[\vec{u}]_Y = \invmat{B}\mat{A}[\vec{u}]_X$$
+    Tedy: $[id]_{XY} = \invmat{B}\mat{A}$.
+    Prakticky: $(\mat{B}|\mat{A}) \sim (\mat{I_n} | [id]_{XY})$.
+\end{remark}
+
+\begin{definition}
+    Nechť $V$ a $W$ jsou vektorové prostory nad K. Lineární zobrazení,
+    které je prosté a na, nazveme \newterm{isomorfismem} prostorů $V$ a $W$.
+\end{definition}
+
+\begin{observation}
+    Zobrazení $f^{-1}$ je také isomorfismem.
+\end{observation}
+
+\begin{proof}
+	Musíme dokázat, že zobrazení $f^{-1}$ je lineární zobrazení:
+	\begin{enumerate}[i.]
+		\item $f^{-1}(\vec{w} + \vec{w'}) = f^{-1}(f(\vec{u}) + f(\vec{u'})) = 
+			f^{-1}(f(\vec{u} + \vec{u'})) = \vec{u} + \vec{u'} 
+			= f^{-1}(\vec{w}) + f^{-1}(\vec{w'}).$
+	    \item Násobení analogicky.
+	\end{enumerate}
+\end{proof}
+
+\begin{theorem}
+    Nechť $V$ a $W$ jsou vektorové prostory nad $K$ s konečnými bázemi $X$
+    a $Y$. Potom platí, že lineární zobrazení $f: V \rightarrow W$ je
+    isomorfismus, právě když matice $[f]_{XY}$ je regulární. Navíc platí:
+    $$ [f^{-1}]_{YX} = \left([f]_{XY}\right)^{-1}.$$
+\end{theorem}
+
+\begin{proof}
+    \leavevmode
+    \begin{itemize}
+        \item $\impliedby$: $[f]_{XY}$ je regulární. Vezmeme zobrazení 
+            $g: W \rightarrow V$ definované maticí: $[g]_{YX} = 
+            \left([f]_{XY}\right)^{-1}$. Ukážeme, že $g = f^{-1}$ a 
+            ověříme vlastnosti isomorfismu.
+            \begin{enumerate}[i.]
+                \item $[g \circ f]_{XX} = [g]_{YX}[f]_{XY} = \mat{I_n}.$
+                    Tedy $g \circ f$ je identita na $V$ a $f$ je prosté.
+                \item $[f \circ g]_{YY} = [f]_{XY} [g]_{YX} = \mat{I_n}.$
+                    Tedy $f \circ g$ je identita na $W$ a $f$ je na.
+            \end{enumerate}
+        \item $\implies$: Máme zobrazení $f$ a $f^{-1}$. Pro jejich matice
+            platí:
+            \begin{enumerate}[i.]
+                \item $[f^{-1}]_{YX}[f]_{XY} = [id]_{XX} = \mat{I_n},
+                    \dm V = n$
+                \item $[f]_{XY}[f^{-1}]_{YX} = [id]_{YY} = \mat{I_m},
+                    \dm W = m$
+            \end{enumerate}
+            Vyplývá, že $n = m$ a $[f]_{XY}$ je regulární.
+    \end{itemize}
+\end{proof}
+
+\begin{proposition}
+    Každý prostor dimense $n$ nad $K$ je isomorfní s $K^n$.
+\end{proposition}
+
+\begin{proof}
+    Zvolíme bázi $X$, potom zobrazení $f: \underbrace{\vec{u}}_{\in V} 
+    \rightarrow \underbrace{[u]_X}_{\in K^n}$ je isomoforfismem. 
+    $[f]_{Xk} = \mat{I_n}$ tvoří kanonickou bázi.
+\end{proof}
+
+\begin{proposition}
+    Nechť $f: V \rightarrow W$ je lineární zobrazení. Potom platí:
+    \begin{enumerate}[i.]
+        \item $Ker(f) \coloneqq \{\vec{x} | f(\vec{x}) = \vec{0}\}$ je 
+            podprostor $V$.
+        \item Pokud má rovnice $f(\vec{x}) = \vec{b}$ alespoň 1 řešení 
+			$\vec{x_0}$, potom lze každé řešení $\vec{x}$ této rovnice 
+			vyjádřit jako $\vec{x} = \vec{x_0} + \vec{x'}$, kde 
+			$\vec{x'} \in Ker(f)$.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item Nechť $\vec{x_1}, \vec{x_2} \in Ker(f): f(\vec{x_1} + \vec{x_2})
+            = f(\vec{x_1}) + f(\vec{x_2}) = \vec{0} + \vec{0} = \vec{0}$, tedy
+            $\vec{x_1} + \vec{x_2} \in Ker(f)$. Násobení analogicky.
+        \item $f(\vec{x} - \vec{x_0}) = f(\vec{x}) - f(\vec{x_0}) = \vec{b}
+            - \vec{b} = \vec{0}$, tedy $\vec{x} - \vec{x_0} \in Ker(f)$.
+    \end{enumerate}
+\end{proof}

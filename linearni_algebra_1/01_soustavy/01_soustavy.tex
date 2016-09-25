@@ -1,0 +1,51 @@
+\section{Soustavy lineárních rovnic}
+
+\begin{definition}
+    \newterm{Reálný $n$\mbox{-}složkový vektor} $\vec{b}$ je uspořádaná $n$-tice
+    reálných čísel:
+    $$\vec{b} = \colvec{b_1\\b_2\\\vdots\\b_n}.$$
+    Značíme $\vec{b} \in \mathbb{R}^n$. Všechny vektory jsou sloupcové. Pro
+    řádkový zápis použijeme transposici:
+    $$ \rowvec{b_1,b_2,\dots,b_n}^\top = \colvec{b_1\\b_2\\\vdots\\b_n};
+    \colvec{b_1\\b_2\\\vdots\\b_n}^\top = \rowvec{b_1,b_2,\dots,b_n}$$
+    Podobně uspořádaná $n$-tice neznámých hodnot $\vec{x} =
+    \rowvec{x_1,\dots,x_n}^\top$ se nazývá \newterm{$n$-složkový vektor
+    neznámých}.
+\end{definition}
+
+\begin{definition}
+    \newterm{Reálná matice} $\mat{A}$ řádu $m \times n$ je soubor $m \cdot n$ reálných
+    čísel uspořádaných do útvaru o $m$ řádcích a $n$ sloupcích:
+    \[ \mat{A} = \begin{pmatrix}
+            a_{11} &\dots  &a_{1n}\\
+            \vdots &\ddots &\vdots\\
+            a_{m1} &\dots  &a_{mn}
+    \end{pmatrix}  \]
+    Píšeme $\mat{A} \in \mathbb{R}^{m \times n}$, prvky matice značíme
+    versálkami s dolními indexy:
+    $$ a_{ij} = (\mat{A})_{ij}$$
+    \newterm{Čtvercová matice} má stejný počet řádků a sloupců.
+\end{definition}
+
+\begin{definition}
+    Nechť $\mat{A} \in \mathbb{R}^{m \times n}$,  $\vec{b} \in \mathbb{R}^m$
+    a $x = \rowvec{x_1,\dots,x_n}^\top$ je vektor neznámých. Potom 
+    \newterm{soustavou $m$ lineárních rovnic o $n$ neznámých} rozumíme zápis:
+    $$ \mat{A}\vec{x} = \vec{b}.$$
+    Tutéž soutavu lze zapsat v rozvinutém tvaru jako:
+    \begin{alignat*}{5}
+        a_{11}x_1 &+a_{12}x_2 &+\dots &+a_{1n}x_n &=b_1  \\
+        a_{21}x_1 &+a_{22}x_2 &+\dots &+a_{2n}x_n &=b_2  \\
+        \vdots \\
+        a_{m1}x_1 &+a_{m2}x_2 &+\dots &+a_{mn}x_n &=b_m 
+    \end{alignat*}
+    Matice $\mat{A}$ se nazývá \newterm{matice soustavy}, vektor $\vec{b}$ se 
+    nazývá \newterm{vektor pravých stran}.
+    Matice $(\mat{A}|\vec{b})$ je \newterm{rozšířená matice soustavy}.
+\end{definition}
+
+\begin{definition}
+    Reálný vektor $x \in \mathbb{R}^n$ se nazývá \newterm{řešením soustavy}
+    $\mat{A}\vec{x} = \vec{b}$, pokud splňuje všech $m$ rovnic soustavy. To
+    jest, $\forall i: a_{i1}x_1 + a_{i2}x_2 + \dots + a_{in}x_n = b_i$.
+\end{definition}

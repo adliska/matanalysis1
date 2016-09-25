@@ -1,0 +1,224 @@
+\section{Vektorové prostory}
+
+\begin{definition}
+    Nechť $(k, +, \cdot)$ je těleso. Množinu $V$ spolu s binární operací $+$ na 
+    $V$ a zobrazením $\cdot: k \times V \rightarrow V$ se nazývá 
+    \newterm{vektorový prostor} $(V, +, \cdot)$ nad $k$, pokud platí následující
+    axiomy:
+    \begin{enumerate}
+        \item[(SA)] $\forall \vu,\vv,\vw \in V: (\vu+\vv)+\vw = \vu+(\vv+\vw)$ 
+            (sčítání je asociativní)
+        \item[(SK)] $\forall \vu,\vv \in V: \vu+\vv = \vv+\vu$ (sčítání je 
+            komutativní)
+        \item[(S0)] $\exists \vzero \in V,  \forall \vu \in V: \vu+\vzero = \vu$ 
+            (existence nulového prvku)
+        \item[(SI)] $\forall \vu \in V, \exists -\vu \in V: \vu+(-\vu) = \vzero$ 
+            (existence opačného prvku)
+        \item[(NA)] $\forall a,b \in k, \forall \vu \in V a \cdot (b \cdot \vu) = 
+            (a \cdot b)\cdot \vu$ (násobení vektoru je asociativní)
+        \item[(N1)] $\forall \vn \in V: 1 \cdot \vn = \vn$, kde $1$ je jednotkový 
+            prvek tělesa $k$ (invariance vektoru při násobení jednotkovým prvkem
+            tělesa)
+        \item[(D1)] $\forall a,b \in k, \forall \vu \in V: (a + b)\vu = a\vu + 
+            b\vu$ (distributivita násobení vektoru vzhledem ke sčítání prvků 
+            tělesa)
+        \item[(D2)] $\forall a \in k, \forall \vu,\vv \in V: a(\vu+\vv) = a\vu 
+            + a\vv$ (distributivita násobení vektoru vzhledem ke sčítání vektorů)
+    \end{enumerate}
+\end{definition}
+
+\begin{remark}
+    Ingredience vektorového prostoru:
+    \begin{enumerate}[i.]
+        \item Těleso $k$ s operacemi $+$ a $\cdot$. Jeho prvky se nazývají 
+            skaláry.
+        \item Prostor $V$ s operací $+$\footnote{Operace $+$ na $V$ je odlišná
+            od operace $+$ na $k$. Obě se nicméně značí obvykle stejně.}. 
+            Jeho prvky se nazývají vektory.
+        \item Operace $\cdot$ ``mezi $k$ a $V$''.
+    \end{enumerate}
+\end{remark}
+
+\begin{remark}[Příklady vektorových prostorů]
+    \leavevmode
+    \begin{enumerate}[i.]
+        \item $V = \{0\}.$ Triviální vektorový prostor nad libovolným tělesem 
+            $k$.
+        \item $K^n.$ Aritmetický vektorový prostor dimenze $n$. 
+            Vektory jsou uspořádané $n$-tice prvků z $K$. Operace $+$ a $\cdot$
+            se provadějí po složkách. Z každého tělesa lze vybudovat vektorový 
+            prostor téže velikosti $K^1$.
+        \item Matice typu $m \times n$ nad $K$.
+        \item Polynomy omezeného stupně.
+        \item Spojité funkce, diferencovatelné funkce v $\mathbb{R}$.
+        \item Systém podmožin nějaké množiny $X$ jako prostor nad $\mathbb{Z}_2$.
+    \end{enumerate}
+\end{remark}
+
+\begin{proposition}
+    Prvky $\vzero$ a $-\vec{a}$ jsou určeny jednoznačně.
+\end{proposition}
+
+\begin{proof}
+    Důkaz je stejný jako pro skaláry.
+\end{proof}
+
+\begin{proposition}
+    $\forall \vu \in V, \forall a \in K: 0 \cdot \vu = a \cdot \vzero = \vzero$
+\end{proposition}
+
+\begin{proof}
+    $$0\vu = 0\vu + 0 = 0\vu + 0\vu - 0\vu = (0 + 0)\vu - 0\vu = 0\vu - 0\vu = 
+    \vzero$$
+    $$a\vzero = a\vzero + \vzero = a\vzero + a\vzero - a\vzero = a(\vzero + \vzero) 
+    - a\vzero = a\vzero - a\vzero = \vzero$$
+\end{proof}
+
+\begin{proposition}
+    Pokud $a\cdot\vu = \vzero$, potom $a = 0$ nebo $\vu = \vzero$.
+\end{proposition}
+
+\begin{proof}
+    Sporem. Nechť $a \neq 0$ a $\vu \neq \vzero$.
+    $$\vzero \neq \vu = 1 \cdot \vu = \inv{a} \cdot a \cdot \vu = 
+    \inv{a} \cdot \vzero = \vzero$$
+\end{proof}
+
+\begin{definition}
+    Nechť $(V, +, \cdot)$ je vektorový prostor nad tělesem $K$ a $U$ je 
+    neprázdná podmnožinu $V$ taková, že:
+    \begin{enumerate}[i.]
+        \item $\forall \vu,\vv \in U: \vu + \vv \in U$
+        \item $\forall \vu \in V, \forall a \in K: a\cdot \vu \in U.$
+    \end{enumerate}
+    Potom $(U, +, \cdot)$ nazýváme \newterm{podprostorem} $V$.
+\end{definition}
+
+\begin{remark}
+    Množinu $U$ splňující výše uvedené podmínky nazýváme \newterm{uzavřenou} 
+    na operace $+$ a $\cdot$.
+\end{remark}
+
+\begin{observation}
+    Podprostor $(U, +, \cdot)$ vektorového prostoru $V$ je vektorový 
+    prostor.
+\end{observation}
+
+\begin{proof}
+    Je třeba ověřit všech 8 axiomů z definice vektorového prostoru. Existence
+    nulového a opačného prvku plyne z uzavřenosti $U$ vůči operaci $\cdot$ 
+    ($0 \cdot \va = \vzero, -1 \cdot \va = -\va$).
+\end{proof}
+
+\begin{remark}[Příklady podprostorů $\mathbb{R}^3$]
+    \leavevmode
+    \begin{itemize}
+        \item
+            rovina $\pi$ procházející počátkem
+        \item přímka $p$ procházející počátkem
+        \item bod $\{0\}$
+    \end{itemize}
+\end{remark}
+
+\begin{proposition}
+    Nechť $(U_i, i \in I)$ je systém podprostorů nějakého vektorového prostoru
+    $V$. Potom průnik těchto podprostorů, t.j. $\cap_{i \in I} U_i$, je
+    podprostorem $V$.
+\end{proposition}
+
+\begin{proof}
+    Je třeba ukázat uzavřenost $W$ na $+$ a $\cdot$. 
+    
+    Označme $W \coloneqq \cap_{i \in I} U_i$. Potom:
+    \begin{itemize}
+        \item uzavřenost na $+$: $u,v \in W \Rightarrow \vu,\vv \in 
+            \cap_{i \in I} U_i \Rightarrow \forall i \in I: \vu,\vv \in U_i 
+            \Rightarrow \forall i \in I: \vu+\vv \in U_i \Rightarrow \vu+\vv \in 
+            \cap_{i \in I} U_i = W$
+        \item uzavřenost na $\cdot$: $a \in K, \vu \in W \Rightarrow \forall i
+            \in I: \vu \in U_i \Rightarrow \forall i \in I: a \cdot \vu \in U_i
+            \Rightarrow a \cdot \vu \in \cap_{i \in I} U_i = W$
+    \end{itemize}
+\end{proof}
+
+\begin{definition}
+    Nechť $V$ je vektorový prostopr nad $K$ a $X$ je podmnožina $V$. Potom 
+    $\obal(X)$ značí \newterm{podprostor generovaný $X$} (či \newterm{lineární 
+    obal} množiny X), což je průnik všech podprostorů $V$, které obsahují $X$. 
+    Formálně: $$\obal(X) \coloneqq 
+    \cap \{U | X \subseteq U, U \text{ podprostor } V\}.$$ 
+\end{definition}
+
+\begin{proposition}
+    Nechť $V$ je vektorový prostor nad $K$ a $X \subseteq V$. Potom $\obal(X)$
+    obsahuje všechny lineární kombinace vektorů z $X$, neboli $$\obal(X) = 
+    \{\vu | \vu = \sum_{i=1}^{n}a_i \vec{x_i}, n \geq 0, 
+    \forall i = 1, \dots, n: a_i \in K, \vec{x_i} \in X \}$$
+\end{proposition}
+
+\begin{proof}
+    Definujme:
+    $$W_1 \coloneqq \cap_{X \subseteq U \subseteq V} U$$
+    $$W_2 \coloneqq \left\{ \sum_{i=1}^{n} a_i \vec{x_i}, a_i \in K, 
+    \vec{x_i} \in X \right\}$$
+
+    Nejprve ukážeme, že množina $W_2$ je podprostorem $V$, t.j. že je 
+    uzavřená na $+$ a $\cdot$. 
+    \begin{itemize}
+        \item Uzavřenost na $+$. Nechť $\vu,\vv \in W_2$. Potom:
+            $$ \vu = \sum_{i=1}^{k}a_i \vec{x_i}, a_i \in K, \vec{x_i} \in X$$
+            $$ \vv = \sum_{i=1}^{l}{a'}_i \vec{{x'}_i}, {a'}_i \in K, 
+            \vec{{x'}_i} \in X$$
+
+            Označme $\{\vec{y_1}, \dots, \vec{y_n}\} = \{\vec{x_1}, \dots, 
+            \vec{x_k}\} \cup \{\vec{{x'}_1}, \dots, \vec{{x'}_l}\}$. 
+            Po přeznačení a doplnění koeficientů lze vyjádřit:
+            $$ \vu = \sum_{i=1}^{n} b_i \vec{y_i}$$
+            $$ \vv = \sum_{i =1}^{n} {b'}_i \vec{y_i}$$
+            Potom
+            $$ \vu + \vv = \sum_{i=1}^{n} b_i \vec{y_i} + \sum_{i=1}^{n} 
+            {b'}_i \vec{y_i} = \sum_{i=1}^{n} (b_i + {b'}_i)\vec{y_i}$$
+            a $\vu + \vv \in W_2$ z definice $W_2$.
+
+        \item Uzavřenost na $\cdot$. Nechť $\vu \in W_2, c \in K$.
+            $$c \cdot \vu = c \cdot \sum_{i=1}^{k} a_i \vec{x_i} = 
+            \sum_{i = 1}^{k} \underbrace{(ca_i)}_{\in K} 
+            \underbrace{\vec{x_i}}_{\in X} \in W_2$$
+    \end{itemize}
+
+    Nyní $W_1 \subseteq W_2$, protože $W_2$ lze vzít za nějaké $U_i$, přes
+    které děláme průniky, jelikož obsahuje $X$ a je podprostorem $V$. Dále také
+    $W_2 \subseteq W_1$, protože každé $U_i$ musí být uzavřené na $+$ a 
+    $\cdot$, a tedy $\forall i: W_2 \subseteq U_i \implies W_2 \subseteq \cap U_i = W_1$. 
+    Z tohoto plyne $W_1 = W_2$.
+\end{proof}
+
+\begin{definition}[Prostory určené maticí]
+    Nechť $\mat{A}$ je matice typu $m \times n$ nad tělesem $K$.
+    \begin{itemize}
+        \item \newterm{Sloupcový prostor} $S(\mat{A})$ je podprostor 
+            $\mathbb{K}^m$ generovaný sloupci matice $\mat{A}$. Formálně:
+            $S(\mat{A}) = \{\vu \in \mathbb{K}^m, \vu = \mat{A}\vx,
+            \vx \in \mathbb{K}^n \}.$
+        \item \newterm{Řádkový prostor} $R(\mat{A})$ je podprostor 
+            $\mathbb{K}^n$ generovaný řádky matice $\mat{A}$. Formálně:
+            $R(\mat{A}) = \{\vv \in \mathbb{K}^n, \vv = \transmat{A}\vy, 
+            \vy \in \mathbb{K}^m \}$.
+        \item \newterm{Jádro matice} $Ker(\mat{A})$ je podprostor
+            $\mathbb{K}^n$ tvořený všemi řešeními homogenní soustavy
+            $\mat{A}\vec{x} = \vec{0}$.
+    \end{itemize}
+\end{definition}
+
+\begin{observation}
+    Elementární úpravy nemění $R(A)$ ani $Ker(A)$.
+\end{observation}
+
+\begin{observation}
+    Nechť $\vx \in Ker(A)$ a $\vv \in R(A)$. Potom $\vv^{\top}\vx = 0$.
+\end{observation}
+
+\begin{proof}
+    $\vv^{\top}\vx = (\mat{A}^{\top}\vy)^{\top}\vx = \vy^{\top}\mat{A}\vx = 
+    \vy^{\top} \cdot \vzero = 0$
+\end{proof}
