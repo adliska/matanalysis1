@@ -1,0 +1,142 @@
+\section{Úvod}
+
+\begin{remark}[Neformální definice]
+    Cílem lineárního programování je optimalizovat lineární funkci přes
+    množinu vymezenou lineárními podmínkami.
+
+    \newterm{Lineární účelová funkce} je následujícího tvaru:
+    \begin{equation*}
+        \max c_1x_1 + c_2x_2 + \dots + c_nx_n,
+    \end{equation*}
+    kde $c_1,c_2,\dots,c_n \in \R,$ a $x_1,x_2,\dots,x_n$ jsou reálné
+    proměnné.
+
+    \newterm{Lineární podmínky} jsou zadány soustavou lineární nerovnic:
+    \begin{align*}
+        a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n &\leq b_1 \\
+        a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n &\leq b_m,
+    \end{align*}
+    kde $a_{11},\dots,a_{mn} \in \R, b_1,\dots,b_m \in \R.$
+\end{remark}
+
+\begin{definition}
+    \newterm{Úloha lineárního programování (LP)} zní:
+
+    \begin{displayquote}
+        Nalezněte $\vx \in \Rn,$ jenž maximalizuje účelovou funkci 
+        $\vc^\top\vx$ za podmínek $\mA\vx \leq \vb,$ kde $\vc \in \R,
+        \va \in \Rmn$ a $\leq$ je po složkách.
+    \end{displayquote}
+    Každé $\vx \in \Rn,$ které splňuje $\mA\vx\leq\vb,$ nazveme 
+    \newterm{přípustným řešením}.
+    \newterm{Optimálním řešením} úlohy LP je takové přípustné řešení $\vx^*,$
+    pro něž platí, že pro libovolné přípustné řešení $\vx$ platí:
+    $\vc^\top\vx \leq \vc^\top\vx^*.$
+        
+\end{definition}
+
+\begin{remark}[Geometrická interpretace úlohy LP]
+    \leavevmode
+    \begin{enumerate}
+        \item Každá jedna podmínka definuje poloprostor v $\Rn.$ 
+        \item Všechny podmínky dohromady definují -- přes průnik 
+            poloprostorů -- tzv. \newterm{polyedr (mnohostěn) přípustných 
+            řešení}.
+        \item Účelová funkce naopak udává \newterm{gradient}, tj. směr, 
+            ve kterém roste/klesá hodnota účelové funkce.
+        \item Optimální řešení je takový bod $\vx^*,$ že všechna přípustná
+            řešení leží v poloprostoru $\vc^\top\vx \leq \vc^\top\vx^* = \vz.$
+    \end{enumerate}
+\end{remark}
+
+\begin{remark}[Celočíselné lineární programování]
+    Někdy lze požadovat, aby řešení $\vx \in \Zn.$ Potom se jedná
+    o tzv. \newterm{celočíselné lineární programování} (ILP, z 
+    \newterm{Integer Linear Programming}), což je NP-úplná úloha.
+
+    Úloha ILP nemusí mít řešení, přestože příslušná LP úlohá řešení má.
+    Dokonce se řešení LP a ILP úloh mohou libovolně řešit. Uvažujme
+    například účelovou funkci $x_1 + \dots + x_n$ při podmínkách
+    $\fa i,j: x_i + x_j \leq 1.$ Pro úlohu LP dále $\fa i: x_i \in [0,1],$
+    kdežto pro úlohu ILP $\fa i: x_i \in \{0,1\}.$ Optimum LP se nachází
+    v bodě $(\frac{1}{2}, \dots, \frac{1}{2})^\top$ při $\vc^\top\vx = 
+    \frac{n}{2};$ optimum úlohy ILP např. v bodě $(1,0,\dots,0)$ 
+    při $\vc^\top\vx = 1.$
+\end{remark}
+
+\begin{remark}[Převody mezi různými tvary úloh]
+    \leavevmode
+    \begin{itemize}
+        \item Místo maxima je třeba najít minimum účelové funkce. Potom
+            \[ \min \ctx \iff \max -\ctx. \]
+        \item V podmínkách se nachází nerovnost $\geq.$ Potom
+            \[ a_{i1}x_1 + \dots + a_{in}x_n \geq b_i \iff 
+            -a_{i1}x_1 + \dots + -a_{in}x_n \leq -b_i. \]
+        \item V podmínkách se nachází rovnost.
+            \[ 
+                a_{i1}x_1 + \dots + a_{in}x_n = b_i \iff 
+                a_{i1}x_1 + \dots + a_{in}x_n \geq b_i \land
+                a_{i1}x_1 + \dots + a_{in}x_n \leq b_i.
+            \]
+        \item Nerovnost lze převést na rovnost a nezápornost.
+            \[
+                a_{i1}x_1 + \dots + a_{in}x_n \leq b_i \iff
+                a_{i1}x_1 + \dots + a_{in}x_n + x_{n+1} = b_i 
+                \land x_{n+1} \geq 0.
+            \]
+        \item Neomezené proměnné lze převést na nezáporné proměnné, pokud
+            $x_i$ nahradíme $x'_i - x''_i,$ kde $x'_i,x''_i \geq 0.$
+    \end{itemize}
+\end{remark}
+
+\begin{remark}[Možné výsledky úloh LP]
+    \leavevmode
+    \begin{enumerate}[a.]
+        \item Úloha nemá řešení, jelikož nemá žádné přípustné řešení.
+
+            Příklad: $x_1 + x_2 \leq 19, x_1 \geq 10, x_2 \geq 10.$
+
+        \item Úloha nemá řešení, jelikož hodnota účelové funkce je neomezená.
+
+            Příklad: $\max x_1 + x_2, x_1 - x_2 \geq -1, x_1 - x_2 \leq 1,
+            x_1,x_2 \geq 0.$
+
+        \item Úloha má jednoznačné optimum.
+
+        \item Úloha má nekonečně mnoho optimálních řešení.
+
+            Příklad: $\max x_1 + x_2, x_1 + x_2 \leq 3, x_1 \geq 0, x_2 \leq 2.$
+    \end{enumerate}
+\end{remark}
+
+\begin{definition}
+    Množina $M \subseteq \Rn$ je \newterm{konvexní}, pokud $\fa \vu,\vv \in M$
+    obsahuje i úsečku $uv,$ neboli: $\{\alpha\vu + (1-\alpha)\vv, \alpha \in
+    [0,1]\}.$
+\end{definition}
+
+\begin{observation}
+    Průnik konvexních množin je konvexní.
+\end{observation}
+
+\begin{observation}
+    Množina přípustných řešení je konvexní.
+\end{observation}
+
+\begin{proof}
+    Jedná se o průnik konvexních množin (poloprostorů).
+\end{proof}
+
+\begin{observation}
+    Množina optimálních řešení je konvexní.
+\end{observation}
+
+\begin{proof}
+    Nechť $\vx^*, \vx^{**}$ jsou dvě optima, tj. $\vc^\top\vx^* = 
+    \vc^\top\vx^{**} = \vz,$ a $\alpha \in [0,1].$ Potom:
+    \[
+        \vc^\top(\alpha\vx^* + (1-\alpha)\vx^{**}) = \alpha\vc^\top\vx^*
+        + (1 - \alpha)\vc^\top\vx^{**} = \alpha\vz + (1-\alpha)\vz = \vz
+    \]
+    a tedy i $\alpha\vx^* + (1-\alpha)\vx^{**}$ je optimum.
+\end{proof}
